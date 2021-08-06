@@ -1,7 +1,6 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
-import it.units.italiandraughts.ui.BoardController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
