@@ -5,4 +5,6 @@ module it.units.italiandraughts {
 
     opens it.units.italiandraughts to javafx.fxml;
     exports it.units.italiandraughts;
+    exports it.units.italiandraughts.ui;
+    opens it.units.italiandraughts.ui to javafx.fxml;
 }

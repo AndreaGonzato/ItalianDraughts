@@ -1,11 +1,12 @@
-package it.units.italiandraughts;
+package it.units.italiandraughts.ui;
 
+import it.units.italiandraughts.ItalianDraughts;
+import it.units.italiandraughts.ui.BoardController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 

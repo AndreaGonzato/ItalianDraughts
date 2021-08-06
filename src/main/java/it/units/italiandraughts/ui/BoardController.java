@@ -1,4 +1,4 @@
-package it.units.italiandraughts;
+package it.units.italiandraughts.ui;
 
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
