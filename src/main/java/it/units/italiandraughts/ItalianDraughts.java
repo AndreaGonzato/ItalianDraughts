@@ -13,7 +13,7 @@ public class ItalianDraughts extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ItalianDraughts.class.getResource("menuLayout.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menuLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 350, 240);
         stage.setTitle("ItalianDraughts");
         stage.setScene(scene);

@@ -11,11 +11,9 @@ public class MenuController {
 
     @FXML
     protected void startGame() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ItalianDraughts.class.getResource("secondScene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("boardLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        ItalianDraughts.getPrimaryStage().setTitle("ItalianDraughts");
         ItalianDraughts.getPrimaryStage().setScene(scene);
-        ItalianDraughts.getPrimaryStage().show();
     }
 
     @FXML
