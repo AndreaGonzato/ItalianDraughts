@@ -16,8 +16,8 @@
         </GridPane>
     </VBox>
     <HBox>
-        <Label text="Andrea"/>
-        <Label text="Tom"/>
+        <Label fx:id="player1Name"/>
+        <Label fx:id="player2Name"/>
     </HBox>
 
 </VBox>

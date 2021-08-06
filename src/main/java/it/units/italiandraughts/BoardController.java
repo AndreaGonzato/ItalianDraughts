@@ -5,12 +5,16 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class BoardController {
     @FXML
     GridPane board;
+
+    @FXML
+    Label player1Name, player2Name;
 
     public void initialize() {
         final int size = 8;
