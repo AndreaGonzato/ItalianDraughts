@@ -13,4 +13,5 @@
 
     <Button text="Start" onAction="#startGame"/>
     <Button text="Exit" onAction="#quitGame"/>
+
 </VBox>

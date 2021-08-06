@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
 public class HelloController {
+
     @FXML
     protected void startGame() {
         Group group = new Group();
@@ -22,4 +23,5 @@ public class HelloController {
         Platform.exit();
         System.exit(0);
     }
+
 }
