@@ -7,6 +7,6 @@ public class TestMain {
     @Test
     void testAddOne() {
         int number = 23;
-        Assertions.assertEquals(24, HelloApplication.addOne(number));
+        Assertions.assertEquals(24, ItalianDraughts.addOne(number));
     }
 }
