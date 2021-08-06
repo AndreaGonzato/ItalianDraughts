@@ -12,7 +12,7 @@ public class MenuController {
     @FXML
     protected void startGame() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("boardLayout.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         ItalianDraughts.getPrimaryStage().setScene(scene);
     }
 
