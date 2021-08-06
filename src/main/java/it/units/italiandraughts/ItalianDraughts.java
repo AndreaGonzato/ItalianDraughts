@@ -29,6 +29,10 @@ public class ItalianDraughts extends Application {
         return primaryStage;
     }
 
+    public static void setPrimaryStage(Stage primaryStage) {
+        ItalianDraughts.primaryStage = primaryStage;
+    }
+
     // TODO remove this fake method
     public static int addOne(int n) {
         return n + 1;

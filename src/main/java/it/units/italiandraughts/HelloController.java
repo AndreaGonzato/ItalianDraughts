@@ -2,20 +2,22 @@ package it.units.italiandraughts;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+
 public class HelloController {
 
     @FXML
-    protected void startGame() {
-        Group group = new Group();
-        Scene scene = new Scene(group, 320, 240);
-        Label text = new Label("TEST TEXT");
-        text.setLayoutX(20);
-        group.getChildren().addAll(text);
+    protected void startGame() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ItalianDraughts.class.getResource("secondScene.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        ItalianDraughts.getStage().setTitle("ItalianDraughts");
         ItalianDraughts.getStage().setScene(scene);
+        ItalianDraughts.getStage().show();
     }
 
     @FXML
