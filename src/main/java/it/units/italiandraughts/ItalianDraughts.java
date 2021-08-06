@@ -13,7 +13,7 @@ public class ItalianDraughts extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ItalianDraughts.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ItalianDraughts.class.getResource("menuLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 350, 240);
         stage.setTitle("ItalianDraughts");
         stage.setScene(scene);
@@ -25,12 +25,8 @@ public class ItalianDraughts extends Application {
         launch();
     }
 
-    protected static Stage getStage() {
+    protected static Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    public static void setPrimaryStage(Stage primaryStage) {
-        ItalianDraughts.primaryStage = primaryStage;
     }
 
     // TODO remove this fake method
