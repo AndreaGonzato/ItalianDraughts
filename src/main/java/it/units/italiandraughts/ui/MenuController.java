@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class MenuController {
 
+    public static final short MIN_MENU_WIDTH = 350;
+    public static final short MIN_MENU_HEIGHT = 240;
+
     @FXML
     TextField player1Field, player2Field;
 
