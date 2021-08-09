@@ -27,9 +27,7 @@ public class MenuController {
         boardController.player2Name.setText(player2Field.getText());
         Stage stage = ItalianDraughts.getPrimaryStage();
         stage.setScene(scene);
-        stage.sizeToScene();
-        stage.setMinHeight(stage.getHeight());
-        stage.setMinWidth(stage.getWidth());
+
     }
 
     @FXML
