@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import it.units.italiandraughts.ui.InGameLabel?>
+
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.units.italiandraughts.ui.BoardController">
     <padding>
@@ -16,8 +18,9 @@
         </GridPane>
     </VBox>
     <HBox>
-        <Label fx:id="player1Name"/>
-        <Label fx:id="player2Name"/>
+        <InGameLabel fx:id="player1Name"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <InGameLabel fx:id="player2Name"/>
     </HBox>
 
 </VBox>

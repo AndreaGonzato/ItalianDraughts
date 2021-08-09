@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
+
+<fx:root type="Label" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+        <font>
+            <Font size="22.0" />
+        </font>
+</fx:root>
