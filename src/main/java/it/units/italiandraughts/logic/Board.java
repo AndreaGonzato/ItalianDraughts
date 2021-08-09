@@ -7,11 +7,6 @@ public class Board {
     private int[][] board;
     private final int SIZE = 8;
 
-    public static void main(String[] args) {
-        Board b = new Board();
-        System.out.println(b);
-    }
-
     Board() {
         board = new int[SIZE][SIZE];
 
