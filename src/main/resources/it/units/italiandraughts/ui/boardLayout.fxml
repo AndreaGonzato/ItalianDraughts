@@ -13,11 +13,9 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <VBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-        <GridPane fx:id="board" minWidth="500" maxWidth="500" minHeight="500" maxHeight="500">
-        </GridPane>
-    </VBox>
-    <HBox>
+    <GridPane fx:id="board"/>
+
+    <HBox VBox.vgrow="ALWAYS">
         <InGameLabel fx:id="player1Name"/>
         <Pane HBox.hgrow="ALWAYS"/>
         <InGameLabel fx:id="player2Name"/>
