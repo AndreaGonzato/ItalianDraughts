@@ -1,11 +1,13 @@
 package it.units.italiandraughts.ui;
 
+import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Piece;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 public class BoardController {
+
     @FXML
     GridPane board;
 
@@ -15,6 +17,15 @@ public class BoardController {
     private final double TILE_SIZE = 550/8;
 
     public void initialize() {
+        board.setMinSize(
+                ItalianDraughts.getScreenHeight()/3*2,
+                ItalianDraughts.getScreenHeight()/3*2
+        );
+        board.setMaxSize(
+                ItalianDraughts.getScreenHeight()/3*2,
+                ItalianDraughts.getScreenHeight()/3*2
+        );
+
         final int size = 8;
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
@@ -55,8 +66,5 @@ public class BoardController {
 
 
     }
-
-
-
 
 }
