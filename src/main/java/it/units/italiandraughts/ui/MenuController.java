@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -21,7 +22,11 @@ public class MenuController {
         BoardController boardController = fxmlLoader.getController();
         boardController.player1Name.setText(player1Field.getText());
         boardController.player2Name.setText(player2Field.getText());
-        ItalianDraughts.getPrimaryStage().setScene(scene);
+        Stage stage = ItalianDraughts.getPrimaryStage();
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.setMinHeight(stage.getHeight());
+        stage.setMinWidth(stage.getWidth());
     }
 
     @FXML
