@@ -2,13 +2,8 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.logic.Piece;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
 
 public class BoardController {
     @FXML
@@ -28,16 +23,16 @@ public class BoardController {
                 square.setMaxSize(800/5, 800/5);
                 String color;
                 if ((row + col) % 2 == 0) {
-                    color = "white";
-                } else {
                     color = "black";
+                } else {
+                    color = "white";
                 }
 
                 // TODO just a test, try to add a single piece
-                if (col == 4 && row == 2){
+                if (col == 5 && row == 2){
                     Piece piece = new Piece();
-                    square.getChildren().addAll(piece.getEllipse1());
-                    square.getChildren().add(piece.getEllipse2());
+                    square.getChildren().addAll(piece.getBaseEllipse());
+                    square.getChildren().add(piece.getUpperEllipse());
                 }
 
 
