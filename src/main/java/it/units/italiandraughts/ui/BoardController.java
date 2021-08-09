@@ -9,7 +9,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BoardController {
 
@@ -21,8 +20,6 @@ public class BoardController {
 
     @FXML
     Label player1Name, player2Name;
-
-    private final double TILE_SIZE = 550/8;
 
     public void initialize() {
         board.setMinSize(
@@ -49,8 +46,6 @@ public class BoardController {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 StackPane square = new StackPane();
-                square.setPrefSize(800/5, 800/5);
-                square.setMaxSize(800/5, 800/5);
                 String color;
                 if ((row + col) % 2 == 0) {
                     color = "#d47d35";
@@ -60,7 +55,7 @@ public class BoardController {
 
                 // TODO just a test, try to add a single piece
                 if (col == 4 && row == 2){
-                    Piece piece = new Piece();
+                    Piece piece = new Piece(board.getMaxHeight()/8);
                     square.getChildren().addAll(piece.getBaseEllipse());
                     square.getChildren().add(piece.getUpperEllipse());
                 }
