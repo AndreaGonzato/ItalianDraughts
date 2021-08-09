@@ -34,13 +34,13 @@ public class BoardController {
                 square.setMaxSize(800/5, 800/5);
                 String color;
                 if ((row + col) % 2 == 0) {
-                    color = "black";
+                    color = "#d47d35";
                 } else {
                     color = "white";
                 }
 
                 // TODO just a test, try to add a single piece
-                if (col == 5 && row == 2){
+                if (col == 4 && row == 2){
                     Piece piece = new Piece();
                     square.getChildren().addAll(piece.getBaseEllipse());
                     square.getChildren().add(piece.getUpperEllipse());

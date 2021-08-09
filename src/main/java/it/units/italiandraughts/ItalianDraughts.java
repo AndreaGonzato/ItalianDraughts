@@ -22,6 +22,8 @@ public class ItalianDraughts extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/menuLayout.fxml"));
         screenWidth = (int) screenBounds.getWidth();
         screenHeight = (int) screenBounds.getHeight();
+        // TODO test
+        System.out.println(screenWidth + " " + screenHeight);
         primaryStage = stage;
         Scene scene = new Scene(fxmlLoader.load(), screenWidth/4, screenHeight/4);
         stage.setTitle("ItalianDraughts");
