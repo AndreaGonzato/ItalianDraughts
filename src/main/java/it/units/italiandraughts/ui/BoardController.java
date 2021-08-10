@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class BoardController {
 
     @FXML
     Label player1Name, player2Name;
+
+    @FXML
+    Line line;
 
     public void initialize() {
         BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
@@ -54,6 +58,8 @@ public class BoardController {
             label.setMaxWidth((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
             label.setMinWidth((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
         });
+
+        line.setEndX(gridPane.getMaxWidth());
     }
 
 }

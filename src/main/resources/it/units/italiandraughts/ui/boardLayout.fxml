@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import it.units.italiandraughts.ui.InGameLabel?>
-<?import javafx.scene.control.Label?>
 <?import it.units.italiandraughts.ui.CoordinateLabel?>
+<?import javafx.scene.shape.Line?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.units.italiandraughts.ui.BoardController">
@@ -46,6 +46,7 @@
             <CoordinateLabel text="H"/>
         </HBox>
     </VBox>
+    <Line stroke="gray" fx:id="line" strokeWidth="2"/>
     <HBox VBox.vgrow="ALWAYS">
         <InGameLabel fx:id="player1Name"/>
         <Pane HBox.hgrow="ALWAYS"/>
