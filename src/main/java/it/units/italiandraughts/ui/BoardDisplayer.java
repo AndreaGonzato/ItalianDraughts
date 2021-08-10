@@ -38,11 +38,8 @@ public class BoardDisplayer {
                     color = "white";
                 }
 
-
-
-
                 square.setStyle("-fx-background-color: " + color + ";");
-                //gridPane.add(square, col, row);
+                gridPane.add(square, col, row);
             }
         }
 
@@ -65,18 +62,12 @@ public class BoardDisplayer {
         // TODO just a test, try to add a single piece
         for (int i=0 ; i< matrix.length; i++){
             for (int j = 0; j < matrix.length; j++) {
-
                 if (matrix[i][j] != 0){
                     Piece piece = new Piece(tileSize);
                     tiles[i][j].getChildren().add(piece.getBaseEllipse());
                     tiles[i][j].getChildren().add(piece.getUpperEllipse());
-
                 }
-                gridPane.add(tiles[i][j], j, i);
             }
-
         }
-
-
     }
 }
