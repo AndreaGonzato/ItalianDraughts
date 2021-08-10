@@ -6,7 +6,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import it.units.italiandraughts.ui.MenuController;
 
 import java.io.IOException;
 
