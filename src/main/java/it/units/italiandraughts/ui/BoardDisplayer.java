@@ -59,20 +59,26 @@ public class BoardDisplayer {
 
     }
 
-    public void draw(int[][] matrix) {
+    public void draw(Piece[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] == 1) {
-                    Piece piece = new Piece(PieceType.PLAYER1 ,tileSize);
-                    tiles[i][j].getChildren().add(piece.getBaseEllipse());
-                    tiles[i][j].getChildren().add(piece.getUpperEllipse());
-                }
-                if (matrix[i][j] == 2) {
-                    Piece piece = new Piece(PieceType.PLAYER2, tileSize);
-                    tiles[i][j].getChildren().add(piece.getBaseEllipse());
-                    tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                if (matrix[i][j] != null) {
+                    if (PieceType.PLAYER1.equals(matrix[i][j].getPieceType())) {
+                        Piece piece = new Piece(PieceType.PLAYER1, tileSize);
+                        tiles[i][j].getChildren().add(piece.getBaseEllipse());
+                        tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                    }
+                    if (PieceType.PLAYER2.equals(matrix[i][j].getPieceType())) {
+                        Piece piece = new Piece(PieceType.PLAYER2, tileSize);
+                        tiles[i][j].getChildren().add(piece.getBaseEllipse());
+                        tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                    }
                 }
             }
         }
+    }
+
+    public double getTileSize() {
+        return tileSize;
     }
 }

@@ -2,15 +2,16 @@ package it.units.italiandraughts.logic;
 
 
 import it.units.italiandraughts.ui.BoardDisplayer;
+import it.units.italiandraughts.ui.Piece;
 
 import java.util.Arrays;
 
 public class Board {
-    private int[][] board;
+    private Piece[][] board;
     public static final int SIZE = 8;
 
     public Board(BoardDisplayer boardDisplayer) {
-        board = new int[SIZE][SIZE];
+        board = new Piece[SIZE][SIZE];
 
         int player2Pieces = 12;
         int player1Pieces = 12;
@@ -19,7 +20,7 @@ public class Board {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if ((row + col) % 2 == 0 && player2Pieces > 0) {
-                    board[row][col] = 2;
+                    board[row][col] = new Piece(PieceType.PLAYER2, boardDisplayer.getTileSize());
                     player2Pieces--;
                 }
             }
@@ -28,7 +29,7 @@ public class Board {
         for (int row = 5; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if ((row + col) % 2 == 0 && player1Pieces > 0) {
-                    board[row][col] = 1;
+                    board[row][col] = new Piece(PieceType.PLAYER1, boardDisplayer.getTileSize());
                     player1Pieces--;
                 }
             }

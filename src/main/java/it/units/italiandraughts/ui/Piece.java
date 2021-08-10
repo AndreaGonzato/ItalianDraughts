@@ -33,6 +33,10 @@ public class Piece extends StackPane {
 
     }
 
+    public PieceType getPieceType() {
+        return pieceType;
+    }
+
     public Ellipse getBaseEllipse() {
         return baseEllipse;
     }
