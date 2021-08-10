@@ -24,7 +24,7 @@ public class Piece extends StackPane {
 
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
         if (pieceType == PieceType.PLAYER1) {
-            upperEllipse.setFill(Color.valueOf("#fff9f4"));
+            upperEllipse.setFill(Color.valueOf("#e8e8e8")); // White
         } else {
             upperEllipse.setFill(Color.valueOf("#423c39"));
         }

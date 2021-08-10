@@ -37,6 +37,7 @@ public class BoardDisplayer {
                     color = "#d47d35";
                 } else {
                     color = "white";
+                    color = "#fafafa";
                 }
 
                 square.setStyle("-fx-background-color: " + color + ";");
