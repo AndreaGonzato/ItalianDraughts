@@ -30,7 +30,7 @@ public class BoardController {
     public void initialize() {
         BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
         Board board = new Board(boardDisplayer);
-        board.draw();
+        board.draw(boardDisplayer);
         Stage stage = ItalianDraughts.getPrimaryStage();
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
@@ -40,7 +40,7 @@ public class BoardController {
         List<Node> rowLabels = rowNumbers.getChildren();
         rowLabels.forEach(e -> {
             ((Label) e).setMaxHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
-            ((Label) e).setMinHeight((ItalianDraughts.getScreenHeight()/3*2)/8);
+            ((Label) e).setMinHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
         });
 
         Platform.runLater(() -> columnLetters.setPadding(new Insets(0, 0, 0,

@@ -23,7 +23,7 @@ public class ItalianDraughts extends Application {
         screenWidth = (int) screenBounds.getWidth();
         screenHeight = (int) screenBounds.getHeight();
         primaryStage = stage;
-        Scene scene = new Scene(fxmlLoader.load(), screenWidth/4, screenHeight/4);
+        Scene scene = new Scene(fxmlLoader.load(), screenWidth / 4, screenHeight / 4);
         stage.setTitle("ItalianDraughts");
         stage.setScene(scene);
         stage.sizeToScene();

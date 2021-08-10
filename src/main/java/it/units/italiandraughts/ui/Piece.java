@@ -23,9 +23,8 @@ public class Piece extends StackPane {
         //baseEllipse.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2 + TILE_SIZE * 0.07);
 
 
-
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
-        upperEllipse.setFill( Color.valueOf("#fff9f4"));
+        upperEllipse.setFill(Color.valueOf("#fff9f4"));
 
         upperEllipse.setStroke(Color.BLACK);
         upperEllipse.setStrokeWidth(tileSize * 0.03);

@@ -2,17 +2,14 @@ package it.units.italiandraughts.logic;
 
 
 import it.units.italiandraughts.ui.BoardDisplayer;
-import it.units.italiandraughts.ui.Piece;
 
 import java.util.Arrays;
 
 public class Board {
     private int[][] board;
     private final int SIZE = 8;
-    private BoardDisplayer boardDisplayer;
 
     public Board(BoardDisplayer boardDisplayer) {
-        this.boardDisplayer = boardDisplayer;
         board = new int[SIZE][SIZE];
 
         int player2Pieces = 12;
@@ -38,13 +35,10 @@ public class Board {
         }
 
 
-
-
     }
 
 
-
-    public void draw() {
+    public void draw(BoardDisplayer boardDisplayer) {
         boardDisplayer.draw(board);
     }
 
