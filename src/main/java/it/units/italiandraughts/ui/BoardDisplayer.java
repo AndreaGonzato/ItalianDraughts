@@ -15,7 +15,6 @@ public class BoardDisplayer {
     public BoardDisplayer(GridPane gridPane) {
         this.gridPane = gridPane;
         tiles = new StackPane[SIZE][SIZE];
-        tileSize = gridPane.getMaxHeight()/8;
 
         gridPane.setMinSize(
                 ItalianDraughts.getScreenHeight()/3*2,
@@ -25,6 +24,8 @@ public class BoardDisplayer {
                 ItalianDraughts.getScreenHeight()/3*2,
                 ItalianDraughts.getScreenHeight()/3*2
         );
+
+        tileSize = gridPane.getMaxHeight()/8;
 
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -37,15 +38,6 @@ public class BoardDisplayer {
                     color = "white";
                 }
 
-/*
-                // TODO just a test, try to add a single piece
-                if (col == 4 && row == 2){
-                    Piece piece = new Piece(gridPane.getMaxHeight()/8);
-                    square.getChildren().addAll(piece.getBaseEllipse());
-                    square.getChildren().add(piece.getUpperEllipse());
-                }
-
- */
 
 
 
@@ -74,7 +66,7 @@ public class BoardDisplayer {
         for (int i=0 ; i< matrix.length; i++){
             for (int j = 0; j < matrix.length; j++) {
 
-                if (matrix[i][j] == 2){
+                if (matrix[i][j] != 0){
                     Piece piece = new Piece(tileSize);
                     tiles[i][j].getChildren().add(piece.getBaseEllipse());
                     tiles[i][j].getChildren().add(piece.getUpperEllipse());
