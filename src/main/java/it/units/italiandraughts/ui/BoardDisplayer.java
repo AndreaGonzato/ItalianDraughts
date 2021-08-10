@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 public class BoardDisplayer {
     private GridPane gridPane;
     private StackPane[][] tiles;
-    private double tileSize;
+    private final double tileSize;
 
     public BoardDisplayer(GridPane gridPane) {
         this.gridPane = gridPane;
