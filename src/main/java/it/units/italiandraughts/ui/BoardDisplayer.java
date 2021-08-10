@@ -7,13 +7,14 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class BoardDisplayer {
+    private final int SIZE = 8;
     private GridPane gridPane;
     private StackPane[][] tiles;
     private double tileSize;
 
     public BoardDisplayer(GridPane gridPane) {
         this.gridPane = gridPane;
-        tiles = new StackPane[8][8];
+        tiles = new StackPane[SIZE][SIZE];
         tileSize = gridPane.getMaxHeight()/8;
 
         gridPane.setMinSize(
@@ -25,9 +26,8 @@ public class BoardDisplayer {
                 ItalianDraughts.getScreenHeight()/3*2
         );
 
-        final int size = 8;
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 StackPane square = new StackPane();
                 tiles[row][col] = square;
                 String color;
@@ -37,6 +37,7 @@ public class BoardDisplayer {
                     color = "white";
                 }
 
+/*
                 // TODO just a test, try to add a single piece
                 if (col == 4 && row == 2){
                     Piece piece = new Piece(gridPane.getMaxHeight()/8);
@@ -44,15 +45,17 @@ public class BoardDisplayer {
                     square.getChildren().add(piece.getUpperEllipse());
                 }
 
+ */
+
 
 
                 square.setStyle("-fx-background-color: " + color + ";");
-                gridPane.add(square, col, row);
+                //gridPane.add(square, col, row);
             }
         }
 
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < SIZE; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setPercentWidth(12.5);
             gridPane.getColumnConstraints().add(columnConstraints);
@@ -62,18 +65,24 @@ public class BoardDisplayer {
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
+
+
     }
 
     public void draw(int[][] matrix){
         // TODO just a test, try to add a single piece
         for (int i=0 ; i< matrix.length; i++){
             for (int j = 0; j < matrix.length; j++) {
-                if (i == 4 && j == 2){
+
+                if (matrix[i][j] == 2){
                     Piece piece = new Piece(tileSize);
-                    tiles[i][j].getChildren().addAll(piece.getBaseEllipse());
+                    tiles[i][j].getChildren().add(piece.getBaseEllipse());
                     tiles[i][j].getChildren().add(piece.getUpperEllipse());
+
                 }
+                gridPane.add(tiles[i][j], j, i);
             }
+
         }
 
 

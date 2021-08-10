@@ -25,6 +25,7 @@ public class BoardController {
 
         BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
         Board board = new Board(boardDisplayer);
+        board.draw();
         Stage stage = ItalianDraughts.getPrimaryStage();
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
@@ -36,6 +37,10 @@ public class BoardController {
             ((Label) e).setMaxHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
             ((Label) e).setMinHeight((ItalianDraughts.getScreenHeight()/3*2)/8);
         });
+
+        System.out.println(board); // TODO TEST
+
+
 
 
 

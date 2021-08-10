@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 
 import it.units.italiandraughts.ui.BoardDisplayer;
+import it.units.italiandraughts.ui.Piece;
 
 import java.util.Arrays;
 
@@ -36,12 +37,15 @@ public class Board {
             }
         }
 
+
+
+
     }
 
 
 
     public void draw() {
-        // TODO call ui.Board.draw()
+        boardDisplayer.draw(board);
     }
 
     @Override
