@@ -9,11 +9,15 @@ public class Piece extends StackPane {
 
     private Ellipse baseEllipse;
     private Ellipse upperEllipse;
+    private PieceType pieceType;
 
 
-    public Piece(double tileSize) {
+    public Piece(PieceType pieceType, double tileSize) {
+        this.pieceType = pieceType;
         baseEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
+
         baseEllipse.setFill(Color.BLACK);
+
 
         baseEllipse.setStroke(Color.BLACK);
         baseEllipse.setStrokeWidth(tileSize * 0.03);
@@ -24,7 +28,11 @@ public class Piece extends StackPane {
 
 
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
-        upperEllipse.setFill(Color.valueOf("#fff9f4"));
+        if (pieceType == PieceType.PLAYER1) {
+            upperEllipse.setFill(Color.valueOf("#fff9f4"));
+        }else {
+            upperEllipse.setFill(Color.valueOf("#423c39"));
+        }
 
         upperEllipse.setStroke(Color.BLACK);
         upperEllipse.setStrokeWidth(tileSize * 0.03);

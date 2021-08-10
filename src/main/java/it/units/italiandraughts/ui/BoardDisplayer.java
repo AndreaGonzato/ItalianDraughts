@@ -60,8 +60,13 @@ public class BoardDisplayer {
     public void draw(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] != 0) {
-                    Piece piece = new Piece(tileSize);
+                if (matrix[i][j] == 1) {
+                    Piece piece = new Piece(PieceType.PLAYER1 ,tileSize);
+                    tiles[i][j].getChildren().add(piece.getBaseEllipse());
+                    tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                }
+                if (matrix[i][j] == 2) {
+                    Piece piece = new Piece(PieceType.PLAYER2, tileSize);
                     tiles[i][j].getChildren().add(piece.getBaseEllipse());
                     tiles[i][j].getChildren().add(piece.getUpperEllipse());
                 }
