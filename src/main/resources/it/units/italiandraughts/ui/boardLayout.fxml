@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import it.units.italiandraughts.ui.InGameLabel?>
-<?import it.units.italiandraughts.ui.CoordinateLabel?>
+<?import it.units.italiandraughts.ui.label.InGameLabel?>
+<?import it.units.italiandraughts.ui.label.CoordinateLabel?>
 <?import javafx.scene.shape.Line?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"

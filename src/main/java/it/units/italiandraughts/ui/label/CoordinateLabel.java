@@ -1,4 +1,4 @@
-package it.units.italiandraughts.ui;
+package it.units.italiandraughts.ui.label;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
