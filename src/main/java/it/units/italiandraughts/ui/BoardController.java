@@ -2,7 +2,7 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
-import it.units.italiandraughts.ui.label.CoordinateLabel;
+import it.units.italiandraughts.ui.labels.CoordinateLabel;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;

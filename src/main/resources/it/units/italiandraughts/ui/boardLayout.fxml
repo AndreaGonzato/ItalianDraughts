@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import it.units.italiandraughts.ui.label.InGameLabel?>
-<?import it.units.italiandraughts.ui.label.CoordinateLabel?>
+<?import it.units.italiandraughts.ui.labels.InGameLabel?>
+<?import it.units.italiandraughts.ui.labels.CoordinateLabel?>
 <?import javafx.scene.shape.Line?>
 
 <?import javafx.scene.control.Button?>
