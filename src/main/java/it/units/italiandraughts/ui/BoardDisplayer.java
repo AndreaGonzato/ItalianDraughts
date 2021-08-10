@@ -1,20 +1,20 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
+import it.units.italiandraughts.logic.Board;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class BoardDisplayer {
-    private final int SIZE = 8;
     private GridPane gridPane;
     private StackPane[][] tiles;
     private double tileSize;
 
     public BoardDisplayer(GridPane gridPane) {
         this.gridPane = gridPane;
-        tiles = new StackPane[SIZE][SIZE];
+        tiles = new StackPane[Board.SIZE][Board.SIZE];
 
         gridPane.setMinSize(
                 ItalianDraughts.getScreenHeight() / 3 * 2,
@@ -27,8 +27,8 @@ public class BoardDisplayer {
 
         tileSize = gridPane.getMaxHeight() / 8;
 
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
+        for (int row = 0; row < Board.SIZE; row++) {
+            for (int col = 0; col < Board.SIZE; col++) {
                 StackPane square = new StackPane();
                 tiles[row][col] = square;
                 String color;
@@ -44,7 +44,7 @@ public class BoardDisplayer {
         }
 
 
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < Board.SIZE; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setPercentWidth(12.5);
             gridPane.getColumnConstraints().add(columnConstraints);

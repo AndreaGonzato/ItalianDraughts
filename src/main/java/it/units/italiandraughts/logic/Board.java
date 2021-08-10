@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Board {
     private int[][] board;
-    private final int SIZE = 8;
+    public static final int SIZE = 8;
 
     public Board(BoardDisplayer boardDisplayer) {
         board = new int[SIZE][SIZE];
