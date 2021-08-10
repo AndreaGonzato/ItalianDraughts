@@ -49,7 +49,7 @@
     </VBox>
     <Line stroke="gray" fx:id="line" strokeWidth="2"/>
     <HBox VBox.vgrow="ALWAYS">
-        <InGameLabel fx:id="player1Name"/>
+        <InGameLabel fx:id="player1Name" maxWidth="148"/>
         <InGameLabel text="○" textFill="#423c39"/>
         <Pane HBox.hgrow="ALWAYS"/>
         <Button fx:id="undo" text="Undo" prefHeight="30" prefWidth="65">
@@ -68,7 +68,7 @@
         </Button>
         <Pane HBox.hgrow="ALWAYS"/>
         <InGameLabel text="●" textFill="#423c39"/>
-        <InGameLabel fx:id="player2Name"/>
+        <InGameLabel fx:id="player2Name" maxWidth="148"/>
     </HBox>
 
 </VBox>
