@@ -1,7 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
-import it.units.italiandraughts.logic.Piece;
+import it.units.italiandraughts.logic.Board;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -23,8 +23,8 @@ public class BoardController {
 
     public void initialize() {
 
-        Board checkboard = new Board(board);
-
+        BoardDisplayer boardDisplayer = new BoardDisplayer(board);
+        Board board = new Board(boardDisplayer);
         Stage stage = ItalianDraughts.getPrimaryStage();
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());

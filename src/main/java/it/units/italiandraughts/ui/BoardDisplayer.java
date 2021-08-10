@@ -7,8 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
-public class Board {
-    public Board(GridPane board) {
+public class BoardDisplayer {
+
+    public BoardDisplayer(GridPane board) {
+
         board.setMinSize(
                 ItalianDraughts.getScreenHeight()/3*2,
                 ItalianDraughts.getScreenHeight()/3*2
@@ -54,5 +56,9 @@ public class Board {
             board.getRowConstraints().add(rowConstraints);
         }
 
+    }
+
+    public void draw(){
+        // TODO how to draw the board
     }
 }
