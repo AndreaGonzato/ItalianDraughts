@@ -23,23 +23,18 @@ public class Piece extends StackPane {
         baseEllipse.setStroke(Color.BLACK);
         baseEllipse.setStrokeWidth(tileSize * 0.03);
 
-        //baseEllipse.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3125 * 2) / 2);
         baseEllipse.setTranslateY(tileSize * 0.07);
-        //baseEllipse.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2 + TILE_SIZE * 0.07);
 
 
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
         if (pieceType == PieceType.PLAYER1) {
             upperEllipse.setFill(Color.valueOf("#fff9f4"));
-        }else {
+        } else {
             upperEllipse.setFill(Color.valueOf("#423c39"));
         }
 
         upperEllipse.setStroke(Color.BLACK);
         upperEllipse.setStrokeWidth(tileSize * 0.03);
-
-        //upperEllipse.setTranslateX((TILE_SIZE - TILE_SIZE * 0.3125 * 2) / 2);
-        //upperEllipse.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2);
 
     }
 
