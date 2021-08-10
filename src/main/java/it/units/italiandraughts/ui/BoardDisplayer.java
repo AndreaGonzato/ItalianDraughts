@@ -1,7 +1,6 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
-import it.units.italiandraughts.logic.Piece;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -10,10 +9,12 @@ import javafx.scene.layout.StackPane;
 public class BoardDisplayer {
     private GridPane gridPane;
     private StackPane[][] tiles;
+    private double tileSize;
 
     public BoardDisplayer(GridPane gridPane) {
         this.gridPane = gridPane;
         tiles = new StackPane[8][8];
+        tileSize = gridPane.getMaxHeight()/8;
 
         gridPane.setMinSize(
                 ItalianDraughts.getScreenHeight()/3*2,
@@ -68,7 +69,7 @@ public class BoardDisplayer {
         for (int i=0 ; i< matrix.length; i++){
             for (int j = 0; j < matrix.length; j++) {
                 if (i == 4 && j == 2){
-                    Piece piece = new Piece(gridPane.getMaxHeight()/8);
+                    Piece piece = new Piece(tileSize);
                     tiles[i][j].getChildren().addAll(piece.getBaseEllipse());
                     tiles[i][j].getChildren().add(piece.getUpperEllipse());
                 }

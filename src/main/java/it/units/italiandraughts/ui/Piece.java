@@ -1,4 +1,4 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.ui;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
