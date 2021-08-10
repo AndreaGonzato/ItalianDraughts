@@ -26,7 +26,7 @@
                 <Label text="2"/>
                 <Label text="1"/>
             </VBox>
-            <GridPane fx:id="board"/>
+            <GridPane fx:id="gridPane"/>
         </HBox>
     </VBox>
     <HBox VBox.vgrow="ALWAYS">

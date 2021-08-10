@@ -13,7 +13,7 @@ import java.util.List;
 public class BoardController {
 
     @FXML
-    GridPane board;
+    GridPane gridPane;
 
     @FXML
     VBox rowNumbers;
@@ -23,7 +23,7 @@ public class BoardController {
 
     public void initialize() {
 
-        BoardDisplayer boardDisplayer = new BoardDisplayer(board);
+        BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
         Board board = new Board(boardDisplayer);
         Stage stage = ItalianDraughts.getPrimaryStage();
         stage.sizeToScene();

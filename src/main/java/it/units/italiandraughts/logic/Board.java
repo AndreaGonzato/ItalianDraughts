@@ -18,7 +18,6 @@ public class Board {
         int player1Pieces = 12;
 
 
-
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if ((row + col) % 2 == 0 && player2Pieces > 0) {
@@ -39,14 +38,16 @@ public class Board {
 
     }
 
-    public void draw(){
+
+
+    public void draw() {
         // TODO call ui.Board.draw()
     }
 
     @Override
     public String toString() {
         String result = "Board{ board=\n";
-        for (int i=0 ; i<SIZE; i++){
+        for (int i = 0; i < SIZE; i++) {
             result += Arrays.toString(board[i]) + "\n";
         }
         result += " }";

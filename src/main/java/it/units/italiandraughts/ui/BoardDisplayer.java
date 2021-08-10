@@ -8,14 +8,18 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class BoardDisplayer {
+    private GridPane gridPane;
+    private StackPane[][] tiles;
 
-    public BoardDisplayer(GridPane board) {
+    public BoardDisplayer(GridPane gridPane) {
+        this.gridPane = gridPane;
+        tiles = new StackPane[8][8];
 
-        board.setMinSize(
+        gridPane.setMinSize(
                 ItalianDraughts.getScreenHeight()/3*2,
                 ItalianDraughts.getScreenHeight()/3*2
         );
-        board.setMaxSize(
+        gridPane.setMaxSize(
                 ItalianDraughts.getScreenHeight()/3*2,
                 ItalianDraughts.getScreenHeight()/3*2
         );
@@ -24,6 +28,7 @@ public class BoardDisplayer {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 StackPane square = new StackPane();
+                tiles[row][col] = square;
                 String color;
                 if ((row + col) % 2 == 0) {
                     color = "#d47d35";
@@ -33,7 +38,7 @@ public class BoardDisplayer {
 
                 // TODO just a test, try to add a single piece
                 if (col == 4 && row == 2){
-                    Piece piece = new Piece(board.getMaxHeight()/8);
+                    Piece piece = new Piece(gridPane.getMaxHeight()/8);
                     square.getChildren().addAll(piece.getBaseEllipse());
                     square.getChildren().add(piece.getUpperEllipse());
                 }
@@ -41,7 +46,7 @@ public class BoardDisplayer {
 
 
                 square.setStyle("-fx-background-color: " + color + ";");
-                board.add(square, col, row);
+                gridPane.add(square, col, row);
             }
         }
 
@@ -49,16 +54,27 @@ public class BoardDisplayer {
         for (int i = 0; i < size; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setPercentWidth(12.5);
-            board.getColumnConstraints().add(columnConstraints);
+            gridPane.getColumnConstraints().add(columnConstraints);
 
             RowConstraints rowConstraints = new RowConstraints();
             rowConstraints.setPercentHeight(12.5);
-            board.getRowConstraints().add(rowConstraints);
+            gridPane.getRowConstraints().add(rowConstraints);
         }
 
     }
 
-    public void draw(){
-        // TODO how to draw the board
+    public void draw(int[][] matrix){
+        // TODO just a test, try to add a single piece
+        for (int i=0 ; i< matrix.length; i++){
+            for (int j = 0; j < matrix.length; j++) {
+                if (i == 4 && j == 2){
+                    Piece piece = new Piece(gridPane.getMaxHeight()/8);
+                    tiles[i][j].getChildren().addAll(piece.getBaseEllipse());
+                    tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                }
+            }
+        }
+
+
     }
 }
