@@ -28,6 +28,16 @@
             </VBox>
             <GridPane fx:id="gridPane"/>
         </HBox>
+        <HBox fx:id="columnLetters">
+            <Label text="A"/>
+            <Label text="B"/>
+            <Label text="C"/>
+            <Label text="D"/>
+            <Label text="E"/>
+            <Label text="F"/>
+            <Label text="G"/>
+            <Label text="H"/>
+        </HBox>
     </VBox>
     <HBox VBox.vgrow="ALWAYS">
         <InGameLabel fx:id="player1Name"/>
