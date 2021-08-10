@@ -2,6 +2,7 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
+import it.units.italiandraughts.logic.PieceType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
