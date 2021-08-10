@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
@@ -30,6 +31,9 @@ public class BoardController {
 
     @FXML
     Line line;
+
+    @FXML
+    Button undo;
 
     public void initialize() {
         BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
@@ -61,6 +65,7 @@ public class BoardController {
         });
 
         line.setEndX(gridPane.getMaxWidth());
+        undo.setMinHeight(player1Name.getHeight());
     }
 
 }

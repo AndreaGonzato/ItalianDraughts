@@ -9,6 +9,7 @@
 <?import it.units.italiandraughts.ui.label.CoordinateLabel?>
 <?import javafx.scene.shape.Line?>
 
+<?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.units.italiandraughts.ui.BoardController">
     <padding>
@@ -49,6 +50,21 @@
     <Line stroke="gray" fx:id="line" strokeWidth="2"/>
     <HBox VBox.vgrow="ALWAYS">
         <InGameLabel fx:id="player1Name"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <Button fx:id="undo" text="Undo" prefHeight="30" prefWidth="65">
+            <HBox.margin>
+                <Insets>
+                    <right>10</right>
+                </Insets>
+            </HBox.margin>
+        </Button>
+        <Button text="Reset" prefHeight="30" prefWidth="65">
+            <HBox.margin>
+                <Insets>
+                    <left>10</left>
+                </Insets>
+            </HBox.margin>
+        </Button>
         <Pane HBox.hgrow="ALWAYS"/>
         <InGameLabel fx:id="player2Name"/>
     </HBox>
