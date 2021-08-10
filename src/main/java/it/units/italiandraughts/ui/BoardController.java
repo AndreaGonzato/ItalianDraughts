@@ -65,7 +65,9 @@ public class BoardController {
         });
 
         line.setEndX(gridPane.getMaxWidth());
-        undo.setMinHeight(player1Name.getHeight());
+        player1Name.setPadding(new Insets(0, 15, 0, 0));
+        player2Name.setPadding(new Insets(0, 0, 0, 15));
+        gridPane.setStyle("-fx-border-color: #d47d35");
     }
 
 }
