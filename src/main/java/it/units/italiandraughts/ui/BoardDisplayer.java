@@ -10,12 +10,10 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class BoardDisplayer {
-    private GridPane gridPane;
     private StackPane[][] tiles;
     private final double tileSize;
 
     public BoardDisplayer(GridPane gridPane) {
-        this.gridPane = gridPane;
         tiles = new StackPane[Board.SIZE][Board.SIZE];
 
         gridPane.setMinSize(
@@ -37,7 +35,6 @@ public class BoardDisplayer {
                 if ((row + col) % 2 == 0) {
                     color = "#d47d35";
                 } else {
-                    color = "white";
                     color = "#fafafa";
                 }
 
