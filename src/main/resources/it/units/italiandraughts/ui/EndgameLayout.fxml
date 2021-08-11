@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-
 <?import it.units.italiandraughts.ui.elements.GameButton?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.units.italiandraughts.ui.EndgameController">
@@ -13,7 +12,15 @@
     </padding>
     <Label fx:id="winnerLabel"/>
     <HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-        <GameButton text="New game"/>
-        <GameButton text="Exit"/>
+        <GameButton text="New game" prefWidth="80">
+        <HBox.margin>
+            <Insets right="10.0"/>
+        </HBox.margin>
+        </GameButton>
+        <GameButton text="Exit" prefWidth="80">
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </GameButton>
     </HBox>
 </VBox>
