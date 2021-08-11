@@ -10,4 +10,19 @@ public class Piece {
     public PieceType getPieceType() {
         return pieceType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Piece)) return false;
+
+        Piece piece = (Piece) o;
+
+        return pieceType == piece.pieceType;
+    }
+
+    @Override
+    public int hashCode() {
+        return pieceType.hashCode();
+    }
 }

@@ -50,4 +50,8 @@ public class Board {
         result += " }";
         return result;
     }
+
+    public Piece[][] getBoard() {
+        return board;
+    }
 }
