@@ -1,6 +1,5 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.ItalianDraughts;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,9 +21,11 @@ public class MenuController {
         BoardController boardController = fxmlLoader.getController();
         boardController.player1Name.setText(player1Field.getText());
         boardController.player2Name.setText(player2Field.getText());
-        Stage stage = ItalianDraughts.getPrimaryStage();
+        Stage stage = (Stage) player1Field.getScene().getWindow();
         stage.setScene(scene);
-
+        stage.sizeToScene();
+        stage.setMinHeight(stage.getHeight());
+        stage.setMinWidth(stage.getWidth());
     }
 
     @FXML

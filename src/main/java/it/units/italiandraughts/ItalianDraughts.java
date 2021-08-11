@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class ItalianDraughts extends Application {
 
-    private static Stage primaryStage;
     private static int screenWidth;
     private static int screenHeight;
 
@@ -21,7 +20,6 @@ public class ItalianDraughts extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/MenuLayout.fxml"));
         screenWidth = (int) screenBounds.getWidth();
         screenHeight = (int) screenBounds.getHeight();
-        primaryStage = stage;
         Scene scene = new Scene(fxmlLoader.load(), screenWidth / 4, screenHeight / 4);
         stage.setTitle("ItalianDraughts");
         stage.setScene(scene);
@@ -34,10 +32,6 @@ public class ItalianDraughts extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-
-    public static Stage getPrimaryStage() {
-        return primaryStage;
     }
 
     public static int getScreenWidth() {

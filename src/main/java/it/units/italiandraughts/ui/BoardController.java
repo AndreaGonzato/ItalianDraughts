@@ -4,14 +4,17 @@ import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class BoardController {
@@ -38,10 +41,6 @@ public class BoardController {
         BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
         Board board = new Board(boardDisplayer);
         board.draw(boardDisplayer);
-        Stage stage = ItalianDraughts.getPrimaryStage();
-        stage.sizeToScene();
-        stage.setMinHeight(stage.getHeight());
-        stage.setMinWidth(stage.getWidth());
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
