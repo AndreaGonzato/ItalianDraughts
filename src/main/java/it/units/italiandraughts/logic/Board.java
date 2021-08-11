@@ -7,11 +7,11 @@ import it.units.italiandraughts.ui.PieceDisplayer;
 import java.util.Arrays;
 
 public class Board {
-    private PieceDisplayer[][] board;
+    private Piece[][] board;
     public static final int SIZE = 8;
 
     public Board(BoardDisplayer boardDisplayer) {
-        board = new PieceDisplayer[SIZE][SIZE];
+        board = new Piece[SIZE][SIZE];
 
         int player2Pieces = 12;
         int player1Pieces = 12;
@@ -20,7 +20,7 @@ public class Board {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if ((row + col) % 2 == 0 && player2Pieces > 0) {
-                    board[row][col] = new PieceDisplayer(PieceType.PLAYER2, boardDisplayer.getTileSize());
+                    board[row][col] = new Piece(PieceType.PLAYER2);
                     player2Pieces--;
                 }
             }
@@ -29,7 +29,7 @@ public class Board {
         for (int row = 5; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if ((row + col) % 2 == 0 && player1Pieces > 0) {
-                    board[row][col] = new PieceDisplayer(PieceType.PLAYER1, boardDisplayer.getTileSize());
+                    board[row][col] = new Piece(PieceType.PLAYER1);
                     player1Pieces--;
                 }
             }
@@ -37,7 +37,6 @@ public class Board {
 
 
     }
-
 
     public void draw(BoardDisplayer boardDisplayer) {
         boardDisplayer.draw(board);

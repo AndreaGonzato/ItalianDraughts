@@ -1,5 +1,6 @@
 package it.units.italiandraughts.ui;
 
+import it.units.italiandraughts.logic.Piece;
 import it.units.italiandraughts.logic.PieceType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -10,11 +11,11 @@ public class PieceDisplayer extends StackPane {
 
     private Ellipse baseEllipse;
     private Ellipse upperEllipse;
-    private PieceType pieceType;
+    private Piece piece;
 
 
-    public PieceDisplayer(PieceType pieceType, double tileSize) {
-        this.pieceType = pieceType;
+    public PieceDisplayer(Piece piece, double tileSize) {
+        this.piece = piece;
         baseEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
         baseEllipse.setFill(Color.BLACK);
         baseEllipse.setStroke(Color.BLACK);
@@ -23,7 +24,7 @@ public class PieceDisplayer extends StackPane {
 
 
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
-        if (pieceType == PieceType.PLAYER1) {
+        if (piece.getPieceType().equals(PieceType.PLAYER1)) {
             upperEllipse.setFill(Color.valueOf("#e8e8e8")); // White
         } else {
             upperEllipse.setFill(Color.valueOf("#423c39"));
@@ -33,8 +34,8 @@ public class PieceDisplayer extends StackPane {
 
     }
 
-    public PieceType getPieceType() {
-        return pieceType;
+    public Piece getPiece() {
+        return piece;
     }
 
     public Ellipse getBaseEllipse() {

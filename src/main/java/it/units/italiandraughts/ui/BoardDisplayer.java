@@ -2,6 +2,7 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
+import it.units.italiandraughts.logic.Piece;
 import it.units.italiandraughts.logic.PieceType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -59,17 +60,17 @@ public class BoardDisplayer {
 
     }
 
-    public void draw(PieceDisplayer[][] matrix) {
+    public void draw(Piece[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] != null) {
                     if (PieceType.PLAYER1.equals(matrix[i][j].getPieceType())) {
-                        PieceDisplayer pieceDisplayer = new PieceDisplayer(PieceType.PLAYER1, tileSize);
+                        PieceDisplayer pieceDisplayer = new PieceDisplayer(new Piece(PieceType.PLAYER1), tileSize);
                         tiles[i][j].getChildren().add(pieceDisplayer.getBaseEllipse());
                         tiles[i][j].getChildren().add(pieceDisplayer.getUpperEllipse());
                     }
                     if (PieceType.PLAYER2.equals(matrix[i][j].getPieceType())) {
-                        PieceDisplayer pieceDisplayer = new PieceDisplayer(PieceType.PLAYER2, tileSize);
+                        PieceDisplayer pieceDisplayer = new PieceDisplayer(new Piece(PieceType.PLAYER2), tileSize);
                         tiles[i][j].getChildren().add(pieceDisplayer.getBaseEllipse());
                         tiles[i][j].getChildren().add(pieceDisplayer.getUpperEllipse());
                     }
@@ -81,4 +82,6 @@ public class BoardDisplayer {
     public double getTileSize() {
         return tileSize;
     }
+
+
 }
