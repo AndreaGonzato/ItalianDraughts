@@ -5,7 +5,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
-public class Piece extends StackPane {
+public class PieceDisplayer extends StackPane {
 
 
     private Ellipse baseEllipse;
@@ -13,7 +13,7 @@ public class Piece extends StackPane {
     private PieceType pieceType;
 
 
-    public Piece(PieceType pieceType, double tileSize) {
+    public PieceDisplayer(PieceType pieceType, double tileSize) {
         this.pieceType = pieceType;
         baseEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
         baseEllipse.setFill(Color.BLACK);

@@ -59,19 +59,19 @@ public class BoardDisplayer {
 
     }
 
-    public void draw(Piece[][] matrix) {
+    public void draw(PieceDisplayer[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] != null) {
                     if (PieceType.PLAYER1.equals(matrix[i][j].getPieceType())) {
-                        Piece piece = new Piece(PieceType.PLAYER1, tileSize);
-                        tiles[i][j].getChildren().add(piece.getBaseEllipse());
-                        tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                        PieceDisplayer pieceDisplayer = new PieceDisplayer(PieceType.PLAYER1, tileSize);
+                        tiles[i][j].getChildren().add(pieceDisplayer.getBaseEllipse());
+                        tiles[i][j].getChildren().add(pieceDisplayer.getUpperEllipse());
                     }
                     if (PieceType.PLAYER2.equals(matrix[i][j].getPieceType())) {
-                        Piece piece = new Piece(PieceType.PLAYER2, tileSize);
-                        tiles[i][j].getChildren().add(piece.getBaseEllipse());
-                        tiles[i][j].getChildren().add(piece.getUpperEllipse());
+                        PieceDisplayer pieceDisplayer = new PieceDisplayer(PieceType.PLAYER2, tileSize);
+                        tiles[i][j].getChildren().add(pieceDisplayer.getBaseEllipse());
+                        tiles[i][j].getChildren().add(pieceDisplayer.getUpperEllipse());
                     }
                 }
             }
