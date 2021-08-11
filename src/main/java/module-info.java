@@ -9,6 +9,6 @@ module it.units.italiandraughts {
     opens it.units.italiandraughts.ui to javafx.fxml;
     exports it.units.italiandraughts.logic;
     opens it.units.italiandraughts.logic to javafx.fxml;
-    exports it.units.italiandraughts.ui.labels;
-    opens it.units.italiandraughts.ui.labels to javafx.fxml;
+    exports it.units.italiandraughts.ui.elements;
+    opens it.units.italiandraughts.ui.elements to javafx.fxml;
 }

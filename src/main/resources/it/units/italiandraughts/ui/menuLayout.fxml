@@ -3,10 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import it.units.italiandraughts.ui.elements.GameButton?>
+
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.units.italiandraughts.ui.MenuController">
     <padding>
@@ -33,14 +33,14 @@
     <TextField fx:id="player2Field" text="Player 2"/>
     </HBox>
     <HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-    <Button text="Start" onAction="#startGame" prefHeight="30" prefWidth="50" defaultButton="true">
+    <GameButton text="Start" onAction="#startGame" defaultButton="true">
         <HBox.margin>
             <Insets>
                 <right>20</right>
             </Insets>
         </HBox.margin>
-        </Button>
+        </GameButton>
 
-    <Button text="Exit" onAction="#quitGame" prefHeight="30" prefWidth="50"/>
+    <GameButton text="Exit" onAction="#quitGame"/>
     </HBox>
 </VBox>

@@ -2,7 +2,7 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
-import it.units.italiandraughts.ui.labels.CoordinateLabel;
+import it.units.italiandraughts.ui.elements.CoordinateLabel;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -47,7 +47,7 @@ public class BoardController {
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
         rowLabels.forEach(e -> {
-            CoordinateLabel label = (CoordinateLabel) e;
+            Label label = (Label) e;
             label.setMaxHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
             label.setMinHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
         });

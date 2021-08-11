@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import it.units.italiandraughts.ui.labels.InGameLabel?>
-<?import it.units.italiandraughts.ui.labels.CoordinateLabel?>
 <?import javafx.scene.shape.Line?>
+<?import it.units.italiandraughts.ui.elements.InGameLabel?>
+<?import it.units.italiandraughts.ui.elements.GameButton?>
+<?import it.units.italiandraughts.ui.elements.CoordinateLabel?>
 
-<?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.units.italiandraughts.ui.BoardController">
     <padding>
@@ -52,20 +52,20 @@
         <InGameLabel fx:id="player1Name" maxWidth="148"/>
         <InGameLabel text="○" textFill="#423c39"/>
         <Pane HBox.hgrow="ALWAYS"/>
-        <Button fx:id="undo" text="Undo" prefHeight="30" prefWidth="65">
+        <GameButton fx:id="undo" text="Undo">
             <HBox.margin>
                 <Insets>
                     <right>10</right>
                 </Insets>
             </HBox.margin>
-        </Button>
-        <Button text="Reset" prefHeight="30" prefWidth="65">
+        </GameButton>
+        <GameButton text="Reset">
             <HBox.margin>
                 <Insets>
                     <left>10</left>
                 </Insets>
             </HBox.margin>
-        </Button>
+        </GameButton>
         <Pane HBox.hgrow="ALWAYS"/>
         <InGameLabel text="●" textFill="#423c39"/>
         <InGameLabel fx:id="player2Name" maxWidth="148"/>
