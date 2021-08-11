@@ -24,6 +24,7 @@ public class MenuController {
         Stage oldStage = (Stage) player1Field.getScene().getWindow();
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("ItalianDraughts");
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
