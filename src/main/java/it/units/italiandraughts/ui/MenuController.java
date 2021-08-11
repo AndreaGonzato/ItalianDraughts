@@ -26,6 +26,8 @@ public class MenuController {
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
+        stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML

@@ -25,6 +25,7 @@ public class ItalianDraughts extends Application {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
+        stage.centerOnScreen();
         stage.setResizable(false);
         stage.setWidth(scene.getWidth());
         stage.setHeight(scene.getHeight());
