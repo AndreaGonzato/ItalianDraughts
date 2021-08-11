@@ -42,9 +42,5 @@ public class ItalianDraughts extends Application {
     public static int getScreenHeight() {
         return screenHeight;
     }
-
-    // TODO remove this fake method
-    public static int addOne(int n) {
-        return n + 1;
-    }
+    
 }
