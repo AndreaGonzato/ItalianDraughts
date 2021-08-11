@@ -17,7 +17,7 @@ public class MenuController {
 
     @FXML
     protected void startGame() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("boardLayout.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         BoardController boardController = fxmlLoader.getController();
         boardController.player1Name.setText(player1Field.getText());

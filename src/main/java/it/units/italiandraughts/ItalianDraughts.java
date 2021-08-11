@@ -18,7 +18,7 @@ public class ItalianDraughts extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/menuLayout.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/MenuLayout.fxml"));
         screenWidth = (int) screenBounds.getWidth();
         screenHeight = (int) screenBounds.getHeight();
         primaryStage = stage;
