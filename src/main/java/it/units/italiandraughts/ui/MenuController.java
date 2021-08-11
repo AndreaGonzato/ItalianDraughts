@@ -27,6 +27,7 @@ public class MenuController {
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
+        stage.setResizable(false);
         stage.show();
         oldStage.close();
         stage.centerOnScreen();
