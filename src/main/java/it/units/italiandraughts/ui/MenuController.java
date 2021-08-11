@@ -21,12 +21,14 @@ public class MenuController {
         BoardController boardController = fxmlLoader.getController();
         boardController.player1Name.setText(player1Field.getText());
         boardController.player2Name.setText(player2Field.getText());
-        Stage stage = (Stage) player1Field.getScene().getWindow();
+        Stage oldStage = (Stage) player1Field.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
         stage.show();
+        oldStage.close();
         stage.centerOnScreen();
     }
 
