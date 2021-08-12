@@ -2,6 +2,7 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.Game;
+import it.units.italiandraughts.logic.Player;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -37,7 +38,9 @@ public class BoardController {
         BoardDrawer boardDrawer = new BoardDrawer(gridPane);
         Board board = new Board();
         board.draw(boardDrawer);
-        Game game = new Game(board);
+        Player player1 = new Player(player1Name.getText(), PieceType.PLAYER1);
+        Player player2 = new Player(player2Name.getText(), PieceType.PLAYER2);
+        Game game = new Game(board, player1, player2);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
