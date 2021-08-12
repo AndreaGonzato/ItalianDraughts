@@ -42,8 +42,8 @@ public class BoardController {
         List<Node> rowLabels = rowNumbers.getChildren();
         rowLabels.forEach(e -> {
             Label label = (Label) e;
-            label.setMaxHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
-            label.setMinHeight((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
+            label.setMaxHeight(BoardDrawer.getBoardHeight() / 8);
+            label.setMinHeight(BoardDrawer.getBoardHeight() / 8);
         });
 
         Platform.runLater(() -> columnLetters.setPadding(
@@ -54,8 +54,8 @@ public class BoardController {
         List<Node> columnLabels = columnLetters.getChildren();
         columnLabels.forEach(e -> {
             Label label = (Label) e;
-            label.setMaxWidth((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
-            label.setMinWidth((ItalianDraughts.getScreenHeight() / 3 * 2) / 8);
+            label.setMaxWidth(BoardDrawer.getBoardHeight() / 8);
+            label.setMinWidth(BoardDrawer.getBoardHeight() / 8);
         });
 
         line.setEndX(gridPane.getMaxWidth());

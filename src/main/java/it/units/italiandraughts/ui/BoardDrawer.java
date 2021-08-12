@@ -12,16 +12,20 @@ public class BoardDrawer {
     private StackPane[][] tiles;
     private final double tileSize;
 
+    protected static float getBoardHeight() {
+        return ItalianDraughts.getScreenHeight() / 3f * 2;
+    }
+
     public BoardDrawer(GridPane gridPane) {
         tiles = new StackPane[Board.SIZE][Board.SIZE];
 
         gridPane.setMinSize(
-                ItalianDraughts.getScreenHeight() / 3 * 2,
-                ItalianDraughts.getScreenHeight() / 3 * 2
+                getBoardHeight(),
+                getBoardHeight()
         );
         gridPane.setMaxSize(
-                ItalianDraughts.getScreenHeight() / 3 * 2,
-                ItalianDraughts.getScreenHeight() / 3 * 2
+                getBoardHeight(),
+                getBoardHeight()
         );
 
         tileSize = gridPane.getMaxHeight() / 8;
