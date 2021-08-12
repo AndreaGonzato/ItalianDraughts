@@ -16,9 +16,9 @@ public class Board {
         for (int row = 0; row < SIZE; row++) {
             for (int col = row % 2; col < SIZE; col += 2) {
                 if (row < 3) {
-                    board[row][col] = new Piece(PieceType.PLAYER2);
+                    board[row][col] = new Piece(PieceType.PLAYER2, col, row);
                 } else if (row > 4) {
-                    board[row][col] = new Piece(PieceType.PLAYER1);
+                    board[row][col] = new Piece(PieceType.PLAYER1, col, row);
                 }
             }
         }
