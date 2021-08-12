@@ -13,29 +13,15 @@ public class Board {
     public Board() {
         board = new Piece[SIZE][SIZE];
 
-        int player2Pieces = 12;
-        int player1Pieces = 12;
-
-
         for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                if ((row + col) % 2 == 0 && player2Pieces > 0) {
+            for (int col = row % 2; col < SIZE; col += 2) {
+                if (row < 3) {
                     board[row][col] = new Piece(PieceType.PLAYER2);
-                    player2Pieces--;
-                }
-            }
-        }
-
-        for (int row = 5; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                if ((row + col) % 2 == 0 && player1Pieces > 0) {
+                } else if (row > 4) {
                     board[row][col] = new Piece(PieceType.PLAYER1);
-                    player1Pieces--;
                 }
             }
         }
-
-
     }
 
     public void draw(BoardDrawer boardDrawer) {
