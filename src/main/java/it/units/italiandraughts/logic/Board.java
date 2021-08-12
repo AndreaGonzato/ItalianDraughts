@@ -28,6 +28,11 @@ public class Board {
         boardDrawer.draw(board);
     }
 
+    public void move(int fromX, int fromY, int toX, int toY){
+        board[toY][toX] = board[fromY][fromX];
+        board[fromY][fromX] = null;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Board{ board=\n");

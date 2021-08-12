@@ -55,6 +55,7 @@ public class BoardDrawer {
     public void draw(Piece[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
+                tiles[i][j].getChildren().clear();
                 Piece piece = matrix[i][j];
                 if (piece != null) {
                     new PieceDrawer(piece, tileSize).draw(tiles[i][j]);

@@ -42,6 +42,10 @@ public class BoardController {
         Player player2 = new Player(player2Name.getText(), PieceType.PLAYER2);
         Game game = new Game(board, player1, player2);
 
+        board.move(0, 0, 4, 4);
+        board.draw(boardDrawer);
+        System.out.println(board);
+
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
         rowLabels.forEach(e -> {

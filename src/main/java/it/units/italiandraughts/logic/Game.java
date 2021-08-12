@@ -13,4 +13,5 @@ public class Game {
         this.player2 = player2;
         activePlayer = player1;
     }
+
 }
