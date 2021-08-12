@@ -12,8 +12,8 @@ public class BoardDrawer {
     private final StackPane[][] tiles;
     private final double tileSize;
 
-    protected static float getBoardHeight() {
-        return ItalianDraughts.getScreenHeight() / 3f * 2;
+    protected static double getBoardHeight() {
+        return ItalianDraughts.getScreenHeight() / 3 * 2;
     }
 
     public BoardDrawer(GridPane gridPane) {

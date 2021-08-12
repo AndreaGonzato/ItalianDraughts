@@ -13,8 +13,8 @@ import java.util.Objects;
 
 public class ItalianDraughts extends Application {
 
-    private static final int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-    private static final int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
+    private static final double screenWidth = Screen.getPrimary().getBounds().getWidth();
+    private static final double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -35,11 +35,11 @@ public class ItalianDraughts extends Application {
         launch();
     }
 
-    public static int getScreenWidth() {
+    public static double getScreenWidth() {
         return screenWidth;
     }
 
-    public static int getScreenHeight() {
+    public static double getScreenHeight() {
         return screenHeight;
     }
     
