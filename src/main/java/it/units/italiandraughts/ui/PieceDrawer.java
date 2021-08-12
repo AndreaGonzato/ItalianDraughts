@@ -21,13 +21,8 @@ public class PieceDrawer extends StackPane {
         baseEllipse.setStrokeWidth(tileSize * 0.03);
         baseEllipse.setTranslateY(tileSize * 0.07);
 
-
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
-        if (piece.getPieceType().equals(PieceType.PLAYER1)) {
-            upperEllipse.setFill(Color.valueOf(PieceType.PLAYER1.getHexColor())); // White
-        } else {
-            upperEllipse.setFill(Color.valueOf(PieceType.PLAYER2.getHexColor()));
-        }
+        upperEllipse.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
         upperEllipse.setStroke(Color.BLACK);
         upperEllipse.setStrokeWidth(tileSize * 0.03);
 
