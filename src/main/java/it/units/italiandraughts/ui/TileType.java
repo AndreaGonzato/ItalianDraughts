@@ -3,7 +3,7 @@ package it.units.italiandraughts.ui;
 public enum TileType {
     BRONZE("#d47d35"), WHITE_SMOKE("#fafafa");
 
-    String hex;
+    private final String hex;
 
     TileType(String hex) {
         this.hex = hex;
