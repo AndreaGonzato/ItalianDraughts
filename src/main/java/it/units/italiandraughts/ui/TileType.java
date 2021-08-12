@@ -1,11 +1,11 @@
 package it.units.italiandraughts.ui;
 
-public enum Color {
+public enum TileType {
     BRONZE("#d47d35"), WHITE_SMOKE("#fafafa");
 
     String hex;
 
-    Color(String hex) {
+    TileType(String hex) {
         this.hex = hex;
     }
 

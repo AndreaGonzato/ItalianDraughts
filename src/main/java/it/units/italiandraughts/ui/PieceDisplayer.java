@@ -25,9 +25,9 @@ public class PieceDisplayer extends StackPane {
 
         upperEllipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
         if (piece.getPieceType().equals(PieceType.PLAYER1)) {
-            upperEllipse.setFill(Color.valueOf("#e8e8e8")); // White
+            upperEllipse.setFill(Color.valueOf(PieceType.PLAYER1.getHexColor())); // White
         } else {
-            upperEllipse.setFill(Color.valueOf("#423c39"));
+            upperEllipse.setFill(Color.valueOf(PieceType.PLAYER2.getHexColor()));
         }
         upperEllipse.setStroke(Color.BLACK);
         upperEllipse.setStrokeWidth(tileSize * 0.03);
