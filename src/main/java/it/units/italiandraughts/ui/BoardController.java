@@ -38,7 +38,6 @@ public class BoardController {
         Board board = new Board();
         board.draw(boardDrawer);
         Game game = new Game(board);
-        System.out.println(board);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
