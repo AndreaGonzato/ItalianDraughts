@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MenuController {
 
@@ -27,7 +28,7 @@ public class MenuController {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("ItalianDraughts");
-        stage.getIcons().add(new Image(ItalianDraughts.class.getResourceAsStream("ui/img/icon.png")));
+        stage.getIcons().add(new Image(Objects.requireNonNull(ItalianDraughts.class.getResourceAsStream("ui/img/icon.png"))));
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
