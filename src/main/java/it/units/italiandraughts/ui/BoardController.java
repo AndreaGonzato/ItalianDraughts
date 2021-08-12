@@ -34,9 +34,9 @@ public class BoardController {
     Button undo;
 
     public void initialize() {
-        BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
+        BoardDrawer boardDrawer = new BoardDrawer(gridPane);
         Board board = new Board();
-        board.draw(boardDisplayer);
+        board.draw(boardDrawer);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();

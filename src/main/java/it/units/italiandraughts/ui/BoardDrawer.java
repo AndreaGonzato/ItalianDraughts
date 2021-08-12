@@ -8,11 +8,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
-public class BoardDisplayer {
+public class BoardDrawer {
     private StackPane[][] tiles;
     private final double tileSize;
 
-    public BoardDisplayer(GridPane gridPane) {
+    public BoardDrawer(GridPane gridPane) {
         tiles = new StackPane[Board.SIZE][Board.SIZE];
 
         gridPane.setMinSize(
@@ -61,14 +61,12 @@ public class BoardDisplayer {
             for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] != null) {
                     if (PieceType.PLAYER1.equals(matrix[i][j].getPieceType())) {
-                        PieceDisplayer pieceDisplayer = new PieceDisplayer(new Piece(PieceType.PLAYER1), tileSize);
-                        tiles[i][j].getChildren().add(pieceDisplayer.getBaseEllipse());
-                        tiles[i][j].getChildren().add(pieceDisplayer.getUpperEllipse());
+                        PieceDrawer pieceDrawer = new PieceDrawer(new Piece(PieceType.PLAYER1), tileSize);
+                        pieceDrawer.draw(tiles[i][j]);
                     }
                     if (PieceType.PLAYER2.equals(matrix[i][j].getPieceType())) {
-                        PieceDisplayer pieceDisplayer = new PieceDisplayer(new Piece(PieceType.PLAYER2), tileSize);
-                        tiles[i][j].getChildren().add(pieceDisplayer.getBaseEllipse());
-                        tiles[i][j].getChildren().add(pieceDisplayer.getUpperEllipse());
+                        PieceDrawer pieceDrawer = new PieceDrawer(new Piece(PieceType.PLAYER2), tileSize);
+                        pieceDrawer.draw(tiles[i][j]);
                     }
                 }
             }

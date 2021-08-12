@@ -1,7 +1,7 @@
 package it.units.italiandraughts.logic;
 
 
-import it.units.italiandraughts.ui.BoardDisplayer;
+import it.units.italiandraughts.ui.BoardDrawer;
 import it.units.italiandraughts.ui.PieceType;
 
 import java.util.Arrays;
@@ -38,8 +38,8 @@ public class Board {
 
     }
 
-    public void draw(BoardDisplayer boardDisplayer) {
-        boardDisplayer.draw(board);
+    public void draw(BoardDrawer boardDrawer) {
+        boardDrawer.draw(board);
     }
 
     @Override
