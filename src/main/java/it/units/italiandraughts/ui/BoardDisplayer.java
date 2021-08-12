@@ -33,9 +33,9 @@ public class BoardDisplayer {
                 tiles[row][col] = square;
                 String color;
                 if ((row + col) % 2 == 0) {
-                    color = "#d47d35";
+                    color = Color.BRONZE.getHex();
                 } else {
-                    color = "#fafafa";
+                    color = Color.WHITE_SMOKE.getHex();
                 }
 
                 square.setStyle("-fx-background-color: " + color + ";");

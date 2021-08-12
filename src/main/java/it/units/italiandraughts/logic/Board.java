@@ -9,7 +9,7 @@ public class Board {
     private Piece[][] board;
     public static final int SIZE = 8;
 
-    public Board(BoardDisplayer boardDisplayer) {
+    public Board() {
         board = new Piece[SIZE][SIZE];
 
         int player2Pieces = 12;

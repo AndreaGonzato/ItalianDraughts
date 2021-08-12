@@ -1,15 +1,13 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.ItalianDraughts;
-import it.units.italiandraughts.ui.BoardDisplayer;
-import javafx.scene.layout.GridPane;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     @Test
     void initializationPosition() {
-        Board board = new Board(new BoardDisplayer(new GridPane()));
+        Board board = new Board();
         Piece[][] pieces = new Piece[8][8];
         pieces[0][0] = new Piece(PieceType.PLAYER2);
         pieces[0][2] = new Piece(PieceType.PLAYER2);

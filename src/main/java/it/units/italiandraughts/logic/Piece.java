@@ -1,7 +1,7 @@
 package it.units.italiandraughts.logic;
 
 public class Piece {
-    private PieceType pieceType;
+    private final PieceType pieceType;
 
     public Piece(PieceType pieceType) {
         this.pieceType = pieceType;

@@ -4,17 +4,13 @@ import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.List;
 
 public class BoardController {
@@ -39,7 +35,7 @@ public class BoardController {
 
     public void initialize() {
         BoardDisplayer boardDisplayer = new BoardDisplayer(gridPane);
-        Board board = new Board(boardDisplayer);
+        Board board = new Board();
         board.draw(boardDisplayer);
 
         // resize the numbers to the left of board
