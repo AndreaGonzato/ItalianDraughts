@@ -9,7 +9,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class BoardDrawer {
-    private StackPane[][] tiles;
+    private final StackPane[][] tiles;
     private final double tileSize;
 
     protected static float getBoardHeight() {
