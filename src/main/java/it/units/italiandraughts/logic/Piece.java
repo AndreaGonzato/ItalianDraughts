@@ -24,6 +24,11 @@ public class Piece {
     }
 
     @Override
+    public String toString() {
+        return pieceType.toString();
+    }
+
+    @Override
     public int hashCode() {
         return pieceType.hashCode();
     }

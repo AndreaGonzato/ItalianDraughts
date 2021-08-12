@@ -44,12 +44,12 @@ public class Board {
 
     @Override
     public String toString() {
-        String result = "Board{ board=\n";
+        StringBuilder result = new StringBuilder("Board{ board=\n");
         for (int i = 0; i < SIZE; i++) {
-            result += Arrays.toString(board[i]) + "\n";
+            result.append(Arrays.toString(board[i])).append("\n");
         }
-        result += " }";
-        return result;
+        result.append(" }");
+        return result.toString();
     }
 
     public Piece[][] getBoard() {

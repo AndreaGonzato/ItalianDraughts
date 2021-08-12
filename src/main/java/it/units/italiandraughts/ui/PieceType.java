@@ -12,4 +12,11 @@ public enum PieceType {
     public String getHexColor() {
         return hexColor;
     }
+
+    @Override
+    public String toString() {
+        if (this.equals(PLAYER1)) {
+            return "PLAYER1";
+        } else return "PLAYER2";
+    }
 }
