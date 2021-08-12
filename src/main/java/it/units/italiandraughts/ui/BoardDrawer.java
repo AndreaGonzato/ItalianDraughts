@@ -19,14 +19,8 @@ public class BoardDrawer {
     public BoardDrawer(GridPane gridPane) {
         tiles = new StackPane[Board.SIZE][Board.SIZE];
 
-        gridPane.setMinSize(
-                getBoardHeight(),
-                getBoardHeight()
-        );
-        gridPane.setMaxSize(
-                getBoardHeight(),
-                getBoardHeight()
-        );
+        gridPane.setMinSize(getBoardHeight(), getBoardHeight());
+        gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
 
         tileSize = gridPane.getMaxHeight() / 8;
 
@@ -61,15 +55,9 @@ public class BoardDrawer {
     public void draw(Piece[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] != null) {
-                    if (PieceType.PLAYER1.equals(matrix[i][j].getPieceType())) {
-                        PieceDrawer pieceDrawer = new PieceDrawer(new Piece(PieceType.PLAYER1), tileSize);
-                        pieceDrawer.draw(tiles[i][j]);
-                    }
-                    if (PieceType.PLAYER2.equals(matrix[i][j].getPieceType())) {
-                        PieceDrawer pieceDrawer = new PieceDrawer(new Piece(PieceType.PLAYER2), tileSize);
-                        pieceDrawer.draw(tiles[i][j]);
-                    }
+                Piece piece = matrix[i][j];
+                if (piece != null) {
+                    new PieceDrawer(piece, tileSize).draw(tiles[i][j]);
                 }
             }
         }
