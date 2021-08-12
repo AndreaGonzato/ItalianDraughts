@@ -1,6 +1,5 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.Game;
 import javafx.application.Platform;
