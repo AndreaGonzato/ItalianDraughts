@@ -46,14 +46,12 @@ public class BoardDrawer {
             }
         }
 
-
+        ColumnConstraints columnConstraints = new ColumnConstraints();
+        columnConstraints.setPercentWidth(12.5);
+        RowConstraints rowConstraints = new RowConstraints();
+        rowConstraints.setPercentHeight(12.5);
         for (int i = 0; i < Board.SIZE; i++) {
-            ColumnConstraints columnConstraints = new ColumnConstraints();
-            columnConstraints.setPercentWidth(12.5);
             gridPane.getColumnConstraints().add(columnConstraints);
-
-            RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setPercentHeight(12.5);
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
