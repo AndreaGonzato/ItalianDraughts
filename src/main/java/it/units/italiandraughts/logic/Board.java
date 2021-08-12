@@ -7,7 +7,7 @@ import it.units.italiandraughts.ui.PieceType;
 import java.util.Arrays;
 
 public class Board {
-    private Piece[][] board;
+    private final Piece[][] board;
     public static final int SIZE = 8;
 
     public Board() {
