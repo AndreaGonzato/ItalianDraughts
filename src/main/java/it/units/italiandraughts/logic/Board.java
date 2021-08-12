@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 
 import it.units.italiandraughts.ui.BoardDisplayer;
+import it.units.italiandraughts.ui.PieceType;
 
 import java.util.Arrays;
 

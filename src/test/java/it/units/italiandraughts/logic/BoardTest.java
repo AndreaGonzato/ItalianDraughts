@@ -1,6 +1,7 @@
 package it.units.italiandraughts.logic;
 
 
+import it.units.italiandraughts.ui.PieceType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

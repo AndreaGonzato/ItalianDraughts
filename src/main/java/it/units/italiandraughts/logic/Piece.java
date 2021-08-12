@@ -1,5 +1,7 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.ui.PieceType;
+
 public class Piece {
     private final PieceType pieceType;
 

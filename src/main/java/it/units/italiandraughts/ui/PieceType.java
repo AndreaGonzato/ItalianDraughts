@@ -1,4 +1,4 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.ui;
 
 public enum PieceType {
     PLAYER1("#eeebd9"), PLAYER2("#423c39");
