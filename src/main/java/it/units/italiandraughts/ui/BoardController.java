@@ -45,7 +45,6 @@ public class BoardController {
 
         board.move(board.getBoard()[0][0], 4, 4);
         board.draw(boardDrawer);
-        System.out.println(board);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();

@@ -1,5 +1,6 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.exception.IllegalMovePieceException;
 import it.units.italiandraughts.ui.PieceType;
 
 public class Piece {
@@ -14,6 +15,9 @@ public class Piece {
     }
 
     public void move(int toX, int toY){
+        if ((toX + toY) % 2 == 1){
+            throw new IllegalMovePieceException("The required move is illegal because no pieces can stand on a white tile");
+        }
         x = toX;
         y = toY;
     }
