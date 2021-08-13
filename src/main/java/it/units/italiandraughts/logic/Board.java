@@ -34,6 +34,15 @@ public class Board {
         board[toY][toX] = piece;
     }
 
+    public void empty(){
+        // TODO use functional programming
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j <SIZE ; j++) {
+                board[i][j] = null;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Board{ board=\n");
