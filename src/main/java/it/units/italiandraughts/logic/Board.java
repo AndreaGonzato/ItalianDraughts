@@ -28,9 +28,10 @@ public class Board {
         boardDrawer.draw(board);
     }
 
-    public void move(int fromX, int fromY, int toX, int toY){
-        board[toY][toX] = board[fromY][fromX];
-        board[fromY][fromX] = null;
+    public void move(Piece piece, int toX, int toY){
+        board[piece.getY()][piece.getX()] = null;
+        piece.move(toX, toY);
+        board[toY][toX] = piece;
     }
 
     @Override

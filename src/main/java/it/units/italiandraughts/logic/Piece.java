@@ -13,6 +13,11 @@ public class Piece {
         this.y = y;
     }
 
+    public void move(int toX, int toY){
+        x = toX;
+        y = toY;
+    }
+
     public PieceType getPieceType() {
         return pieceType;
     }
