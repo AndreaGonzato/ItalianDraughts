@@ -57,6 +57,7 @@ public class BoardDrawer {
                 Piece piece = matrix[i][j];
                 if (piece != null) {
                     new PieceDrawer(piece, tileSize).draw(tiles[i][j]);
+                    tiles[i][j].setEmpty(false);
                 } else {
                     tiles[i][j].setEmpty(true);
                 }
