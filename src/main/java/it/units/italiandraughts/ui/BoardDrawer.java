@@ -25,16 +25,13 @@ public class BoardDrawer {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                Tile square = new Tile();
-                tiles[row][col] = square;
-                String color;
+                Tile square;
                 if ((row + col) % 2 == 0) {
-                    color = TileType.BRONZE.getHex();
+                    square = new Tile(TileType.BRONZE);
                 } else {
-                    color = TileType.WHITE_SMOKE.getHex();
+                    square = new Tile(TileType.WHITE_SMOKE);
                 }
-
-                square.setStyle("-fx-background-color: " + color + ";");
+                tiles[row][col] = square;
                 gridPane.add(square, col, row);
             }
         }
