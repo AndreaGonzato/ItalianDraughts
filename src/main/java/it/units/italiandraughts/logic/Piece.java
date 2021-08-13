@@ -28,9 +28,9 @@ public class Piece {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Piece)) return false;
+        if (!(o instanceof Piece piece)) return false;
 
-        Piece piece = (Piece) o;
+        piece = (Piece) o;
 
         return pieceType == piece.pieceType;
     }
