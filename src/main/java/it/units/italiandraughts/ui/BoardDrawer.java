@@ -7,6 +7,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import java.util.Arrays;
+
 public class BoardDrawer {
     private final Tile[][] tiles;
     private final double tileSize;
@@ -27,9 +29,9 @@ public class BoardDrawer {
             for (int col = 0; col < Board.SIZE; col++) {
                 Tile square;
                 if ((row + col) % 2 == 0) {
-                    square = new Tile(TileType.BRONZE);
+                    square = new Tile(this, TileType.BRONZE, row, col);
                 } else {
-                    square = new Tile(TileType.WHITE_SMOKE);
+                    square = new Tile(this, TileType.WHITE_SMOKE, row, col);
                 }
                 tiles[row][col] = square;
                 gridPane.add(square, col, row);
@@ -66,5 +68,13 @@ public class BoardDrawer {
         return tileSize;
     }
 
+    void markAsClicked(int x, int y) {
+        Tile tile = tiles[x][y];
+        if (tile.isEmpty()) {
+            return;
+        }
+        Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+        tile.highlight(true);
+    }
 
 }
