@@ -35,7 +35,6 @@ public class Board {
     }
 
     public void empty(){
-        // TODO use functional programming
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j <SIZE ; j++) {
                 board[i][j] = null;
