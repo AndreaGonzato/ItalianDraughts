@@ -6,10 +6,9 @@ import it.units.italiandraughts.logic.Piece;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 
 public class BoardDrawer {
-    private final StackPane[][] tiles;
+    private final Tile[][] tiles;
     private final double tileSize;
 
     protected static double getBoardHeight() {
@@ -17,7 +16,7 @@ public class BoardDrawer {
     }
 
     public BoardDrawer(GridPane gridPane) {
-        tiles = new StackPane[Board.SIZE][Board.SIZE];
+        tiles = new Tile[Board.SIZE][Board.SIZE];
 
         gridPane.setMinSize(getBoardHeight(), getBoardHeight());
         gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
@@ -26,7 +25,7 @@ public class BoardDrawer {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                StackPane square = new StackPane();
+                Tile square = new Tile();
                 tiles[row][col] = square;
                 String color;
                 if ((row + col) % 2 == 0) {
