@@ -35,7 +35,7 @@ public class PieceDrawer extends StackPane {
         return piece;
     }
 
-    public void draw(StackPane tile){
+    void draw(StackPane tile){
         tile.getChildren().add(baseEllipse);
         tile.getChildren().add(upperEllipse);
         tile.setOnMouseClicked(event -> {
