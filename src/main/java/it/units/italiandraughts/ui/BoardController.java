@@ -26,7 +26,7 @@ public class BoardController {
     HBox columnLetters;
 
     @FXML
-    Label player1Name, player2Name;
+    Label player1NameLabel, player2NameLabel;
 
     @FXML
     Line line;
@@ -38,8 +38,8 @@ public class BoardController {
         BoardDrawer boardDrawer = new BoardDrawer(gridPane);
         Board board = new Board();
         board.draw(boardDrawer);
-        Player player1 = new Player(player1Name.getText(), PieceType.PLAYER1);
-        Player player2 = new Player(player2Name.getText(), PieceType.PLAYER2);
+        Player player1 = new Player(player1NameLabel.getText(), PieceType.PLAYER1);
+        Player player2 = new Player(player2NameLabel.getText(), PieceType.PLAYER2);
         Game game = new Game(board, player1, player2);
 
 

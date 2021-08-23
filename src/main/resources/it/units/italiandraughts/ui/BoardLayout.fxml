@@ -49,7 +49,7 @@
     </VBox>
     <Line stroke="gray" fx:id="line" strokeWidth="2"/>
     <HBox VBox.vgrow="ALWAYS">
-        <InGameLabel fx:id="player1Name" maxWidth="148">
+        <InGameLabel fx:id="player1NameLabel" maxWidth="148">
             <padding>
                 <Insets right="15.0"/>
             </padding>
@@ -72,7 +72,7 @@
         </GameButton>
         <Pane HBox.hgrow="ALWAYS"/>
         <InGameLabel text="●" textFill="#423c39"/>
-        <InGameLabel fx:id="player2Name" maxWidth="148">
+        <InGameLabel fx:id="player2NameLabel" maxWidth="148">
             <padding>
                 <Insets left="15.0"/>
             </padding>
