@@ -22,8 +22,8 @@ public class MenuController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         BoardController boardController = fxmlLoader.getController();
-        boardController.player1Name.setText(player1Field.getText());
-        boardController.player2Name.setText(player2Field.getText());
+        boardController.player1NameLabel.setText(player1Field.getText());
+        boardController.player2NameLabel.setText(player2Field.getText());
         Stage oldStage = (Stage) player1Field.getScene().getWindow();
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -33,9 +33,9 @@ public class MenuController {
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
         stage.setResizable(false);
+        stage.centerOnScreen();
         stage.show();
         oldStage.close();
-        stage.centerOnScreen();
     }
 
     @FXML

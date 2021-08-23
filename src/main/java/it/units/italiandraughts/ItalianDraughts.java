@@ -24,11 +24,9 @@ public class ItalianDraughts extends Application {
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("ui/img/icon.png"))));
         stage.setScene(scene);
         stage.sizeToScene();
-        stage.show();
         stage.centerOnScreen();
         stage.setResizable(false);
-        stage.setWidth(scene.getWidth());
-        stage.setHeight(scene.getHeight());
+        stage.show();
     }
 
     public static void main(String[] args) {

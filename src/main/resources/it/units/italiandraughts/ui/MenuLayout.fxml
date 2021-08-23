@@ -23,24 +23,24 @@
         <TextField fx:id="player1Field" text="Player 1"/>
     </HBox>
     <HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-    <Label fx:id="player2Label" text="Second player's name:">
-        <HBox.margin>
-            <Insets>
-                <right>10</right>
-            </Insets>
-        </HBox.margin>
-    </Label>
-    <TextField fx:id="player2Field" text="Player 2"/>
+        <Label fx:id="player2Label" text="Second player's name:">
+            <HBox.margin>
+                <Insets>
+                    <right>10</right>
+                </Insets>
+            </HBox.margin>
+        </Label>
+        <TextField fx:id="player2Field" text="Player 2"/>
     </HBox>
     <HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-    <GameButton text="Start" onAction="#startGame" defaultButton="true">
-        <HBox.margin>
-            <Insets>
-                <right>20</right>
-            </Insets>
-        </HBox.margin>
+        <GameButton text="Start" onAction="#startGame" defaultButton="true">
+            <HBox.margin>
+                <Insets>
+                    <right>20</right>
+                </Insets>
+            </HBox.margin>
         </GameButton>
 
-    <GameButton text="Exit" onAction="#quitGame"/>
+        <GameButton text="Exit" onAction="#quitGame"/>
     </HBox>
 </VBox>
