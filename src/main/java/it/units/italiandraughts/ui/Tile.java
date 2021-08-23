@@ -40,12 +40,7 @@ public class Tile extends StackPane {
     }
 
     void highlight(boolean value) {
-        String newColor;
-        if (!value) {
-            newColor = this.type.getHex();
-        } else {
-            newColor = HIGHLIGHT_COLOR;
-        }
+        String newColor = value ? HIGHLIGHT_COLOR : this.type.getHex();
         this.highlighted = value;
         this.setStyle("-fx-background-color: " + newColor + ";");
     }
