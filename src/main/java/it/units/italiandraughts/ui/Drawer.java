@@ -57,14 +57,9 @@ public class Drawer implements PropertyChangeListener {
     }
 
     private void drawBoard(LogicTile[][] board) {
-        for (int row = 0; row < Board.SIZE; row++) {
-            for (int col = 0; col < Board.SIZE; col++) {
-                tiles[row][col].getChildren().clear();
-                if (!board[row][col].isEmpty()) {
-                    drawPiece(tiles[row][col], board[row][col].getPiece());
-                }
-            }
-        }
+        Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
+        Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
+                .forEach(t -> drawPiece(tiles[t.getX()][t.getY()], t.getPiece()));
     }
 
     private void drawPiece(Tile tile, Piece piece) {
