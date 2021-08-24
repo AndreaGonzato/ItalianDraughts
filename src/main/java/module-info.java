@@ -1,6 +1,7 @@
 module it.units.italiandraughts {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens it.units.italiandraughts to javafx.fxml;

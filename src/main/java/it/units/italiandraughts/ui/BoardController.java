@@ -1,5 +1,6 @@
 package it.units.italiandraughts.ui;
 
+import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.Game;
 import it.units.italiandraughts.logic.Player;
@@ -34,24 +35,29 @@ public class BoardController {
     @FXML
     Button undo;
 
+    private static double getBoardHeight() {
+        return ItalianDraughts.getScreenHeight() / 3 * 2;
+    }
+
     public void initialize() {
-        BoardDrawer boardDrawer = new BoardDrawer(gridPane);
+        gridPane.setMinSize(getBoardHeight(), getBoardHeight());
+        gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
         Board board = new Board();
-        board.draw(boardDrawer);
+        Drawer drawer = new Drawer(gridPane);
+        board.addPropertyChangeListener(drawer);
+        board.init();
         Player player1 = new Player(player1NameLabel.getText(), PieceType.PLAYER1);
         Player player2 = new Player(player2NameLabel.getText(), PieceType.PLAYER2);
         Game game = new Game(board, player1, player2);
 
-
-        board.move(board.getBoard()[0][0], 4, 4);
-        board.draw(boardDrawer);
+        //board.move(board.getBoard()[0][0], 4, 4);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
         rowLabels.forEach(e -> {
             Label label = (Label) e;
-            label.setMaxHeight(BoardDrawer.getBoardHeight() / Board.SIZE);
-            label.setMinHeight(BoardDrawer.getBoardHeight() / Board.SIZE);
+            label.setMaxHeight(getBoardHeight() / Board.SIZE);
+            label.setMinHeight(getBoardHeight() / Board.SIZE);
         });
 
         Platform.runLater(() -> columnLetters.setPadding(
@@ -62,8 +68,8 @@ public class BoardController {
         List<Node> columnLabels = columnLetters.getChildren();
         columnLabels.forEach(e -> {
             Label label = (Label) e;
-            label.setMaxWidth(BoardDrawer.getBoardHeight() / Board.SIZE);
-            label.setMinWidth(BoardDrawer.getBoardHeight() / Board.SIZE);
+            label.setMaxWidth(getBoardHeight() / Board.SIZE);
+            label.setMinWidth(getBoardHeight() / Board.SIZE);
         });
 
         line.setEndX(gridPane.getMaxWidth());
