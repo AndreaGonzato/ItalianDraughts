@@ -14,14 +14,6 @@ public class Piece {
         this.y = y;
     }
 
-    public void move(int toX, int toY){
-        if ((toX + toY) % 2 == 1){
-            throw new IllegalMovePieceException("The required move is illegal because no pieces can stand on a white tile");
-        }
-        x = toX;
-        y = toY;
-    }
-
     public PieceType getPieceType() {
         return pieceType;
     }
@@ -32,6 +24,14 @@ public class Piece {
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int value) {
+        x = value;
+    }
+
+    public void setY(int value) {
+        y = value;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package it.units.italiandraughts.logic;
 
 
+import it.units.italiandraughts.exception.IllegalMovePieceException;
 import it.units.italiandraughts.ui.PieceType;
 
 import java.beans.PropertyChangeListener;
@@ -38,12 +39,16 @@ public class Board {
         support.addPropertyChangeListener(pcl);
     }
 
-    // TODO this has to be re-implemented
-    public void move(Piece piece, int toX, int toY){
-        //board[piece.getY()][piece.getX()] = null;
-        //piece.move(toX, toY);
-        //board[toY][toX] = piece;
-        //notifyChange();
+    public void move(int fromX, int fromY, int toX, int toY){
+        if ((toX + toY) % 2 == 1){
+            throw new IllegalMovePieceException("The required move is illegal because no pieces can stand on a white tile");
+        }
+        Piece piece = tiles[fromY][fromX].getPiece();
+        tiles[fromX][fromY].placePiece(null);
+        piece.setX(toX);
+        piece.setY(toY);
+        tiles[toX][toY].placePiece(piece);
+        notifyChange();
     }
 
     public void notifyChange() {
