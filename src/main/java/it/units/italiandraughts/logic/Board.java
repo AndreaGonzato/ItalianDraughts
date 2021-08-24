@@ -26,7 +26,7 @@ public class Board {
 
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() < 3 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2, t.getX(), t.getY())));
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() > 4 && (t.getY()+ t.getX()) % 2 == 0)
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() > 4 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1, t.getX(), t.getY())));
     }
 
@@ -34,8 +34,8 @@ public class Board {
         support.addPropertyChangeListener(pcl);
     }
 
-    public void move(int fromX, int fromY, int toX, int toY){
-        if ((toX + toY) % 2 == 1){
+    public void move(int fromX, int fromY, int toX, int toY) {
+        if ((toX + toY) % 2 == 1) {
             throw new IllegalMovePieceException("The required move is illegal because no pieces can stand on a white tile");
         }
         Piece piece = tiles[fromY][fromX].getPiece();
@@ -51,9 +51,9 @@ public class Board {
     }
 
 
-    public void empty(){
+    public void empty() {
         for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j <SIZE ; j++) {
+            for (int j = 0; j < SIZE; j++) {
                 tiles[i][j] = null;
             }
         }
