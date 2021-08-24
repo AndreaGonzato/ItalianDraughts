@@ -46,14 +46,10 @@ public class Board {
         //notifyChange();
     }
 
-    private void notifyChange() {
+    public void notifyChange() {
         support.firePropertyChange("board", null, tiles);
     }
 
-    public void init() {
-        support.firePropertyChange("boardinit", null, tiles);
-        notifyChange();
-    }
 
     public void empty(){
         for (int i = 0; i < SIZE; i++) {

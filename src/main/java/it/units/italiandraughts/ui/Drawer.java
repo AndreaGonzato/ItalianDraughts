@@ -18,7 +18,7 @@ public class Drawer implements PropertyChangeListener {
     private final Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
 
-    public Drawer(GridPane gridPane) {
+    public Drawer(GridPane gridPane, LogicTile[][] tiles) {
         this.gridPane = gridPane;
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
@@ -34,12 +34,12 @@ public class Drawer implements PropertyChangeListener {
             for (int col = 0; col < Board.SIZE; col++) {
                 Tile square;
                 if ((row + col) % 2 == 0) {
-                    square = new Tile(TileType.BRONZE, row, col);
+                    square = new Tile(tiles[row][col], TileType.BRONZE, row, col);
                 } else {
-                    square = new Tile(TileType.WHITE_SMOKE, row, col);
+                    square = new Tile(tiles[row][col], TileType.WHITE_SMOKE, row, col);
                 }
                 square.addPropertyChangeListener(this);
-                tiles[row][col] = square;
+                this.tiles[row][col] = square;
                 gridPane.add(square, col, row);
             }
         }
@@ -50,10 +50,6 @@ public class Drawer implements PropertyChangeListener {
             case "board" -> {
                 LogicTile[][] board = (LogicTile[][]) evt.getNewValue();
                 drawBoard(board);
-            }
-            case "boardinit" -> {
-                LogicTile[][] board = (LogicTile[][]) evt.getNewValue();
-                Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.bindToLogicTile(board[t.getX()][t.getY()]));
             }
             case "highlighted" -> Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
         }

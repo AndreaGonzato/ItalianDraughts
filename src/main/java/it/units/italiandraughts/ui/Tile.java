@@ -17,7 +17,8 @@ public class Tile extends StackPane {
     private static final String HIGHLIGHT_COLOR = "#56db39";
     private final PropertyChangeSupport support;
 
-    public Tile(TileType type, int x, int y) {
+    public Tile(LogicTile logicTile, TileType type, int x, int y) {
+        this.logicTile = logicTile;
         support = new PropertyChangeSupport(this);
         this.x = x;
         this.y = y;

@@ -43,9 +43,9 @@ public class BoardController {
         gridPane.setMinSize(getBoardHeight(), getBoardHeight());
         gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
         Board board = new Board();
-        Drawer drawer = new Drawer(gridPane);
+        Drawer drawer = new Drawer(gridPane, board.getTiles());
         board.addPropertyChangeListener(drawer);
-        board.init();
+        board.notifyChange();
         Player player1 = new Player(player1NameLabel.getText(), PieceType.PLAYER1);
         Player player2 = new Player(player2NameLabel.getText(), PieceType.PLAYER2);
         Game game = new Game(board, player1, player2);
