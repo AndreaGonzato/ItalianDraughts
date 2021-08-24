@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class Drawer implements PropertyChangeListener {
 
-    private final Tile[][] matrix = new Tile[Board.SIZE][Board.SIZE];
+    private final Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
 
     public Drawer(GridPane gridPane) {
@@ -39,7 +39,7 @@ public class Drawer implements PropertyChangeListener {
                     square = new Tile(TileType.WHITE_SMOKE, row, col);
                 }
                 square.addPropertyChangeListener(this);
-                matrix[row][col] = square;
+                tiles[row][col] = square;
                 gridPane.add(square, col, row);
             }
         }
@@ -53,9 +53,9 @@ public class Drawer implements PropertyChangeListener {
             }
             case "boardinit" -> {
                 LogicTile[][] board = (LogicTile[][]) evt.getNewValue();
-                Arrays.stream(matrix).flatMap(Arrays::stream).forEach(t -> t.bindToLogicTile(board[t.getX()][t.getY()]));
+                Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.bindToLogicTile(board[t.getX()][t.getY()]));
             }
-            case "highlighted" -> Arrays.stream(matrix).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+            case "highlighted" -> Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
         }
 
     }
@@ -64,7 +64,7 @@ public class Drawer implements PropertyChangeListener {
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
                 if (!board[row][col].isEmpty()) {
-                    drawPiece(matrix[row][col], board[row][col].getPiece());
+                    drawPiece(tiles[row][col], board[row][col].getPiece());
                 }
             }
         }

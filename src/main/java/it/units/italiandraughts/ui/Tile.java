@@ -26,6 +26,11 @@ public class Tile extends StackPane {
         this.setOnMouseClicked(this::notifyClick);
     }
 
+
+    public void bindToLogicTile(LogicTile logicTile) {
+        this.logicTile = logicTile;
+    }
+
     public int getX() {
         return x;
     }
@@ -34,8 +39,8 @@ public class Tile extends StackPane {
         return y;
     }
 
-    public void bindToLogicTile(LogicTile logicTile) {
-        this.logicTile = logicTile;
+    public LogicTile getLogicTile() {
+        return logicTile;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {

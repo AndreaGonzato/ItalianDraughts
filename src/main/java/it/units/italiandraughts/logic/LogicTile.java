@@ -11,6 +11,15 @@ public class LogicTile {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+
     public boolean isEmpty() {
         return piece == null;
     }

@@ -12,7 +12,7 @@ public class BoardTest {
 
         Board board = new Board();
 
-        Assertions.assertArrayEquals(expectedPieces, board.getBoard());
+        Assertions.assertArrayEquals(expectedPieces, board.getTiles());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class BoardTest {
         Board board = new Board();
         board.empty();
 
-        Assertions.assertArrayEquals(expectedPieces, board.getBoard());
+        Assertions.assertArrayEquals(expectedPieces, board.getTiles());
     }
 
     // TODO this shall be uncommented when move() works again
