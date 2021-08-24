@@ -34,9 +34,9 @@ public class Drawer implements PropertyChangeListener {
             for (int col = 0; col < Board.SIZE; col++) {
                 Tile square;
                 if ((row + col) % 2 == 0) {
-                    square = new Tile(tiles[row][col], TileType.BRONZE, row, col);
+                    square = new Tile(tiles[row][col], TileType.BRONZE);
                 } else {
-                    square = new Tile(tiles[row][col], TileType.WHITE_SMOKE, row, col);
+                    square = new Tile(tiles[row][col], TileType.WHITE_SMOKE);
                 }
                 square.addPropertyChangeListener(this);
                 this.tiles[row][col] = square;

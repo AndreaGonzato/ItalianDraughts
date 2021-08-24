@@ -9,19 +9,15 @@ import java.beans.PropertyChangeSupport;
 
 public class Tile extends StackPane {
 
-    private final int x;
-    private final int y;
     private LogicTile logicTile;
     private boolean highlighted;
     private final TileType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
     private final PropertyChangeSupport support;
 
-    public Tile(LogicTile logicTile, TileType type, int x, int y) {
+    public Tile(LogicTile logicTile, TileType type) {
         this.logicTile = logicTile;
         support = new PropertyChangeSupport(this);
-        this.x = x;
-        this.y = y;
         this.type = type;
         this.setStyle("-fx-background-color: " + type.getHex() + ";");
         this.setOnMouseClicked(this::notifyClick);
@@ -32,13 +28,6 @@ public class Tile extends StackPane {
         this.logicTile = logicTile;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     public LogicTile getLogicTile() {
         return logicTile;
