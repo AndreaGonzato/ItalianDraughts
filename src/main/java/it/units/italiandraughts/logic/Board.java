@@ -24,15 +24,10 @@ public class Board {
             }
         }
 
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = row % 2; col < SIZE; col += 2) {
-                if (row < 3) {
-                    tiles[row][col].placePiece(new Piece(PieceType.PLAYER2, col, row));
-                } else if (row > 4) {
-                    tiles[row][col].placePiece(new Piece(PieceType.PLAYER1, col, row));
-                }
-            }
-        }
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() < 3 && (t.getY() + t.getX()) % 2 == 0)
+                .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2, t.getX(), t.getY())));
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() > 4 && (t.getY()+ t.getX()) % 2 == 0)
+                .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1, t.getX(), t.getY())));
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
