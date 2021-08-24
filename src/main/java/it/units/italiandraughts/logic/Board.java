@@ -9,17 +9,17 @@ import java.util.Arrays;
 import java.beans.PropertyChangeSupport;
 
 public class Board {
-    private final LogicTile[][] tiles;
+    private final Tile[][] tiles;
     public static final int SIZE = 8;
     private PropertyChangeSupport support;
 
     public Board() {
         support = new PropertyChangeSupport(this);
-        tiles = new LogicTile[SIZE][SIZE];
+        tiles = new Tile[SIZE][SIZE];
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                LogicTile square = new LogicTile(row, col);
+                Tile square = new Tile(row, col);
                 tiles[row][col] = square;
             }
         }
@@ -69,7 +69,7 @@ public class Board {
         return result.toString();
     }
 
-    public LogicTile[][] getTiles() {
+    public Tile[][] getTiles() {
         return tiles;
     }
 }

@@ -1,12 +1,12 @@
 package it.units.italiandraughts.logic;
 
-public class LogicTile {
+public class Tile {
 
     private final int x;
     private final int y;
     private Piece piece;
 
-    public LogicTile(int x, int y) {
+    public Tile(int x, int y) {
         this.x = x;
         this.y = y;
     }

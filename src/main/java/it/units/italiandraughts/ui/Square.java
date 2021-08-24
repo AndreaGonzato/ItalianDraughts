@@ -1,22 +1,22 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.logic.LogicTile;
+import it.units.italiandraughts.logic.Tile;
 import javafx.event.Event;
 import javafx.scene.layout.StackPane;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class Tile extends StackPane {
+public class Square extends StackPane {
 
-    private LogicTile logicTile;
+    private Tile tile;
     private boolean highlighted;
     private final TileType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
     private final PropertyChangeSupport support;
 
-    public Tile(LogicTile logicTile, TileType type) {
-        this.logicTile = logicTile;
+    public Square(Tile tile, TileType type) {
+        this.tile = tile;
         support = new PropertyChangeSupport(this);
         this.type = type;
         this.setStyle("-fx-background-color: " + type.getHex() + ";");
@@ -24,13 +24,13 @@ public class Tile extends StackPane {
     }
 
 
-    public void bindToLogicTile(LogicTile logicTile) {
-        this.logicTile = logicTile;
+    public void bindToLogicTile(Tile tile) {
+        this.tile = tile;
     }
 
 
-    public LogicTile getLogicTile() {
-        return logicTile;
+    public Tile getLogicTile() {
+        return tile;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -48,7 +48,7 @@ public class Tile extends StackPane {
     }
 
     void highlight(boolean value) {
-        if (logicTile.isEmpty()) {
+        if (tile.isEmpty()) {
             return;
         }
         String newColor = value ? HIGHLIGHT_COLOR : this.type.getHex();

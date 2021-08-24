@@ -1,7 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.logic.Board;
-import it.units.italiandraughts.logic.LogicTile;
+import it.units.italiandraughts.logic.Tile;
 import it.units.italiandraughts.logic.Piece;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -15,10 +15,10 @@ import java.util.Arrays;
 
 public class Drawer implements PropertyChangeListener {
 
-    private final Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
+    private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
 
-    public Drawer(GridPane gridPane, LogicTile[][] tiles) {
+    public Drawer(GridPane gridPane, Tile[][] tiles) {
         this.gridPane = gridPane;
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
@@ -32,14 +32,14 @@ public class Drawer implements PropertyChangeListener {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                Tile square;
+                Square square;
                 if ((row + col) % 2 == 0) {
-                    square = new Tile(tiles[row][col], TileType.BRONZE);
+                    square = new Square(tiles[row][col], TileType.BRONZE);
                 } else {
-                    square = new Tile(tiles[row][col], TileType.WHITE_SMOKE);
+                    square = new Square(tiles[row][col], TileType.WHITE_SMOKE);
                 }
                 square.addPropertyChangeListener(this);
-                this.tiles[row][col] = square;
+                this.squares[row][col] = square;
                 gridPane.add(square, col, row);
             }
         }
@@ -48,21 +48,23 @@ public class Drawer implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case "board" -> {
-                LogicTile[][] board = (LogicTile[][]) evt.getNewValue();
+                Tile[][] board = (Tile[][]) evt.getNewValue();
                 drawBoard(board);
             }
-            case "highlighted" -> Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+            case "highlighted" -> Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
         }
 
     }
 
-    private void drawBoard(LogicTile[][] board) {
-        Arrays.stream(tiles).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
+
+    private void drawBoard(Tile[][] board) {
+        Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
-                .forEach(t -> drawPiece(tiles[t.getX()][t.getY()], t.getPiece()));
+                .forEach(t -> drawPiece(squares[t.getX()][t.getY()], t.getPiece()));
     }
 
-    private void drawPiece(Tile tile, Piece piece) {
+
+    private void drawPiece(Square square, Piece piece) {
         double tileSize = gridPane.getMaxHeight() / 8;
         Ellipse baseEllipse = createEllipse(tileSize);
         baseEllipse.setFill(Color.BLACK);
@@ -71,8 +73,8 @@ public class Drawer implements PropertyChangeListener {
         Ellipse upperEllipse = createEllipse(tileSize);
         upperEllipse.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
 
-        tile.getChildren().add(baseEllipse);
-        tile.getChildren().add(upperEllipse);
+        square.getChildren().add(baseEllipse);
+        square.getChildren().add(upperEllipse);
     }
 
     private Ellipse createEllipse(double tileSize) {
