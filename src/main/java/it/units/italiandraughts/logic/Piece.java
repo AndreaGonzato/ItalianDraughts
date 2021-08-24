@@ -1,6 +1,5 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.exception.IllegalMovePieceException;
 import it.units.italiandraughts.ui.PieceType;
 
 public class Piece {
