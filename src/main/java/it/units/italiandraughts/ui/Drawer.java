@@ -18,7 +18,7 @@ public class Drawer implements PropertyChangeListener {
     private final GridPane gridPane;
     private Game game;
 
-    public Drawer(GridPane gridPane, Tile[][] tiles, Game game) {
+    public Drawer(GridPane gridPane, Game game) {
         this.gridPane = gridPane;
         this.game = game;
 
@@ -35,9 +35,9 @@ public class Drawer implements PropertyChangeListener {
             for (int col = 0; col < Board.SIZE; col++) {
                 Square square;
                 if ((row + col) % 2 == 0) {
-                    square = new Square(tiles[row][col], TileType.BRONZE);
+                    square = new Square(game.getBoard().getTiles()[row][col], TileType.BRONZE);
                 } else {
-                    square = new Square(tiles[row][col], TileType.WHITE_SMOKE);
+                    square = new Square(game.getBoard().getTiles()[row][col], TileType.WHITE_SMOKE);
                 }
                 square.addPropertyChangeListener(this);
                 this.squares[row][col] = square;
