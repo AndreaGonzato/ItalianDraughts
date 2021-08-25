@@ -1,9 +1,6 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.logic.Board;
-import it.units.italiandraughts.logic.Status;
-import it.units.italiandraughts.logic.Tile;
-import it.units.italiandraughts.logic.Piece;
+import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -19,11 +16,11 @@ public class Drawer implements PropertyChangeListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
-    private Status status;
+    private Game game;
 
-    public Drawer(GridPane gridPane, Tile[][] tiles, Status status) {
+    public Drawer(GridPane gridPane, Tile[][] tiles, Game game) {
         this.gridPane = gridPane;
-        this.status = status;
+        this.game = game;
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setPercentWidth(12.5);
@@ -57,7 +54,7 @@ public class Drawer implements PropertyChangeListener {
             }
             case "highlighted" -> {
                 Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
-                status = Status.MOVE_IN_PROGRESS;
+                game.setStatus(Status.MOVE_IN_PROGRESS);
             }
         }
 
