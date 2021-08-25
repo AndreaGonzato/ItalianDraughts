@@ -18,30 +18,28 @@ public class BoardTest {
 
     @Test
     void empty() {
-        Piece[][] expectedPieces = new Piece[8][8];
+        Tile[][] expectedPTiles = new Tile[8][8];
 
         Board board = new Board();
         board.empty();
 
-        Assertions.assertArrayEquals(expectedPieces, board.getTiles());
+        Assertions.assertArrayEquals(expectedPTiles, board.getTiles());
     }
 
-    // TODO this shall be uncommented when move() works again
 
-    /*
     @Test
     void moveTopRightPiecePlayer1ToLeft() {
-        Piece[][] expectedBoard = setUpBoard();
-        expectedBoard[4][6] = expectedBoard[5][7];
-        expectedBoard[5][7] = null;
+        Tile[][] expectedTiles = setUpBoard();
+        expectedTiles[4][6].placePiece(new Piece(PieceType.PLAYER1));
+        expectedTiles[5][7].placePiece(null);
 
         Board board = new Board();
-        board.move(board.getBoard()[5][7], 6, 4);
+        board.move(7, 5, 6, 4);
 
-        Assertions.assertArrayEquals(expectedBoard, board.getBoard());
+        Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
 
-     */
+
 
     private Tile[][] setUpBoard() {
         Tile[][] tiles = new Tile[8][8];
@@ -67,18 +65,18 @@ public class BoardTest {
         tiles[2][6].placePiece(new Piece(PieceType.PLAYER2));
 
 
-        tiles[5][1].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[5][3].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[5][5].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[5][7].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[6][0].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[6][2].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[6][4].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[6][6].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[7][1].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[7][3].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[7][5].placePiece(new Piece(PieceType.PLAYER2));
-        tiles[7][7].placePiece(new Piece(PieceType.PLAYER2));
+        tiles[5][1].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[5][3].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[5][5].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[5][7].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[6][0].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[6][2].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[6][4].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[6][6].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[7][1].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[7][3].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[7][5].placePiece(new Piece(PieceType.PLAYER1));
+        tiles[7][7].placePiece(new Piece(PieceType.PLAYER1));
 
         return tiles;
     }
