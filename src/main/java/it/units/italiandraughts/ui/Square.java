@@ -9,7 +9,7 @@ import java.beans.PropertyChangeSupport;
 
 public class Square extends StackPane {
 
-    private Tile tile;
+    private final Tile tile;
     private boolean highlighted;
     private final TileType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
@@ -23,7 +23,7 @@ public class Square extends StackPane {
         this.setOnMouseClicked(this::notifyClick);
     }
 
-    public Tile getLogicTile() {
+    public Tile getTile() {
         return tile;
     }
 

@@ -63,7 +63,6 @@ public class Drawer implements PropertyChangeListener {
 
     }
 
-
     private void drawBoard(Tile[][] board) {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
@@ -80,7 +79,6 @@ public class Drawer implements PropertyChangeListener {
         circle.setFill(Color.rgb(131, 235, 159, 0.6));
         square.getChildren().add(circle);
     }
-
 
     private void drawPiece(Square square, Piece piece) {
         double tileSize = gridPane.getMaxHeight() / 8;
