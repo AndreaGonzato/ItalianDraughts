@@ -19,14 +19,14 @@ public class Board {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                Tile tile = new Tile(row, col);
+                Tile tile = new Tile(col, row);
                 tiles[row][col] = tile;
             }
         }
 
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() < 3 && (t.getY() + t.getX()) % 2 == 0)
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() < 3 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2)));
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() > 4 && (t.getY() + t.getX()) % 2 == 0)
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() > 4 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1)));
     }
 
@@ -39,8 +39,8 @@ public class Board {
             throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
         }
         Piece piece = tiles[fromY][fromX].getPiece();
-        tiles[fromX][fromY].placePiece(null);
-        tiles[toX][toY].placePiece(piece);
+        tiles[fromY][fromX].placePiece(null);
+        tiles[toY][toX].placePiece(piece);
         notifyChange();
     }
 

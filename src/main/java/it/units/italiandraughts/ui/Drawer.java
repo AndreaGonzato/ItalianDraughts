@@ -76,7 +76,7 @@ public class Drawer implements PropertyChangeListener {
     private void drawBoard(Tile[][] board) {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
-                .forEach(t -> drawPiece(squares[t.getX()][t.getY()], t.getPiece()));
+                .forEach(t -> drawPiece(squares[t.getY()][t.getX()], t.getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
     }
 
