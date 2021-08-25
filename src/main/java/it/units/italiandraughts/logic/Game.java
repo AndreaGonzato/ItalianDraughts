@@ -16,10 +16,10 @@ public class Game {
         status = Status.IDLE;
     }
 
-    public void changeActivePlayer(){
-        if (player1.equals(activePlayer)){
+    public void toggleActivePlayer() {
+        if (player1.equals(activePlayer)) {
             activePlayer = player2;
-        }else {
+        } else {
             activePlayer = player1;
         }
     }
