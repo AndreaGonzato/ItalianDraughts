@@ -1,6 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.logic.Board;
+import it.units.italiandraughts.logic.Status;
 import it.units.italiandraughts.logic.Tile;
 import it.units.italiandraughts.logic.Piece;
 import javafx.scene.layout.ColumnConstraints;
@@ -18,9 +19,11 @@ public class Drawer implements PropertyChangeListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
+    private Status status;
 
-    public Drawer(GridPane gridPane, Tile[][] tiles) {
+    public Drawer(GridPane gridPane, Tile[][] tiles, Status status) {
         this.gridPane = gridPane;
+        this.status = status;
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setPercentWidth(12.5);
@@ -52,7 +55,10 @@ public class Drawer implements PropertyChangeListener {
                 Tile[][] board = (Tile[][]) evt.getNewValue();
                 drawBoard(board);
             }
-            case "highlighted" -> Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+            case "highlighted" -> {
+                Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+                status = Status.MOVE_IN_PROGRESS;
+            }
         }
 
     }
