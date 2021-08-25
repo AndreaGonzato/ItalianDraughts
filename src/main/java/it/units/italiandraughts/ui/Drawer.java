@@ -7,16 +7,19 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.input.MouseEvent;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class Drawer implements PropertyChangeListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
-    private Game game;
+    private final Game game;
 
     public Drawer(GridPane gridPane, Game game) {
         this.gridPane = gridPane;
@@ -39,11 +42,21 @@ public class Drawer implements PropertyChangeListener {
                 } else {
                     square = new Square(game.getBoard().getTiles()[row][col], TileType.WHITE_SMOKE);
                 }
-                square.addPropertyChangeListener(this);
+                square.setOnMouseClicked(this::onClick);
                 this.squares[row][col] = square;
                 game.getBoard().getTiles()[row][col].setSquare(square);
                 gridPane.add(square, col, row);
             }
+        }
+    }
+
+    private Square getHighlightedSquare() throws Exception{
+        Stream<Square> stream = Arrays.stream(squares).flatMap(Arrays::stream).filter(Square::isHighlighted);
+        Optional<Square> highlighted = stream.findAny();
+        if (highlighted.isEmpty()) {
+            throw new Exception("something has gone terribly wrong");
+        } else {
+            return highlighted.get();
         }
     }
 
@@ -53,6 +66,7 @@ public class Drawer implements PropertyChangeListener {
                 Tile[][] board = (Tile[][]) evt.getNewValue();
                 drawBoard(board);
             }
+            /*
             case "clicked" -> {
                 Square square = (Square) evt.getNewValue();
 
@@ -65,12 +79,44 @@ public class Drawer implements PropertyChangeListener {
                     square.highlight(!square.isHighlighted());
                     game.setStatus(Status.MOVE_IN_PROGRESS);
                 } else {
-
+                    Square fromSquare;
+                    try {
+                        fromSquare = getHighlightedSquare();
+                    } catch (Exception e) {
+                        return;
+                    }
+                    game.getBoard().move(fromSquare.getTile().getX(), fromSquare.getTile().getY(),
+                            square.getTile().getX(), square.getTile().getY());
                     game.setStatus(Status.IDLE);
                 }
             }
+ */
         }
 
+    }
+
+    private void highlight(Square square) {
+        Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+        square.highlight(true);
+    }
+
+    public void onClick(MouseEvent e) {
+        Square square = (Square) e.getSource();
+        switch (game.getStatus()) {
+            case IDLE -> {
+                game.setSource(square.getTile());
+                highlight(square);
+                game.setStatus(Status.MOVE_IN_PROGRESS);
+            }
+            case MOVE_IN_PROGRESS -> {
+                game.getBoard().move(game.getSource().getX(),
+                        game.getSource().getY(),
+                        square.getTile().getX(),
+                        square.getTile().getY());
+                game.setSource(null);
+                game.setStatus(Status.IDLE);
+            }
+        }
     }
 
     private void drawBoard(Tile[][] board) {

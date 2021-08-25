@@ -52,8 +52,6 @@ public class BoardController {
         Drawer drawer = new Drawer(gridPane, game);
         board.addPropertyChangeListener(drawer);
         board.notifyChange();
-        //board.move(0,0,4,6);
-
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
@@ -77,8 +75,6 @@ public class BoardController {
 
         line.setEndX(gridPane.getMaxWidth());
         gridPane.setStyle("-fx-border-color: #d47d35");
-
-        game.inGame();
     }
 
 }

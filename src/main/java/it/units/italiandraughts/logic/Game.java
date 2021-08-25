@@ -1,7 +1,5 @@
 package it.units.italiandraughts.logic;
 
-import java.util.Arrays;
-
 public class Game {
 
     private final Board board;
@@ -9,6 +7,7 @@ public class Game {
     private final Player player2;
     private Player activePlayer;
     private Status status;
+    private Tile source;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
@@ -26,6 +25,14 @@ public class Game {
         }
     }
 
+    public Tile getSource() {
+        return source;
+    }
+
+    public void setSource(Tile tile) {
+        this.source = tile;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -36,10 +43,6 @@ public class Game {
 
     public Board getBoard() {
         return board;
-    }
-
-    public void inGame() {
-
     }
 
 }
