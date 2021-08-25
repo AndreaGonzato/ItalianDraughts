@@ -62,8 +62,8 @@ public class BoardController {
         });
 
         Platform.runLater(() -> columnLetters.setPadding(
-                new Insets(0, 0, 0, rowNumbers.getWidth()
-                )));
+                new Insets(0, 0, 0, rowNumbers.getWidth())
+        ));
 
         // resize the letters under the board
         List<Node> columnLabels = columnLetters.getChildren();
