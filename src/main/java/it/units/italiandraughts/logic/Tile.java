@@ -34,6 +34,10 @@ public class Tile {
         this.piece = piece;
     }
 
+    void removePiece(){
+        this.piece = null;
+    }
+
     public Piece getPiece() {
         return piece;
     }

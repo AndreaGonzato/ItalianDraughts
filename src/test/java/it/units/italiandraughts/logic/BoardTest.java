@@ -31,7 +31,7 @@ public class BoardTest {
     void moveTopRightPiecePlayer1ToLeft() {
         Tile[][] expectedTiles = setUpBoard();
         expectedTiles[4][6].placePiece(new Piece(PieceType.PLAYER1));
-        expectedTiles[5][7].placePiece(null);
+        expectedTiles[5][7].removePiece();
 
         Board board = new Board();
         board.move(7, 5, 6, 4);
