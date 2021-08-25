@@ -7,6 +7,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 
 import java.beans.PropertyChangeEvent;
@@ -61,6 +62,17 @@ public class Drawer implements PropertyChangeListener {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
                 .forEach(t -> drawPiece(squares[t.getX()][t.getY()], t.getPiece()));
+        drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
+    }
+
+    private void drawGreenCircleOnEmptySquare(Square square){
+        if (square.getChildren().size() > 0){
+            // TODO exception
+        }
+        double tileSize = gridPane.getMaxHeight() / 8;
+        Circle circle = new Circle(tileSize * 0.15);
+        circle.setFill(Color.rgb(131, 235, 159, 0.6));
+        square.getChildren().add(circle);
     }
 
 
