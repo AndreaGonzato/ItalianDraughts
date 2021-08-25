@@ -19,8 +19,8 @@ public class Board {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                Tile square = new Tile(row, col);
-                tiles[row][col] = square;
+                Tile tile = new Tile(row, col);
+                tiles[row][col] = tile;
             }
         }
 

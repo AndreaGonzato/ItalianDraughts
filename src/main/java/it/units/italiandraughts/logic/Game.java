@@ -1,5 +1,7 @@
 package it.units.italiandraughts.logic;
 
+import java.util.Arrays;
+
 public class Game {
 
     private final Board board;
@@ -39,4 +41,5 @@ public class Game {
     public void inGame() {
 
     }
+
 }

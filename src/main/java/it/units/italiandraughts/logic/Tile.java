@@ -1,10 +1,13 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.ui.Square;
+
 public class Tile {
 
     private final int x;
     private final int y;
     private Piece piece;
+    private Square square;
 
     public Tile(int x, int y) {
         this.x = x;
@@ -15,6 +18,14 @@ public class Tile {
         this.x = x;
         this.y = y;
         this.piece = piece;
+    }
+
+    public void setSquare(Square square) {
+        this.square = square;
+    }
+
+    public Square getSquare() {
+        return square;
     }
 
     public int getX() {
@@ -33,6 +44,8 @@ public class Tile {
     void placePiece(Piece piece) {
         this.piece = piece;
     }
+
+
 
     void removePiece(){
         this.piece = null;

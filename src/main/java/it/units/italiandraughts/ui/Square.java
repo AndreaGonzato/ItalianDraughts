@@ -36,7 +36,7 @@ public class Square extends StackPane {
         highlight(!isHighlighted());
     }
 
-    boolean isHighlighted() {
+    public boolean isHighlighted() {
         return highlighted;
     }
 
