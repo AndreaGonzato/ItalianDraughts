@@ -11,7 +11,7 @@ import java.beans.PropertyChangeSupport;
 public class Board {
     private final Tile[][] tiles;
     public static final int SIZE = 8;
-    private PropertyChangeSupport support;
+    private final PropertyChangeSupport support;
 
     public Board() {
         support = new PropertyChangeSupport(this);
