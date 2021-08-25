@@ -36,7 +36,7 @@ public class Board {
 
     public void move(int fromX, int fromY, int toX, int toY) {
         if ((toX + toY) % 2 == 1) {
-            throw new IllegalMovePieceException("The required move is illegal because no pieces can stand on a white tile");
+            throw new IllegalMovePieceException("The required move is illegal because no piece can stand on a white tile");
         }
         Piece piece = tiles[fromY][fromX].getPiece();
         tiles[fromX][fromY].placePiece(null);
