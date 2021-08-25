@@ -23,12 +23,6 @@ public class Square extends StackPane {
         this.setOnMouseClicked(this::notifyClick);
     }
 
-
-    public void bindToLogicTile(Tile tile) {
-        this.tile = tile;
-    }
-
-
     public Tile getLogicTile() {
         return tile;
     }
@@ -36,7 +30,6 @@ public class Square extends StackPane {
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
         support.addPropertyChangeListener(pcl);
     }
-
 
     private void notifyClick(Event event) {
         support.firePropertyChange("highlighted", isHighlighted(), !isHighlighted());
