@@ -11,6 +11,12 @@ public class Tile {
         this.y = y;
     }
 
+    public Tile(int x, int y, Piece piece) {
+        this.x = x;
+        this.y = y;
+        this.piece = piece;
+    }
+
     public int getX() {
         return x;
     }

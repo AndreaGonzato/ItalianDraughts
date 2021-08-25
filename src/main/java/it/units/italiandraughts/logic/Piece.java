@@ -4,34 +4,15 @@ import it.units.italiandraughts.ui.PieceType;
 
 public class Piece {
     private final PieceType pieceType;
-    private int x;
-    private int y;
 
-    public Piece(PieceType pieceType, int x, int y) {
+    public Piece(PieceType pieceType) {
         this.pieceType = pieceType;
-        this.x = x;
-        this.y = y;
     }
 
     public PieceType getPieceType() {
         return pieceType;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int value) {
-        x = value;
-    }
-
-    public void setY(int value) {
-        y = value;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -25,9 +25,9 @@ public class Board {
         }
 
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() < 3 && (t.getY() + t.getX()) % 2 == 0)
-                .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2, t.getX(), t.getY())));
+                .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2)));
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getX() > 4 && (t.getY() + t.getX()) % 2 == 0)
-                .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1, t.getX(), t.getY())));
+                .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1)));
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -40,8 +40,6 @@ public class Board {
         }
         Piece piece = tiles[fromY][fromX].getPiece();
         tiles[fromX][fromY].placePiece(null);
-        piece.setX(toX);
-        piece.setY(toY);
         tiles[toX][toY].placePiece(piece);
         notifyChange();
     }
