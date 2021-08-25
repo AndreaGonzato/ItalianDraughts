@@ -53,9 +53,21 @@ public class Drawer implements PropertyChangeListener {
                 Tile[][] board = (Tile[][]) evt.getNewValue();
                 drawBoard(board);
             }
-            case "highlighted" -> {
-                Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
-                game.setStatus(Status.MOVE_IN_PROGRESS);
+            case "clicked" -> {
+                Square square = (Square) evt.getNewValue();
+
+                if (square.getTile().isEmpty()) {
+                    game.setStatus(Status.IDLE);
+                }
+
+                if (game.getStatus().equals(Status.IDLE) && !square.getTile().isEmpty()) {
+                    Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+                    square.highlight(!square.isHighlighted());
+                    game.setStatus(Status.MOVE_IN_PROGRESS);
+                } else {
+
+                    game.setStatus(Status.IDLE);
+                }
             }
         }
 

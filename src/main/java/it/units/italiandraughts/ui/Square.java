@@ -32,8 +32,8 @@ public class Square extends StackPane {
     }
 
     private void notifyClick(Event event) {
-        support.firePropertyChange("highlighted", isHighlighted(), !isHighlighted());
-        highlight(!isHighlighted());
+        support.firePropertyChange("clicked", null, this);
+        //highlight(!isHighlighted());
     }
 
     public boolean isHighlighted() {
@@ -41,9 +41,6 @@ public class Square extends StackPane {
     }
 
     void highlight(boolean value) {
-        if (tile.isEmpty()) {
-            return;
-        }
         String newColor = value ? HIGHLIGHT_COLOR : this.type.getHex();
         this.highlighted = value;
         this.setStyle("-fx-background-color: " + newColor + ";");
