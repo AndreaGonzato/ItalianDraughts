@@ -44,7 +44,7 @@ public class Drawer implements PropertyChangeListener {
                 } else {
                     square = new Square(game.getBoard().getTiles()[row][col], SquareType.WHITE_SMOKE);
                 }
-                square.setOnMouseClicked(this::onClick);
+                square.setOnMouseClicked(this::onClickOnSquare);
                 this.squares[row][col] = square;
                 game.getBoard().getTiles()[row][col].setSquare(square);
                 gridPane.add(square, col, row);
@@ -102,7 +102,7 @@ public class Drawer implements PropertyChangeListener {
         square.highlight(true);
     }
 
-    public void onClick(MouseEvent event) {
+    public void onClickOnSquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         switch (game.getStatus()) {
             case IDLE -> {
