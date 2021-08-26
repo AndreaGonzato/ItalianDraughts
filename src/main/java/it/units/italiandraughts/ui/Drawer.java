@@ -119,7 +119,7 @@ public class Drawer implements PropertyChangeListener {
 
     private void drawGreenCircleOnEmptySquare(Square square) {
         if (square.getType().equals(SquareType.WHITE_SMOKE)) {
-            throw new IllegalPositionDrawingException("Can not draw on white square");
+            throw new IllegalPositionDrawingException("Cannot draw on white square");
         }
         double tileSize = gridPane.getMaxHeight() / 8;
         Circle circle = new Circle(tileSize * 0.15);
