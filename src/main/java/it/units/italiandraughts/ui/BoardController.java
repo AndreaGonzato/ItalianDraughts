@@ -5,6 +5,8 @@ import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.Game;
 import it.units.italiandraughts.logic.Player;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -35,6 +37,9 @@ public class BoardController {
     @FXML
     Button undo;
 
+    @FXML
+    Button reset;
+
     private static double getBoardHeight() {
         return ItalianDraughts.getScreenHeight() / 3 * 2;
     }
@@ -48,6 +53,7 @@ public class BoardController {
         Player player2 = new Player(player2NameLabel.getText(), PieceType.PLAYER2);
         Game game = new Game(board, player1, player2);
         Drawer drawer = new Drawer(gridPane, game);
+        game.setDrawer(drawer);
         game.addPropertyChangeListener(drawer);
 
         // resize the numbers to the left of board
@@ -72,6 +78,12 @@ public class BoardController {
 
         line.setEndX(gridPane.getMaxWidth());
         gridPane.setStyle("-fx-border-color: #d47d35");
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                game.resetGame();
+            }
+        });
     }
 
 }

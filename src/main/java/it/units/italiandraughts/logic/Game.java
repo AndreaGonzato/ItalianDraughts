@@ -1,6 +1,7 @@
 package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalMoveException;
+import it.units.italiandraughts.ui.Drawer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -13,6 +14,7 @@ public class Game {
     private Player activePlayer;
     private Status status;
     private Tile source;
+    private Drawer drawer;
     private final PropertyChangeSupport support;
 
     public Game(Board board, Player player1, Player player2) {
@@ -53,6 +55,13 @@ public class Game {
         toggleActivePlayer();
     }
 
+    public void resetGame(){
+        board.empty();
+        board.placePieceInInitialPosition();
+        System.out.println(board);
+        drawer.updateBoard(board.getTiles());
+    }
+
     public Tile getSource() {
         return source;
     }
@@ -63,6 +72,10 @@ public class Game {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setDrawer(Drawer drawer) {
+        this.drawer = drawer;
     }
 
     public Status getStatus() {

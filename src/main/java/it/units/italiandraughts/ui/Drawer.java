@@ -56,6 +56,7 @@ public class Drawer implements PropertyChangeListener {
         updateBoard(game.getBoard().getTiles());
     }
 
+
     public void propertyChange(PropertyChangeEvent event) {
         // TODO remove this if if no other PropertyChangeEvent are used
         if ("activePlayer".equals(event.getPropertyName())) {
@@ -109,8 +110,13 @@ public class Drawer implements PropertyChangeListener {
                 .forEach(s -> s.setOnMouseClicked(null));
     }
 
-    private void updateBoard(Tile[][] board) {
+    public void removeAllPieces(){
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
+    }
+
+
+    public void updateBoard(Tile[][] board) {
+        removeAllPieces();
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
                 .forEach(t -> drawPiece(squares[t.getY()][t.getX()], t.getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line

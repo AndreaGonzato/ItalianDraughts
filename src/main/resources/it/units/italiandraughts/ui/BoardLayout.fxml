@@ -63,7 +63,7 @@
                 </Insets>
             </HBox.margin>
         </GameButton>
-        <GameButton text="Reset">
+        <GameButton fx:id="reset" text="Reset">
             <HBox.margin>
                 <Insets>
                     <left>10</left>

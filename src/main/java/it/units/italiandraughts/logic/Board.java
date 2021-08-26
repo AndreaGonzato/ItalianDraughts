@@ -18,7 +18,10 @@ public class Board {
                 tiles[row][col] = tile;
             }
         }
+        placePieceInInitialPosition();
+    }
 
+    public void placePieceInInitialPosition(){
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() < 3 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2)));
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() > 4 && (t.getY() + t.getX()) % 2 == 0)
@@ -28,7 +31,7 @@ public class Board {
     public void empty() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                tiles[i][j] = null;
+                tiles[i][j] = new Tile(j, i);
             }
         }
     }
