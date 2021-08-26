@@ -30,10 +30,6 @@ public class Game {
         log = new ByteArrayOutputStream();
     }
 
-    public Player getPlayer1() {
-        return player1;
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
