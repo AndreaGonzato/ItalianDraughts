@@ -82,6 +82,10 @@ public class Game {
         return status;
     }
 
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
     public Board getBoard() {
         return board;
     }

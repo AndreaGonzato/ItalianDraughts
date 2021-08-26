@@ -58,7 +58,7 @@ public class Drawer implements PropertyChangeListener {
 
 
     public void propertyChange(PropertyChangeEvent event) {
-        // TODO remove this if if no other PropertyChangeEvent are used
+        // TODO remove this if no other PropertyChangeEvent are used
         if ("activePlayer".equals(event.getPropertyName())) {
             unsetOnMouseClickedForAllSquares();
             setOnMouseClickedBasedOnPredicate(
@@ -80,7 +80,7 @@ public class Drawer implements PropertyChangeListener {
                 game.setSource(square.getTile());
                 highlight(square);
                 unsetOnMouseClickedForAllSquares();
-                setOnMouseClickedBasedOnPredicate(s -> (s.getTile().isEmpty()));
+                setOnMouseClickedBasedOnPredicate(square1 -> (square1.getTile().isEmpty() || square1.getTile().getPiece().getPieceType().equals(game.getActivePlayer().getPieceType())));
                 game.setStatus(Status.MOVE_IN_PROGRESS);
             }
             case MOVE_IN_PROGRESS -> {
