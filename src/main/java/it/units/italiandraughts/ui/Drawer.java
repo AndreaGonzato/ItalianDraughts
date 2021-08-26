@@ -52,16 +52,6 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    private Square getHighlightedSquare() throws Exception{
-        Stream<Square> stream = Arrays.stream(squares).flatMap(Arrays::stream).filter(Square::isHighlighted);
-        Optional<Square> highlighted = stream.findAny();
-        if (highlighted.isEmpty()) {
-            throw new Exception("something has gone terribly wrong");
-        } else {
-            return highlighted.get();
-        }
-    }
-
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case "board" -> {
