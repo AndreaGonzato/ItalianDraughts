@@ -49,9 +49,6 @@ public class BoardController {
         Game game = new Game(board, player1, player2);
         Drawer drawer = new Drawer(gridPane, game);
         game.addPropertyChangeListener(drawer);
-        board.addPropertyChangeListener(drawer);
-        board.notifyChange();
-        //game.notifyActivePlayerChange(null, player1);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();

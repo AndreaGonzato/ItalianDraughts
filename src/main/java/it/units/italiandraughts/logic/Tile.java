@@ -37,6 +37,7 @@ public class Tile {
     }
 
 
+
     public boolean isEmpty() {
         return piece == null;
     }
@@ -54,6 +55,7 @@ public class Tile {
     public Piece getPiece() {
         return piece;
     }
+
 
     @Override
     public boolean equals(Object o) {

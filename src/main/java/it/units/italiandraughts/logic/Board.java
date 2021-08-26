@@ -6,15 +6,12 @@ import it.units.italiandraughts.ui.PieceType;
 
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
-import java.beans.PropertyChangeSupport;
 
 public class Board {
     private final Tile[][] tiles;
     public static final int SIZE = 8;
-    private final PropertyChangeSupport support;
 
     public Board() {
-        support = new PropertyChangeSupport(this);
         tiles = new Tile[SIZE][SIZE];
 
         for (int row = 0; row < Board.SIZE; row++) {
@@ -28,14 +25,6 @@ public class Board {
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2)));
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() > 4 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1)));
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
-    }
-
-    public void notifyChange() {
-        support.firePropertyChange("board", null, tiles);
     }
 
     public void empty() {

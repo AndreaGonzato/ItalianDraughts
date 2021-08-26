@@ -51,14 +51,13 @@ public class Drawer implements PropertyChangeListener {
         setOnMouseClickedBasedOnPredicate(
                 s -> !(s.getTile().isEmpty()) && s.getTile().getPiece().getPieceType()
                         .equals(game.getPlayer1().getPieceType()));
+
+        // draw the pieces at the start
+        updateBoard(game.getBoard().getTiles());
     }
 
     public void propertyChange(PropertyChangeEvent event) {
         switch (event.getPropertyName()) {
-            case "board" -> {
-                Tile[][] board = (Tile[][]) event.getNewValue();
-                drawBoard(board);
-            }
             case "activePlayer" -> {
                 unsetOnMouseClickedForAllSquares();
                 setOnMouseClickedBasedOnPredicate(
@@ -93,6 +92,7 @@ public class Drawer implements PropertyChangeListener {
                 } catch (IllegalMoveException e) {
                     return;
                 }
+                updateBoard(game.getBoard().getTiles());
                 game.setSource(null);
                 game.setStatus(Status.IDLE);
             }
@@ -110,15 +110,15 @@ public class Drawer implements PropertyChangeListener {
                 .forEach(s -> s.setOnMouseClicked(null));
     }
 
-    private void drawBoard(Tile[][] board) {
+    private void updateBoard(Tile[][] board) {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
                 .forEach(t -> drawPiece(squares[t.getY()][t.getX()], t.getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
     }
 
-    private void drawGreenCircleOnEmptySquare(Square square){
-        if (square.getType().equals(SquareType.WHITE_SMOKE)){
+    private void drawGreenCircleOnEmptySquare(Square square) {
+        if (square.getType().equals(SquareType.WHITE_SMOKE)) {
             throw new IllegalPositionDrawingException("Can not draw on white square");
         }
         double tileSize = gridPane.getMaxHeight() / 8;
