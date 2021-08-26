@@ -2,6 +2,8 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.PieceType;
 
+import java.util.Objects;
+
 public class Player {
 
     private String name;
@@ -32,7 +34,7 @@ public class Player {
 
         Player player = (Player) o;
 
-        if (name != null ? !name.equals(player.name) : player.name != null) return false;
+        if (!Objects.equals(name, player.name)) return false;
         return pieceType == player.pieceType;
     }
 
