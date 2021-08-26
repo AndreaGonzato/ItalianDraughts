@@ -1,5 +1,7 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.exception.IllegalMoveException;
+
 public class Game {
 
     private final Board board;
@@ -23,6 +25,18 @@ public class Game {
         } else {
             activePlayer = player1;
         }
+    }
+
+    public void move(int fromX, int fromY, int toX, int toY) {
+        if ((toX + toY) % 2 == 1) {
+            throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
+        }
+        Tile[][] tiles = getBoard().getTiles();
+        Piece piece = tiles[fromY][fromX].getPiece();
+        tiles[fromY][fromX].placePiece(null);
+        tiles[toY][toX].placePiece(piece);
+        getBoard().notifyChange();
+        toggleActivePlayer();
     }
 
     public Tile getSource() {

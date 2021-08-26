@@ -115,7 +115,7 @@ public class Drawer implements PropertyChangeListener {
             }
             case MOVE_IN_PROGRESS -> {
                 try {
-                    game.getBoard().move(game.getSource().getX(),
+                    game.move(game.getSource().getX(),
                             game.getSource().getY(),
                             square.getTile().getX(),
                             square.getTile().getY());

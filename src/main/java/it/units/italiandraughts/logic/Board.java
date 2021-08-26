@@ -34,20 +34,9 @@ public class Board {
         support.addPropertyChangeListener(pcl);
     }
 
-    public void move(int fromX, int fromY, int toX, int toY) {
-        if ((toX + toY) % 2 == 1) {
-            throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
-        }
-        Piece piece = tiles[fromY][fromX].getPiece();
-        tiles[fromY][fromX].placePiece(null);
-        tiles[toY][toX].placePiece(piece);
-        notifyChange();
-    }
-
     public void notifyChange() {
         support.firePropertyChange("board", null, tiles);
     }
-
 
     public void empty() {
         for (int i = 0; i < SIZE; i++) {
