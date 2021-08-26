@@ -6,7 +6,6 @@ import javafx.scene.layout.StackPane;
 public class Square extends StackPane {
 
     private final Tile tile;
-    private boolean highlighted;
     private final SquareType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
 
@@ -21,14 +20,8 @@ public class Square extends StackPane {
         return tile;
     }
 
-
-    public boolean isHighlighted() {
-        return highlighted;
-    }
-
     void highlight(boolean value) {
         String newColor = value ? HIGHLIGHT_COLOR : this.type.getHex();
-        this.highlighted = value;
         this.setStyle("-fx-background-color: " + newColor + ";");
     }
 

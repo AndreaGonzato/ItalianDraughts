@@ -19,8 +19,6 @@ public class Piece {
         if (this == o) return true;
         if (!(o instanceof Piece piece)) return false;
 
-        piece = (Piece) o;
-
         return pieceType == piece.pieceType;
     }
 
