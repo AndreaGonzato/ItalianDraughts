@@ -14,8 +14,7 @@ import javafx.scene.input.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.function.Predicate;
 
 public class Drawer implements PropertyChangeListener {
 
@@ -44,7 +43,6 @@ public class Drawer implements PropertyChangeListener {
                 } else {
                     square = new Square(game.getBoard().getTiles()[row][col], SquareType.WHITE_SMOKE);
                 }
-                square.setOnMouseClicked(this::onClickOnSquare);
                 this.squares[row][col] = square;
                 game.getBoard().getTiles()[row][col].setSquare(square);
                 gridPane.add(square, col, row);
@@ -58,33 +56,14 @@ public class Drawer implements PropertyChangeListener {
                 Tile[][] board = (Tile[][]) evt.getNewValue();
                 drawBoard(board);
             }
-            /*
-            case "clicked" -> {
-                Square square = (Square) evt.getNewValue();
-
-                if (square.getTile().isEmpty()) {
-                    game.setStatus(Status.IDLE);
-                }
-
-                if (game.getStatus().equals(Status.IDLE) && !square.getTile().isEmpty()) {
-                    Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
-                    square.highlight(!square.isHighlighted());
-                    game.setStatus(Status.MOVE_IN_PROGRESS);
-                } else {
-                    Square fromSquare;
-                    try {
-                        fromSquare = getHighlightedSquare();
-                    } catch (Exception e) {
-                        return;
-                    }
-                    game.getBoard().move(fromSquare.getTile().getX(), fromSquare.getTile().getY(),
-                            square.getTile().getX(), square.getTile().getY());
-                    game.setStatus(Status.IDLE);
-                }
+            case "activePlayer" -> {
+                unsetOnMouseClickedForAllSquares();
+                setOnMouseClickedBasedOnPredicate(
+                        s -> !(s.getTile().isEmpty()) && s.getTile().getPiece().getPieceType()
+                                .equals(((Player) evt.getNewValue()).getPieceType())
+                );
             }
- */
         }
-
     }
 
     private void highlight(Square square) {
@@ -96,11 +75,10 @@ public class Drawer implements PropertyChangeListener {
         Square square = (Square) event.getSource();
         switch (game.getStatus()) {
             case IDLE -> {
-                if (square.getTile().isEmpty()) {
-                    return;
-                }
                 game.setSource(square.getTile());
                 highlight(square);
+                unsetOnMouseClickedForAllSquares();
+                setOnMouseClickedBasedOnPredicate(s -> (s.getTile().isEmpty()));
                 game.setStatus(Status.MOVE_IN_PROGRESS);
             }
             case MOVE_IN_PROGRESS -> {
@@ -116,6 +94,17 @@ public class Drawer implements PropertyChangeListener {
                 game.setStatus(Status.IDLE);
             }
         }
+    }
+
+    private void setOnMouseClickedBasedOnPredicate(Predicate<? super Square> predicate) {
+        Arrays.stream(squares).flatMap(Arrays::stream)
+                .filter(predicate)
+                .forEach(s -> s.setOnMouseClicked(this::onClickOnSquare));
+    }
+
+    private void unsetOnMouseClickedForAllSquares() {
+        Arrays.stream(squares).flatMap(Arrays::stream)
+                .forEach(s -> s.setOnMouseClicked(null));
     }
 
     private void drawBoard(Tile[][] board) {

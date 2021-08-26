@@ -3,6 +3,7 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.ui.PieceType;
 
 public class Player {
+
     private String name;
     private int score;
     private final PieceType pieceType;
@@ -11,6 +12,10 @@ public class Player {
         this.pieceType = pieceType;
         this.name = name;
         score = 0;
+    }
+
+    public PieceType getPieceType() {
+        return pieceType;
     }
 
     @Override

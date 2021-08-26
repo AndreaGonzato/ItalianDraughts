@@ -2,6 +2,9 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalMoveException;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class Game {
 
     private final Board board;
@@ -10,6 +13,7 @@ public class Game {
     private Player activePlayer;
     private Status status;
     private Tile source;
+    private final PropertyChangeSupport support;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
@@ -17,14 +21,29 @@ public class Game {
         this.player2 = player2;
         activePlayer = player1;
         status = Status.IDLE;
+        support = new PropertyChangeSupport(this);
     }
 
-    public void toggleActivePlayer() {
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    private void toggleActivePlayer() {
+        final Player oldActivePlayer = activePlayer;
         if (player1.equals(activePlayer)) {
             activePlayer = player2;
         } else {
             activePlayer = player1;
         }
+        notifyActivePlayerChange(oldActivePlayer, activePlayer);
+    }
+
+    public void notifyActivePlayerChange(Player oldActivePlayer, Player newActivePlayer) {
+        support.firePropertyChange("activePlayer", oldActivePlayer, newActivePlayer);
     }
 
     public void move(int fromX, int fromY, int toX, int toY) {
