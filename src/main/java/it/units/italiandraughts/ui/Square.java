@@ -7,10 +7,10 @@ public class Square extends StackPane {
 
     private final Tile tile;
     private boolean highlighted;
-    private final TileType type;
+    private final SquareType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
 
-    public Square(Tile tile, TileType type) {
+    public Square(Tile tile, SquareType type) {
         this.tile = tile;
         this.type = type;
         this.setStyle("-fx-background-color: " + type.getHex() + ";");
@@ -31,4 +31,7 @@ public class Square extends StackPane {
         this.setStyle("-fx-background-color: " + newColor + ";");
     }
 
+    public SquareType getType() {
+        return type;
+    }
 }

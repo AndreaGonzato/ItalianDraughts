@@ -1,11 +1,11 @@
 package it.units.italiandraughts.ui;
 
-public enum TileType {
+public enum SquareType {
     BRONZE("#d47d35"), WHITE_SMOKE("#fafafa");
 
     private final String hex;
 
-    TileType(String hex) {
+    SquareType(String hex) {
         this.hex = hex;
     }
 

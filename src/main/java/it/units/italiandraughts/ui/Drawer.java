@@ -1,6 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.exception.IllegalMoveException;
+import it.units.italiandraughts.exception.IllegalPositionDrawingException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -39,9 +40,9 @@ public class Drawer implements PropertyChangeListener {
             for (int col = 0; col < Board.SIZE; col++) {
                 Square square;
                 if ((row + col) % 2 == 0) {
-                    square = new Square(game.getBoard().getTiles()[row][col], TileType.BRONZE);
+                    square = new Square(game.getBoard().getTiles()[row][col], SquareType.BRONZE);
                 } else {
-                    square = new Square(game.getBoard().getTiles()[row][col], TileType.WHITE_SMOKE);
+                    square = new Square(game.getBoard().getTiles()[row][col], SquareType.WHITE_SMOKE);
                 }
                 square.setOnMouseClicked(this::onClick);
                 this.squares[row][col] = square;
@@ -135,8 +136,8 @@ public class Drawer implements PropertyChangeListener {
     }
 
     private void drawGreenCircleOnEmptySquare(Square square){
-        if (square.getChildren().size() > 0){
-            // TODO exception
+        if (square.getType().equals(SquareType.WHITE_SMOKE)){
+            throw new IllegalPositionDrawingException("Can not draw on white square");
         }
         double tileSize = gridPane.getMaxHeight() / 8;
         Circle circle = new Circle(tileSize * 0.15);
