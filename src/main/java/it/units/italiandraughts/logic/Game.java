@@ -15,7 +15,6 @@ public class Game {
     private Status status;
     private Tile source;
     private final PropertyChangeSupport support;
-    //private Drawer drawer;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
@@ -52,8 +51,6 @@ public class Game {
         Piece piece = tiles[fromY][fromX].getPiece();
         tiles[fromY][fromX].placePiece(null);
         tiles[toY][toX].placePiece(piece);
-        // TODO show new board
-        //drawer.drawPieces();
         toggleActivePlayer();
     }
 
@@ -77,7 +74,4 @@ public class Game {
         return board;
     }
 
-    /*public void addDrawer(Drawer drawer) {
-        this.drawer = drawer;
-    }*/
 }
