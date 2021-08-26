@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class Drawer implements PropertyChangeListener {
 
@@ -48,9 +47,9 @@ public class Drawer implements PropertyChangeListener {
                 gridPane.add(square, col, row);
             }
         }
-        setOnMouseClickedBasedOnPredicate(
-                square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
-                        .equals(PieceType.PLAYER1));
+
+        setClickableForPlayer(game.getPlayer1());
+        setClickableForEmptySquares();
 
         // draw the pieces at the start
         updateBoard(game.getBoard().getTiles());
@@ -60,11 +59,9 @@ public class Drawer implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent event) {
         // TODO remove this if if no other PropertyChangeEvent are used
         if ("activePlayer".equals(event.getPropertyName())) {
-            unsetOnMouseClickedForAllSquares();
-            setOnMouseClickedBasedOnPredicate(
-                    square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
-                            .equals(((Player) event.getNewValue()).getPieceType())
-            );
+            setClickableForPlayer((Player) event.getNewValue());
+            unsetClickableForPlayer((Player) event.getOldValue());
+            setClickableForEmptySquares();
         }
     }
 
@@ -73,43 +70,58 @@ public class Drawer implements PropertyChangeListener {
         square.highlight(true);
     }
 
-    public void onClickOnSquare(MouseEvent event) {
+    public void onClickOnFullSquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         switch (game.getStatus()) {
             case IDLE -> {
-                game.setSource(square.getTile());
-                highlight(square);
-                unsetOnMouseClickedForAllSquares();
-                setOnMouseClickedBasedOnPredicate(s -> (s.getTile().isEmpty()));
+                setSourceAndHighLight(square);
                 game.setStatus(Status.MOVE_IN_PROGRESS);
             }
-            case MOVE_IN_PROGRESS -> {
-                try {
-                    game.move(game.getSource().getX(),
-                            game.getSource().getY(),
-                            square.getTile().getX(),
-                            square.getTile().getY());
-                } catch (IllegalMoveException e) {
-                    return;
-                }
-                updateBoard(game.getBoard().getTiles());
-                game.setSource(null);
-                game.setStatus(Status.IDLE);
-            }
+            case MOVE_IN_PROGRESS -> setSourceAndHighLight(square);
         }
     }
 
-    private void setOnMouseClickedBasedOnPredicate(Predicate<? super Square> predicate) {
-        Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(predicate)
-                .forEach(s -> s.setOnMouseClicked(this::onClickOnSquare));
+    private void setSourceAndHighLight(Square square) {
+        game.setSource(square.getTile());
+        highlight(square);
     }
 
-    private void unsetOnMouseClickedForAllSquares() {
+    public void onClickOnEmptySquare(MouseEvent event) {
+        Square square = (Square) event.getSource();
+        if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
+            try {
+                game.move(game.getSource().getX(),
+                        game.getSource().getY(),
+                        square.getTile().getX(),
+                        square.getTile().getY());
+            } catch (IllegalMoveException e) {
+                return;
+            }
+            updateBoard(game.getBoard().getTiles());
+            game.setSource(null);
+            game.setStatus(Status.IDLE);
+        }
+    }
+
+    private void setClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
+                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
+                        .equals(player.getPieceType()))
+                .forEach(s -> s.setOnMouseClicked(this::onClickOnFullSquare));
+    }
+
+    private void unsetClickableForPlayer(Player player) {
+        Arrays.stream(squares).flatMap(Arrays::stream)
+                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
+                        .equals(player.getPieceType()))
                 .forEach(s -> s.setOnMouseClicked(null));
     }
 
+    private void setClickableForEmptySquares() {
+        Arrays.stream(squares).flatMap(Arrays::stream)
+                .filter(square -> square.getTile().isEmpty())
+                .forEach(s -> s.setOnMouseClicked(this::onClickOnEmptySquare));
+    }
 
     public void updateBoard(Tile[][] board) {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
