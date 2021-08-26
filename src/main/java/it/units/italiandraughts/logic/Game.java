@@ -55,10 +55,9 @@ public class Game {
         toggleActivePlayer();
     }
 
-    public void resetGame(){
+    public void reset(){
         board.emptyPiecesFromTiles();
         board.placePieceInInitialPosition();
-        System.out.println(board);
         drawer.updateBoard(board.getTiles());
     }
 

@@ -78,12 +78,7 @@ public class BoardController {
 
         line.setEndX(gridPane.getMaxWidth());
         gridPane.setStyle("-fx-border-color: #d47d35");
-        reset.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                game.resetGame();
-            }
-        });
+        reset.setOnAction(event -> game.reset());
     }
 
 }
