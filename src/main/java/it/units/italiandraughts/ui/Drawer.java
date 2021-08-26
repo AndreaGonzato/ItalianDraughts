@@ -25,6 +25,7 @@ public class Drawer implements PropertyChangeListener {
     public Drawer(GridPane gridPane, Game game) {
         this.gridPane = gridPane;
         this.game = game;
+        game.setDrawer(this);
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setPercentWidth(12.5);
