@@ -50,17 +50,17 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
-        switch (evt.getPropertyName()) {
+    public void propertyChange(PropertyChangeEvent event) {
+        switch (event.getPropertyName()) {
             case "board" -> {
-                Tile[][] board = (Tile[][]) evt.getNewValue();
+                Tile[][] board = (Tile[][]) event.getNewValue();
                 drawBoard(board);
             }
             case "activePlayer" -> {
                 unsetOnMouseClickedForAllSquares();
                 setOnMouseClickedBasedOnPredicate(
                         s -> !(s.getTile().isEmpty()) && s.getTile().getPiece().getPieceType()
-                                .equals(((Player) evt.getNewValue()).getPieceType())
+                                .equals(((Player) event.getNewValue()).getPieceType())
                 );
             }
         }
