@@ -44,10 +44,10 @@ public class BoardTest {
 
 
     private Tile[][] setUpBoard() {
-        Tile[][] tiles = new Tile[8][8];
+        Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
 
         // create all the tiles
-        for (int i = 0 ; i<8 ; i++){
+        for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++) {
                 tiles[i][j] = new Tile(i, j);
             }
