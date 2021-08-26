@@ -45,7 +45,6 @@ public class Drawer implements PropertyChangeListener {
                     square = new Square(game.getBoard().getTiles()[row][col], SquareType.WHITE_SMOKE);
                 }
                 this.squares[row][col] = square;
-                game.getBoard().getTiles()[row][col].setSquare(square);
                 gridPane.add(square, col, row);
             }
         }
