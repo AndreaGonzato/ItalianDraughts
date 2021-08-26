@@ -49,8 +49,8 @@ public class Drawer implements PropertyChangeListener {
             }
         }
         setOnMouseClickedBasedOnPredicate(
-                s -> !(s.getTile().isEmpty()) && s.getTile().getPiece().getPieceType()
-                        .equals(game.getPlayer1().getPieceType()));
+                square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
+                        .equals(PieceType.PLAYER1));
 
         // draw the pieces at the start
         updateBoard(game.getBoard().getTiles());
@@ -62,7 +62,7 @@ public class Drawer implements PropertyChangeListener {
         if ("activePlayer".equals(event.getPropertyName())) {
             unsetOnMouseClickedForAllSquares();
             setOnMouseClickedBasedOnPredicate(
-                    s -> !(s.getTile().isEmpty()) && s.getTile().getPiece().getPieceType()
+                    square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
                             .equals(((Player) event.getNewValue()).getPieceType())
             );
         }
