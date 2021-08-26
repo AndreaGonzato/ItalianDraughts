@@ -21,7 +21,7 @@ public class BoardTest {
         Tile[][] expectedPTiles = new Tile[8][8];
 
         Board board = new Board();
-        board.empty();
+        board.emptyPiecesFromTiles();
 
         Assertions.assertArrayEquals(expectedPTiles, board.getTiles());
     }

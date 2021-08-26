@@ -56,7 +56,7 @@ public class Game {
     }
 
     public void resetGame(){
-        board.empty();
+        board.emptyPiecesFromTiles();
         board.placePieceInInitialPosition();
         System.out.println(board);
         drawer.updateBoard(board.getTiles());

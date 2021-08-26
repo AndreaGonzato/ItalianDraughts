@@ -28,10 +28,10 @@ public class Board {
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1)));
     }
 
-    public void empty() {
+    public void emptyPiecesFromTiles() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                tiles[i][j] = new Tile(j, i);
+                tiles[i][j].removePiece();
             }
         }
     }
