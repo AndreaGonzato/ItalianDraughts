@@ -1,5 +1,6 @@
 package it.units.italiandraughts.ui;
 
+import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -100,19 +101,26 @@ public class Drawer implements PropertyChangeListener {
         square.highlight(true);
     }
 
-    public void onClick(MouseEvent e) {
-        Square square = (Square) e.getSource();
+    public void onClick(MouseEvent event) {
+        Square square = (Square) event.getSource();
         switch (game.getStatus()) {
             case IDLE -> {
+                if (square.getTile().isEmpty()) {
+                    return;
+                }
                 game.setSource(square.getTile());
                 highlight(square);
                 game.setStatus(Status.MOVE_IN_PROGRESS);
             }
             case MOVE_IN_PROGRESS -> {
-                game.getBoard().move(game.getSource().getX(),
-                        game.getSource().getY(),
-                        square.getTile().getX(),
-                        square.getTile().getY());
+                try {
+                    game.getBoard().move(game.getSource().getX(),
+                            game.getSource().getY(),
+                            square.getTile().getX(),
+                            square.getTile().getY());
+                } catch (IllegalMoveException e) {
+                    return;
+                }
                 game.setSource(null);
                 game.setStatus(Status.IDLE);
             }
@@ -145,8 +153,7 @@ public class Drawer implements PropertyChangeListener {
         Ellipse upperEllipse = createEllipse(tileSize);
         upperEllipse.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
 
-        square.getChildren().add(baseEllipse);
-        square.getChildren().add(upperEllipse);
+        square.getChildren().addAll(baseEllipse, upperEllipse);
     }
 
     private Ellipse createEllipse(double tileSize) {

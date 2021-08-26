@@ -4,7 +4,6 @@ import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.Game;
 import it.units.italiandraughts.logic.Player;
-import it.units.italiandraughts.logic.Tile;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -14,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class BoardController {
