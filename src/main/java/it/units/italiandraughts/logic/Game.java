@@ -24,10 +24,6 @@ public class Game {
         support = new PropertyChangeSupport(this);
     }
 
-    public Player getActivePlayer() {
-        return activePlayer;
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
