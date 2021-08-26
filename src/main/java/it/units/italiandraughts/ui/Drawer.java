@@ -116,6 +116,25 @@ public class Drawer implements PropertyChangeListener {
         Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
                 .forEach(t -> drawPiece(squares[t.getY()][t.getX()], t.getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
+        drawKingOnEmptySquare(squares[4][4]); // TODO remove this
+    }
+
+    private void drawKingOnEmptySquare(Square square) {
+        double tileSize = gridPane.getMaxHeight() / 8;
+        Ellipse baseEllipse = createEllipse(tileSize);
+        baseEllipse.setFill(Color.BLACK);
+        baseEllipse.setTranslateY(tileSize * 0.06);
+        Piece piece = new Piece(PieceType.PLAYER1);
+
+        Ellipse upperEllipse = createEllipse(tileSize);
+        upperEllipse.setTranslateY(tileSize * -0.06);
+        Ellipse middleEllipse = createEllipse(tileSize);
+        middleEllipse.setFill(Color.valueOf("#c6c6c6"));
+        Ellipse upperEllipse2 = createEllipse(tileSize);
+        upperEllipse2.setTranslateY(tileSize * -0.1);
+        upperEllipse2.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
+
+        square.getChildren().addAll(baseEllipse, middleEllipse, upperEllipse, upperEllipse2);
     }
 
     private void drawGreenCircleOnEmptySquare(Square square) {
