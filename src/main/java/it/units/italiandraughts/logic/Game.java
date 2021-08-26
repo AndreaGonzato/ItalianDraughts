@@ -24,6 +24,10 @@ public class Game {
         support = new PropertyChangeSupport(this);
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
@@ -35,11 +39,7 @@ public class Game {
         } else {
             activePlayer = player1;
         }
-        notifyActivePlayerChange(oldActivePlayer, activePlayer);
-    }
-
-    public void notifyActivePlayerChange(Player oldActivePlayer, Player newActivePlayer) {
-        support.firePropertyChange("activePlayer", oldActivePlayer, newActivePlayer);
+        support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
     }
 
     public void move(int fromX, int fromY, int toX, int toY) {

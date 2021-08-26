@@ -48,6 +48,9 @@ public class Drawer implements PropertyChangeListener {
                 gridPane.add(square, col, row);
             }
         }
+        setOnMouseClickedBasedOnPredicate(
+                s -> !(s.getTile().isEmpty()) && s.getTile().getPiece().getPieceType()
+                        .equals(game.getPlayer1().getPieceType()));
     }
 
     public void propertyChange(PropertyChangeEvent event) {

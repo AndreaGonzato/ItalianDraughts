@@ -51,7 +51,7 @@ public class BoardController {
         game.addPropertyChangeListener(drawer);
         board.addPropertyChangeListener(drawer);
         board.notifyChange();
-        game.notifyActivePlayerChange(null, player1);
+        //game.notifyActivePlayerChange(null, player1);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
