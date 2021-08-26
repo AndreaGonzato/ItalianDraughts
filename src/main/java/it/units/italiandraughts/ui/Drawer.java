@@ -57,6 +57,7 @@ public class Drawer implements PropertyChangeListener {
     }
 
     public void propertyChange(PropertyChangeEvent event) {
+        // TODO remove this if if no other PropertyChangeEvent are used
         if ("activePlayer".equals(event.getPropertyName())) {
             unsetOnMouseClickedForAllSquares();
             setOnMouseClickedBasedOnPredicate(

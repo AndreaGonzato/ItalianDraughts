@@ -1,7 +1,6 @@
 package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalMoveException;
-import it.units.italiandraughts.ui.Drawer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

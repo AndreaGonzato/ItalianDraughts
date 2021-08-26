@@ -1,10 +1,8 @@
 package it.units.italiandraughts.logic;
 
 
-import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.PieceType;
 
-import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 
 public class Board {
