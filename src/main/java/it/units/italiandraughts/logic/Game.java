@@ -3,6 +3,7 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
+import javafx.fxml.FXMLLoader;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -36,6 +37,10 @@ public class Game {
         return player1;
     }
 
+    public List<int[]> getLog() {
+        return log;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
@@ -50,7 +55,7 @@ public class Game {
         support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
     }
 
-    public void move(int fromX, int fromY, int toX, int toY) {
+    public void move(int fromX, int fromY, int toX, int toY, boolean shouldLog) {
         if ((toX + toY) % 2 == 1) {
             throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
         }
@@ -58,8 +63,10 @@ public class Game {
         Piece piece = tiles[fromY][fromX].getPiece();
         tiles[fromY][fromX].placePiece(null);
         tiles[toY][toX].placePiece(piece);
+        if (shouldLog) {
+            log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
+        }
         toggleActivePlayer();
-        log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
     }
 
     public void reset() {
@@ -103,8 +110,7 @@ public class Game {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
         int[] coordinates = log.remove(log.size() - 1);
-        move(coordinates[2], coordinates[3], coordinates[0], coordinates[1]);
-        log.remove(log.size() - 1);
+        move(coordinates[2], coordinates[3], coordinates[0], coordinates[1], false);
         drawer.updateBoard(board.getTiles());
         status = Status.IDLE;
     }

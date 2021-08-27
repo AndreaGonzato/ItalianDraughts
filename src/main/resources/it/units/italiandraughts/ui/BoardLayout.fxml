@@ -31,7 +31,11 @@
                 <CoordinateLabel text="2"/>
                 <CoordinateLabel text="1"/>
             </VBox>
-            <GridPane fx:id="gridPane"/>
+            <GridPane fx:id="gridPane">
+                <userData>
+                    <fx:reference source="controller" />
+                </userData>
+            </GridPane>
             <padding>
                 <Insets bottom="10.0"/>
             </padding>

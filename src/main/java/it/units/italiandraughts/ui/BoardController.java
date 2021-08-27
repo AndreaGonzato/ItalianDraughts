@@ -77,6 +77,11 @@ public class BoardController {
         gridPane.setStyle("-fx-border-color: #d47d35");
         reset.setOnAction(event -> game.reset());
         undo.setOnAction(event -> game.undo());
+        undo.setDisable(true);
+    }
+
+    public Button getUndoButton() {
+        return undo;
     }
 
 }

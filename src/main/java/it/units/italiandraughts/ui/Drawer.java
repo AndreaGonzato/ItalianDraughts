@@ -62,6 +62,8 @@ public class Drawer implements PropertyChangeListener {
             setClickableForPlayer((Player) event.getNewValue());
             unsetClickableForPlayer((Player) event.getOldValue());
             setClickableForEmptySquares();
+            BoardController controller = (BoardController) gridPane.getUserData();
+            controller.getUndoButton().setDisable(game.getLog().size() <= 0);
         }
     }
 
@@ -92,7 +94,8 @@ public class Drawer implements PropertyChangeListener {
                 game.move(game.getActiveTile().getX(),
                         game.getActiveTile().getY(),
                         square.getTile().getX(),
-                        square.getTile().getY());
+                        square.getTile().getY(),
+                        true);
             } catch (IllegalMoveException e) {
                 return;
             }
