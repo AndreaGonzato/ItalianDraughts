@@ -17,7 +17,7 @@ public class Game {
     private final Player player2;
     private Player activePlayer;
     private Status status;
-    private Tile source;
+    private Tile activeTile;
     private Drawer drawer;
     private final PropertyChangeSupport support;
     private final List<int[]> log;
@@ -74,12 +74,12 @@ public class Game {
         drawer.updateBoard(board.getTiles());
     }
 
-    public Tile getSource() {
-        return source;
+    public Tile getActiveTile() {
+        return activeTile;
     }
 
-    public void setSource(Tile tile) {
-        this.source = tile;
+    public void setActiveTile(Tile tile) {
+        this.activeTile = tile;
     }
 
     public void setStatus(Status status) {
