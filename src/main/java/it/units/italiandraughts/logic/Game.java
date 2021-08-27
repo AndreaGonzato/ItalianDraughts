@@ -5,7 +5,8 @@ import it.units.italiandraughts.ui.Drawer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -18,7 +19,7 @@ public class Game {
     private Tile source;
     private Drawer drawer;
     private final PropertyChangeSupport support;
-    private final ByteArrayOutputStream log;
+    private final List<int[]> log;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
@@ -27,7 +28,7 @@ public class Game {
         activePlayer = player1;
         status = Status.IDLE;
         support = new PropertyChangeSupport(this);
-        log = new ByteArrayOutputStream();
+        log = new ArrayList<>();
     }
 
     public Player getPlayer1() {
@@ -57,7 +58,7 @@ public class Game {
         tiles[fromY][fromX].placePiece(null);
         tiles[toY][toX].placePiece(piece);
         toggleActivePlayer();
-        IntStream.of(fromX, fromY, toX, toY).forEachOrdered(log::write);
+        log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
     }
 
     public void reset(){
