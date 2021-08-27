@@ -64,7 +64,7 @@ public class Game {
     public void reset(){
         board.emptyPiecesFromTiles();
         board.placePieceInInitialPosition();
-        drawer.removeAllHighlight();
+        drawer.UnhighlightSquares();
         drawer.unsetClickableForPlayer(player2);
         drawer.setClickableForPlayer(player1);
         drawer.setClickableForEmptySquares();
