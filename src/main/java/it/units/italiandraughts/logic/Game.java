@@ -36,6 +36,10 @@ public class Game {
         return player1;
     }
 
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
     public List<int[]> getLog() {
         return log;
     }

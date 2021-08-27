@@ -16,7 +16,7 @@ public class BoardTest {
     }
 
     @Test
-    void empty() {
+    void emptyPiecesFromTiles() {
         Tile[][] expectedTiles = new Tile[8][8];
 
         for (int i = 0; i < 8; i++){
