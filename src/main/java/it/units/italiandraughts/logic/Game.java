@@ -64,6 +64,12 @@ public class Game {
     public void reset(){
         board.emptyPiecesFromTiles();
         board.placePieceInInitialPosition();
+        drawer.removeAllHighlight();
+        drawer.unsetClickableForPlayer(player2);
+        drawer.setClickableForPlayer(player1);
+        drawer.setClickableForEmptySquares();
+        status = Status.IDLE;
+        activePlayer = player1;
         drawer.updateBoard(board.getTiles());
     }
 

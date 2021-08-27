@@ -65,8 +65,12 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    private void highlight(Square square) {
+    public void removeAllHighlight(){
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.highlight(false));
+    }
+
+    private void highlight(Square square) {
+        removeAllHighlight();
         square.highlight(true);
     }
 
@@ -76,7 +80,7 @@ public class Drawer implements PropertyChangeListener {
         game.setStatus(Status.MOVE_IN_PROGRESS);
     }
 
-    private void setSourceAndHighLight(Square square) {
+    public void setSourceAndHighLight(Square square) {
         game.setSource(square.getTile());
         highlight(square);
     }
@@ -98,21 +102,21 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    private void setClickableForPlayer(Player player) {
+    public void setClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
                         .equals(player.getPieceType()))
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
-    private void unsetClickableForPlayer(Player player) {
+    public void unsetClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
                         .equals(player.getPieceType()))
                 .forEach(square -> square.setOnMouseClicked(null));
     }
 
-    private void setClickableForEmptySquares() {
+    public void setClickableForEmptySquares() {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> square.getTile().isEmpty())
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
