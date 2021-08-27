@@ -1,12 +1,11 @@
 package it.units.italiandraughts.logic;
 
-
 import it.units.italiandraughts.ui.PieceType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 public class BoardTest {
+
     @Test
     void placePieceInInitialPosition() {
         Tile[][] expectedTiles = setUpBoard();
@@ -32,7 +31,6 @@ public class BoardTest {
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
 
-
     @Test
     void moveTopRightPiecePlayer1ToLeft() {
         Tile[][] expectedTiles = setUpBoard();
@@ -46,8 +44,6 @@ public class BoardTest {
 
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
-
-
 
     private Tile[][] setUpBoard() {
         Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
@@ -72,7 +68,6 @@ public class BoardTest {
         tiles[2][4].placePiece(new Piece(PieceType.PLAYER2));
         tiles[2][6].placePiece(new Piece(PieceType.PLAYER2));
 
-
         tiles[5][1].placePiece(new Piece(PieceType.PLAYER1));
         tiles[5][3].placePiece(new Piece(PieceType.PLAYER1));
         tiles[5][5].placePiece(new Piece(PieceType.PLAYER1));
@@ -88,6 +83,5 @@ public class BoardTest {
 
         return tiles;
     }
-
 
 }
