@@ -36,7 +36,7 @@ public class BoardTest {
         Board board = new Board();
         Game game = new Game(board, new Player("1", PieceType.PLAYER1),
                 new Player("2", PieceType.PLAYER2));
-        game.move(7, 5, 6, 4);
+        game.move(7, 5, 6, 4, false);
 
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
