@@ -18,12 +18,12 @@ public class BoardTest {
 
     @Test
     void empty() {
-        Tile[][] expectedPTiles = new Tile[8][8];
+        Tile[][] expectedTiles = new Tile[8][8];
 
         Board board = new Board();
         board.emptyPiecesFromTiles();
 
-        Assertions.assertArrayEquals(expectedPTiles, board.getTiles());
+        Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
 
 
