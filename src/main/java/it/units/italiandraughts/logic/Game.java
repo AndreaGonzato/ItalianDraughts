@@ -98,10 +98,14 @@ public class Game {
     }
 
     public void undo() {
-        int[] coordinates = log.remove(log.size() - 1);
+        int index = log.size() - 1;
+        if (index < 0) {
+            return;
+        }
+        int[] coordinates = log.remove(index);
         if (coordinates != null) {
             move(coordinates[2], coordinates[3], coordinates[0], coordinates[1]);
-            log.remove(log.size() - 1);
+            log.remove(index);
             drawer.updateBoard(board.getTiles());
             status = Status.IDLE;
         }
