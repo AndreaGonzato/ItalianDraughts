@@ -68,12 +68,12 @@ public class Drawer implements PropertyChangeListener {
     }
 
     public void turnOffHighlightedSquares(){
-        Arrays.stream(squares).flatMap(Arrays::stream).filter(Square::isHighlighted).forEach(t -> t.setHighlight(false));
+        Arrays.stream(squares).flatMap(Arrays::stream).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
     }
 
     private void highlightSquare(Square square) {
         turnOffHighlightedSquares();
-        square.setHighlight(true);
+        square.setHighlighted(true);
     }
 
     public void onClickOnFullSquare(MouseEvent event) {

@@ -26,7 +26,7 @@ public class BoardTest {
         }
 
         Board board = new Board();
-        board.emptyPiecesFromTiles();
+        board.removePiecesFromTiles();
 
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }

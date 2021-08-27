@@ -25,7 +25,7 @@ public class Square extends StackPane {
         return highlighted;
     }
 
-    void setHighlight(boolean value) {
+    void setHighlighted(boolean value) {
         highlighted = value;
         String newColor = value ? HIGHLIGHT_COLOR : this.type.getHex();
         this.setStyle("-fx-background-color: " + newColor + ";");

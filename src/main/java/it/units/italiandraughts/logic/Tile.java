@@ -36,7 +36,6 @@ public class Tile {
         return y;
     }
 
-
     public boolean isEmpty() {
         return piece == null;
     }
@@ -45,7 +44,6 @@ public class Tile {
         this.piece = piece;
     }
 
-
     void removePiece() {
         this.piece = null;
     }
@@ -53,7 +51,6 @@ public class Tile {
     public Piece getPiece() {
         return piece;
     }
-
 
     @Override
     public boolean equals(Object o) {

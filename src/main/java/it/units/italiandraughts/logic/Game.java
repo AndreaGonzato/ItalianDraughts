@@ -3,7 +3,6 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
-import javafx.fxml.FXMLLoader;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -70,8 +69,8 @@ public class Game {
     }
 
     public void reset() {
-        board.emptyPiecesFromTiles();
-        board.placePieceInInitialPosition();
+        board.removePiecesFromTiles();
+        board.initPieces();
         drawer.turnOffHighlightedSquares();
         drawer.unsetClickableForPlayer(player2);
         drawer.setClickableForPlayer(player1);

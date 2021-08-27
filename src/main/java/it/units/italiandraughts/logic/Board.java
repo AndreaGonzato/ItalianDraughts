@@ -18,17 +18,17 @@ public class Board {
                 tiles[row][col] = tile;
             }
         }
-        placePieceInInitialPosition();
+        initPieces();
     }
 
-    public void placePieceInInitialPosition(){
+    public void initPieces(){
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() < 3 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER2)));
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() > 4 && (t.getY() + t.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceType.PLAYER1)));
     }
 
-    public void emptyPiecesFromTiles() {
+    public void removePiecesFromTiles() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 tiles[i][j].removePiece();
