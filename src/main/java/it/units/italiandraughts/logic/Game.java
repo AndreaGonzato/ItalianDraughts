@@ -98,6 +98,12 @@ public class Game {
     }
 
     public void undo() {
-        // TODO implement this
+        int[] coordinates = log.remove(log.size() - 1);
+        if (coordinates != null) {
+            move(coordinates[2], coordinates[3], coordinates[0], coordinates[1]);
+            log.remove(log.size() - 1);
+            drawer.updateBoard(board.getTiles());
+            status = Status.IDLE;
+        }
     }
 }
