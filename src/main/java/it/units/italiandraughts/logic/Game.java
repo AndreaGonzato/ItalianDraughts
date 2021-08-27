@@ -61,7 +61,7 @@ public class Game {
         }
         Tile[][] tiles = getBoard().getTiles();
         Piece piece = tiles[fromY][fromX].getPiece();
-        tiles[fromY][fromX].placePiece(null);
+        tiles[fromY][fromX].removePiece();
         tiles[toY][toX].placePiece(piece);
         if (shouldLog) {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
