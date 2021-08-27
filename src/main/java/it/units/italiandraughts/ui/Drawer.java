@@ -72,13 +72,8 @@ public class Drawer implements PropertyChangeListener {
 
     public void onClickOnFullSquare(MouseEvent event) {
         Square square = (Square) event.getSource();
-        switch (game.getStatus()) {
-            case IDLE -> {
-                setSourceAndHighLight(square);
-                game.setStatus(Status.MOVE_IN_PROGRESS);
-            }
-            case MOVE_IN_PROGRESS -> setSourceAndHighLight(square);
-        }
+        setSourceAndHighLight(square);
+        game.setStatus(Status.MOVE_IN_PROGRESS);
     }
 
     private void setSourceAndHighLight(Square square) {
