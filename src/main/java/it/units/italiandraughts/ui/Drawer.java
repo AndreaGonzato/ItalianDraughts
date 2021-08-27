@@ -102,26 +102,26 @@ public class Drawer implements PropertyChangeListener {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
                         .equals(player.getPieceType()))
-                .forEach(s -> s.setOnMouseClicked(this::onClickOnFullSquare));
+                .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
     private void unsetClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
                         .equals(player.getPieceType()))
-                .forEach(s -> s.setOnMouseClicked(null));
+                .forEach(square -> square.setOnMouseClicked(null));
     }
 
     private void setClickableForEmptySquares() {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> square.getTile().isEmpty())
-                .forEach(s -> s.setOnMouseClicked(this::onClickOnEmptySquare));
+                .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
     }
 
     public void updateBoard(Tile[][] board) {
-        Arrays.stream(squares).flatMap(Arrays::stream).forEach(t -> t.getChildren().clear());
-        Arrays.stream(board).flatMap(Arrays::stream).filter(t -> !t.isEmpty())
-                .forEach(t -> drawPiece(squares[t.getY()][t.getX()], t.getPiece()));
+        Arrays.stream(squares).flatMap(Arrays::stream).forEach(tile -> tile.getChildren().clear());
+        Arrays.stream(board).flatMap(Arrays::stream).filter(tile -> !tile.isEmpty())
+                .forEach(tile -> drawPiece(squares[tile.getY()][tile.getX()], tile.getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
         drawKingOnEmptySquare(squares[4][4]); // TODO remove this
     }
