@@ -13,7 +13,6 @@ public class Square extends StackPane {
     public Square(Tile tile, SquareType type) {
         this.tile = tile;
         this.type = type;
-        this.highlighted = false;
         this.setStyle("-fx-background-color: " + type.getHex() + ";");
         tile.setSquare(this);
     }
