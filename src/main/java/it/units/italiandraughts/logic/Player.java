@@ -7,13 +7,11 @@ import java.util.Objects;
 public class Player {
 
     private String name;
-    private int score;
     private final PieceType pieceType;
 
     public Player(String name, PieceType pieceType){
         this.pieceType = pieceType;
         this.name = name;
-        score = 0;
     }
 
     public PieceType getPieceType() {

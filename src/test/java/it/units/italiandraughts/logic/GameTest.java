@@ -15,4 +15,11 @@ public class GameTest {
         Assertions.assertEquals(PieceType.PLAYER1, actualActivePlayer.getPieceType());
     }
 
+    @Test
+    void move(){
+        Game game = new Game(new Board(), new Player("", PieceType.PLAYER1), new Player("", PieceType.PLAYER2));
+    }
+
+
+
 }
