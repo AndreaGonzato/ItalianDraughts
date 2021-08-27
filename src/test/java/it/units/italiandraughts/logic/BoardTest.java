@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     @Test
-    void initialization() {
+    void placePieceInInitialPosition() {
         Tile[][] expectedTiles = setUpBoard();
 
         Board board = new Board();
