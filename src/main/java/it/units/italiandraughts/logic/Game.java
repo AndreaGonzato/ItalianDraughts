@@ -1,5 +1,6 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 
@@ -61,7 +62,7 @@ public class Game {
         log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
     }
 
-    public void reset(){
+    public void reset() {
         board.emptyPiecesFromTiles();
         board.placePieceInInitialPosition();
         drawer.turnOffHighlightedSquares();
@@ -98,16 +99,13 @@ public class Game {
     }
 
     public void undo() {
-        int index = log.size() - 1;
-        if (index < 0) {
-            return;
+        if (log.size() - 1 < 0) {
+            throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
-        int[] coordinates = log.remove(index);
-        if (coordinates != null) {
-            move(coordinates[2], coordinates[3], coordinates[0], coordinates[1]);
-            log.remove(index);
-            drawer.updateBoard(board.getTiles());
-            status = Status.IDLE;
-        }
+        int[] coordinates = log.remove(log.size() - 1);
+        move(coordinates[2], coordinates[3], coordinates[0], coordinates[1]);
+        log.remove(log.size() - 1);
+        drawer.updateBoard(board.getTiles());
+        status = Status.IDLE;
     }
 }
