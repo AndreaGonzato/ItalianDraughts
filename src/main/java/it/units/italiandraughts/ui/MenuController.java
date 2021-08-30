@@ -29,11 +29,7 @@ public class MenuController {
         stage.setScene(scene);
         stage.setTitle("ItalianDraughts");
         stage.getIcons().add(new Image(Objects.requireNonNull(ItalianDraughts.class.getResourceAsStream("ui/img/icon.png"))));
-        stage.sizeToScene();
-        stage.setMinHeight(stage.getHeight());
-        stage.setMinWidth(stage.getWidth());
-        stage.setResizable(false);
-        stage.centerOnScreen();
+        ItalianDraughts.setupStage(stage);
         stage.show();
         oldStage.close();
     }

@@ -23,10 +23,16 @@ public class ItalianDraughts extends Application {
         stage.setTitle("ItalianDraughts");
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("ui/img/icon.png"))));
         stage.setScene(scene);
-        stage.sizeToScene();
-        stage.centerOnScreen();
-        stage.setResizable(false);
+        setupStage(stage);
         stage.show();
+    }
+
+    public static void setupStage(Stage stage) {
+        stage.sizeToScene();
+        stage.setMinHeight(stage.getHeight());
+        stage.setMinWidth(stage.getWidth());
+        stage.setResizable(false);
+        stage.centerOnScreen();
     }
 
     public static void main(String[] args) {
