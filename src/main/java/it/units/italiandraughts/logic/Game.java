@@ -5,12 +5,15 @@ import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 
 import it.units.italiandraughts.ui.SquareType;
+import org.jgrapht.Graph;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -122,18 +125,23 @@ public class Game {
     }
 
     public void generateGraph() {
-        DefaultDirectedGraph<Tile, DefaultEdge> directedGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
-
+        SimpleDirectedWeightedGraph<Tile, DefaultWeightedEdge> graph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
         for (int i = 0; i < Board.SIZE; i++) {
             for (int j = 0; j < Board.SIZE; j++) {
                 Tile tile = board.getTiles()[i][j];
                 if (tile.getSquare().getType().equals(SquareType.BRONZE)){
-                    directedGraph.addVertex(tile);
+                    graph.addVertex(tile);
                 }
             }
         }
 
-        System.out.println(directedGraph); // TODO just a simple test, remove this line
+        // TODO test how to add an edge
+        DefaultWeightedEdge e1 = graph.addEdge(board.getTiles()[0][0], board.getTiles()[0][2]);
+        graph.setEdgeWeight(e1, 5);
+
+
+
+        System.out.println(graph); // TODO just a simple test, remove this line
 
 
     }
