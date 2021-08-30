@@ -4,8 +4,14 @@ import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 
+import org.jgrapht.*;
+import org.jgrapht.graph.*;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -113,5 +119,22 @@ public class Game {
         move(coordinates[2], coordinates[3], coordinates[0], coordinates[1], false);
         drawer.updateBoard(board.getTiles());
         status = Status.IDLE;
+    }
+
+    public void generateGraph() {
+        DefaultDirectedGraph<Tile, DefaultEdge> directedGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
+
+        for (int i = 0; i < Board.SIZE; i++) {
+            for (int j = 0; j < Board.SIZE; j++) {
+                Tile tile = board.getTiles()[i][j];
+                if (!tile.isEmpty()){
+                    directedGraph.addVertex(tile);
+                }
+            }
+        }
+
+        System.out.println(directedGraph); // TODO just a simple test, remove this line
+
+
     }
 }
