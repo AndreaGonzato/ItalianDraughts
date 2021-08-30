@@ -20,7 +20,7 @@ public class PieceDrawer {
         baseEllipse.setTranslateY(tileSize * 0.07);
 
         Ellipse upperEllipse = createEllipse(tileSize);
-        upperEllipse.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
+        upperEllipse.setFill(Color.valueOf(piece.getPieceColor().getHexColor()));
 
         square.getChildren().addAll(baseEllipse, upperEllipse);
     }
@@ -38,7 +38,7 @@ public class PieceDrawer {
         middleEllipse.setFill(Color.valueOf("#c6c6c6"));
         Ellipse upperEllipse2 = createEllipse(tileSize);
         upperEllipse2.setTranslateY(tileSize * -0.1);
-        upperEllipse2.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
+        upperEllipse2.setFill(Color.valueOf(piece.getPieceColor().getHexColor()));
 
         square.getChildren().addAll(baseEllipse, middleEllipse, upperEllipse, upperEllipse2);
     }
