@@ -28,9 +28,7 @@ public class Player {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Player)) return false;
-
-        Player player = (Player) o;
+        if (!(o instanceof Player player)) return false;
 
         if (!Objects.equals(name, player.name)) return false;
         return pieceColor == player.pieceColor;
