@@ -8,6 +8,7 @@ public class Piece {
 
     public Piece(PieceColor pieceColor) {
         this.pieceColor = pieceColor;
+        this.pieceType = PieceType.MAN;
     }
 
     public Piece(PieceColor pieceColor, PieceType pieceType) {
