@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.input.MouseEvent;
 
 import java.beans.PropertyChangeEvent;
@@ -20,10 +19,12 @@ public class Drawer implements PropertyChangeListener {
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final GridPane gridPane;
     private final Game game;
+    private final PieceDrawer pieceDrawer;
 
     public Drawer(GridPane gridPane, Game game) {
         this.gridPane = gridPane;
         this.game = game;
+        pieceDrawer = new PieceDrawer(gridPane);
         game.setDrawer(this);
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
@@ -124,27 +125,9 @@ public class Drawer implements PropertyChangeListener {
     public void updateBoard(Tile[][] board) {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(tile -> tile.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(tile -> !tile.isEmpty())
-                .forEach(tile -> drawPiece(squares[tile.getY()][tile.getX()], tile.getPiece()));
+                .forEach(tile -> pieceDrawer.drawPieceOnSquare(squares[tile.getY()][tile.getX()], tile.getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
-        drawKingOnEmptySquare(squares[4][4]); // TODO remove this
-    }
-
-    private void drawKingOnEmptySquare(Square square) {
-        double tileSize = gridPane.getMaxHeight() / 8;
-        Ellipse baseEllipse = createEllipse(tileSize);
-        baseEllipse.setFill(Color.BLACK);
-        baseEllipse.setTranslateY(tileSize * 0.06);
-        Piece piece = new Piece(PieceColor.PLAYER1);
-
-        Ellipse upperEllipse = createEllipse(tileSize);
-        upperEllipse.setTranslateY(tileSize * -0.06);
-        Ellipse middleEllipse = createEllipse(tileSize);
-        middleEllipse.setFill(Color.valueOf("#c6c6c6"));
-        Ellipse upperEllipse2 = createEllipse(tileSize);
-        upperEllipse2.setTranslateY(tileSize * -0.1);
-        upperEllipse2.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
-
-        square.getChildren().addAll(baseEllipse, middleEllipse, upperEllipse, upperEllipse2);
+        pieceDrawer.drawKingOnEmptySquare(squares[4][4]); // TODO remove this
     }
 
     private void drawGreenCircleOnEmptySquare(Square square) {
@@ -157,23 +140,6 @@ public class Drawer implements PropertyChangeListener {
         square.getChildren().add(circle);
     }
 
-    private void drawPiece(Square square, Piece piece) {
-        double tileSize = gridPane.getMaxHeight() / 8;
-        Ellipse baseEllipse = createEllipse(tileSize);
-        baseEllipse.setFill(Color.BLACK);
-        baseEllipse.setTranslateY(tileSize * 0.07);
 
-        Ellipse upperEllipse = createEllipse(tileSize);
-        upperEllipse.setFill(Color.valueOf(piece.getPieceType().getHexColor()));
-
-        square.getChildren().addAll(baseEllipse, upperEllipse);
-    }
-
-    private Ellipse createEllipse(double tileSize) {
-        Ellipse ellipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
-        ellipse.setStroke(Color.BLACK);
-        ellipse.setStrokeWidth(tileSize * 0.03);
-        return ellipse;
-    }
 
 }
