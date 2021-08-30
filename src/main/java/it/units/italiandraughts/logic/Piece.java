@@ -4,13 +4,27 @@ import it.units.italiandraughts.ui.PieceColor;
 
 public class Piece {
     private final PieceColor pieceColor;
+    private PieceType pieceType;
 
     public Piece(PieceColor pieceColor) {
         this.pieceColor = pieceColor;
     }
 
-    public PieceColor getPieceType() {
+    public Piece(PieceColor pieceColor, PieceType pieceType) {
+        this.pieceColor = pieceColor;
+        this.pieceType = pieceType;
+    }
+
+    public PieceColor getPieceColor() {
         return pieceColor;
+    }
+
+    public PieceType getPieceType() {
+        return pieceType;
+    }
+
+    public void setPieceType(PieceType pieceType) {
+        this.pieceType = pieceType;
     }
 
     @Override
