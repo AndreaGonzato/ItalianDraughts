@@ -31,9 +31,7 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Board{ board=\n");
-        for (int i = 0; i < SIZE; i++) {
-            result.append(Arrays.toString(tiles[i])).append("\n");
-        }
+        Arrays.stream(tiles).forEachOrdered(result::append);
         result.append(" }");
         return result.toString();
     }
