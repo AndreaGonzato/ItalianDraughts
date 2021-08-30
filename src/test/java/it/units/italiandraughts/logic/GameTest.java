@@ -12,7 +12,7 @@ public class GameTest {
 
         Player actualActivePlayer = game.getActivePlayer();
 
-        Assertions.assertEquals(PieceColor.PLAYER1, actualActivePlayer.getPieceType());
+        Assertions.assertEquals(PieceColor.PLAYER1, actualActivePlayer.getPieceColor());
     }
 
     @Test

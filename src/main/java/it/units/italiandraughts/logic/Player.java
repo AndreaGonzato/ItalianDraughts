@@ -7,15 +7,15 @@ import java.util.Objects;
 public class Player {
 
     private String name;
-    private final PieceColor pieceType;
+    private final PieceColor pieceColor;
 
-    public Player(String name, PieceColor pieceType){
-        this.pieceType = pieceType;
+    public Player(String name, PieceColor pieceColor){
+        this.pieceColor = pieceColor;
         this.name = name;
     }
 
-    public PieceColor getPieceType() {
-        return pieceType;
+    public PieceColor getPieceColor() {
+        return pieceColor;
     }
 
     @Override
@@ -33,13 +33,13 @@ public class Player {
         Player player = (Player) o;
 
         if (!Objects.equals(name, player.name)) return false;
-        return pieceType == player.pieceType;
+        return pieceColor == player.pieceColor;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + pieceType.hashCode();
+        result = 31 * result + pieceColor.hashCode();
         return result;
     }
 }
