@@ -104,14 +104,14 @@ public class Drawer implements PropertyChangeListener {
 
     public void setClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
+                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceColor()
                         .equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
     public void unsetClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceType()
+                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceColor()
                         .equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(null));
     }
@@ -139,7 +139,5 @@ public class Drawer implements PropertyChangeListener {
         circle.setFill(Color.rgb(131, 235, 159, 0.6));
         square.getChildren().add(circle);
     }
-
-
 
 }
