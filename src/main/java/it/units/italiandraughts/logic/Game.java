@@ -28,10 +28,14 @@ public class Game {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
-        activePlayer = player1;
-        status = Status.IDLE;
+        setInitialConditions();
         support = new PropertyChangeSupport(this);
         log = new ArrayList<>();
+    }
+
+    private void setInitialConditions() {
+        activePlayer = player1;
+        status = Status.IDLE;
     }
 
     public Player getPlayer1() {
@@ -77,8 +81,7 @@ public class Game {
     public void reset() {
         board = new Board();
         log.clear();
-        activePlayer = player1;
-        status = Status.IDLE;
+        setInitialConditions();
         support.removePropertyChangeListener(drawer);
         drawer = drawer.reset();
         addPropertyChangeListener(drawer);
