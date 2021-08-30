@@ -32,12 +32,12 @@ public class Piece {
         if (this == o) return true;
         if (!(o instanceof Piece piece)) return false;
 
-        return pieceColor == piece.pieceColor;
+        return pieceColor == piece.pieceColor && pieceType == piece.pieceType;
     }
 
     @Override
     public String toString() {
-        return pieceColor.toString();
+        return pieceColor + ", " + pieceType;
     }
 
     @Override
