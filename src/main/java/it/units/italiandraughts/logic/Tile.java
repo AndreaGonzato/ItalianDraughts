@@ -58,9 +58,8 @@ public class Tile {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Tile tile)) return false;
+        if (x != tile.x || y != tile.y) return false;
 
-        if (x != tile.x) return false;
-        if (y != tile.y) return false;
         return Objects.equals(piece, tile.piece);
     }
 
