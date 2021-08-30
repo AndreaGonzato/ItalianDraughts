@@ -7,8 +7,7 @@ public class Piece {
     private PieceType pieceType;
 
     public Piece(PieceColor pieceColor) {
-        this.pieceColor = pieceColor;
-        this.pieceType = PieceType.MAN;
+        this(pieceColor, PieceType.MAN);
     }
 
     public Piece(PieceColor pieceColor, PieceType pieceType) {
