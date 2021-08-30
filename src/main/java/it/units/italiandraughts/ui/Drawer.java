@@ -35,18 +35,14 @@ public class Drawer implements PropertyChangeListener {
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
-        for (int row = 0; row < Board.SIZE; row++) {
-            for (int col = 0; col < Board.SIZE; col++) {
-                Square square;
-                if ((row + col) % 2 == 0) {
-                    square = new Square(game.getBoard().getTiles()[row][col], SquareType.BRONZE);
-                } else {
-                    square = new Square(game.getBoard().getTiles()[row][col], SquareType.WHITE_SMOKE);
-                }
-                this.squares[row][col] = square;
-                gridPane.add(square, col, row);
-            }
-        }
+        Arrays.stream(game.getBoard().getTiles()).flatMap(Arrays::stream)
+                .forEach(tile -> {
+                    Square square = new Square(tile,
+                            ((tile.getX() + tile.getY()) % 2 == 0) ?
+                            SquareType.BRONZE : SquareType.WHITE_SMOKE);
+                    squares[tile.getY()][tile.getX()] = square;
+                    gridPane.add(square, tile.getX(), tile.getY());
+                });
 
         setClickableForPlayer(game.getPlayer1());
         setClickableForEmptySquares();
