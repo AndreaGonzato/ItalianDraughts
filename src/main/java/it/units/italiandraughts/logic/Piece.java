@@ -1,15 +1,15 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.ui.PieceType;
+import it.units.italiandraughts.ui.PieceColor;
 
 public class Piece {
-    private final PieceType pieceType;
+    private final PieceColor pieceType;
 
-    public Piece(PieceType pieceType) {
+    public Piece(PieceColor pieceType) {
         this.pieceType = pieceType;
     }
 
-    public PieceType getPieceType() {
+    public PieceColor getPieceType() {
         return pieceType;
     }
 

@@ -1,20 +1,20 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.ui.PieceType;
+import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.Objects;
 
 public class Player {
 
     private String name;
-    private final PieceType pieceType;
+    private final PieceColor pieceType;
 
-    public Player(String name, PieceType pieceType){
+    public Player(String name, PieceColor pieceType){
         this.pieceType = pieceType;
         this.name = name;
     }
 
-    public PieceType getPieceType() {
+    public PieceColor getPieceType() {
         return pieceType;
     }
 

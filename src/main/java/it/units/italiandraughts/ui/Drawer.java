@@ -134,7 +134,7 @@ public class Drawer implements PropertyChangeListener {
         Ellipse baseEllipse = createEllipse(tileSize);
         baseEllipse.setFill(Color.BLACK);
         baseEllipse.setTranslateY(tileSize * 0.06);
-        Piece piece = new Piece(PieceType.PLAYER1);
+        Piece piece = new Piece(PieceColor.PLAYER1);
 
         Ellipse upperEllipse = createEllipse(tileSize);
         upperEllipse.setTranslateY(tileSize * -0.06);

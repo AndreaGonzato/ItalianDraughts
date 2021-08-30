@@ -1,11 +1,11 @@
 package it.units.italiandraughts.ui;
 
-public enum PieceType {
+public enum PieceColor {
     PLAYER1("#eeebd9"), PLAYER2("#423c39");
 
     private final String hexColor;
 
-    PieceType(String hexColor) {
+    PieceColor(String hexColor) {
         this.hexColor = hexColor;
     }
 
