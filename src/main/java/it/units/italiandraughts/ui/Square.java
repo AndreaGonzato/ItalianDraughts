@@ -10,10 +10,10 @@ public class Square extends StackPane {
     private static final String HIGHLIGHT_COLOR = "#56db39";
     private boolean highlighted;
 
-    public Square(Tile tile, SquareType type) {
+    public Square(Tile tile, SquareType squareType) {
         this.tile = tile;
-        this.type = type;
-        this.setStyle("-fx-background-color: " + type.getHex() + ";");
+        this.type = squareType;
+        this.setStyle("-fx-background-color: " + squareType.getHex() + ";");
         tile.setSquare(this);
     }
 

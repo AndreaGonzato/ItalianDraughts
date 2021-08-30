@@ -4,14 +4,11 @@ import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 
-import org.jgrapht.*;
+import it.units.italiandraughts.ui.SquareType;
 import org.jgrapht.graph.*;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -127,7 +124,7 @@ public class Game {
         for (int i = 0; i < Board.SIZE; i++) {
             for (int j = 0; j < Board.SIZE; j++) {
                 Tile tile = board.getTiles()[i][j];
-                if (!tile.isEmpty()){
+                if (tile.getSquare().getType().equals(SquareType.BRONZE)){
                     directedGraph.addVertex(tile);
                 }
             }
