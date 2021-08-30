@@ -18,7 +18,7 @@ public class MenuController {
     TextField player1Field, player2Field;
 
     @FXML
-    protected void startGame() throws IOException {
+    private void startGame() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         BoardController boardController = fxmlLoader.getController();

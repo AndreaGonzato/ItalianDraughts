@@ -28,14 +28,6 @@ public class Board {
                 .forEach(t -> t.placePiece(new Piece(PieceColor.PLAYER1)));
     }
 
-    public void removePiecesFromTiles() {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                tiles[i][j].removePiece();
-            }
-        }
-    }
-
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Board{ board=\n");

@@ -16,22 +16,6 @@ public class BoardTest {
     }
 
     @Test
-    void emptyPiecesFromTiles() {
-        Tile[][] expectedTiles = new Tile[8][8];
-
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++) {
-                expectedTiles[i][j] = new Tile(j, i);
-            }
-        }
-
-        Board board = new Board();
-        board.removePiecesFromTiles();
-
-        Assertions.assertArrayEquals(expectedTiles, board.getTiles());
-    }
-
-    @Test
     void moveTopRightPiecePlayer1ToLeft() {
         Tile[][] expectedTiles = setUpBoard();
         expectedTiles[4][6].placePiece(new Piece(PieceColor.PLAYER1));

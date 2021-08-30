@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Game {
-
-    private final Board board;
+    private Board board;
     private final Player player1;
     private final Player player2;
     private Player activePlayer;
@@ -73,15 +72,13 @@ public class Game {
     }
 
     public void reset() {
-        board.removePiecesFromTiles();
-        board.initPieces();
-        drawer.turnOffHighlightedSquares();
-        drawer.unsetClickableForPlayer(player2);
-        drawer.setClickableForPlayer(player1);
-        drawer.setClickableForEmptySquares();
-        status = Status.IDLE;
+        board = new Board();
+        log.clear();
         activePlayer = player1;
-        drawer.updateBoard(board.getTiles());
+        status = Status.IDLE;
+        support.removePropertyChangeListener(drawer);
+        drawer = drawer.reset();
+        addPropertyChangeListener(drawer);
     }
 
     public Tile getActiveTile() {
