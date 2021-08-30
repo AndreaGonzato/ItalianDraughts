@@ -2,6 +2,8 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.Square;
 
+import java.util.Objects;
+
 public class Tile {
 
     private final int x;
@@ -55,13 +57,11 @@ public class Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile)) return false;
-
-        Tile tile = (Tile) o;
+        if (!(o instanceof Tile tile)) return false;
 
         if (x != tile.x) return false;
         if (y != tile.y) return false;
-        return piece != null ? piece.equals(tile.piece) : tile.piece == null;
+        return Objects.equals(piece, tile.piece);
     }
 
     @Override
