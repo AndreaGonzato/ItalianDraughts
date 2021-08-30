@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Player {
 
-    private String name;
+    private final String name;
     private final PieceColor pieceColor;
 
     public Player(String name, PieceColor pieceColor){
