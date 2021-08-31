@@ -3,17 +3,11 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
-
-import it.units.italiandraughts.ui.SquareType;
-import org.jgrapht.graph.*;
-import org.jgrapht.traverse.DepthFirstIterator;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -39,6 +33,7 @@ public class Game {
     private void setInitialConditions() {
         activePlayer = player1;
         status = Status.IDLE;
+        updateMovable();
     }
 
     public Player getPlayer1() {
@@ -79,6 +74,40 @@ public class Game {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
         }
         toggleActivePlayer();
+        updateMovable();
+        generateGraph();
+    }
+
+    private void updateMovable() {
+        Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
+                .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
+                .forEach(tile -> {
+                    int x = tile.getX();
+                    int y = tile.getY();
+                    int direction = activePlayer.equals(player1) ? 1 : -1;
+                    Tile one = null;
+                    Tile two = null;
+                    final int newY = y - direction;
+                    if (isValidCoordinate(newY)) {
+                        if (isValidCoordinate(x - 1)) {
+                            one = board.getTiles()[newY][x - 1];
+                        }
+                        if (isValidCoordinate(x + 1)) {
+                            two = board.getTiles()[newY][x + 1];
+                        }
+                    }
+                    boolean canMoveOnTileOne = canMoveHere(one);
+                    boolean canMoveOnTileTwo = canMoveHere(two);
+                    tile.getPiece().setMovable(canMoveOnTileOne || canMoveOnTileTwo);
+                });
+    }
+
+    private boolean canMoveHere(Tile tile) {
+        return tile != null && tile.isEmpty();
+    }
+
+    private boolean isValidCoordinate(int value) {
+        return value < 8 && value >= 0;
     }
 
     public void reset() {
@@ -135,7 +164,7 @@ public class Game {
         graph.printVertices();
 
 
-        System.out.println(graph.toString()); // TODO just a simple test, remove this line
+        System.out.println(graph); // TODO just a simple test, remove this line
 
 
     }

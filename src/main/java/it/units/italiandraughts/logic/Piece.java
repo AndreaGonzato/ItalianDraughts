@@ -47,7 +47,7 @@ public class Piece {
 
     @Override
     public String toString() {
-        return pieceColor + ", " + pieceType;
+        return pieceColor + ", " + pieceType + ", movable: " + movable;
     }
 
     @Override

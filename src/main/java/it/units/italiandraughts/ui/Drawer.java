@@ -67,7 +67,6 @@ public class Drawer implements PropertyChangeListener {
             setClickableForEmptySquares();
             BoardController boardController = (BoardController) gridPane.getUserData();
             boardController.getUndoButton().setDisable(game.getLog().size() <= 0);
-            game.generateGraph();
         }
     }
 
@@ -84,6 +83,9 @@ public class Drawer implements PropertyChangeListener {
         Square square = (Square) event.getSource();
         setActiveTileAndHighlightSquare(square);
         game.setStatus(Status.MOVE_IN_PROGRESS);
+
+        // TODO test print
+        System.out.println(square.getTile().getPiece().isMovable());
     }
 
     public void setActiveTileAndHighlightSquare(Square square) {
