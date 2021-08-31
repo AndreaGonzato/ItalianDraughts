@@ -10,7 +10,7 @@ public class Edge extends DefaultWeightedEdge {
 
     @Override
     public String toString() {
-        return Double.toString(getWeight());
+        return "( " + getSource() + " -> " + getWeight() + " -> " + getTarget() + " )";
     }
 
 

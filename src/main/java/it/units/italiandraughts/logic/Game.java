@@ -176,10 +176,8 @@ public class Game {
         graph.addEdge(board.getTiles()[0][0], board.getTiles()[0][2], 5);
 
 
-        graph.printVertices();
-
-
-        System.out.println(graph); // TODO just a simple test, remove this line
+        graph.printVertices(); // TODO remove this line
+        graph.printEdges(); // TODO remove this line
 
 
     }

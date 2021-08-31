@@ -2,9 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.SquareType;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
-import org.jgrapht.traverse.DepthFirstIterator;
 
-import java.util.Iterator;
 import java.util.Set;
 
 public class Graph {
@@ -35,5 +33,10 @@ public class Graph {
     public void printVertices(){
         Set<Tile> tiles = graph.vertexSet();
         tiles.forEach(System.out::println);
+    }
+
+    public void printEdges(){
+        Set<Edge> edges = graph.edgeSet();
+        edges.forEach(System.out::println);
     }
 }
