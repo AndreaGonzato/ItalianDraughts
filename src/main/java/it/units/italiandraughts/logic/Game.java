@@ -6,7 +6,6 @@ import it.units.italiandraughts.ui.Drawer;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -32,7 +31,7 @@ public class Game {
     private void setInitialConditions() {
         activePlayer = player1;
         status = Status.IDLE;
-        updateMovable();
+        updateMovablePieces();
     }
 
     public Player getPlayer1() {
@@ -73,11 +72,11 @@ public class Game {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
         }
         toggleActivePlayer();
-        updateMovable();
+        updateMovablePieces();
         generateGraph();
     }
 
-    private void updateMovable() {
+    private void updateMovablePieces() {
         Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
                 .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
                 .forEach(this::setMovable);
@@ -116,12 +115,12 @@ public class Game {
         return tile.isEmpty();
     }
 
-    private boolean canEat(Tile fromTile, Tile toTile) {
-        if (!toTile.isEmpty() && !toTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
-            int deltaX = toTile.getX() - fromTile.getX();
-            int deltaY = toTile.getY() - fromTile.getY();
-            int newX = toTile.getX() + deltaX;
-            int newY = toTile.getY() + deltaY;
+    private boolean canEat(Tile fromTile, Tile overTile) {
+        if (!overTile.isEmpty() && !overTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
+            int deltaX = overTile.getX() - fromTile.getX();
+            int deltaY = overTile.getY() - fromTile.getY();
+            int newX = overTile.getX() + deltaX;
+            int newY = overTile.getY() + deltaY;
             return isValidTile(newX, newY) && canMove(board.getTiles()[newY][newX]);
         }
         return false;
