@@ -5,10 +5,8 @@ import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -82,10 +80,10 @@ public class Game {
     private void updateMovable() {
         Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
                 .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
-                .forEach(this::checkMovable);
+                .forEach(this::setMovable);
     }
 
-    private void checkMovable(Tile tile) {
+    private void setMovable(Tile tile) {
         boolean movable = getNeighbors(tile).stream()
                 .anyMatch(neighbor -> canMove(neighbor) || canEat(tile, neighbor));
         tile.getPiece().setMovable(movable);
@@ -95,14 +93,22 @@ public class Game {
         List<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
         int y = tile.getY();
-        int direction = activePlayer.equals(player1) ? 1 : -1;
-        final int newY = y - direction;
-        if (isValidTile(x - 1, newY)) {
-            neighbors.add(board.getTiles()[newY][x - 1]);
+        List<Integer> deltas = new ArrayList<>();
+
+        switch (tile.getPiece().getPieceType()) {
+            case MAN -> deltas.add(activePlayer.equals(player1) ? 1 : -1);
+            case KING -> Collections.addAll(deltas, -1, 1);
         }
-        if (isValidTile(x + 1, newY)) {
-            neighbors.add(board.getTiles()[newY][x + 1]);
-        }
+
+        deltas.forEach(delta -> {
+            if (isValidTile(x - 1, y - delta)) {
+                neighbors.add(board.getTiles()[y - delta][x - 1]);
+            }
+            if (isValidTile(x + 1, y - delta)) {
+                neighbors.add(board.getTiles()[y - delta][x + 1]);
+            }
+        });
+
         return neighbors;
     }
 
