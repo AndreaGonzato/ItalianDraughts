@@ -5,6 +5,7 @@ import it.units.italiandraughts.ui.PieceColor;
 public class Piece {
     private final PieceColor pieceColor;
     private PieceType pieceType;
+    private boolean movable;
 
     public Piece(PieceColor pieceColor) {
         this(pieceColor, PieceType.MAN);
@@ -13,6 +14,7 @@ public class Piece {
     public Piece(PieceColor pieceColor, PieceType pieceType) {
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
+        movable = false;
     }
 
     public PieceColor getPieceColor() {
@@ -33,6 +35,14 @@ public class Piece {
         if (!(o instanceof Piece piece)) return false;
 
         return pieceColor == piece.pieceColor && pieceType == piece.pieceType;
+    }
+
+    public boolean isMovable() {
+        return movable;
+    }
+
+    public void setMovable(boolean movable) {
+        this.movable = movable;
     }
 
     @Override
