@@ -5,6 +5,7 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import org.jgrapht.traverse.DepthFirstIterator;
 
 import java.util.Iterator;
+import java.util.Set;
 
 public class Graph {
 
@@ -32,14 +33,7 @@ public class Graph {
     }
 
     public void printVertices(){
-        Tile start = graph
-                .vertexSet().stream().findAny()
-                .get();
-
-        Iterator<Tile> iterator = new DepthFirstIterator<>(graph, start);
-        while (iterator.hasNext()) {
-            Tile tile = iterator.next();
-            System.out.println(tile);
-        }
+        Set<Tile> tiles = graph.vertexSet();
+        tiles.forEach(System.out::println);
     }
 }

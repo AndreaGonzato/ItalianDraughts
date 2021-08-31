@@ -16,7 +16,7 @@ public enum PieceColor {
     @Override
     public String toString() {
         if (this.equals(WHITE)) {
-            return "PLAYER1";
-        } else return "PLAYER2";
+            return "WHITE";
+        } else return "BLACK";
     }
 }
