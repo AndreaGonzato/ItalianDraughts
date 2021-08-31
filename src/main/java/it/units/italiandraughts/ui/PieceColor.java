@@ -1,7 +1,7 @@
 package it.units.italiandraughts.ui;
 
 public enum PieceColor {
-    PLAYER1("#eeebd9"), PLAYER2("#423c39");
+    WHITE("#eeebd9"), BLACK("#423c39");
 
     private final String hexColor;
 
@@ -15,7 +15,7 @@ public enum PieceColor {
 
     @Override
     public String toString() {
-        if (this.equals(PLAYER1)) {
+        if (this.equals(WHITE)) {
             return "PLAYER1";
         } else return "PLAYER2";
     }

@@ -8,16 +8,16 @@ public class GameTest {
 
     @Test
     void firstActivePlayerPieceType(){
-        Game game = new Game(new Board(), new Player("", PieceColor.PLAYER1), new Player("", PieceColor.PLAYER2));
+        Game game = new Game(new Board(), new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
 
         Player actualActivePlayer = game.getActivePlayer();
 
-        Assertions.assertEquals(PieceColor.PLAYER1, actualActivePlayer.getPieceColor());
+        Assertions.assertEquals(PieceColor.WHITE, actualActivePlayer.getPieceColor());
     }
 
     @Test
     void move(){
-        Game game = new Game(new Board(), new Player("", PieceColor.PLAYER1), new Player("", PieceColor.PLAYER2));
+        Game game = new Game(new Board(), new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
     }
 
 
