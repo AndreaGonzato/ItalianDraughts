@@ -8,6 +8,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -81,33 +82,47 @@ public class Game {
     private void updateMovable() {
         Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
                 .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
-                .forEach(tile -> {
-                    int x = tile.getX();
-                    int y = tile.getY();
-                    int direction = activePlayer.equals(player1) ? 1 : -1;
-                    Tile one = null;
-                    Tile two = null;
-                    final int newY = y - direction;
-                    if (isValidCoordinate(newY)) {
-                        if (isValidCoordinate(x - 1)) {
-                            one = board.getTiles()[newY][x - 1];
-                        }
-                        if (isValidCoordinate(x + 1)) {
-                            two = board.getTiles()[newY][x + 1];
-                        }
-                    }
-                    boolean canMoveOnTileOne = canMoveHere(one);
-                    boolean canMoveOnTileTwo = canMoveHere(two);
-                    tile.getPiece().setMovable(canMoveOnTileOne || canMoveOnTileTwo);
-                });
+                .forEach(this::checkMovable);
     }
 
-    private boolean canMoveHere(Tile tile) {
-        return tile != null && tile.isEmpty();
+    private void checkMovable(Tile tile) {
+        boolean movable = getNeighbors(tile).stream()
+                .anyMatch(neighbor -> canMove(neighbor) || canEat(tile, neighbor));
+        tile.getPiece().setMovable(movable);
     }
 
-    private boolean isValidCoordinate(int value) {
-        return value < 8 && value >= 0;
+    private List<Tile> getNeighbors(Tile tile) {
+        List<Tile> neighbors = new ArrayList<>();
+        int x = tile.getX();
+        int y = tile.getY();
+        int direction = activePlayer.equals(player1) ? 1 : -1;
+        final int newY = y - direction;
+        if (isValidTile(x - 1, newY)) {
+            neighbors.add(board.getTiles()[newY][x - 1]);
+        }
+        if (isValidTile(x + 1, newY)) {
+            neighbors.add(board.getTiles()[newY][x + 1]);
+        }
+        return neighbors;
+    }
+
+    private boolean canMove(Tile tile) {
+        return tile.isEmpty();
+    }
+
+    private boolean canEat(Tile fromTile, Tile toTile) {
+        if (!toTile.isEmpty() && !toTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
+            int deltaX = toTile.getX() - fromTile.getX();
+            int deltaY = toTile.getY() - fromTile.getY();
+            int newX = toTile.getX() + deltaX;
+            int newY = toTile.getY() + deltaY;
+            return isValidTile(newX, newY) && canMove(board.getTiles()[newY][newX]);
+        }
+        return false;
+    }
+
+    private boolean isValidTile(int x, int y) {
+        return (x < 8 && x >= 0) && (y < 8 && y >= 0);
     }
 
     public void reset() {
