@@ -18,7 +18,7 @@ public class Graph {
         for (int i = 0; i < Board.SIZE; i++) {
             for (int j = 0; j < Board.SIZE; j++) {
                 Tile tile = board.getTiles()[i][j];
-                if (tile.getSquare().getType().equals(SquareType.BRONZE)){
+                if ((tile.getX() + tile.getY()) % 2 == 0){
                     graph.addVertex(tile);
                 }
             }
