@@ -92,12 +92,12 @@ public class Game {
     }
 
     private void checkNeighborsAndSetMovable(Tile tile) {
-        boolean movable = getNeighbors(tile).stream()
+        boolean movable = getReachableNeighbors(tile).stream()
                 .anyMatch(neighbor -> canMoveOnTile(neighbor) || canEat(tile, neighbor));
         tile.getPiece().setMovable(movable);
     }
 
-    private List<Tile> getNeighbors(Tile tile) {
+    private List<Tile> getReachableNeighbors(Tile tile) {
         List<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
         int y = tile.getY();
@@ -196,7 +196,7 @@ public class Game {
     public Graph generateGraphForTile(Tile source) {
         Graph graph = new Graph(board, source);
         // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
-        getNeighbors(source).stream().filter(this::canMoveOnTile).forEach(tile -> graph.addEdge(source, tile, 1));
+        getReachableNeighbors(source).stream().filter(this::canMoveOnTile).forEach(tile -> graph.addEdge(source, tile, 1));
         return graph;
     }
 }
