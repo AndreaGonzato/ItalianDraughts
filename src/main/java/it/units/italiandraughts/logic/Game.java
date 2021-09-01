@@ -7,6 +7,7 @@ import it.units.italiandraughts.ui.Drawer;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -24,8 +25,8 @@ public class Game {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
-        newTurn();
         support = new PropertyChangeSupport(this);
+        newTurn();
         log = new ArrayList<>();
     }
 
@@ -34,7 +35,11 @@ public class Game {
         setStatus(Status.IDLE);
         toggleActivePlayer();
         updateMovablePieces();
-        generateGraph();
+        List<Graph> graphs = Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
+                .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
+                                && tile.getPiece().isMovable())
+                .map(this::generateGraphForTile).collect(Collectors.toList());
+        graphs.forEach(Graph::explorePossibleMoves);
     }
 
     public Player getPlayer1() {
@@ -174,13 +179,10 @@ public class Game {
         status = Status.IDLE;
     }
 
-    public void generateGraph() {
-
-        Graph graph = new Graph(board);
-
-        // TODO test how to add an edge
-        graph.addEdge(board.getTiles()[0][0], board.getTiles()[0][2], 5);
-
-
+    public Graph generateGraphForTile(Tile source) {
+        Graph graph = new Graph(board, source);
+        // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
+        getNeighbors(source).stream().filter(this::canMove).forEach(tile -> graph.addEdge(source, tile, 1));
+        return graph;
     }
 }
