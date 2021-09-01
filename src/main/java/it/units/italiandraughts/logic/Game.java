@@ -128,7 +128,7 @@ public class Game {
     }
 
     private boolean isValidTile(int x, int y) {
-        return (x < 8 && x >= 0) && (y < 8 && y >= 0);
+        return (x < Board.SIZE && x >= 0) && (y < Board.SIZE && y >= 0);
     }
 
     public void reset() {
