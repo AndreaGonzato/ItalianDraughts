@@ -102,12 +102,12 @@ public class Game {
         int x = tile.getX();
         int y = tile.getY();
 
-        BiPredicate<Integer, Integer> isValidCoordinateOfATileBiPredicate = (targetX, targetY) -> (targetX < Board.SIZE && targetX >= 0) && (targetY < Board.SIZE && targetY >= 0);
+        BiPredicate<Integer, Integer> areValidCoordinatesOfTileBiPredicate = (coordinateTargetX, coordinateTargetY) -> (coordinateTargetX < Board.SIZE && coordinateTargetX >= 0) && (coordinateTargetY < Board.SIZE && coordinateTargetY >= 0);
 
-        Optional<Tile> topLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x-1, y-1)).findAny();
-        Optional<Tile> topRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x+1, y-1)).findAny();
-        Optional<Tile> bottomLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x-1, y+1)).findAny();
-        Optional<Tile> bottomRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x+1, y+1)).findAny();
+        Optional<Tile> topLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x-1, y-1)).findAny();
+        Optional<Tile> topRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x+1, y-1)).findAny();
+        Optional<Tile> bottomLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x-1, y+1)).findAny();
+        Optional<Tile> bottomRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x+1, y+1)).findAny();
 
 
         switch (tile.getPiece().getPieceType()) {
