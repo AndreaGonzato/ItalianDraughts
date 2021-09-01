@@ -46,10 +46,10 @@ public class Graph {
         DijkstraShortestPath<Tile, Edge> dijkstra = new DijkstraShortestPath<>(graph);
         ShortestPathAlgorithm.SingleSourcePaths<Tile, Edge> paths = dijkstra.getPaths(source);
         Supplier<Stream<GraphPath<Tile, Edge>>> supplier = () -> possibleDestinations.stream().map(paths::getPath);
-        Optional<GraphPath<Tile, Edge>> longestPath = supplier.get().min((path1, path2) -> {
+        Optional<GraphPath<Tile, Edge>> optionalLongestPath = supplier.get().min((path1, path2) -> {
             return (int) (path2.getWeight() - path1.getWeight()); // TODO improve this?
         });
-        longestPath.ifPresent(tileEdgeGraphPath -> supplier.get().filter(path -> path.getWeight() == tileEdgeGraphPath.getWeight())
+        optionalLongestPath.ifPresent(longestPath -> supplier.get().filter(path -> path.getWeight() == longestPath.getWeight())
                 // TODO remove these diagnostic prints
                 .forEach(path -> {
                     System.out.println("Allowed move: FROM");
