@@ -100,12 +100,12 @@ public class Game {
             case KING -> Collections.addAll(deltas, -1, 1);
         }
 
-        deltas.forEach(delta -> {
-            if (isValidCoordinateOfATile(x - 1, y - delta)) {
-                neighbors.add(board.getTiles()[y - delta][x - 1]);
+        deltas.forEach(integer -> {
+            if (isValidCoordinateOfATile(x - 1, y - integer)) {
+                neighbors.add(board.getTiles()[y - integer][x - 1]);
             }
-            if (isValidCoordinateOfATile(x + 1, y - delta)) {
-                neighbors.add(board.getTiles()[y - delta][x + 1]);
+            if (isValidCoordinateOfATile(x + 1, y - integer)) {
+                neighbors.add(board.getTiles()[y - integer][x + 1]);
             }
         });
 
