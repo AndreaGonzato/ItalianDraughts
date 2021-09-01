@@ -1,6 +1,5 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.ui.SquareType;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.Set;

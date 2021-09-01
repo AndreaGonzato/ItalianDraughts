@@ -3,6 +3,7 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
@@ -179,10 +180,6 @@ public class Game {
 
         // TODO test how to add an edge
         graph.addEdge(board.getTiles()[0][0], board.getTiles()[0][2], 5);
-
-
-        graph.printVertices(); // TODO remove this line
-        graph.printEdges(); // TODO remove this line
 
 
     }
