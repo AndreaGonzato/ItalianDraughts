@@ -7,7 +7,10 @@ import it.units.italiandraughts.ui.Drawer;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+
 import java.util.stream.Collectors;
+
+import java.util.function.BiPredicate;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -98,21 +101,32 @@ public class Game {
         List<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
         int y = tile.getY();
-        List<Integer> deltas = new ArrayList<>();
+
+        BiPredicate<Integer, Integer> isValidCoordinateOfATileBiPredicate = (targetX, targetY) -> (targetX < Board.SIZE && targetX >= 0) && (targetY < Board.SIZE && targetY >= 0);
+
+        Optional<Tile> topLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x-1, y-1)).findAny();
+        Optional<Tile> topRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x+1, y-1)).findAny();
+        Optional<Tile> bottomLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x-1, y+1)).findAny();
+        Optional<Tile> bottomRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> isValidCoordinateOfATileBiPredicate.test(x+1, y+1)).findAny();
+
 
         switch (tile.getPiece().getPieceType()) {
-            case MAN -> deltas.add(activePlayer.equals(player1) ? 1 : -1);
-            case KING -> Collections.addAll(deltas, -1, 1);
+            case MAN -> {
+                if (activePlayer.equals(player1)) {
+                    topLeftTile.ifPresent(neighbors::add);
+                    topRightTile.ifPresent(neighbors::add);
+                } else {
+                    bottomLeftTile.ifPresent(neighbors::add);
+                    bottomRightTile.ifPresent(neighbors::add);
+                }
+            }
+            case KING -> {
+                topLeftTile.ifPresent(neighbors::add);
+                topRightTile.ifPresent(neighbors::add);
+                bottomLeftTile.ifPresent(neighbors::add);
+                bottomRightTile.ifPresent(neighbors::add);
+            }
         }
-
-        deltas.forEach(integer -> {
-            if (isValidCoordinateOfATile(x - 1, y - integer)) {
-                neighbors.add(board.getTiles()[y - integer][x - 1]);
-            }
-            if (isValidCoordinateOfATile(x + 1, y - integer)) {
-                neighbors.add(board.getTiles()[y - integer][x + 1]);
-            }
-        });
 
         return neighbors;
     }
