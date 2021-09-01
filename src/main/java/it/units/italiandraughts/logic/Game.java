@@ -24,15 +24,17 @@ public class Game {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
-        setInitialConditions();
+        newTurn();
         support = new PropertyChangeSupport(this);
         log = new ArrayList<>();
     }
 
-    private void setInitialConditions() {
-        activePlayer = player1;
-        status = Status.IDLE;
+    private void newTurn() {
+        setActiveTile(null);
+        setStatus(Status.IDLE);
+        toggleActivePlayer();
         updateMovablePieces();
+        generateGraph();
     }
 
     public Player getPlayer1() {
@@ -72,9 +74,7 @@ public class Game {
         if (shouldLog) {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
         }
-        toggleActivePlayer();
-        updateMovablePieces();
-        generateGraph();
+        newTurn();
     }
 
     private void updateMovablePieces() {
@@ -134,7 +134,7 @@ public class Game {
     public void reset() {
         board = new Board();
         log.clear();
-        setInitialConditions();
+        newTurn();
         support.removePropertyChangeListener(drawer);
         drawer = drawer.reset();
         addPropertyChangeListener(drawer);

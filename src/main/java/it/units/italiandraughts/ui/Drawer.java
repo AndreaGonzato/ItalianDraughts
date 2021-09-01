@@ -106,8 +106,6 @@ public class Drawer implements PropertyChangeListener {
                 return;
             }
             updateBoard(game.getBoard().getTiles());
-            game.setActiveTile(null);
-            game.setStatus(Status.IDLE);
         }
     }
 
