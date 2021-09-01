@@ -88,12 +88,12 @@ public class Game {
     private void updateMovablePieces() {
         Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
                 .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
-                .forEach(this::setMovable);
+                .forEach(this::checkNeighborsAndSetMovable);
     }
 
-    private void setMovable(Tile tile) {
+    private void checkNeighborsAndSetMovable(Tile tile) {
         boolean movable = getNeighbors(tile).stream()
-                .anyMatch(neighbor -> canMove(neighbor) || canEat(tile, neighbor));
+                .anyMatch(neighbor -> canMoveOnTile(neighbor) || canEat(tile, neighbor));
         tile.getPiece().setMovable(movable);
     }
 
@@ -131,7 +131,7 @@ public class Game {
         return neighbors;
     }
 
-    private boolean canMove(Tile tile) {
+    private boolean canMoveOnTile(Tile tile) {
         return tile.isEmpty();
     }
 
@@ -141,7 +141,7 @@ public class Game {
             int deltaY = overTile.getY() - fromTile.getY();
             int newX = overTile.getX() + deltaX;
             int newY = overTile.getY() + deltaY;
-            return isValidCoordinateOfATile(newX, newY) && canMove(board.getTiles()[newY][newX]);
+            return isValidCoordinateOfATile(newX, newY) && canMoveOnTile(board.getTiles()[newY][newX]);
         }
         return false;
     }
@@ -196,7 +196,7 @@ public class Game {
     public Graph generateGraphForTile(Tile source) {
         Graph graph = new Graph(board, source);
         // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
-        getNeighbors(source).stream().filter(this::canMove).forEach(tile -> graph.addEdge(source, tile, 1));
+        getNeighbors(source).stream().filter(this::canMoveOnTile).forEach(tile -> graph.addEdge(source, tile, 1));
         return graph;
     }
 }
