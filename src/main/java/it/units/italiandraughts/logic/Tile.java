@@ -44,6 +44,7 @@ public class Tile {
 
     void placePiece(Piece piece) {
         this.piece = piece;
+        piece.setTile(this);
     }
 
     void removePiece() {

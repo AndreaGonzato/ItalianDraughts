@@ -31,6 +31,10 @@ public class Piece {
         return tile;
     }
 
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
     public void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
     }
