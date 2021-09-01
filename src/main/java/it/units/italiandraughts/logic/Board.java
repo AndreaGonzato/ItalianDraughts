@@ -14,18 +14,27 @@ public class Board {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                Tile tile = new Tile(col, row);
+                Tile tile;
+                if ((col + row) % 2 == 0) {
+                    tile = new BlackTile(col, row);
+                } else {
+                    tile = new Tile(col, row);
+                }
                 tiles[row][col] = tile;
             }
         }
         initPieces();
     }
 
-    public void initPieces(){
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
+    public void initPieces() {
+        Arrays.stream(tiles).flatMap(Arrays::stream)
+                .filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
+                .map(BlackTile::asBlackTile)
                 .forEach(tile -> tile.placePiece(new Piece(PieceColor.BLACK, tile)));
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
-                .forEach(tile -> tile.placePiece(new Piece(PieceColor.WHITE, tile )));
+        Arrays.stream(tiles).flatMap(Arrays::stream)
+                .filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
+                .map(BlackTile::asBlackTile)
+                .forEach(tile -> tile.placePiece(new Piece(PieceColor.WHITE, tile)));
     }
 
     @Override

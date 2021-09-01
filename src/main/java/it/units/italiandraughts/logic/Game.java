@@ -39,7 +39,9 @@ public class Game {
         toggleActivePlayer();
         updateMovablePieces();
         List<Graph> graphs = Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
-                .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
+                .filter(tile -> !tile.isEmpty())
+                .map(BlackTile::asBlackTile)
+                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
                                 && tile.getPiece().isMovable())
                 .map(this::generateGraphForTile).collect(Collectors.toList());
         graphs.forEach(Graph::explorePossibleMoves);
@@ -76,9 +78,11 @@ public class Game {
             throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
         }
         Tile[][] tiles = getBoard().getTiles();
-        Piece piece = tiles[fromY][fromX].getPiece();
-        tiles[fromY][fromX].removePiece();
-        tiles[toY][toX].placePiece(piece);
+        BlackTile fromTile = (BlackTile) tiles[fromY][fromX];
+        BlackTile toTile = (BlackTile) tiles[toY][toX];
+        Piece piece = fromTile.getPiece();
+        fromTile.removePiece();
+        toTile.placePiece(piece);
         if (shouldLog) {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
         }
@@ -87,17 +91,19 @@ public class Game {
 
     private void updateMovablePieces() {
         Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
-                .filter(tile -> !tile.isEmpty() && tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
+                .filter(tile -> !tile.isEmpty())
+                .map(BlackTile::asBlackTile)
+                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
                 .forEach(this::checkNeighborsAndSetMovable);
     }
 
-    private void checkNeighborsAndSetMovable(Tile tile) {
-        boolean movable = getReachableNeighbors(tile).stream()
+    private void checkNeighborsAndSetMovable(BlackTile tile) {
+        boolean movable = getReachableNeighbors(tile).stream().map(BlackTile::asBlackTile)
                 .anyMatch(neighbor -> neighbor.isEmpty() || canEat(tile, neighbor));
         tile.getPiece().setMovable(movable);
     }
 
-    private List<Tile> getReachableNeighbors(Tile tile) {
+    private List<Tile> getReachableNeighbors(BlackTile tile) {
         List<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
         int y = tile.getY();
@@ -130,7 +136,7 @@ public class Game {
         return neighbors;
     }
 
-    private boolean canEat(Tile fromTile, Tile overTile) {
+    private boolean canEat(BlackTile fromTile, BlackTile overTile) {
         if (!overTile.isEmpty() && !overTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
             int deltaX = overTile.getX() - fromTile.getX();
             int deltaY = overTile.getY() - fromTile.getY();
@@ -188,7 +194,7 @@ public class Game {
         status = Status.IDLE;
     }
 
-    public Graph generateGraphForTile(Tile source) {
+    public Graph generateGraphForTile(BlackTile source) {
         Graph graph = new Graph(board, source);
         // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
         getReachableNeighbors(source).stream().filter(Tile::isEmpty).forEach(tile -> graph.addEdge(source, tile, 1));

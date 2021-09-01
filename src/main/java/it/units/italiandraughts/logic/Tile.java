@@ -8,18 +8,11 @@ public class Tile {
 
     private final int x;
     private final int y;
-    private Piece piece;
     private Square square;
 
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public Tile(int x, int y, Piece piece) {
-        this.x = x;
-        this.y = y;
-        this.piece = piece;
     }
 
     public void setSquare(Square square) {
@@ -39,36 +32,26 @@ public class Tile {
     }
 
     public boolean isEmpty() {
-        return piece == null;
-    }
-
-    void placePiece(Piece piece) {
-        this.piece = piece;
-        piece.setTile(this);
-    }
-
-    void removePiece() {
-        this.piece = null;
-    }
-
-    public Piece getPiece() {
-        return piece;
+        return true;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile tile)) return false;
-        if (x != tile.x || y != tile.y) return false;
+        if (!(o instanceof Tile)) return false;
 
-        return Objects.equals(piece, tile.piece);
+        Tile tile = (Tile) o;
+
+        if (x != tile.x) return false;
+        if (y != tile.y) return false;
+        return square.equals(tile.square);
     }
 
     @Override
     public int hashCode() {
         int result = x;
         result = 31 * result + y;
-        result = 31 * result + (piece != null ? piece.hashCode() : 0);
+        result = 31 * result + square.hashCode();
         return result;
     }
 
@@ -77,7 +60,6 @@ public class Tile {
         return "Tile{" +
                 "x=" + x +
                 ", y=" + y +
-                ", piece=" + piece +
                 '}';
     }
 }

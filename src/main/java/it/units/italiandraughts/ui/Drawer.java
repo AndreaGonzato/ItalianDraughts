@@ -83,9 +83,6 @@ public class Drawer implements PropertyChangeListener {
         Square square = (Square) event.getSource();
         setActiveTileAndHighlightSquare(square);
         game.setStatus(Status.MOVE_IN_PROGRESS);
-
-        // TODO test print
-        System.out.println(square.getTile().getPiece().isMovable());
     }
 
     public void setActiveTileAndHighlightSquare(Square square) {
@@ -111,14 +108,16 @@ public class Drawer implements PropertyChangeListener {
 
     public void setClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceColor()
+                .filter(square -> !(square.getTile().isEmpty()) &&
+                        BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
                         .equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
     public void unsetClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> !(square.getTile().isEmpty()) && square.getTile().getPiece().getPieceColor()
+                .filter(square -> !(square.getTile().isEmpty()) &&
+                        BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
                         .equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(null));
     }
@@ -132,7 +131,8 @@ public class Drawer implements PropertyChangeListener {
     public void updateBoard(Tile[][] board) {
         Arrays.stream(squares).flatMap(Arrays::stream).forEach(tile -> tile.getChildren().clear());
         Arrays.stream(board).flatMap(Arrays::stream).filter(tile -> !tile.isEmpty())
-                .forEach(tile -> pieceDrawer.drawPieceOnSquare(squares[tile.getY()][tile.getX()], tile.getPiece()));
+                .forEach(tile -> pieceDrawer.drawPieceOnSquare(squares[tile.getY()][tile.getX()],
+                        BlackTile.asBlackTile(tile).getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
         pieceDrawer.drawKingOnEmptySquare(squares[4][4]); // TODO remove this
     }

@@ -6,13 +6,13 @@ public class Piece {
     private final PieceColor pieceColor;
     private PieceType pieceType;
     private boolean movable;
-    private Tile tile;
+    private BlackTile tile;
 
-    public Piece(PieceColor pieceColor, Tile tile) {
+    public Piece(PieceColor pieceColor, BlackTile tile) {
         this(pieceColor, PieceType.MAN, tile);
     }
 
-    public Piece(PieceColor pieceColor, PieceType pieceType, Tile tile) {
+    public Piece(PieceColor pieceColor, PieceType pieceType, BlackTile tile) {
         this.tile = tile;
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
@@ -27,11 +27,11 @@ public class Piece {
         return pieceType;
     }
 
-    public Tile getTile() {
+    public BlackTile getTile() {
         return tile;
     }
 
-    public void setTile(Tile tile) {
+    public void setTile(BlackTile tile) {
         this.tile = tile;
     }
 
