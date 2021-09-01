@@ -101,10 +101,10 @@ public class Game {
         }
 
         deltas.forEach(delta -> {
-            if (isValidTile(x - 1, y - delta)) {
+            if (isValidCoordinateOfATile(x - 1, y - delta)) {
                 neighbors.add(board.getTiles()[y - delta][x - 1]);
             }
-            if (isValidTile(x + 1, y - delta)) {
+            if (isValidCoordinateOfATile(x + 1, y - delta)) {
                 neighbors.add(board.getTiles()[y - delta][x + 1]);
             }
         });
@@ -122,12 +122,12 @@ public class Game {
             int deltaY = overTile.getY() - fromTile.getY();
             int newX = overTile.getX() + deltaX;
             int newY = overTile.getY() + deltaY;
-            return isValidTile(newX, newY) && canMove(board.getTiles()[newY][newX]);
+            return isValidCoordinateOfATile(newX, newY) && canMove(board.getTiles()[newY][newX]);
         }
         return false;
     }
 
-    private boolean isValidTile(int x, int y) {
+    private boolean isValidCoordinateOfATile(int x, int y) {
         return (x < Board.SIZE && x >= 0) && (y < Board.SIZE && y >= 0);
     }
 
