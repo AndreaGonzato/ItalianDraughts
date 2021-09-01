@@ -93,7 +93,7 @@ public class Game {
 
     private void checkNeighborsAndSetMovable(Tile tile) {
         boolean movable = getReachableNeighbors(tile).stream()
-                .anyMatch(neighbor -> canMoveOnTile(neighbor) || canEat(tile, neighbor));
+                .anyMatch(neighbor -> neighbor.isEmpty() || canEat(tile, neighbor));
         tile.getPiece().setMovable(movable);
     }
 
@@ -108,7 +108,6 @@ public class Game {
         Optional<Tile> topRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x+1, y-1)).findAny();
         Optional<Tile> bottomLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x-1, y+1)).findAny();
         Optional<Tile> bottomRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x+1, y+1)).findAny();
-
 
         switch (tile.getPiece().getPieceType()) {
             case MAN -> {
@@ -131,17 +130,13 @@ public class Game {
         return neighbors;
     }
 
-    private boolean canMoveOnTile(Tile tile) {
-        return tile.isEmpty();
-    }
-
     private boolean canEat(Tile fromTile, Tile overTile) {
         if (!overTile.isEmpty() && !overTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
             int deltaX = overTile.getX() - fromTile.getX();
             int deltaY = overTile.getY() - fromTile.getY();
             int newX = overTile.getX() + deltaX;
             int newY = overTile.getY() + deltaY;
-            return isValidCoordinateOfATile(newX, newY) && canMoveOnTile(board.getTiles()[newY][newX]);
+            return isValidCoordinateOfATile(newX, newY) && board.getTiles()[newY][newX].isEmpty();
         }
         return false;
     }
@@ -196,7 +191,7 @@ public class Game {
     public Graph generateGraphForTile(Tile source) {
         Graph graph = new Graph(board, source);
         // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
-        getReachableNeighbors(source).stream().filter(this::canMoveOnTile).forEach(tile -> graph.addEdge(source, tile, 1));
+        getReachableNeighbors(source).stream().filter(Tile::isEmpty).forEach(tile -> graph.addEdge(source, tile, 1));
         return graph;
     }
 }
