@@ -22,9 +22,9 @@ public class Board {
     }
 
     public void initPieces(){
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() < 3 && (t.getY() + t.getX()) % 2 == 0)
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceColor.BLACK)));
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(t -> t.getY() > 4 && (t.getY() + t.getX()) % 2 == 0)
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
                 .forEach(t -> t.placePiece(new Piece(PieceColor.WHITE)));
     }
 

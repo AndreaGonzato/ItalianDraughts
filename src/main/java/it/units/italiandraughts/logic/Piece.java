@@ -6,6 +6,7 @@ public class Piece {
     private final PieceColor pieceColor;
     private PieceType pieceType;
     private boolean movable;
+    private Tile tile;
 
     public Piece(PieceColor pieceColor) {
         this(pieceColor, PieceType.MAN);
@@ -36,6 +37,8 @@ public class Piece {
 
         return pieceColor == piece.pieceColor && pieceType == piece.pieceType;
     }
+
+
 
     public boolean isMovable() {
         return movable;
