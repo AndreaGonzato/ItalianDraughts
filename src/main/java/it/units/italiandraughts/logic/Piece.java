@@ -8,11 +8,12 @@ public class Piece {
     private boolean movable;
     private Tile tile;
 
-    public Piece(PieceColor pieceColor) {
-        this(pieceColor, PieceType.MAN);
+    public Piece(PieceColor pieceColor, Tile tile) {
+        this(pieceColor, PieceType.MAN, tile);
     }
 
-    public Piece(PieceColor pieceColor, PieceType pieceType) {
+    public Piece(PieceColor pieceColor, PieceType pieceType, Tile tile) {
+        this.tile = tile;
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
         movable = false;
@@ -24,6 +25,10 @@ public class Piece {
 
     public PieceType getPieceType() {
         return pieceType;
+    }
+
+    public Tile getTile() {
+        return tile;
     }
 
     public void setPieceType(PieceType pieceType) {

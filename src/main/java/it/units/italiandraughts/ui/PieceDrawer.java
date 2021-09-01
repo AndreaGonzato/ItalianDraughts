@@ -30,7 +30,7 @@ public class PieceDrawer {
         Ellipse baseEllipse = createEllipse(tileSize);
         baseEllipse.setFill(Color.BLACK);
         baseEllipse.setTranslateY(tileSize * 0.06);
-        Piece piece = new Piece(PieceColor.WHITE);
+        Piece piece = new Piece(PieceColor.WHITE, square.getTile());
 
         Ellipse upperEllipse = createEllipse(tileSize);
         upperEllipse.setTranslateY(tileSize * -0.06);

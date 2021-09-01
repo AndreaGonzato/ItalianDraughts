@@ -23,9 +23,9 @@ public class Board {
 
     public void initPieces(){
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
-                .forEach(t -> t.placePiece(new Piece(PieceColor.BLACK)));
+                .forEach(tile -> tile.placePiece(new Piece(PieceColor.BLACK, tile)));
         Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
-                .forEach(t -> t.placePiece(new Piece(PieceColor.WHITE)));
+                .forEach(tile -> tile.placePiece(new Piece(PieceColor.WHITE, tile )));
     }
 
     @Override

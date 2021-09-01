@@ -18,7 +18,7 @@ public class BoardTest {
     @Test
     void moveTopRightPiecePlayer1ToLeft() {
         Tile[][] expectedTiles = setUpBoard();
-        expectedTiles[4][6].placePiece(new Piece(PieceColor.WHITE));
+        placePieceOnTile(expectedTiles[4][6], PieceColor.WHITE);
         expectedTiles[5][7].removePiece();
 
         Board board = new Board();
@@ -39,33 +39,38 @@ public class BoardTest {
             }
         }
 
-        tiles[0][0].placePiece(new Piece(PieceColor.BLACK));
-        tiles[0][2].placePiece(new Piece(PieceColor.BLACK));
-        tiles[0][4].placePiece(new Piece(PieceColor.BLACK));
-        tiles[0][6].placePiece(new Piece(PieceColor.BLACK));
-        tiles[1][1].placePiece(new Piece(PieceColor.BLACK));
-        tiles[1][3].placePiece(new Piece(PieceColor.BLACK));
-        tiles[1][5].placePiece(new Piece(PieceColor.BLACK));
-        tiles[1][7].placePiece(new Piece(PieceColor.BLACK));
-        tiles[2][0].placePiece(new Piece(PieceColor.BLACK));
-        tiles[2][2].placePiece(new Piece(PieceColor.BLACK));
-        tiles[2][4].placePiece(new Piece(PieceColor.BLACK));
-        tiles[2][6].placePiece(new Piece(PieceColor.BLACK));
 
-        tiles[5][1].placePiece(new Piece(PieceColor.WHITE));
-        tiles[5][3].placePiece(new Piece(PieceColor.WHITE));
-        tiles[5][5].placePiece(new Piece(PieceColor.WHITE));
-        tiles[5][7].placePiece(new Piece(PieceColor.WHITE));
-        tiles[6][0].placePiece(new Piece(PieceColor.WHITE));
-        tiles[6][2].placePiece(new Piece(PieceColor.WHITE));
-        tiles[6][4].placePiece(new Piece(PieceColor.WHITE));
-        tiles[6][6].placePiece(new Piece(PieceColor.WHITE));
-        tiles[7][1].placePiece(new Piece(PieceColor.WHITE));
-        tiles[7][3].placePiece(new Piece(PieceColor.WHITE));
-        tiles[7][5].placePiece(new Piece(PieceColor.WHITE));
-        tiles[7][7].placePiece(new Piece(PieceColor.WHITE));
+        placePieceOnTile(tiles[0][0], PieceColor.BLACK);
+        placePieceOnTile(tiles[0][2], PieceColor.BLACK);
+        placePieceOnTile(tiles[0][4], PieceColor.BLACK);
+        placePieceOnTile(tiles[0][6], PieceColor.BLACK);
+        placePieceOnTile(tiles[1][1], PieceColor.BLACK);
+        placePieceOnTile(tiles[1][3], PieceColor.BLACK);
+        placePieceOnTile(tiles[1][5], PieceColor.BLACK);
+        placePieceOnTile(tiles[1][7], PieceColor.BLACK);
+        placePieceOnTile(tiles[2][0], PieceColor.BLACK);
+        placePieceOnTile(tiles[2][2], PieceColor.BLACK);
+        placePieceOnTile(tiles[2][4], PieceColor.BLACK);
+        placePieceOnTile(tiles[2][6], PieceColor.BLACK);
+
+        placePieceOnTile(tiles[5][1], PieceColor.WHITE);
+        placePieceOnTile(tiles[5][3], PieceColor.WHITE);
+        placePieceOnTile(tiles[5][5], PieceColor.WHITE);
+        placePieceOnTile(tiles[5][7], PieceColor.WHITE);
+        placePieceOnTile(tiles[6][0], PieceColor.WHITE);
+        placePieceOnTile(tiles[6][2], PieceColor.WHITE);
+        placePieceOnTile(tiles[6][4], PieceColor.WHITE);
+        placePieceOnTile(tiles[6][6], PieceColor.WHITE);
+        placePieceOnTile(tiles[7][1], PieceColor.WHITE);
+        placePieceOnTile(tiles[7][3], PieceColor.WHITE);
+        placePieceOnTile(tiles[7][5], PieceColor.WHITE);
+        placePieceOnTile(tiles[7][7], PieceColor.WHITE);
 
         return tiles;
+    }
+
+    private void placePieceOnTile(Tile tile, PieceColor pieceColor){
+        tile.placePiece(new Piece(pieceColor, tile));
     }
 
 }
