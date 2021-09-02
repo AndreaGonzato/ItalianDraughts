@@ -23,6 +23,8 @@ public class Board {
                 tiles[row][col] = tile;
             }
         }
+        Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
+                        .forEach(blackTile -> blackTile.addNeighbors(tiles));
         initPieces();
     }
 

@@ -2,13 +2,16 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.Square;
 
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.function.Predicate;
 
 public class Tile {
 
-    private final int x;
-    private final int y;
+    protected final int x;
+    protected final int y;
     private Square square;
+    protected static final Predicate<int[]> areValidCoordinates =
+            coordinates -> Arrays.stream(coordinates).allMatch(coordinate -> coordinate >= 0 && coordinate < Board.SIZE);
 
     public Tile(int x, int y) {
         this.x = x;
@@ -51,7 +54,6 @@ public class Tile {
     public int hashCode() {
         int result = x;
         result = 31 * result + y;
-        result = 31 * result + square.hashCode();
         return result;
     }
 

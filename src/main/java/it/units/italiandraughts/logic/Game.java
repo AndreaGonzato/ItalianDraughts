@@ -3,14 +3,11 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
-
+import it.units.italiandraughts.ui.PieceColor;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
-
 import java.util.stream.Collectors;
-
-import java.util.function.BiPredicate;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -97,58 +94,29 @@ public class Game {
                 .forEach(this::checkNeighborsAndSetMovable);
     }
 
-    private void checkNeighborsAndSetMovable(BlackTile tile) {
-        boolean movable = getReachableNeighbors(tile).stream().map(BlackTile::asBlackTile)
-                .anyMatch(neighbor -> neighbor.isEmpty() || canEat(tile, neighbor));
-        tile.getPiece().setMovable(movable);
-    }
-
-    private List<Tile> getReachableNeighbors(BlackTile tile) {
-        List<Tile> neighbors = new ArrayList<>();
-        int x = tile.getX();
-        int y = tile.getY();
-
-        BiPredicate<Integer, Integer> areValidCoordinatesOfTileBiPredicate = (coordinateTargetX, coordinateTargetY) -> (coordinateTargetX < Board.SIZE && coordinateTargetX >= 0) && (coordinateTargetY < Board.SIZE && coordinateTargetY >= 0);
-
-        Optional<Tile> topLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x-1, y-1)).findAny();
-        Optional<Tile> topRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x+1, y-1)).findAny();
-        Optional<Tile> bottomLeftTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x-1, y+1)).findAny();
-        Optional<Tile> bottomRightTile = Arrays.stream(board.getTiles()).flatMap(Arrays::stream).filter(tiles -> areValidCoordinatesOfTileBiPredicate.test(x+1, y+1)).findAny();
-
-        switch (tile.getPiece().getPieceType()) {
-            case MAN -> {
-                if (activePlayer.equals(player1)) {
-                    topLeftTile.ifPresent(neighbors::add);
-                    topRightTile.ifPresent(neighbors::add);
-                } else {
-                    bottomLeftTile.ifPresent(neighbors::add);
-                    bottomRightTile.ifPresent(neighbors::add);
-                }
-            }
-            case KING -> {
-                topLeftTile.ifPresent(neighbors::add);
-                topRightTile.ifPresent(neighbors::add);
-                bottomLeftTile.ifPresent(neighbors::add);
-                bottomRightTile.ifPresent(neighbors::add);
-            }
+    private void checkNeighborsAndSetMovable(BlackTile blackTile) {
+        boolean movable = false;
+        Piece piece = blackTile.getPiece();
+        String movesTowards = piece.getPieceColor().equals(PieceColor.WHITE) ? "top" : "bottom";
+        switch (piece.getPieceType()) {
+            case MAN -> movable = blackTile.getNeighbors().keySet().stream().filter(key -> key.startsWith(movesTowards))
+                    .anyMatch(key -> blackTile.getNeighbors().get(key).isEmpty() || canEat(blackTile, blackTile.getNeighbors().get(key)));
+            case KING -> movable = blackTile.getNeighbors().values().stream()
+                    .anyMatch(targetTile -> targetTile.isEmpty() || canEat(blackTile, targetTile));
         }
-
-        return neighbors;
+        piece.setMovable(movable);
     }
 
+    // TODO move this to Piece
     private boolean canEat(BlackTile fromTile, BlackTile overTile) {
         if (!overTile.isEmpty() && !overTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
             int deltaX = overTile.getX() - fromTile.getX();
             int deltaY = overTile.getY() - fromTile.getY();
             int newX = overTile.getX() + deltaX;
             int newY = overTile.getY() + deltaY;
-            return isValidCoordinateOfATile(newX, newY) && board.getTiles()[newY][newX].isEmpty();
+            return Tile.areValidCoordinates.test(new int[] {newX, newY}) && board.getTiles()[newY][newX].isEmpty();
         }
         return false;
-    }
-
-    private boolean isValidCoordinateOfATile(int x, int y) {
-        return (x < Board.SIZE && x >= 0) && (y < Board.SIZE && y >= 0);
     }
 
     public void reset() {
@@ -197,7 +165,7 @@ public class Game {
     public Graph generateGraphForTile(BlackTile source) {
         Graph graph = new Graph(board, source);
         // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
-        getReachableNeighbors(source).stream().filter(Tile::isEmpty).forEach(tile -> graph.addEdge(source, tile, 1));
+        source.getNeighbors().values().stream().filter(Tile::isEmpty).forEach(tile -> graph.addEdge(source, tile, 1));
         return graph;
     }
 }
