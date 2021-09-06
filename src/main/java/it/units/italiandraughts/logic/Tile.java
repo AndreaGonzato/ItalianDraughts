@@ -41,9 +41,7 @@ public class Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile)) return false;
-
-        Tile tile = (Tile) o;
+        if (!(o instanceof Tile tile)) return false;
 
         if (x != tile.x) return false;
         if (y != tile.y) return false;
