@@ -100,23 +100,11 @@ public class Game {
         String movesTowards = piece.getPieceColor().equals(PieceColor.WHITE) ? "top" : "bottom";
         switch (piece.getPieceType()) {
             case MAN -> movable = blackTile.getNeighbors().keySet().stream().filter(key -> key.startsWith(movesTowards))
-                    .anyMatch(key -> blackTile.getNeighbors().get(key).isEmpty() || canEat(blackTile, blackTile.getNeighbors().get(key)));
+                    .anyMatch(key -> blackTile.getNeighbors().get(key).isEmpty() || blackTile.getPiece().canEat(blackTile.getNeighbors().get(key).getPiece()));
             case KING -> movable = blackTile.getNeighbors().values().stream()
-                    .anyMatch(targetTile -> targetTile.isEmpty() || canEat(blackTile, targetTile));
+                    .anyMatch(targetTile -> targetTile.isEmpty() || blackTile.getPiece().canEat(targetTile.getPiece()));
         }
         piece.setMovable(movable);
-    }
-
-    // TODO move this to Piece
-    private boolean canEat(BlackTile fromTile, BlackTile overTile) {
-        if (!overTile.isEmpty() && !overTile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())) {
-            int deltaX = overTile.getX() - fromTile.getX();
-            int deltaY = overTile.getY() - fromTile.getY();
-            int newX = overTile.getX() + deltaX;
-            int newY = overTile.getY() + deltaY;
-            return Tile.areValidCoordinates.test(new int[] {newX, newY}) && board.getTiles()[newY][newX].isEmpty();
-        }
-        return false;
     }
 
     public void reset() {
