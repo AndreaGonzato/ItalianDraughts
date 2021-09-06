@@ -70,7 +70,7 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    public void turnOffHighlightedSquares(){
+    private void turnOffHighlightedSquares(){
         Arrays.stream(squares).flatMap(Arrays::stream).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
     }
 
@@ -79,18 +79,18 @@ public class Drawer implements PropertyChangeListener {
         square.setHighlighted(true);
     }
 
-    public void onClickOnFullSquare(MouseEvent event) {
+    private void onClickOnFullSquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         setActiveTileAndHighlightSquare(square);
         game.setStatus(Status.MOVE_IN_PROGRESS);
     }
 
-    public void setActiveTileAndHighlightSquare(Square square) {
+    private void setActiveTileAndHighlightSquare(Square square) {
         game.setActiveTile(square.getTile());
         highlightSquare(square);
     }
 
-    public void onClickOnEmptySquare(MouseEvent event) {
+    private void onClickOnEmptySquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
             try {
@@ -106,7 +106,7 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    public void setClickableForPlayer(Player player) {
+    private void setClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> !(square.getTile().isEmpty()) &&
                         BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
@@ -114,7 +114,7 @@ public class Drawer implements PropertyChangeListener {
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
-    public void unsetClickableForPlayer(Player player) {
+    private void unsetClickableForPlayer(Player player) {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> !(square.getTile().isEmpty()) &&
                         BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
@@ -122,7 +122,7 @@ public class Drawer implements PropertyChangeListener {
                 .forEach(square -> square.setOnMouseClicked(null));
     }
 
-    public void setClickableForEmptySquares() {
+    private void setClickableForEmptySquares() {
         Arrays.stream(squares).flatMap(Arrays::stream)
                 .filter(square -> square.getTile().isEmpty())
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
