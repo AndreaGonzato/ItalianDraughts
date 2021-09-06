@@ -69,8 +69,6 @@ public class Piece {
         return pieceColor == piece.pieceColor && pieceType == piece.pieceType;
     }
 
-
-
     public boolean isMovable() {
         return movable;
     }

@@ -10,6 +10,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static it.units.italiandraughts.ItalianDraughts.matrixToStream;
+
 public class Game {
     private Board board;
     private final Player player1;
@@ -35,7 +37,7 @@ public class Game {
         setStatus(Status.IDLE);
         toggleActivePlayer();
         updateMovablePieces();
-        List<Graph> graphs = Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
+        List<Graph> graphs = matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
@@ -87,7 +89,7 @@ public class Game {
     }
 
     private void updateMovablePieces() {
-        Arrays.stream(board.getTiles()).flatMap(Arrays::stream)
+        matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))

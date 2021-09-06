@@ -5,6 +5,8 @@ import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.Arrays;
 
+import static it.units.italiandraughts.ItalianDraughts.matrixToStream;
+
 public class Board {
     private final Tile[][] tiles;
     public static final int SIZE = 8;
@@ -23,18 +25,16 @@ public class Board {
                 tiles[row][col] = tile;
             }
         }
-        Arrays.stream(tiles).flatMap(Arrays::stream).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
-                        .forEach(blackTile -> blackTile.addNeighbors(tiles));
+        matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
+                .forEach(blackTile -> blackTile.addNeighbors(tiles));
         initPieces();
     }
 
     public void initPieces() {
-        Arrays.stream(tiles).flatMap(Arrays::stream)
-                .filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
+        matrixToStream(tiles).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
                 .map(BlackTile::asBlackTile)
                 .forEach(tile -> tile.placePiece(new Piece(PieceColor.BLACK, tile)));
-        Arrays.stream(tiles).flatMap(Arrays::stream)
-                .filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
+        matrixToStream(tiles).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
                 .map(BlackTile::asBlackTile)
                 .forEach(tile -> tile.placePiece(new Piece(PieceColor.WHITE, tile)));
     }

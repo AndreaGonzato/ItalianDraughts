@@ -14,6 +14,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 
+import static it.units.italiandraughts.ItalianDraughts.matrixToStream;
+
 public class Drawer implements PropertyChangeListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
@@ -36,14 +38,13 @@ public class Drawer implements PropertyChangeListener {
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
-        Arrays.stream(game.getBoard().getTiles()).flatMap(Arrays::stream)
-                .forEach(tile -> {
-                    Square square = new Square(tile,
-                            ((tile.getX() + tile.getY()) % 2 == 0) ?
+        matrixToStream(game.getBoard().getTiles()).forEach(tile -> {
+            Square square = new Square(tile,
+                    ((tile.getX() + tile.getY()) % 2 == 0) ?
                             SquareType.BRONZE : SquareType.WHITE_SMOKE);
-                    squares[tile.getY()][tile.getX()] = square;
-                    gridPane.add(square, tile.getX(), tile.getY());
-                });
+            squares[tile.getY()][tile.getX()] = square;
+            gridPane.add(square, tile.getX(), tile.getY());
+        });
 
         setClickableForPlayer(game.getPlayer1());
         setClickableForEmptySquares();
@@ -70,8 +71,8 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    private void turnOffHighlightedSquares(){
-        Arrays.stream(squares).flatMap(Arrays::stream).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
+    private void turnOffHighlightedSquares() {
+        matrixToStream(squares).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
     }
 
     private void highlightSquare(Square square) {
@@ -107,30 +108,27 @@ public class Drawer implements PropertyChangeListener {
     }
 
     private void setClickableForPlayer(Player player) {
-        Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> !(square.getTile().isEmpty()) &&
+        matrixToStream(squares).filter(square -> !(square.getTile().isEmpty()) &&
                         BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
-                        .equals(player.getPieceColor()))
+                                .equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
     private void unsetClickableForPlayer(Player player) {
-        Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> !(square.getTile().isEmpty()) &&
+        matrixToStream(squares).filter(square -> !(square.getTile().isEmpty()) &&
                         BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
-                        .equals(player.getPieceColor()))
+                                .equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(null));
     }
 
     private void setClickableForEmptySquares() {
-        Arrays.stream(squares).flatMap(Arrays::stream)
-                .filter(square -> square.getTile().isEmpty())
+        matrixToStream(squares).filter(square -> square.getTile().isEmpty())
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
     }
 
     public void updateBoard(Tile[][] board) {
-        Arrays.stream(squares).flatMap(Arrays::stream).forEach(tile -> tile.getChildren().clear());
-        Arrays.stream(board).flatMap(Arrays::stream).filter(tile -> !tile.isEmpty())
+        matrixToStream(squares).forEach(tile -> tile.getChildren().clear());
+        matrixToStream(board).filter(tile -> !tile.isEmpty())
                 .forEach(tile -> pieceDrawer.drawPieceOnSquare(squares[tile.getY()][tile.getX()],
                         BlackTile.asBlackTile(tile).getPiece()));
         drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
