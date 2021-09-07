@@ -14,7 +14,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 
-import static it.units.italiandraughts.ItalianDraughts.matrixToStream;
+import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Drawer implements PropertyChangeListener {
 

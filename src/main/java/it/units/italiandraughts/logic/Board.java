@@ -4,8 +4,9 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
-import static it.units.italiandraughts.ItalianDraughts.matrixToStream;
+import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Board {
     private final Tile[][] tiles;

@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static it.units.italiandraughts.ItalianDraughts.matrixToStream;
+import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Game {
     private Board board;

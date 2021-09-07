@@ -9,18 +9,13 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class ItalianDraughts extends Application {
 
     private static final double screenWidth = Screen.getPrimary().getBounds().getWidth();
     private static final double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
-    public static <T> Stream<T> matrixToStream(T[][] matrix) {
-        return Arrays.stream(matrix).flatMap(Arrays::stream);
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
