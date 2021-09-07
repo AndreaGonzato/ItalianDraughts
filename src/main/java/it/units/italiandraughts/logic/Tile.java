@@ -2,7 +2,8 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.Square;
 
-import java.util.Arrays;
+
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class Tile {
@@ -10,8 +11,14 @@ public class Tile {
     protected final int x;
     protected final int y;
     private Square square;
-    protected static final Predicate<int[]> areValidCoordinates =
-            coordinates -> Arrays.stream(coordinates).allMatch(coordinate -> coordinate >= 0 && coordinate < Board.SIZE);
+
+    private static final Predicate<Integer> isValidCoordinateOfTile =
+            coordinate -> (coordinate >= 0 && coordinate < Board.SIZE);
+
+    protected static final BiPredicate<Integer, Integer> areValidCoordinatesOfTileBiPredicate =
+            (coordinateX, coordinateY) -> isValidCoordinateOfTile.test(coordinateX) &&
+                    isValidCoordinateOfTile.test(coordinateY);
+    
 
     public Tile(int x, int y) {
         this.x = x;

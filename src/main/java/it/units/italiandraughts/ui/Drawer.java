@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
