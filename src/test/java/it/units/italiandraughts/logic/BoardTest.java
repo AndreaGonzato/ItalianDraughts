@@ -17,22 +17,22 @@ public class BoardTest {
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
 
-    /*
+
     @Test
     void moveTopRightPiecePlayer1ToLeft() {
         Tile[][] expectedTiles = setUpBoard();
-        placePieceOnTile(expectedTiles[4][6], PieceColor.WHITE);
-        expectedTiles[5][7].removePiece();
+        placePieceOnTile(BlackTile.asBlackTile(expectedTiles[4][6]), PieceColor.WHITE);
+        BlackTile.asBlackTile(expectedTiles[5][7]).removePiece();
 
         Board board = new Board();
-        Game game = new Game(board, new Player("1", PieceColor.WHITE),
-                new Player("2", PieceColor.BLACK));
+        Game game = new Game(board, new Player("Player1", PieceColor.WHITE),
+                new Player("Player2", PieceColor.BLACK));
         game.move(7, 5, 6, 4, false);
 
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
 
-    */
+
 
     private Tile[][] setUpBoard() {
         Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
