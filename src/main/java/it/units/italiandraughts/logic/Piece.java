@@ -30,7 +30,7 @@ public class Piece {
         return pieceType;
     }
 
-    public boolean canEat(Piece otherPiece) {
+    public boolean canEatNeighbor(Piece otherPiece) {
         if (otherPiece.getPieceColor().equals(this.getPieceColor())) {
             return false;
         }
