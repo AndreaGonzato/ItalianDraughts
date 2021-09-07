@@ -37,19 +37,7 @@ public class BoardTest {
     private Tile[][] setUpBoard() {
         Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
 
-        // create all the tiles
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++) {
-                Tile tile;
-                if ((j + i) % 2 == 0) {
-                    tile = new BlackTile(j, i);
-                } else {
-                    tile = new Tile(j, i);
-                }
-                tiles[i][j] = tile;
-            }
-        }
-
+        initTiles(tiles);
 
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][0]), PieceColor.BLACK);
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][2]), PieceColor.BLACK);
@@ -78,6 +66,89 @@ public class BoardTest {
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][7]), PieceColor.WHITE);
 
         return tiles;
+    }
+
+    private void initTiles(Tile[][] tiles){
+        // create all the tiles
+        initTail(tiles, 0, 0, true);
+        initTail(tiles, 1, 0, false);
+        initTail(tiles, 2, 0, true);
+        initTail(tiles, 3, 0, false);
+        initTail(tiles, 4, 0, true);
+        initTail(tiles, 5, 0, false);
+        initTail(tiles, 6, 0, true);
+        initTail(tiles, 7, 0, false);
+
+        initTail(tiles, 0, 1, false);
+        initTail(tiles, 1, 1, true);
+        initTail(tiles, 2, 1, false);
+        initTail(tiles, 3, 1, true);
+        initTail(tiles, 4, 1, false);
+        initTail(tiles, 5, 1, true);
+        initTail(tiles, 6, 1, false);
+        initTail(tiles, 7, 1, true);
+
+        initTail(tiles, 0, 2, true);
+        initTail(tiles, 1, 2, false);
+        initTail(tiles, 2, 2, true);
+        initTail(tiles, 3, 2, false);
+        initTail(tiles, 4, 2, true);
+        initTail(tiles, 5, 2, false);
+        initTail(tiles, 6, 2, true);
+        initTail(tiles, 7, 2, false);
+
+        initTail(tiles, 0, 3, false);
+        initTail(tiles, 1, 3, true);
+        initTail(tiles, 2, 3, false);
+        initTail(tiles, 3, 3, true);
+        initTail(tiles, 4, 3, false);
+        initTail(tiles, 5, 3, true);
+        initTail(tiles, 6, 3, false);
+        initTail(tiles, 7, 3, true);
+
+        initTail(tiles, 0, 4, true);
+        initTail(tiles, 1, 4, false);
+        initTail(tiles, 2, 4, true);
+        initTail(tiles, 3, 4, false);
+        initTail(tiles, 4, 4, true);
+        initTail(tiles, 5, 4, false);
+        initTail(tiles, 6, 4, true);
+        initTail(tiles, 7, 4, false);
+
+        initTail(tiles, 0, 5, false);
+        initTail(tiles, 1, 5, true);
+        initTail(tiles, 2, 5, false);
+        initTail(tiles, 3, 5, true);
+        initTail(tiles, 4, 5, false);
+        initTail(tiles, 5, 5, true);
+        initTail(tiles, 6, 5, false);
+        initTail(tiles, 7, 5, true);
+
+        initTail(tiles, 0, 6, true);
+        initTail(tiles, 1, 6, false);
+        initTail(tiles, 2, 6, true);
+        initTail(tiles, 3, 6, false);
+        initTail(tiles, 4, 6, true);
+        initTail(tiles, 5, 6, false);
+        initTail(tiles, 6, 6, true);
+        initTail(tiles, 7, 6, false);
+
+        initTail(tiles, 0, 7, false);
+        initTail(tiles, 1, 7, true);
+        initTail(tiles, 2, 7, false);
+        initTail(tiles, 3, 7, true);
+        initTail(tiles, 4, 7, false);
+        initTail(tiles, 5, 7, true);
+        initTail(tiles, 6, 7, false);
+        initTail(tiles, 7, 7, true);
+    }
+
+    private void initTail(Tile[][] tiles, int x, int y, boolean blackTile){
+        if (blackTile){
+            tiles[y][x] = new BlackTile(x, y);
+        }else {
+            tiles[y][x] = new Tile(x, y);
+        }
     }
 
 
