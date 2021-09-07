@@ -102,9 +102,9 @@ public class Game {
         String movesTowards = piece.getPieceColor().equals(PieceColor.WHITE) ? "top" : "bottom";
         switch (piece.getPieceType()) {
             case MAN -> movable = blackTile.getNeighbors().keySet().stream().filter(key -> key.startsWith(movesTowards))
-                    .anyMatch(key -> blackTile.getNeighbors().get(key).isEmpty() || blackTile.getPiece().canEatNeighbor(blackTile.getNeighbors().get(key).getPiece()));
+                    .anyMatch(key -> blackTile.getNeighbors().get(key).isEmpty() || piece.canEatNeighbor(blackTile.getNeighbors().get(key).getPiece()));
             case KING -> movable = blackTile.getNeighbors().values().stream()
-                    .anyMatch(targetTile -> targetTile.isEmpty() || blackTile.getPiece().canEatNeighbor(targetTile.getPiece()));
+                    .anyMatch(targetTile -> targetTile.isEmpty() || piece.canEatNeighbor(targetTile.getPiece()));
         }
         piece.setMovable(movable);
     }
