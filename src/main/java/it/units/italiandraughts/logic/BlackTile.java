@@ -21,15 +21,19 @@ public class BlackTile extends Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BlackTile)) return false;
         if (!super.equals(o)) return false;
+
         BlackTile blackTile = (BlackTile) o;
-        return Objects.equals(piece, blackTile.piece) && Objects.equals(neighbors, blackTile.neighbors);
+
+        return piece != null ? piece.equals(blackTile.piece) : blackTile.piece == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), piece);
+        int result = super.hashCode();
+        result = 31 * result + (piece != null ? piece.hashCode() : 0);
+        return result;
     }
 
     public Map<String, BlackTile> getNeighbors() {

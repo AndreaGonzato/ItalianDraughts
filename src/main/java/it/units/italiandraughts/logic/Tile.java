@@ -48,17 +48,20 @@ public class Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile tile)) return false;
+        if (!(o instanceof Tile)) return false;
+
+        Tile tile = (Tile) o;
 
         if (x != tile.x) return false;
         if (y != tile.y) return false;
-        return square.equals(tile.square);
+        return square != null ? square.equals(tile.square) : tile.square == null;
     }
 
     @Override
     public int hashCode() {
         int result = x;
         result = 31 * result + y;
+        result = 31 * result + (square != null ? square.hashCode() : 0);
         return result;
     }
 
