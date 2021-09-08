@@ -14,9 +14,9 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
@@ -50,7 +50,7 @@ public class Game {
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
-                                && tile.getPiece().isMovable())
+                        && tile.getPiece().isMovable())
                 .map(this::generateGraphForTile).collect(Collectors.toList());
         graphs.forEach(Graph::explorePossibleMoves);
     }
@@ -100,8 +100,10 @@ public class Game {
         newTurn();
     }
 
-    private static void playMovePieceSound(){
-        File movePieceSoundFile = new File("src/main/resources/sound/movePiece.mp3");
+    private static void playMovePieceSound() {
+        String path = "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar +
+                "sound" + File.separatorChar + "movePiece.mp3";
+        File movePieceSoundFile = new File(path);
         URL resource = null;
         try {
             resource = movePieceSoundFile.toURL();
