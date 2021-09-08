@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -106,7 +107,7 @@ public class Game {
         File movePieceSoundFile = new File(path);
         URL resource = null;
         try {
-            resource = movePieceSoundFile.toURL();
+            resource = movePieceSoundFile.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
