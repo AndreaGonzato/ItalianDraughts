@@ -3,21 +3,18 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
-import it.units.italiandraughts.ui.PieceColor;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -125,15 +122,9 @@ public class Game {
     }
 
     private void checkNeighborsAndSetMovable(BlackTile blackTile) {
-        boolean movable = false;
         Piece piece = blackTile.getPiece();
-        String movesTowards = piece.getPieceColor().equals(PieceColor.WHITE) ? "top" : "bottom";
-        switch (piece.getPieceType()) {
-            case MAN -> movable = blackTile.getNeighbors().keySet().stream().filter(key -> key.startsWith(movesTowards))
-                    .anyMatch(key -> blackTile.getNeighbors().get(key).isEmpty() || piece.canEatNeighbor(blackTile.getNeighbors().get(key).getPiece()));
-            case KING -> movable = blackTile.getNeighbors().values().stream()
-                    .anyMatch(targetTile -> targetTile.isEmpty() || piece.canEatNeighbor(targetTile.getPiece()));
-        }
+        boolean movable = piece.getNeighborsThisPieceCanMoveTowards()
+                .anyMatch(tile -> tile.isEmpty() || piece.canEatNeighbor(tile.getPiece()));
         piece.setMovable(movable);
     }
 
@@ -183,8 +174,15 @@ public class Game {
 
     public Graph generateGraphForTile(BlackTile source) {
         Graph graph = new Graph(board, source);
-        // For now, this only adds edges for trivial moves (moves on empty squares, which weight 1)
-        source.getNeighbors().values().stream().filter(Tile::isEmpty).forEach(tile -> graph.addEdge(source, tile, 1));
+        Piece piece = source.getPiece();
+        // Add edges for trivial moves (moves on empty squares, which weight 1)
+        piece.getNeighborsThisPieceCanMoveTowards()
+                .filter(Tile::isEmpty)
+                .forEach(tile -> graph.addEdge(source, tile, 1));
+        // Add edges for eating pieces
+        piece.getNeighborsThisPieceCanMoveTowards()
+                .filter(tile -> !tile.isEmpty() && piece.canEatNeighbor(tile.getPiece()))
+                .forEach(tile -> graph.addEatingEdges(piece, tile.getPiece(), 1));
         return graph;
     }
 }
