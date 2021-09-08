@@ -5,6 +5,7 @@ import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -28,6 +29,7 @@ public class Game {
     private Drawer drawer;
     private final PropertyChangeSupport support;
     private final List<int[]> log;
+    private final MediaPlayer mediaPlayer;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
@@ -37,6 +39,7 @@ public class Game {
         support = new PropertyChangeSupport(this);
         newTurn();
         log = new ArrayList<>();
+        mediaPlayer = initMediaPlayer();
     }
 
     private void newTurn() {
@@ -82,14 +85,18 @@ public class Game {
         if ((toX + toY) % 2 == 1) {
             throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
         }
+
+        new Thread(() -> {
+            mediaPlayer.play();
+            mediaPlayer.seek(new Duration(0));
+        }).start();
+
         Tile[][] tiles = getBoard().getTiles();
         BlackTile fromTile = (BlackTile) tiles[fromY][fromX];
         BlackTile toTile = (BlackTile) tiles[toY][toX];
         Piece piece = fromTile.getPiece();
         fromTile.removePiece();
         toTile.placePiece(piece);
-
-        playMovePieceSound();
 
         if (shouldLog) {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
@@ -99,18 +106,19 @@ public class Game {
         newTurn();
     }
 
-    private static void playMovePieceSound() {
+    private MediaPlayer initMediaPlayer() {
         String path = "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar +
                 "sounds" + File.separatorChar + "movePiece.mp3";
         File movePieceSoundFile = new File(path);
+        MediaPlayer mediaPlayer = null;
         try {
             URL resource = movePieceSoundFile.toURI().toURL();
             Media media = new Media(resource.toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
+            mediaPlayer = new MediaPlayer(media);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return mediaPlayer;
     }
 
     private void updateMovablePieces() {
