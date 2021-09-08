@@ -105,15 +105,14 @@ public class Game {
         String path = "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar +
                 "sound" + File.separatorChar + "movePiece.mp3";
         File movePieceSoundFile = new File(path);
-        URL resource = null;
         try {
-            resource = movePieceSoundFile.toURI().toURL();
+            URL resource = movePieceSoundFile.toURI().toURL();
+            Media media = new Media(resource.toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        final Media media = new Media(resource.toString());
-        final MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
     }
 
     private void updateMovablePieces() {
