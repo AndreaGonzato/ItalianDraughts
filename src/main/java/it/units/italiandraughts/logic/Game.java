@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -107,18 +108,10 @@ public class Game {
     }
 
     private MediaPlayer initMediaPlayer() {
-        String path = "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar +
-                "sounds" + File.separatorChar + "movePiece.mp3";
-        File movePieceSoundFile = new File(path);
-        MediaPlayer mediaPlayer = null;
-        try {
-            URL resource = movePieceSoundFile.toURI().toURL();
-            Media media = new Media(resource.toString());
-            mediaPlayer = new MediaPlayer(media);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return mediaPlayer;
+        String path = "sounds" + File.separatorChar + "movePiece.mp3";
+        URL resource = Objects.requireNonNull(getClass().getResource(path));
+        Media media = new Media(resource.toString());
+        return new MediaPlayer(media);
     }
 
     private void updateMovablePieces() {
