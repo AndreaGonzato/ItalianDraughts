@@ -17,24 +17,6 @@ public class BlackTile extends Tile {
         this.piece = piece;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BlackTile)) return false;
-        if (!super.equals(o)) return false;
-
-        BlackTile blackTile = (BlackTile) o;
-
-        return piece != null ? piece.equals(blackTile.piece) : blackTile.piece == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (piece != null ? piece.hashCode() : 0);
-        return result;
-    }
-
     public Map<String, BlackTile> getNeighbors() {
         return neighbors;
     }
