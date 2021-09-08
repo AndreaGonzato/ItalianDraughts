@@ -2,7 +2,6 @@ package it.units.italiandraughts.logic;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class BlackTile extends Tile {
 
@@ -41,16 +40,16 @@ public class BlackTile extends Tile {
     }
 
     void addNeighbors(Tile[][] tiles) {
-        if (Tile.areValidCoordinatesOfTileBiPredicate.test(x - 1, y - 1)) {
+        if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y - 1)) {
             neighbors.put("topLeft", BlackTile.asBlackTile(tiles[y - 1][x - 1]));
         }
-        if (Tile.areValidCoordinatesOfTileBiPredicate.test(x + 1, y - 1)) {
+        if (Tile.areValidCoordinatesBiPredicate.test(x + 1, y - 1)) {
             neighbors.put("topRight", BlackTile.asBlackTile(tiles[y - 1][x + 1]));
         }
-        if (Tile.areValidCoordinatesOfTileBiPredicate.test(x - 1, y + 1)) {
+        if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y + 1)) {
             neighbors.put("bottomLeft", BlackTile.asBlackTile(tiles[y + 1][x - 1]));
         }
-        if (Tile.areValidCoordinatesOfTileBiPredicate.test(x + 1, y + 1)) {
+        if (Tile.areValidCoordinatesBiPredicate.test(x + 1, y + 1)) {
             neighbors.put("bottomRight", BlackTile.asBlackTile(tiles[y + 1][x + 1]));
         }
     }

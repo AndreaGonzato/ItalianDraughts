@@ -12,12 +12,12 @@ public class Tile {
     protected final int y;
     private Square square;
 
-    private static final Predicate<Integer> isValidCoordinateOfTile =
+    private static final Predicate<Integer> isValidCoordinatePredicate =
             coordinate -> (coordinate >= 0 && coordinate < Board.SIZE);
 
-    protected static final BiPredicate<Integer, Integer> areValidCoordinatesOfTileBiPredicate =
-            (coordinateX, coordinateY) -> isValidCoordinateOfTile.test(coordinateX) &&
-                    isValidCoordinateOfTile.test(coordinateY);
+    protected static final BiPredicate<Integer, Integer> areValidCoordinatesBiPredicate =
+            (coordinateX, coordinateY) -> isValidCoordinatePredicate.test(coordinateX) &&
+                    isValidCoordinatePredicate.test(coordinateY);
     
 
     public Tile(int x, int y) {

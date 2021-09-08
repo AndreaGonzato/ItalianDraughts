@@ -104,7 +104,7 @@ public class Game {
 
     private static void playMovePieceSound() {
         String path = "src" + File.separatorChar + "main" + File.separatorChar + "resources" + File.separatorChar +
-                "sound" + File.separatorChar + "movePiece.mp3";
+                "sounds" + File.separatorChar + "movePiece.mp3";
         File movePieceSoundFile = new File(path);
         try {
             URL resource = movePieceSoundFile.toURI().toURL();
