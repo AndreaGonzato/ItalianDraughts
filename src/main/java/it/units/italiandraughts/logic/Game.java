@@ -92,21 +92,25 @@ public class Game {
         fromTile.removePiece();
         toTile.placePiece(piece);
 
-        File file = new File("src/main/resources/sound/movePiece.mp3");
+        playMovePieceSound();
+
+        if (shouldLog) {
+            log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
+        }
+        newTurn();
+    }
+
+    private static void playMovePieceSound(){
+        File movePieceSoundFile = new File("src/main/resources/sound/movePiece.mp3");
         URL resource = null;
         try {
-            resource = file.toURL();
+            resource = movePieceSoundFile.toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         final Media media = new Media(resource.toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
-
-        if (shouldLog) {
-            log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
-        }
-        newTurn();
     }
 
     private void updateMovablePieces() {
