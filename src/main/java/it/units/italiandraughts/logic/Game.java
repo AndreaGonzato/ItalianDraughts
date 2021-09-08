@@ -4,11 +4,20 @@ import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 import it.units.italiandraughts.ui.PieceColor;
+
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -82,6 +91,18 @@ public class Game {
         Piece piece = fromTile.getPiece();
         fromTile.removePiece();
         toTile.placePiece(piece);
+
+        File file = new File("src/main/resources/sound/movePiece.mp3");
+        URL resource = null;
+        try {
+            resource = file.toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        final Media media = new Media(resource.toString());
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         if (shouldLog) {
             log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
         }

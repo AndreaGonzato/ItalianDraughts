@@ -3,6 +3,7 @@ module it.units.italiandraughts {
     requires javafx.fxml;
     requires java.desktop;
     requires org.jgrapht.core;
+    requires javafx.media;
 
 
     opens it.units.italiandraughts to javafx.fxml;
