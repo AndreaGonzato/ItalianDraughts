@@ -10,7 +10,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -143,6 +142,7 @@ public class Game {
         support.removePropertyChangeListener(drawer);
         drawer = drawer.reset();
         addPropertyChangeListener(drawer);
+        activePlayer = player1;
     }
 
     public Tile getActiveTile() {
