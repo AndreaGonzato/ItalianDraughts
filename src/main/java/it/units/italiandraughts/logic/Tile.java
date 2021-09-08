@@ -3,6 +3,7 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.ui.Square;
 
 
+import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -48,13 +49,11 @@ public class Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile)) return false;
-
-        Tile tile = (Tile) o;
+        if (!(o instanceof Tile tile)) return false;
 
         if (x != tile.x) return false;
         if (y != tile.y) return false;
-        return square != null ? square.equals(tile.square) : tile.square == null;
+        return Objects.equals(square, tile.square);
     }
 
     @Override
