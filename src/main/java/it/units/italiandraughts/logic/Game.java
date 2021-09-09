@@ -1,7 +1,6 @@
 package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalButtonClickException;
-import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.ui.Drawer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,10 +24,10 @@ public class Game {
     private final Player player2;
     private Player activePlayer;
     private Status status;
-    private Tile activeTile;
+    private BlackTile activeTile;
     private Drawer drawer;
     private final PropertyChangeSupport support;
-    private final List<int[]> log;
+    private final List<BlackTile[]> log;
     private final MediaPlayer mediaPlayer;
 
     public Game(Board board, Player player1, Player player2) {
@@ -63,7 +62,7 @@ public class Game {
         return activePlayer;
     }
 
-    public List<int[]> getLog() {
+    public List<BlackTile[]> getLog() {
         return log;
     }
 
@@ -81,25 +80,18 @@ public class Game {
         support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
     }
 
-    public void move(int fromX, int fromY, int toX, int toY, boolean shouldLog) {
-        if ((toX + toY) % 2 == 1) {
-            throw new IllegalMoveException("The required move is illegal because no piece can stand on a white tile");
-        }
-
+    public void move(BlackTile fromTile, BlackTile toTile, boolean shouldLog) {
         new Thread(() -> {
             mediaPlayer.play();
             mediaPlayer.seek(new Duration(0));
         }).start();
 
-        Tile[][] tiles = getBoard().getTiles();
-        BlackTile fromTile = (BlackTile) tiles[fromY][fromX];
-        BlackTile toTile = (BlackTile) tiles[toY][toX];
         Piece piece = fromTile.getPiece();
         fromTile.removePiece();
         toTile.placePiece(piece);
 
         if (shouldLog) {
-            log.add(IntStream.of(fromX, fromY, toX, toY).toArray());
+            log.add(new BlackTile[] {fromTile, toTile});
         }
 
         toggleActivePlayer();
@@ -138,11 +130,11 @@ public class Game {
         addPropertyChangeListener(drawer);
     }
 
-    public Tile getActiveTile() {
+    public BlackTile getActiveTile() {
         return activeTile;
     }
 
-    public void setActiveTile(Tile tile) {
+    public void setActiveTile(BlackTile tile) {
         this.activeTile = tile;
     }
 
@@ -166,8 +158,8 @@ public class Game {
         if (log.size() - 1 < 0) {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
-        int[] coordinates = log.remove(log.size() - 1);
-        move(coordinates[2], coordinates[3], coordinates[0], coordinates[1], false);
+        BlackTile[] tiles = log.remove(log.size() - 1);
+        move(tiles[1], tiles[0], false);
         drawer.updateBoard(board.getTiles());
         status = Status.IDLE;
     }
