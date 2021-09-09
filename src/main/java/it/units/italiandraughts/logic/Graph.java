@@ -56,7 +56,7 @@ public class Graph {
         landingTile.placePiece(new Piece(eatingPiece.getPieceColor(),
                 eatingPiece.getPieceType(), landingTile));
         List<BlackTile> eatableNeighbors = landingTile.getPiece().getReachableNeighborsBlackTiles()
-                .filter(blackTileNeighbor -> landingTile.getPiece().canEatNeighbor(blackTileNeighbor.getPiece()))
+                .filter(blackTileNeighbor -> !blackTileNeighbor.isEmpty() && landingTile.getPiece().canEatNeighbor(blackTileNeighbor.getPiece()))
                 .collect(Collectors.toList());
         for (BlackTile blackTileNeighbor : eatableNeighbors) {
             recursivelyAddEatingEdges(landingTile.getPiece(), blackTileNeighbor.getPiece(), ++step);
