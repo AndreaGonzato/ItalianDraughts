@@ -10,7 +10,6 @@ import javafx.util.Duration;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +123,7 @@ public class Game {
 
     private void checkNeighborsAndSetMovable(BlackTile blackTile) {
         Piece piece = blackTile.getPiece();
-        boolean movable = piece.getNeighborsThisPieceCanMoveTowards()
+        boolean movable = piece.getReachableNeighborsBlackTiles()
                 .anyMatch(tile -> tile.isEmpty() || piece.canEatNeighbor(tile.getPiece()));
         piece.setMovable(movable);
     }
@@ -177,11 +176,11 @@ public class Game {
         Graph graph = new Graph(board, source);
         Piece piece = source.getPiece();
         // Add edges for trivial moves (moves on empty squares, which weight 1)
-        piece.getNeighborsThisPieceCanMoveTowards()
+        piece.getReachableNeighborsBlackTiles()
                 .filter(Tile::isEmpty)
                 .forEach(tile -> graph.addEdge(source, tile, 1));
         // Add edges for eating pieces
-        piece.getNeighborsThisPieceCanMoveTowards()
+        piece.getReachableNeighborsBlackTiles()
                 .filter(tile -> !tile.isEmpty() && piece.canEatNeighbor(tile.getPiece()))
                 .forEach(tile -> graph.addEatingEdges(piece, tile.getPiece(), 1));
         return graph;

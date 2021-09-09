@@ -31,7 +31,7 @@ public class Piece {
         return pieceType;
     }
 
-    public Stream<BlackTile> getNeighborsThisPieceCanMoveTowards() {
+    public Stream<BlackTile> getReachableNeighborsBlackTiles() {
         if (pieceType.equals(PieceType.KING)) {
             return getTile().getNeighbors().values().stream();
         } else {
