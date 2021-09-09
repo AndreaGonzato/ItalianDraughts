@@ -24,6 +24,7 @@ public class MenuController {
         BoardController boardController = fxmlLoader.getController();
         boardController.player1NameLabel.setText(player1Field.getText());
         boardController.player2NameLabel.setText(player2Field.getText());
+        boardController.initializeWindow();
         Stage oldStage = (Stage) player1Field.getScene().getWindow();
         Stage stage = new Stage();
         stage.setScene(scene);

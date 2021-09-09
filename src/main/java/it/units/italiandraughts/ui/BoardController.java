@@ -42,7 +42,7 @@ public class BoardController {
         return ItalianDraughts.getScreenHeight() / 3 * 2;
     }
 
-    public void initialize() {
+    public void initializeWindow() {
         gridPane.setMinSize(getBoardHeight(), getBoardHeight());
         gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
 
