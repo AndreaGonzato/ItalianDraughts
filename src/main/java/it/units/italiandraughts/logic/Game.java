@@ -182,7 +182,7 @@ public class Game {
         // Add edges for eating pieces
         piece.getReachableNeighborsBlackTiles()
                 .filter(tile -> !tile.isEmpty() && piece.canEatNeighbor(tile.getPiece()))
-                .forEach(tile -> graph.addEatingEdges(piece, tile.getPiece(), 1));
+                .forEach(tile -> graph.recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
         return graph;
     }
 }

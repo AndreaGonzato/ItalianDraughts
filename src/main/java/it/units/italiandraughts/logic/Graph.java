@@ -40,7 +40,7 @@ public class Graph {
         possibleDestinations.add(target);
     }
 
-    void addEatingEdges(Piece eatingPiece, Piece eatenPiece, int step) {
+    void recursivelyAddEatingEdges(Piece eatingPiece, Piece eatenPiece, int step) {
         BlackTile landingTile = eatingPiece.getPositionAfterEating(eatenPiece);
         if (landingTile == null) {
             return;
@@ -56,10 +56,10 @@ public class Graph {
         landingTile.placePiece(new Piece(eatingPiece.getPieceColor(),
                 eatingPiece.getPieceType(), landingTile));
         List<BlackTile> eatableNeighbors = landingTile.getPiece().getReachableNeighborsBlackTiles()
-                .filter(neighbor -> landingTile.getPiece().canEatNeighbor(neighbor.getPiece()))
+                .filter(blackTileNeighbor -> landingTile.getPiece().canEatNeighbor(blackTileNeighbor.getPiece()))
                 .collect(Collectors.toList());
-        for (BlackTile neighbor : eatableNeighbors) {
-            addEatingEdges(landingTile.getPiece(), neighbor.getPiece(), ++step);
+        for (BlackTile blackTileNeighbor : eatableNeighbors) {
+            recursivelyAddEatingEdges(landingTile.getPiece(), blackTileNeighbor.getPiece(), ++step);
         }
         landingTile.removePiece();
     }
