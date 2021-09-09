@@ -1,5 +1,7 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.ui.PieceColor;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +49,15 @@ public class BlackTile extends Tile {
     void placePiece(Piece piece) {
         this.piece = piece;
         piece.setTile(this);
+
+        if (y == 0 && piece.getPieceColor().equals(PieceColor.WHITE)){
+            piece.setPieceType(PieceType.KING);
+        }
+
+        if (y == 7 && piece.getPieceColor().equals(PieceColor.BLACK)){
+            piece.setPieceType(PieceType.KING);
+        }
+
     }
 
     void removePiece() {
