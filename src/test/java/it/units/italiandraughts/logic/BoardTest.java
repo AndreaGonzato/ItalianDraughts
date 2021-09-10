@@ -4,9 +4,7 @@ import it.units.italiandraughts.ui.PieceColor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
 public class BoardTest {
@@ -33,7 +31,7 @@ public class BoardTest {
                 new Player("Player2", PieceColor.BLACK));
         Piece piece = BlackTile.asBlackTile(board.getTiles()[5][7]).getPiece();
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
-        game.move(piece, destination, false);
+        game.move(piece, destination);
 
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }

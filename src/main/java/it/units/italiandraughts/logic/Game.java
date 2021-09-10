@@ -79,15 +79,22 @@ public class Game {
         support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
     }
 
-    public void move(Piece piece, BlackTile destination, boolean shouldLog) {
+    public void move(Piece piece, BlackTile destination){
+
+        BlackTile source = piece.getBlackTile();
+        source.removePiece();
+        destination.placePiece(piece);
+
+    }
+
+    public void moveAndNewTurn(Piece piece, BlackTile destination, boolean shouldLog) {
         new Thread(() -> {
             mediaPlayer.play();
             mediaPlayer.seek(new Duration(0));
         }).start();
 
         BlackTile source = piece.getBlackTile();
-        source.removePiece();
-        destination.placePiece(piece);
+        move(piece, destination);
 
         if (shouldLog) {
             log.add(new BlackTile[] { source, destination });
@@ -158,7 +165,7 @@ public class Game {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
         BlackTile[] tiles = log.remove(log.size() - 1);
-        move(tiles[1].getPiece(), tiles[0], false);
+        moveAndNewTurn(tiles[1].getPiece(), tiles[0], false);
         drawer.updateBoard(board.getTiles());
         status = Status.IDLE;
     }
