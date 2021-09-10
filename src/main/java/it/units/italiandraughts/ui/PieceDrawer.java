@@ -2,6 +2,7 @@ package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.logic.BlackTile;
 import it.units.italiandraughts.logic.Piece;
+import it.units.italiandraughts.logic.PieceType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -15,6 +16,13 @@ public class PieceDrawer {
     }
 
     public void drawPieceOnSquare(Square square, Piece piece) {
+        switch (piece.getPieceType()){
+            case MAN -> drawManOnEmptySquare(piece, square);
+            case KING -> drawKingOnEmptySquare(square);
+        }
+    }
+
+    private void drawManOnEmptySquare(Piece piece, Square square){
         double tileSize = gridPane.getMaxHeight() / 8;
         Ellipse baseEllipse = createEllipse(tileSize);
         baseEllipse.setFill(Color.BLACK);
