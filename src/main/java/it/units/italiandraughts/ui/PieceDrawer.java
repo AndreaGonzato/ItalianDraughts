@@ -1,8 +1,7 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.logic.BlackTile;
+
 import it.units.italiandraughts.logic.Piece;
-import it.units.italiandraughts.logic.PieceType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
