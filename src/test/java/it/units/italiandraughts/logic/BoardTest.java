@@ -26,7 +26,8 @@ public class BoardTest {
         Board board = new Board();
         Game game = new Game(board, new Player("Player1", PieceColor.WHITE),
                 new Player("Player2", PieceColor.BLACK));
-        game.move(7, 5, 6, 4, false);
+
+        game.move(BlackTile.asBlackTile(board.getTiles()[5][7]), BlackTile.asBlackTile(board.getTiles()[4][6]), false);
 
         Assertions.assertArrayEquals(expectedTiles, board.getTiles());
     }
