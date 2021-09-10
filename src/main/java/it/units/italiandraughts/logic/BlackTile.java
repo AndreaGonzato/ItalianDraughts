@@ -48,7 +48,7 @@ public class BlackTile extends Tile {
 
     void placePiece(Piece piece) {
         this.piece = piece;
-        piece.setTile(this);
+        piece.setBlackTile(this);
 
         if (y == 0 && piece.getPieceColor().equals(PieceColor.WHITE)){
             piece.setPieceType(PieceType.KING);
@@ -61,7 +61,7 @@ public class BlackTile extends Tile {
     }
 
     void removePiece() {
-        piece.setTile(null);
+        piece.setBlackTile(null);
         this.piece = null;
     }
 

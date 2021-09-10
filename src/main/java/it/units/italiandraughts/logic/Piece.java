@@ -10,17 +10,18 @@ public class Piece {
     private final PieceColor pieceColor;
     private PieceType pieceType;
     private boolean movable;
-    private BlackTile tile;
+    private BlackTile blackTile;
 
-    public Piece(PieceColor pieceColor, BlackTile tile) {
-        this(pieceColor, PieceType.MAN, tile);
+    public Piece(PieceColor pieceColor, BlackTile blackTile) {
+        this(pieceColor, PieceType.MAN, blackTile);
     }
 
-    public Piece(PieceColor pieceColor, PieceType pieceType, BlackTile tile) {
-        this.tile = tile;
+    public Piece(PieceColor pieceColor, PieceType pieceType, BlackTile blackTile) {
+        this.blackTile = blackTile;
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
         movable = false;
+        blackTile.placePiece(this);
     }
 
     public PieceColor getPieceColor() {
@@ -33,9 +34,9 @@ public class Piece {
 
     public Stream<BlackTile> getReachableNeighborsBlackTiles() {
         if (pieceType.equals(PieceType.KING)) {
-            return getTile().getNeighbors().values().stream();
+            return getBlackTile().getNeighbors().values().stream();
         } else {
-            return getTile().getNeighbors().entrySet().stream()
+            return getBlackTile().getNeighbors().entrySet().stream()
                     .filter(entry -> entry.getKey().startsWith(getPieceColor().equals(PieceColor.WHITE) ? "top" : "bottom"))
                     .map(Map.Entry::getValue);
         }
@@ -56,22 +57,22 @@ public class Piece {
     }
 
     BlackTile getPositionAfterEating(Piece otherPiece) {
-        Optional<String> optionalDirection = this.getTile().getNeighbors().entrySet().stream()
-                .filter(entry -> entry.getValue().equals(otherPiece.getTile()))
+        Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
+                .filter(entry -> entry.getValue().equals(otherPiece.getBlackTile()))
                 .map(Map.Entry::getKey).findAny();
         if (optionalDirection.isPresent()) {
             String eatingDirection = optionalDirection.get();
-            return otherPiece.getTile().getNeighbors().get(eatingDirection);
+            return otherPiece.getBlackTile().getNeighbors().get(eatingDirection);
         }
         return null;
     }
 
-    public BlackTile getTile() {
-        return tile;
+    public BlackTile getBlackTile() {
+        return blackTile;
     }
 
-    public void setTile(BlackTile tile) {
-        this.tile = tile;
+    public void setBlackTile(BlackTile blackTile) {
+        this.blackTile = blackTile;
     }
 
     public void setPieceType(PieceType pieceType) {

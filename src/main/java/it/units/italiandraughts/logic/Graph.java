@@ -52,7 +52,7 @@ public class Graph {
         if (eatingPiece.getPieceType().equals(PieceType.KING)) {
             weight *= EATING_KING_MULTIPLIER;
         }
-        addEdge(eatingPiece.getTile(), landingTile, weight);
+        addEdge(eatingPiece.getBlackTile(), landingTile, weight);
         landingTile.placePiece(new Piece(eatingPiece.getPieceColor(),
                 eatingPiece.getPieceType(), landingTile));
         List<BlackTile> eatableNeighbors = landingTile.getPiece().getReachableNeighborsBlackTiles()
