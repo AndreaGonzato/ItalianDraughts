@@ -86,7 +86,7 @@ public class Game {
             mediaPlayer.seek(new Duration(0));
         }).start();
 
-        BlackTile source = piece.getTile();
+        BlackTile source = piece.getBlackTile();
         source.removePiece();
         destination.placePiece(piece);
 
