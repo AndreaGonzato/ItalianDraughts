@@ -33,6 +33,21 @@ public class BlackTileTest {
 
         Assertions.assertEquals(expectedMap, blackTile.getNeighbors());
 
+    }
+
+    @Test
+    void getNeighborsX1Y1(){
+        BlackTile blackTile = new BlackTile(1,1);
+        Tile[][] tiles = initTiles();
+
+        blackTile.addNeighbors(tiles);
+        Map<String, BlackTile> expectedMap = new HashMap<>();
+        expectedMap.put("topLeft", new BlackTile(0,0));
+        expectedMap.put("topRight", new BlackTile(2,0));
+        expectedMap.put("bottomLeft", new BlackTile(0,2));
+        expectedMap.put("bottomRight", new BlackTile(2,2));
+
+        Assertions.assertEquals(expectedMap, blackTile.getNeighbors());
 
     }
 
