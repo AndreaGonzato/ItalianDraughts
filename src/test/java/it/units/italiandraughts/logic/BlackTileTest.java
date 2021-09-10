@@ -15,6 +15,6 @@ public class BlackTileTest {
 
         Assertions.assertEquals(expectedPiece, actualPiece);
 
-
     }
+
 }

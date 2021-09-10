@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class GameTest {
 
     @Test
-    void firstActivePlayerPieceType(){
+    void firstActivePlayerPieceColor(){
         Game game = new Game(new Board(), new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
 
         Player actualActivePlayer = game.getActivePlayer();
