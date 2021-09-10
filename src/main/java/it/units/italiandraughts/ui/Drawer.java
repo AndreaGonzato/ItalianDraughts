@@ -1,6 +1,5 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.exception.IllegalPositionDrawingException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
