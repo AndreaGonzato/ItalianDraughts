@@ -60,9 +60,11 @@ public class BlackTile extends Tile {
 
     }
 
-    void removePiece() {
+    Piece removePiece() {
+        Piece piece = this.piece;
         piece.setBlackTile(null);
         this.piece = null;
+        return piece;
     }
 
     public Piece getPiece() {
