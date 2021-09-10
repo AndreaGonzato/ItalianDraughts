@@ -93,7 +93,7 @@ public class Game {
         if (shouldLog) {
             log.add(new BlackTile[] { source, destination });
         }
-
+        drawer.updateBoard(board.getTiles());
         toggleActivePlayer();
         newTurn();
     }
