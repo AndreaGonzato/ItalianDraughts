@@ -18,7 +18,7 @@ public class PieceDrawer {
     public void drawPieceOnSquare(Square square, Piece piece) {
         switch (piece.getPieceType()){
             case MAN -> drawManOnEmptySquare(piece, square);
-            case KING -> drawKingOnEmptySquare(square);
+            case KING -> drawKingOnEmptySquare(piece, square);
         }
     }
 
@@ -34,12 +34,11 @@ public class PieceDrawer {
         square.getChildren().addAll(baseEllipse, upperEllipse);
     }
 
-    public void drawKingOnEmptySquare(Square square) {
+    public void drawKingOnEmptySquare(Piece piece, Square square) {
         double tileSize = gridPane.getMaxHeight() / 8;
         Ellipse baseEllipse = createEllipse(tileSize);
         baseEllipse.setFill(Color.BLACK);
         baseEllipse.setTranslateY(tileSize * 0.06);
-        Piece piece = new Piece(PieceColor.WHITE, BlackTile.asBlackTile(square.getTile()));
 
         Ellipse upperEllipse = createEllipse(tileSize);
         upperEllipse.setTranslateY(tileSize * -0.06);
