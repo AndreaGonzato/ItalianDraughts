@@ -17,4 +17,11 @@ public class BlackTileTest {
 
     }
 
+    @Test
+    void  addNeighbors(){
+        BlackTile blackTile = new BlackTile(0,0);
+
+        // TODO complete here
+    }
+
 }

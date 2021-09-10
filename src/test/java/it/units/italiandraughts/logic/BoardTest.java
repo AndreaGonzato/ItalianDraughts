@@ -35,9 +35,7 @@ public class BoardTest {
 
 
     private Tile[][] setUpBoard() {
-        Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
-
-        initTiles(tiles);
+        Tile[][] tiles = initTiles();
 
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][0]), PieceColor.BLACK);
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][2]), PieceColor.BLACK);
@@ -68,7 +66,9 @@ public class BoardTest {
         return tiles;
     }
 
-    private void initTiles(Tile[][] tiles){
+    private Tile[][] initTiles(){
+        Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
+
         // create all the tiles
         initTile(tiles, 0, 0, true);
         initTile(tiles, 1, 0, false);
@@ -141,6 +141,8 @@ public class BoardTest {
         initTile(tiles, 5, 7, true);
         initTile(tiles, 6, 7, false);
         initTile(tiles, 7, 7, true);
+
+        return tiles;
     }
 
     private void initTile(Tile[][] tiles, int x, int y, boolean blackTile){
