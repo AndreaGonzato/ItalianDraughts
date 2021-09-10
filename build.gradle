@@ -23,7 +23,6 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'it.units.italiandraughts'
     mainClass = 'it.units.italiandraughts.ItalianDraughts'
 }
 
@@ -37,6 +36,9 @@ dependencies {
     implementation 'org.openjfx:javafx-media:16'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation("org.testfx:testfx-core:4.0.16-alpha")
+    implementation("org.testfx:testfx-junit5:4.0.16-alpha")
+    testImplementation(group: 'org.assertj', name: 'assertj-core', version: '3.13.2')
 }
 
 test {
