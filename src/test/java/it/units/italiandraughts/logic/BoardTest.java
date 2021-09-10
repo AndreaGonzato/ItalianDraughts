@@ -66,7 +66,7 @@ public class BoardTest {
         return tiles;
     }
 
-    private Tile[][] initTiles(){
+    public static Tile[][] initTiles(){
         Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
 
         // create all the tiles
@@ -145,7 +145,7 @@ public class BoardTest {
         return tiles;
     }
 
-    private void initTile(Tile[][] tiles, int x, int y, boolean blackTile){
+    private static void initTile(Tile[][] tiles, int x, int y, boolean blackTile){
         if (blackTile){
             tiles[y][x] = new BlackTile(x, y);
         }else {
