@@ -94,7 +94,7 @@ public class Drawer implements PropertyChangeListener {
         Square square = (Square) event.getSource();
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
             try {
-                game.move(game.getActiveTile(), BlackTile.asBlackTile(square.getTile()), true);
+                game.move(game.getActiveTile().getPiece(), BlackTile.asBlackTile(square.getTile()), true);
             } catch (IllegalMoveException e) {
                 return;
             }
