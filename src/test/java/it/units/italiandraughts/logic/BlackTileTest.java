@@ -92,5 +92,16 @@ public class BlackTileTest {
 
     }
 
+    @Test
+    void removePiece() {
+        BlackTile blackTile = new BlackTile(0, 0);
+        Piece expectedPiece = new Piece(PieceColor.BLACK);
+
+        blackTile.placePiece(expectedPiece);
+
+        Assertions.assertEquals(expectedPiece, blackTile.removePiece());
+
+    }
+
 
 }
