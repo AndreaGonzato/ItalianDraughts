@@ -12,6 +12,16 @@ public class Piece {
     private boolean movable;
     private BlackTile blackTile;
 
+    public Piece(PieceColor pieceColor, PieceType pieceType) {
+        this.pieceColor = pieceColor;
+        this.pieceType = pieceType;
+        movable = false;
+    }
+
+    public Piece(PieceColor pieceColor) {
+        this(pieceColor, PieceType.MAN);
+    }
+
     public Piece(PieceColor pieceColor, BlackTile blackTile) {
         this(pieceColor, PieceType.MAN, blackTile);
     }
