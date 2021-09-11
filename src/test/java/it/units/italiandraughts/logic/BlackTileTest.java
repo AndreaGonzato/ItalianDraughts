@@ -68,6 +68,17 @@ public class BlackTileTest {
 
     }
 
+    @Test
+    void asBlackTile(){
+        Tile tile = new BlackTile(0,0);
+        BlackTile actualBlackTile = BlackTile.asBlackTile(tile);
+
+        BlackTile expectedBlackTile = new BlackTile(0,0);
+
+        Assertions.assertEquals(expectedBlackTile, actualBlackTile);
+
+    }
+
 
 
 
