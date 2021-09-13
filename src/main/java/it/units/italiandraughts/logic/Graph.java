@@ -28,7 +28,7 @@ public class Graph {
         this.source = source;
         possibleDestinations = new ArrayList<>();
         addVertices(board);
-        maxPaths = new ArrayList();
+        maxPaths = new ArrayList<>();
     }
 
     private void addVertices(Board board){
