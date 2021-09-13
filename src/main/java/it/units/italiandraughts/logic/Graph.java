@@ -17,10 +17,10 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Graph {
 
-    public static final float EATING_KING_MULTIPLIER = 1.2f;
-    SimpleDirectedWeightedGraph<Tile, Edge> graph;
-    Tile source;
-    List<Tile> possibleDestinations;
+    private static final float EATING_KING_MULTIPLIER = 1.2f;
+    private SimpleDirectedWeightedGraph<Tile, Edge> graph;
+    private Tile source;
+    private List<Tile> possibleDestinations;
 
     public Graph(Board board, Tile tile) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);

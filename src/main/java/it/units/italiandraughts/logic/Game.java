@@ -85,6 +85,7 @@ public class Game {
         destination.placePiece(piece);
     }
 
+    // TODO find a better name for this method
     public void moveAndNewTurn(Piece piece, BlackTile destination, boolean shouldLog) {
         new Thread(() -> {
             mediaPlayer.play();
