@@ -21,12 +21,14 @@ public class Graph {
     private final SimpleDirectedWeightedGraph<Tile, Edge> graph;
     private final Tile source;
     private final List<Tile> possibleDestinations;
+    private final List<GraphPath<Tile, Edge>> maxPaths;
 
     public Graph(Board board, Tile source) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);
         this.source = source;
         possibleDestinations = new ArrayList<>();
         addVertices(board);
+        maxPaths = new ArrayList();
     }
 
     private void addVertices(Board board){
@@ -72,18 +74,24 @@ public class Graph {
             return (int) (path2.getWeight() - path1.getWeight()); // TODO improve this?
         });
         optionalLongestPath.ifPresent(longestPath -> supplier.get().filter(path -> path.getWeight() == longestPath.getWeight())
+                .forEach(maxPaths::add));
                 // TODO remove these diagnostic prints
+                /*
                 .forEach(path -> {
-                    /*
+
                     System.out.println("Allowed move: FROM");
                     System.out.println(source);
                     System.out.println("TO");
                     System.out.println(path.getEndVertex());
                     System.out.println("WEIGHT = " + path.getWeight());
                     System.out.println();
-                    */
+
                 }));
+
+                 */
+        System.out.println();
     }
+
 
     public void printVertices(){
         Set<Tile> tiles = graph.vertexSet();
@@ -93,5 +101,13 @@ public class Graph {
     public void printEdges(){
         Set<Edge> edges = graph.edgeSet();
         edges.forEach(System.out::println);
+    }
+
+    public List<GraphPath<Tile, Edge>> getMaxPaths() {
+        return maxPaths;
+    }
+
+    public double getMaxPathWeight(){
+        return maxPaths.get(0).getWeight();
     }
 }

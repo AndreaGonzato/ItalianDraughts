@@ -10,9 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
@@ -51,6 +49,15 @@ public class Game {
                         && tile.getPiece().isMovable())
                 .map(this::generateGraphForTile).collect(Collectors.toList());
         graphs.forEach(Graph::explorePossibleMoves);
+
+        // TODO TEST some log
+        OptionalDouble maxPathWeight = graphs.stream()
+                .flatMap(graph -> graph.getMaxPaths().stream())
+                .mapToDouble(tileEdgeGraphPath -> tileEdgeGraphPath.getWeight())
+                .max();
+
+        maxPathWeight.ifPresent( x -> System.out.println(x));
+        System.out.println();
     }
 
     public Player getPlayer1() {
