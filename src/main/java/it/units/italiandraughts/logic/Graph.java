@@ -18,13 +18,13 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 public class Graph {
 
     private static final float EATING_KING_MULTIPLIER = 1.2f;
-    private SimpleDirectedWeightedGraph<Tile, Edge> graph;
-    private Tile source;
-    private List<Tile> possibleDestinations;
+    private final SimpleDirectedWeightedGraph<Tile, Edge> graph;
+    private final Tile source;
+    private final List<Tile> possibleDestinations;
 
-    public Graph(Board board, Tile tile) {
+    public Graph(Board board, Tile source) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);
-        source = tile;
+        this.source = source;
         possibleDestinations = new ArrayList<>();
         addVertices(board);
     }
