@@ -25,9 +25,9 @@ public class BlackTileTest {
     @Test
     void getNeighborsX0Y0() {
         BlackTile blackTile = new BlackTile(0, 0);
-        Tile[][] tiles = initTiles();
+        Board board = new Board();
 
-        blackTile.addNeighbors(tiles);
+        blackTile.addNeighbors(board);
         Map<String, BlackTile> expectedMap = new HashMap<>();
         expectedMap.put("bottomRight", new BlackTile(1, 1));
 
@@ -38,9 +38,9 @@ public class BlackTileTest {
     @Test
     void getNeighborsX1Y1() {
         BlackTile blackTile = new BlackTile(1, 1);
-        Tile[][] tiles = initTiles();
+        Board board = new Board();
 
-        blackTile.addNeighbors(tiles);
+        blackTile.addNeighbors(board);
         Map<String, BlackTile> expectedMap = new HashMap<>();
         expectedMap.put("topLeft", new BlackTile(0, 0));
         expectedMap.put("topRight", new BlackTile(2, 0));
@@ -54,9 +54,9 @@ public class BlackTileTest {
     @Test
     void getNeighborsX7Y7() {
         BlackTile blackTile = new BlackTile(7, 7);
-        Tile[][] tiles = initTiles();
+        Board board = new Board();
 
-        blackTile.addNeighbors(tiles);
+        blackTile.addNeighbors(board);
         Map<String, BlackTile> expectedMap = new HashMap<>();
         expectedMap.put("topLeft", new BlackTile(6, 6));
 

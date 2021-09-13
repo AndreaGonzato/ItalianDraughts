@@ -23,18 +23,18 @@ public class BlackTile extends Tile {
         return neighbors;
     }
 
-    void addNeighbors(Tile[][] tiles) {
+    void addNeighbors(Board board) {
         if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y - 1)) {
-            neighbors.put("topLeft", BlackTile.asBlackTile(tiles[y - 1][x - 1]));
+            neighbors.put("topLeft", BlackTile.asBlackTile(board.getTiles()[y - 1][x - 1]));
         }
         if (Tile.areValidCoordinatesBiPredicate.test(x + 1, y - 1)) {
-            neighbors.put("topRight", BlackTile.asBlackTile(tiles[y - 1][x + 1]));
+            neighbors.put("topRight", BlackTile.asBlackTile(board.getTiles()[y - 1][x + 1]));
         }
         if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y + 1)) {
-            neighbors.put("bottomLeft", BlackTile.asBlackTile(tiles[y + 1][x - 1]));
+            neighbors.put("bottomLeft", BlackTile.asBlackTile(board.getTiles()[y + 1][x - 1]));
         }
         if (Tile.areValidCoordinatesBiPredicate.test(x + 1, y + 1)) {
-            neighbors.put("bottomRight", BlackTile.asBlackTile(tiles[y + 1][x + 1]));
+            neighbors.put("bottomRight", BlackTile.asBlackTile(board.getTiles()[y + 1][x + 1]));
         }
     }
 

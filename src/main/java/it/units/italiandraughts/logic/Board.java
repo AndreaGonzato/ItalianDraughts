@@ -26,7 +26,7 @@ public class Board {
             }
         }
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
-                .forEach(blackTile -> blackTile.addNeighbors(tiles));
+                .forEach(blackTile -> blackTile.addNeighbors(this));
         initPieces();
     }
 
