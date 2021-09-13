@@ -33,7 +33,7 @@ public class BoardTest {
                 new Player("Player2", PieceColor.BLACK));
         Piece piece = BlackTile.asBlackTile(board.getTiles()[5][7]).getPiece();
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
-        game.move(piece, destination);
+        game.movePiece(piece, destination);
 
         Assertions.assertEquals(expectedBoard, board);
     }
