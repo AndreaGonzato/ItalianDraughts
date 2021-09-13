@@ -5,6 +5,7 @@ import it.units.italiandraughts.ui.Drawer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import org.jgrapht.GraphPath;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -50,14 +51,21 @@ public class Game {
                 .map(this::generateGraphForTile).collect(Collectors.toList());
         graphs.forEach(Graph::explorePossibleMoves);
 
-        // TODO TEST some log
         OptionalDouble maxPathWeight = graphs.stream()
                 .flatMap(graph -> graph.getMaxPaths().stream())
                 .mapToDouble(tileEdgeGraphPath -> tileEdgeGraphPath.getWeight())
                 .max();
 
-        maxPathWeight.ifPresent( x -> System.out.println(x));
-        System.out.println();
+
+        List<GraphPath<Tile, Edge>> absoluteLongestPaths;
+        absoluteLongestPaths = graphs.stream()
+                .flatMap(graph -> graph.getMaxPaths().stream())
+                        .filter(tileEdgeGraphPath -> tileEdgeGraphPath.getWeight() == maxPathWeight.getAsDouble())
+                .collect(Collectors.toList());
+
+        // TODO test print the cost of the absoluteLongestPaths and then the path, remove this two lines
+        maxPathWeight.ifPresent(System.out::println);
+        absoluteLongestPaths.forEach(System.out::println);
     }
 
     public Player getPlayer1() {
