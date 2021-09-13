@@ -6,25 +6,28 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 
+import javax.swing.*;
+
 @ExtendWith(ApplicationExtension.class)
 public class BoardTest {
 
 
     @Test
-    void placePieceInInitialPosition() {
-        Tile[][] expectedTiles = setUpBoard();
+    void initBoard() {
+        Board expectedBoard = setUpBoard();
 
-        Board board = new Board();
+        Board actualBoard = new Board();
 
-        Assertions.assertArrayEquals(expectedTiles, board.getTiles());
+        Assertions.assertEquals(expectedBoard, actualBoard);
     }
 
 
     @Test
     void moveTopRightPiecePlayer1ToLeft() {
-        Tile[][] expectedTiles = setUpBoard();
-        placePieceOnTile(BlackTile.asBlackTile(expectedTiles[4][6]), PieceColor.WHITE);
-        BlackTile.asBlackTile(expectedTiles[5][7]).removePiece();
+        // TODO refactor this test
+        Board expectedBoard = setUpBoard();
+        placePieceOnTile(BlackTile.asBlackTile(expectedBoard.getTiles()[4][6]), PieceColor.WHITE);
+        BlackTile.asBlackTile(expectedBoard.getTiles()[5][7]).removePiece();
 
         Board board = new Board();
         Game game = new Game(board, new Player("Player1", PieceColor.WHITE),
@@ -33,12 +36,12 @@ public class BoardTest {
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
         game.move(piece, destination);
 
-        Assertions.assertArrayEquals(expectedTiles, board.getTiles());
+        Assertions.assertEquals(expectedBoard, board);
     }
 
 
 
-    private Tile[][] setUpBoard() {
+    private Board setUpBoard() {
         Tile[][] tiles = initTiles();
 
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][0]), PieceColor.BLACK);
@@ -67,7 +70,7 @@ public class BoardTest {
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][5]), PieceColor.WHITE);
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][7]), PieceColor.WHITE);
 
-        return tiles;
+        return new Board(tiles);
     }
 
     public static Tile[][] initTiles(){

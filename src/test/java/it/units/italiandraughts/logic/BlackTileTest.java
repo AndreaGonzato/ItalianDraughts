@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static it.units.italiandraughts.logic.BoardTest.initTiles;
 
 public class BlackTileTest {
 

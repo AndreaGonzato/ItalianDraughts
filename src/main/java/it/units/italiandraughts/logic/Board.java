@@ -30,7 +30,11 @@ public class Board {
         initPieces();
     }
 
-    public void initPieces() {
+    public Board(Tile[][] tiles){
+        this.tiles = tiles;
+    }
+
+    private void initPieces() {
         matrixToStream(tiles).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
                 .map(BlackTile::asBlackTile)
                 .forEach(tile -> tile.placePiece(new Piece(PieceColor.BLACK, tile)));
@@ -49,5 +53,20 @@ public class Board {
 
     public Tile[][] getTiles() {
         return tiles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+
+        Board board = (Board) o;
+
+        return Arrays.deepEquals(tiles, board.tiles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(tiles);
     }
 }
