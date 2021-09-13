@@ -53,9 +53,8 @@ public class Game {
 
         OptionalDouble maxPathWeight = graphs.stream()
                 .flatMap(graph -> graph.getMaxPaths().stream())
-                .mapToDouble(tileEdgeGraphPath -> tileEdgeGraphPath.getWeight())
+                .mapToDouble(GraphPath::getWeight)
                 .max();
-
 
         List<GraphPath<Tile, Edge>> absoluteLongestPaths;
         absoluteLongestPaths = graphs.stream()
