@@ -85,7 +85,7 @@ public class Game {
         destination.placePiece(piece);
     }
 
-    public void moveAndNewTurn(Piece piece, BlackTile destination) {
+    public void moveAndNewTurn(Piece piece, BlackTile destination, boolean shouldLog) {
         new Thread(() -> {
             mediaPlayer.play();
             mediaPlayer.seek(new Duration(0));
@@ -94,7 +94,9 @@ public class Game {
         BlackTile source = piece.getBlackTile();
         move(piece, destination);
 
-        log.add(new BlackTile[] { source, destination });
+        if (shouldLog){
+            log.add(new BlackTile[] { source, destination });
+        }
         drawer.updateBoard(board.getTiles());
         toggleActivePlayer();
         newTurn();
@@ -161,7 +163,7 @@ public class Game {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
         BlackTile[] tiles = log.remove(log.size() - 1);
-        moveAndNewTurn(tiles[1].getPiece(), tiles[0]);
+        moveAndNewTurn(tiles[1].getPiece(), tiles[0], false);
         drawer.updateBoard(board.getTiles());
         status = Status.IDLE;
     }

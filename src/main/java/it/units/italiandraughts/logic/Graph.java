@@ -74,12 +74,14 @@ public class Graph {
         optionalLongestPath.ifPresent(longestPath -> supplier.get().filter(path -> path.getWeight() == longestPath.getWeight())
                 // TODO remove these diagnostic prints
                 .forEach(path -> {
+                    /*
                     System.out.println("Allowed move: FROM");
                     System.out.println(source);
                     System.out.println("TO");
                     System.out.println(path.getEndVertex());
                     System.out.println("WEIGHT = " + path.getWeight());
                     System.out.println();
+                    */
                 }));
     }
 
