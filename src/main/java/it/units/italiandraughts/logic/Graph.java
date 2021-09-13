@@ -7,11 +7,8 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -21,14 +18,14 @@ public class Graph {
     private final SimpleDirectedWeightedGraph<Tile, Edge> graph;
     private final Tile source;
     private final List<Tile> possibleDestinations;
-    private final List<GraphPath<Tile, Edge>> maxPaths;
+    private final List<GraphPath<Tile, Edge>> longestPaths;
 
     public Graph(Board board, Tile source) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);
         this.source = source;
         possibleDestinations = new ArrayList<>();
         addVertices(board);
-        maxPaths = new ArrayList<>();
+        longestPaths = new ArrayList<>();
     }
 
     private void addVertices(Board board){
@@ -69,12 +66,7 @@ public class Graph {
     void explorePossibleMoves() {
         DijkstraShortestPath<Tile, Edge> dijkstra = new DijkstraShortestPath<>(graph);
         ShortestPathAlgorithm.SingleSourcePaths<Tile, Edge> paths = dijkstra.getPaths(source);
-        Supplier<Stream<GraphPath<Tile, Edge>>> supplier = () -> possibleDestinations.stream().map(paths::getPath);
-        Optional<GraphPath<Tile, Edge>> optionalLongestPath = supplier.get().min((path1, path2) -> {
-            return (int) (path2.getWeight() - path1.getWeight()); // TODO improve this?
-        });
-        optionalLongestPath.ifPresent(longestPath -> supplier.get().filter(path -> path.getWeight() == longestPath.getWeight())
-                .forEach(maxPaths::add));
+        longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(StaticUtil.getLongestPaths()));
     }
 
 
@@ -88,11 +80,11 @@ public class Graph {
         edges.forEach(System.out::println);
     }
 
-    public List<GraphPath<Tile, Edge>> getMaxPaths() {
-        return maxPaths;
+    public List<GraphPath<Tile, Edge>> getLongestPaths() {
+        return longestPaths;
     }
 
     public double getMaxPathWeight(){
-        return maxPaths.get(0).getWeight();
+        return longestPaths.get(0).getWeight();
     }
 }

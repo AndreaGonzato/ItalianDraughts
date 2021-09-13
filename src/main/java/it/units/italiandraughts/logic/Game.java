@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
+import static it.units.italiandraughts.logic.StaticUtil.*;
 
 public class Game {
     private Board board;
@@ -49,21 +49,15 @@ public class Game {
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
                         && tile.getPiece().isMovable())
                 .map(this::generateGraphForTile).collect(Collectors.toList());
+
         graphs.forEach(Graph::explorePossibleMoves);
 
-        OptionalDouble maxPathWeight = graphs.stream()
-                .flatMap(graph -> graph.getMaxPaths().stream())
-                .mapToDouble(GraphPath::getWeight)
-                .max();
-
-        List<GraphPath<Tile, Edge>> absoluteLongestPaths;
-        absoluteLongestPaths = graphs.stream()
-                .flatMap(graph -> graph.getMaxPaths().stream())
-                .filter(tileEdgeGraphPath -> tileEdgeGraphPath.getWeight() == maxPathWeight.getAsDouble())
-                .collect(Collectors.toList());
+        List<GraphPath<Tile, Edge>> absoluteLongestPaths = graphs.stream()
+                .flatMap(graph -> graph.getLongestPaths().stream())
+                .collect(getLongestPaths());
 
         // TODO test print the cost of the absoluteLongestPaths and then the path, remove this two lines
-        maxPathWeight.ifPresent(System.out::println);
+        System.out.println(absoluteLongestPaths.get(0).getWeight());
         absoluteLongestPaths.forEach(System.out::println);
     }
 
