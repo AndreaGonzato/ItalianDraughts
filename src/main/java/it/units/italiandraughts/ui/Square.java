@@ -62,4 +62,8 @@ public class Square extends StackPane {
     public SquareType getType() {
         return type;
     }
+
+    public double getSquareSize() {
+        return squareSize;
+    }
 }

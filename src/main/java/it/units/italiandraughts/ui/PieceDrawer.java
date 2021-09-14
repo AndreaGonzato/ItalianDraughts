@@ -22,38 +22,38 @@ public class PieceDrawer {
     }
 
     private void drawManOnEmptySquare(Piece piece, Square square){
-        double tileSize = gridPane.getMaxHeight() / 8;
-        Ellipse baseEllipse = createEllipse(tileSize);
+        double squareSize = square.getSquareSize();
+        Ellipse baseEllipse = createEllipse(squareSize);
         baseEllipse.setFill(Color.BLACK);
-        baseEllipse.setTranslateY(tileSize * 0.07);
+        baseEllipse.setTranslateY(squareSize * 0.07);
 
-        Ellipse upperEllipse = createEllipse(tileSize);
+        Ellipse upperEllipse = createEllipse(squareSize);
         upperEllipse.setFill(Color.valueOf(piece.getPieceColor().getHexColor()));
 
         square.getChildren().addAll(baseEllipse, upperEllipse);
     }
 
     public void drawKingOnEmptySquare(Piece piece, Square square) {
-        double tileSize = gridPane.getMaxHeight() / 8;
-        Ellipse baseEllipse = createEllipse(tileSize);
+        double squareSize = square.getSquareSize();
+        Ellipse baseEllipse = createEllipse(squareSize);
         baseEllipse.setFill(Color.BLACK);
-        baseEllipse.setTranslateY(tileSize * 0.06);
+        baseEllipse.setTranslateY(squareSize * 0.06);
 
-        Ellipse upperEllipse = createEllipse(tileSize);
-        upperEllipse.setTranslateY(tileSize * -0.06);
-        Ellipse middleEllipse = createEllipse(tileSize);
+        Ellipse upperEllipse = createEllipse(squareSize);
+        upperEllipse.setTranslateY(squareSize * -0.06);
+        Ellipse middleEllipse = createEllipse(squareSize);
         middleEllipse.setFill(Color.valueOf("#c6c6c6"));
-        Ellipse upperEllipse2 = createEllipse(tileSize);
-        upperEllipse2.setTranslateY(tileSize * -0.1);
+        Ellipse upperEllipse2 = createEllipse(squareSize);
+        upperEllipse2.setTranslateY(squareSize * -0.1);
         upperEllipse2.setFill(Color.valueOf(piece.getPieceColor().getHexColor()));
 
         square.getChildren().addAll(baseEllipse, middleEllipse, upperEllipse, upperEllipse2);
     }
 
-    private Ellipse createEllipse(double tileSize) {
-        Ellipse ellipse = new Ellipse(tileSize * 0.3125, tileSize * 0.26);
+    private Ellipse createEllipse(double squareSize) {
+        Ellipse ellipse = new Ellipse(squareSize * 0.3125, squareSize * 0.26);
         ellipse.setStroke(Color.BLACK);
-        ellipse.setStrokeWidth(tileSize * 0.03);
+        ellipse.setStrokeWidth(squareSize * 0.03);
         return ellipse;
     }
 }
