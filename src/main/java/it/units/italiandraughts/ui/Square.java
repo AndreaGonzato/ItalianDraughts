@@ -13,7 +13,7 @@ public class Square extends StackPane {
     private static final String HIGHLIGHT_COLOR = "#56db39";
     private final double squareSize;
     private boolean highlighted;
-    private boolean activeGreenCircle;
+    private boolean hasGreenCircle;
     private Circle greenCircle;
 
 
@@ -23,7 +23,7 @@ public class Square extends StackPane {
         this.type = squareType;
         this.setStyle("-fx-background-color: " + squareType.getHex() + ";");
         tile.setSquare(this);
-        activeGreenCircle = false;
+        hasGreenCircle = false;
     }
 
     public Tile getTile() {
@@ -41,7 +41,7 @@ public class Square extends StackPane {
     }
 
     void placeGreenCircle(){
-        this.activeGreenCircle = true;
+        this.hasGreenCircle = true;
         if (this.getType().equals(SquareType.WHITE_SMOKE)) {
             throw new IllegalPositionDrawingException("Cannot draw on white square");
         }
@@ -51,12 +51,12 @@ public class Square extends StackPane {
     }
 
     void removeGreenCircle(){
-        this.activeGreenCircle = false;
+        this.hasGreenCircle = false;
         this.getChildren().remove(greenCircle);
     }
 
-    public boolean isActiveGreenCircle() {
-        return activeGreenCircle;
+    public boolean hasGreenCircle() {
+        return hasGreenCircle;
     }
 
     public SquareType getType() {
