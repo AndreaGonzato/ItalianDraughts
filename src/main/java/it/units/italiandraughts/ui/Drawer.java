@@ -28,7 +28,7 @@ public class Drawer implements PropertyChangeListener {
     public Drawer(GridPane gridPane, Game game) {
         this.gridPane = gridPane;
         this.game = game;
-        pieceDrawer = new PieceDrawer(gridPane);
+        pieceDrawer = new PieceDrawer();
         game.setDrawer(this);
 
         ColumnConstraints columnConstraints = new ColumnConstraints();

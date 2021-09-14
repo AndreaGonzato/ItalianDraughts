@@ -2,17 +2,10 @@ package it.units.italiandraughts.ui;
 
 
 import it.units.italiandraughts.logic.Piece;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 public class PieceDrawer {
-
-    private final GridPane gridPane;
-
-    public PieceDrawer(GridPane gridPane) {
-        this.gridPane = gridPane;
-    }
 
     public void drawPieceOnSquare(Square square, Piece piece) {
         switch (piece.getPieceType()){
