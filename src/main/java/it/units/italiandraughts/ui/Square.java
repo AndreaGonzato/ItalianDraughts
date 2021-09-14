@@ -40,20 +40,19 @@ public class Square extends StackPane {
         this.setStyle("-fx-background-color: " + newColor + ";");
     }
 
-
-    void setActiveGreenCircle(boolean activeGreenCircle){
-        this.activeGreenCircle = activeGreenCircle;
-
-        if (activeGreenCircle){
-            if (this.getType().equals(SquareType.WHITE_SMOKE)) {
-                throw new IllegalPositionDrawingException("Cannot draw on white square");
-            }
-            greenCircle = new Circle(squareSize * 0.15);
-            greenCircle.setFill(Color.rgb(131, 235, 159, 0.6));
-            this.getChildren().add(greenCircle);
-        }else {
-            this.getChildren().remove(greenCircle);
+    void placeGreenCircle(){
+        this.activeGreenCircle = true;
+        if (this.getType().equals(SquareType.WHITE_SMOKE)) {
+            throw new IllegalPositionDrawingException("Cannot draw on white square");
         }
+        greenCircle = new Circle(squareSize * 0.15);
+        greenCircle.setFill(Color.rgb(131, 235, 159, 0.6));
+        this.getChildren().add(greenCircle);
+    }
+
+    void removeGreenCircle(){
+        this.activeGreenCircle = false;
+        this.getChildren().remove(greenCircle);
     }
 
     public boolean isActiveGreenCircle() {
