@@ -42,7 +42,7 @@ public class Drawer implements PropertyChangeListener {
         matrixToStream(game.getBoard().getTiles()).forEach(tile -> {
             Square square = new Square(tile,
                     ((tile.getX() + tile.getY()) % 2 == 0) ?
-                            SquareType.BRONZE : SquareType.WHITE_SMOKE);
+                            SquareType.BRONZE : SquareType.WHITE_SMOKE, gridPane.getMaxHeight() / Board.SIZE);
             squares[tile.getY()][tile.getX()] = square;
             gridPane.add(square, tile.getX(), tile.getY());
         });
@@ -74,6 +74,8 @@ public class Drawer implements PropertyChangeListener {
 
     private void turnOffHighlightedSquares() {
         matrixToStream(squares).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
+        matrixToStream(squares).filter(square -> square.haveGreenCircle()).forEach(square -> square.setHaveGreenCircle(false));
+
     }
 
     private void highlightSquare(Square square) {
@@ -98,7 +100,8 @@ public class Drawer implements PropertyChangeListener {
                 .collect(Collectors.toList());
 
         for (GraphPath<Tile, Edge> graphPath :absoluteLongestPathsStartingFromTile){
-            drawGreenCircleOnEmptySquare(graphPath.getEndVertex().getSquare());
+            graphPath.getEndVertex().getSquare().setHaveGreenCircle(true);
+            //drawGreenCircleOnEmptySquare(graphPath.getEndVertex().getSquare());
         }
 
 
