@@ -95,12 +95,12 @@ public class Drawer implements PropertyChangeListener {
         game.setActiveTile(BlackTile.asBlackTile(tile));
         highlightSquare(square);
 
-        List<GraphPath<Tile, Edge>> absoluteLongestPathsStartingFromTile = game.getAbsoluteLongestPaths()
+        List<GraphPath<BlackTile, Edge>> absoluteLongestPathsStartingFromTile = game.getAbsoluteLongestPaths()
                 .stream()
                 .filter(tileEdgeGraphPath -> tileEdgeGraphPath.getStartVertex().equals(tile))
                 .collect(Collectors.toList());
 
-        for (GraphPath<Tile, Edge> graphPath :absoluteLongestPathsStartingFromTile){
+        for (GraphPath<BlackTile, Edge> graphPath :absoluteLongestPathsStartingFromTile){
             graphPath.getEndVertex().getSquare().placeGreenCircle();
             //drawGreenCircleOnEmptySquare(graphPath.getEndVertex().getSquare());
         }

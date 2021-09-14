@@ -27,7 +27,7 @@ public class Game {
     private final PropertyChangeSupport support;
     private final List<BlackTile[]> log;
     private final MediaPlayer mediaPlayer;
-    private List<GraphPath<Tile, Edge>> absoluteLongestPaths;
+    private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
@@ -56,8 +56,6 @@ public class Game {
         absoluteLongestPaths = graphs.stream()
                 .flatMap(graph -> graph.getLongestPaths().stream())
                 .collect(getLongestPaths());
-
-
 
         // TODO test print the cost of the absoluteLongestPaths and then the path, remove this two lines
         System.out.println(absoluteLongestPaths.get(0).getWeight());
@@ -186,7 +184,7 @@ public class Game {
         return player1;
     }
 
-    public List<GraphPath<Tile, Edge>> getAbsoluteLongestPaths() {
+    public List<GraphPath<BlackTile, Edge>> getAbsoluteLongestPaths() {
         return absoluteLongestPaths;
     }
 

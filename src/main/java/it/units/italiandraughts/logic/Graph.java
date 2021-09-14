@@ -15,12 +15,12 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 public class Graph {
 
     private static final float EATING_KING_MULTIPLIER = 1.2f;
-    private final SimpleDirectedWeightedGraph<Tile, Edge> graph;
-    private final Tile source;
-    private final List<Tile> possibleDestinations;
-    private final List<GraphPath<Tile, Edge>> longestPaths;
+    private final SimpleDirectedWeightedGraph<BlackTile, Edge> graph;
+    private final BlackTile source;
+    private final List<BlackTile> possibleDestinations;
+    private final List<GraphPath<BlackTile, Edge>> longestPaths;
 
-    public Graph(Board board, Tile source) {
+    public Graph(Board board, BlackTile source) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);
         this.source = source;
         possibleDestinations = new ArrayList<>();
@@ -30,10 +30,11 @@ public class Graph {
 
     private void addVertices(Board board){
         matrixToStream(board.getTiles()).filter(tile -> tile instanceof BlackTile)
+                .map(BlackTile::asBlackTile)
                 .forEach(graph::addVertex);
     }
 
-    void addEdge(Tile source, Tile target, double weight){
+    void addEdge(BlackTile source, BlackTile target, double weight){
         Edge e1 = graph.addEdge(source, target);
         graph.setEdgeWeight(e1, weight);
         possibleDestinations.add(target);
@@ -64,14 +65,14 @@ public class Graph {
     }
 
     void explorePossibleMoves() {
-        DijkstraShortestPath<Tile, Edge> dijkstra = new DijkstraShortestPath<>(graph);
-        ShortestPathAlgorithm.SingleSourcePaths<Tile, Edge> paths = dijkstra.getPaths(source);
+        DijkstraShortestPath<BlackTile, Edge> dijkstra = new DijkstraShortestPath<>(graph);
+        ShortestPathAlgorithm.SingleSourcePaths<BlackTile, Edge> paths = dijkstra.getPaths(source);
         longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(StaticUtil.getLongestPaths()));
     }
 
 
     public void printVertices(){
-        Set<Tile> tiles = graph.vertexSet();
+        Set<BlackTile> tiles = graph.vertexSet();
         tiles.forEach(System.out::println);
     }
 
@@ -80,7 +81,7 @@ public class Graph {
         edges.forEach(System.out::println);
     }
 
-    public List<GraphPath<Tile, Edge>> getLongestPaths() {
+    public List<GraphPath<BlackTile, Edge>> getLongestPaths() {
         return longestPaths;
     }
 

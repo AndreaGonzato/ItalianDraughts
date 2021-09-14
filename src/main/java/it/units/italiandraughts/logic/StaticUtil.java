@@ -14,8 +14,8 @@ public class StaticUtil {
         return Arrays.stream(matrix).flatMap(Arrays::stream);
     }
 
-    static Collector<GraphPath<Tile, Edge>, List<GraphPath<Tile, Edge>>, List<GraphPath<Tile, Edge>>> getLongestPaths() {
-        Comparator<GraphPath<Tile, Edge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
+    static Collector<GraphPath<BlackTile, Edge>, List<GraphPath<BlackTile, Edge>>, List<GraphPath<BlackTile, Edge>>> getLongestPaths() {
+        Comparator<GraphPath<BlackTile, Edge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
         return Collector.of(
                 ArrayList::new,
                 (list, path) -> {
