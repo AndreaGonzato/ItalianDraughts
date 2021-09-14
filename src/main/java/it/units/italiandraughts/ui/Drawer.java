@@ -74,7 +74,7 @@ public class Drawer implements PropertyChangeListener {
 
     private void turnOffHighlightedSquares() {
         matrixToStream(squares).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
-        matrixToStream(squares).filter(square -> square.haveGreenCircle()).forEach(square -> square.setHaveGreenCircle(false));
+        matrixToStream(squares).filter(square -> square.isActiveGreenCircle()).forEach(square -> square.setActiveGreenCircle(false));
 
     }
 
@@ -100,7 +100,7 @@ public class Drawer implements PropertyChangeListener {
                 .collect(Collectors.toList());
 
         for (GraphPath<Tile, Edge> graphPath :absoluteLongestPathsStartingFromTile){
-            graphPath.getEndVertex().getSquare().setHaveGreenCircle(true);
+            graphPath.getEndVertex().getSquare().setActiveGreenCircle(true);
             //drawGreenCircleOnEmptySquare(graphPath.getEndVertex().getSquare());
         }
 
