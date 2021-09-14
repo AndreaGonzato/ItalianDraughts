@@ -8,9 +8,12 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.input.MouseEvent;
+import org.jgrapht.GraphPath;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -85,8 +88,20 @@ public class Drawer implements PropertyChangeListener {
     }
 
     private void setActiveTileAndHighlightSquare(Square square) {
-        game.setActiveTile(BlackTile.asBlackTile(square.getTile()));
+        Tile tile = square.getTile();
+        game.setActiveTile(BlackTile.asBlackTile(tile));
         highlightSquare(square);
+
+        List<GraphPath<Tile, Edge>> absoluteLongestPathsStartingFromTile = game.getAbsoluteLongestPaths()
+                .stream()
+                .filter(tileEdgeGraphPath -> tileEdgeGraphPath.getStartVertex().equals(tile))
+                .collect(Collectors.toList());
+
+        for (GraphPath<Tile, Edge> graphPath :absoluteLongestPathsStartingFromTile){
+            drawGreenCircleOnEmptySquare(graphPath.getEndVertex().getSquare());
+        }
+
+
     }
 
     private void onClickOnEmptySquare(MouseEvent event) {
