@@ -73,10 +73,9 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    private void turnOffHighlightedSquares() {
+    public void turnOffHighlightedSquares() {
         matrixToStream(squares).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
         matrixToStream(squares).filter(Square::hasGreenCircle).forEach(Square::removeGreenCircle);
-
     }
 
     private void highlightSquare(Square square) {
@@ -114,7 +113,7 @@ public class Drawer implements PropertyChangeListener {
             throw new IllegalSquareClickException("Do not click on White Square");
         }
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
-            game.makeMove(game.getActiveTile().getPiece(), BlackTile.asBlackTile(square.getTile()), true);
+            game.moveAlongPath(game.getActiveTile().getPiece(), BlackTile.asBlackTile(square.getTile()), true);
         }
     }
 

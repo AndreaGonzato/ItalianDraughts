@@ -25,7 +25,7 @@ public class Game {
     private BlackTile activeTile;
     private Drawer drawer;
     private final PropertyChangeSupport support;
-    private final List<BlackTile[]> log;
+    private final List<Move> log;
     private final MediaPlayer mediaPlayer;
     private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
 
@@ -76,24 +76,53 @@ public class Game {
         support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
     }
 
-    public void movePiece(Piece piece, BlackTile destination){
+    public void movePiece(Piece piece, BlackTile destination) {
         BlackTile source = piece.getBlackTile();
         source.removePiece();
         destination.placePiece(piece);
     }
 
-    public void makeMove(Piece piece, BlackTile destination, boolean shouldLog) {
+    private void playSound() {
         new Thread(() -> {
             mediaPlayer.play();
             mediaPlayer.seek(new Duration(0));
         }).start();
+    }
 
-        BlackTile source = piece.getBlackTile();
-        movePiece(piece, destination);
+    public void moveAlongPath(Piece piece, BlackTile destination, boolean shouldLog) {
+        Optional<GraphPath<BlackTile, Edge>> optionalPath = absoluteLongestPaths.stream()
+                .filter(path -> path.getEndVertex().equals(destination))
+                .findAny();
+        if (optionalPath.isPresent()) {
+            List<BlackTile> steps = optionalPath.get().getVertexList();
+            playSound();
+            BlackTile source = piece.getBlackTile();
+            List<EatenPiece> eatenPieces = new ArrayList<>();
+            for (int i = 1; i < steps.size(); i++) {
+                final BlackTile landingTile = steps.get(i);
+                if (!piece.getReachableNeighboringBlackTiles().collect(Collectors.toList()).contains(landingTile)) {
+                    Optional<BlackTile> optionalOverTile = piece.getReachableNeighboringBlackTiles()
+                            .filter(tile -> !tile.isEmpty() &&
+                                    landingTile.equals(piece.getPositionAfterEating(tile.getPiece())))
+                            .findAny();
+                    if (optionalOverTile.isPresent()) {
+                        EatenPiece eatenPiece = new EatenPiece(optionalOverTile.get());
+                        eatenPieces.add(eatenPiece);
+                        optionalOverTile.get().removePiece();
+                    }
+                }
+                movePiece(piece, landingTile);
+            }
 
-        if (shouldLog){
-            log.add(new BlackTile[] { source, destination });
+            if (shouldLog) {
+                log.add(new Move(piece, source, steps.get(steps.size() - 1), eatenPieces));
+            }
+
+            finalizeMove();
         }
+    }
+
+    private void finalizeMove() {
         drawer.updateBoard(board.getTiles());
         toggleActivePlayer();
         newTurn();
@@ -135,10 +164,11 @@ public class Game {
         if (log.size() - 1 < 0) {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
-        BlackTile[] tiles = log.remove(log.size() - 1);
-        makeMove(tiles[1].getPiece(), tiles[0], false);
-        drawer.updateBoard(board.getTiles());
-        status = Status.IDLE;
+        Move move = log.remove(log.size() - 1);
+        move.getEatenPieces().forEach(EatenPiece::restore);
+        movePiece(move.getPiece(), move.getSource());
+        finalizeMove();
+        drawer.turnOffHighlightedSquares();
     }
 
     public Graph generateGraphForTile(BlackTile source) {
@@ -193,7 +223,7 @@ public class Game {
         return activePlayer;
     }
 
-    public List<BlackTile[]> getLog() {
+    public List<Move> getLog() {
         return log;
     }
 
