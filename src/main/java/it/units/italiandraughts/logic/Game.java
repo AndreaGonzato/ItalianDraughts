@@ -115,7 +115,7 @@ public class Game {
 
     private void checkNeighborsAndSetMovable(BlackTile blackTile) {
         Piece piece = blackTile.getPiece();
-        boolean movable = piece.getReachableNeighborsBlackTiles()
+        boolean movable = piece.getReachableNeighboringBlackTiles()
                 .anyMatch(tile -> tile.isEmpty() || piece.canEatNeighbor(tile.getPiece()));
         piece.setMovable(movable);
     }
@@ -144,11 +144,11 @@ public class Game {
         Graph graph = new Graph(board, source);
         Piece piece = source.getPiece();
         // Add edges for trivial moves (moves on empty squares, which weight 1)
-        piece.getReachableNeighborsBlackTiles()
+        piece.getReachableNeighboringBlackTiles()
                 .filter(Tile::isEmpty)
                 .forEach(tile -> graph.addEdge(source, tile, 1));
         // Add edges for eating pieces
-        piece.getReachableNeighborsBlackTiles()
+        piece.getReachableNeighboringBlackTiles()
                 .filter(tile -> !tile.isEmpty() && piece.canEatNeighbor(tile.getPiece()))
                 .forEach(tile -> graph.recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
         return graph;

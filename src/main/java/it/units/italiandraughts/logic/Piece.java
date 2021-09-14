@@ -42,7 +42,7 @@ public class Piece {
         return pieceType;
     }
 
-    public Stream<BlackTile> getReachableNeighborsBlackTiles() {
+    public Stream<BlackTile> getReachableNeighboringBlackTiles() {
         if (pieceType.equals(PieceType.KING)) {
             return getBlackTile().getNeighbors().values().stream();
         } else {
