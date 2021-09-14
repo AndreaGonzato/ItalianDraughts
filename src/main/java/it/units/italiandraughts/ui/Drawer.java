@@ -1,6 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.exception.IllegalPositionDrawingException;
+import it.units.italiandraughts.exception.IllegalSquareClickException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -109,6 +110,9 @@ public class Drawer implements PropertyChangeListener {
 
     private void onClickOnEmptySquare(MouseEvent event) {
         Square square = (Square) event.getSource();
+        if (square.getType().equals(SquareType.WHITE_SMOKE)){
+            throw new IllegalSquareClickException("Do not click on White Square");
+        }
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
             game.makeMove(game.getActiveTile().getPiece(), BlackTile.asBlackTile(square.getTile()), true);
         }
@@ -130,6 +134,7 @@ public class Drawer implements PropertyChangeListener {
 
     private void setClickableForEmptySquares() {
         matrixToStream(squares).filter(square -> square.getTile().isEmpty())
+                .filter(square -> square.getType().equals(SquareType.BRONZE))
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
     }
 
