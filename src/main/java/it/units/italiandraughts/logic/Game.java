@@ -61,18 +61,6 @@ public class Game {
         absoluteLongestPaths.forEach(System.out::println);
     }
 
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Player getActivePlayer() {
-        return activePlayer;
-    }
-
-    public List<BlackTile[]> getLog() {
-        return log;
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
@@ -142,30 +130,6 @@ public class Game {
         addPropertyChangeListener(drawer);
     }
 
-    public BlackTile getActiveTile() {
-        return activeTile;
-    }
-
-    public void setActiveTile(BlackTile tile) {
-        this.activeTile = tile;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public void setDrawer(Drawer drawer) {
-        this.drawer = drawer;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
     public void undo() {
         if (log.size() - 1 < 0) {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
@@ -189,4 +153,41 @@ public class Game {
                 .forEach(tile -> graph.recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
         return graph;
     }
+
+    public BlackTile getActiveTile() {
+        return activeTile;
+    }
+
+    public void setActiveTile(BlackTile tile) {
+        this.activeTile = tile;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setDrawer(Drawer drawer) {
+        this.drawer = drawer;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    public List<BlackTile[]> getLog() {
+        return log;
+    }
+
 }
