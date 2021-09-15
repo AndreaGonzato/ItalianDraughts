@@ -9,9 +9,12 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.input.MouseEvent;
+import org.jgrapht.GraphPath;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
@@ -105,7 +108,13 @@ public class Drawer implements PropertyChangeListener {
             throw new IllegalSquareClickException("Do not click on White Square");
         }
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
-            game.moveAlongPath(game.getActiveTile().getPiece(), BlackTile.asBlackTile(square.getTile()), true);
+            Optional<GraphPath<BlackTile, Edge>> optionalPath = game.getAbsoluteLongestPaths().stream()
+                    .filter(path -> path.getEndVertex().equals(square.getTile()))
+                    .findAny();
+            if (optionalPath.isPresent()) {
+                List<BlackTile> steps = optionalPath.get().getVertexList();
+                game.moveStepByStep(game.getActiveTile().getPiece(), steps, true);
+            }
         }
     }
 
