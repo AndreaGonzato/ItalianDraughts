@@ -167,7 +167,7 @@ public class Game {
     }
 
     public Graph generateGraphForTile(BlackTile source) {
-        Graph graph = new Graph(board, source);
+        Graph graph = new Graph(board, source, this);
         Piece piece = source.getPiece();
         // Add edges for trivial moves (moves on empty squares, which weight 1)
         piece.getReachableNeighboringBlackTiles()
