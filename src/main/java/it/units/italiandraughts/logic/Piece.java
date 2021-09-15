@@ -11,11 +11,10 @@ public class Piece {
     private PieceType pieceType;
     private boolean movable;
     private BlackTile blackTile;
+    private int promotionRow;
 
     public Piece(PieceColor pieceColor, PieceType pieceType) {
-        this.pieceColor = pieceColor;
-        this.pieceType = pieceType;
-        movable = false;
+        this(pieceColor, pieceType, null);
     }
 
     public Piece(PieceColor pieceColor) {
@@ -27,11 +26,15 @@ public class Piece {
     }
 
     public Piece(PieceColor pieceColor, PieceType pieceType, BlackTile blackTile) {
-        this.blackTile = blackTile;
         this.pieceColor = pieceColor;
+        this.blackTile = blackTile;
         this.pieceType = pieceType;
         movable = false;
         blackTile.placePiece(this);
+        switch (pieceColor) {
+            case WHITE -> promotionRow = 0;
+            case BLACK -> promotionRow = 7;
+        }
     }
 
     public PieceColor getPieceColor() {
@@ -79,6 +82,10 @@ public class Piece {
 
     public BlackTile getBlackTile() {
         return blackTile;
+    }
+
+    public int getPromotionRow() {
+        return promotionRow;
     }
 
     public void setBlackTile(BlackTile blackTile) {

@@ -129,7 +129,7 @@ public class Game {
         Move move = log.remove(log.size() - 1);
         move.getEatenPieces().forEach(EatenPiece::restore);
         Piece piece = move.getPiece();
-        if (piece.getBlackTile().getY() == piece.getPieceColor().getPromotionRow()) {
+        if (piece.getBlackTile().getY() == piece.getPromotionRow()) {
             piece.setPieceType(PieceType.MAN);
         }
         movePiece(move.getPiece(), move.getSource());
