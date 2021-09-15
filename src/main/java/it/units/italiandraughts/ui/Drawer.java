@@ -113,7 +113,7 @@ public class Drawer implements PropertyChangeListener {
                     .findAny();
             if (optionalPath.isPresent()) {
                 List<BlackTile> steps = optionalPath.get().getVertexList();
-                game.moveStepByStep(game.getActiveTile().getPiece(), steps, true);
+                game.makeMove(game.getActiveTile().getPiece(), steps, true);
             }
         }
     }

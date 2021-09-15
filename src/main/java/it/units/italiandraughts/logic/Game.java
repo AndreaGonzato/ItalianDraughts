@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.ui.Drawer;
+import it.units.italiandraughts.ui.PieceColor;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -91,7 +92,6 @@ public class Game {
 
     // TODO maybe shouldLog is useless
     public void moveStepByStep(Piece piece, List<BlackTile> steps, boolean shouldLog) {
-        playSound();
         BlackTile source = piece.getBlackTile();
         List<EatenPiece> eatenPieces = new ArrayList<>();
         for (int i = 1; i < steps.size(); i++) {
@@ -114,7 +114,25 @@ public class Game {
             log.add(new Move(piece, source, steps.get(steps.size() - 1), eatenPieces));
         }
 
+    }
+
+    public void makeMove(Piece piece, List<BlackTile> steps, boolean shouldLog) {
+        playSound();
+        moveStepByStep(piece, steps, shouldLog);
         finalizeMove();
+    }
+
+    public void undoLastMove() {
+        if (log.size() - 1 < 0) {
+            throw new IllegalButtonClickException("An illegal click was performed on the undo button");
+        }
+        Move move = log.remove(log.size() - 1);
+        move.getEatenPieces().forEach(EatenPiece::restore);
+        Piece piece = move.getPiece();
+        if (piece.getBlackTile().getY() == piece.getPieceColor().getPromotionRow()) {
+            piece.setPieceType(PieceType.MAN);
+        }
+        movePiece(move.getPiece(), move.getSource());
     }
 
     private void finalizeMove() {
@@ -156,12 +174,7 @@ public class Game {
     }
 
     public void undo() {
-        if (log.size() - 1 < 0) {
-            throw new IllegalButtonClickException("An illegal click was performed on the undo button");
-        }
-        Move move = log.remove(log.size() - 1);
-        move.getEatenPieces().forEach(EatenPiece::restore);
-        movePiece(move.getPiece(), move.getSource());
+        undoLastMove();
         finalizeMove();
         drawer.turnOffHighlightedSquares();
     }
