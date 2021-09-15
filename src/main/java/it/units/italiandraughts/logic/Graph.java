@@ -21,12 +21,12 @@ public class Graph {
     private final List<GraphPath<BlackTile, Edge>> longestPaths;
     private final Game game;
 
-    public Graph(Board board, BlackTile source, Game game) {
+    public Graph(BlackTile source, Game game) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);
         this.source = source;
         this.game = game;
         possibleDestinations = new ArrayList<>();
-        addVertices(board);
+        addVertices(game.getBoard());
         longestPaths = new ArrayList<>();
     }
 
