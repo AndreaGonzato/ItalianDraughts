@@ -55,15 +55,14 @@ public class Graph {
             weight *= EATING_KING_MULTIPLIER;
         }
         addEdge(eatingPiece.getBlackTile(), landingTile, weight);
-        landingTile.placePiece(new Piece(eatingPiece.getPieceColor(),
-                eatingPiece.getPieceType(), landingTile));
+        game.moveStepByStep(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile), true);
         List<BlackTile> eatableNeighbors = landingTile.getPiece().getReachableNeighboringBlackTiles()
                 .filter(blackTileNeighbor -> !blackTileNeighbor.isEmpty() && landingTile.getPiece().canEatNeighbor(blackTileNeighbor.getPiece()))
                 .collect(Collectors.toList());
         for (BlackTile blackTileNeighbor : eatableNeighbors) {
             recursivelyAddEatingEdges(landingTile.getPiece(), blackTileNeighbor.getPiece(), ++step);
         }
-        landingTile.removePiece();
+        game.undoLastMove();
     }
 
     void explorePossibleMoves() {
