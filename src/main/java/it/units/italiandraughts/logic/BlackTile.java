@@ -50,14 +50,9 @@ public class BlackTile extends Tile {
         this.piece = piece;
         piece.setBlackTile(this);
 
-        if (y == 0 && piece.getPieceColor().equals(PieceColor.WHITE)){
+        if (y == piece.getPieceColor().getPromotionRow()) {
             piece.setPieceType(PieceType.KING);
         }
-
-        if (y == 7 && piece.getPieceColor().equals(PieceColor.BLACK)){
-            piece.setPieceType(PieceType.KING);
-        }
-
     }
 
     Piece removePiece() {
