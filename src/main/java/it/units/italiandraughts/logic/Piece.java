@@ -37,6 +37,11 @@ public class Piece {
         blackTile.placePiece(this);
     }
 
+    // TODO WIP implement this method
+    public void moveToReachableNeighboringBlackTiles(BlackTile targetBlackTile){
+
+    }
+
     public PieceColor getPieceColor() {
         return pieceColor;
     }
@@ -70,7 +75,7 @@ public class Piece {
     }
 
 
-    // TODO WIP
+    // TODO WIP, for the moment this method is not used. It is used only in Test
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
 

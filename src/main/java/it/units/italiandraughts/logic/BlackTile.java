@@ -1,16 +1,15 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.ui.PieceColor;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class BlackTile extends Tile {
 
     private Piece piece;
     private final Map<String, BlackTile> neighbors = new HashMap<>();
 
-    BlackTile(int x, int y){
+    BlackTile(int x, int y) {
         super(x, y);
     }
 
@@ -38,7 +37,16 @@ public class BlackTile extends Tile {
         }
     }
 
-    public static BlackTile asBlackTile(Tile tile){
+    public boolean isNeighbor(BlackTile blackTile) {
+        Optional<String> eatingDirection = neighbors
+                .keySet()
+                .stream()
+                .filter(key -> blackTile.equals(neighbors.get(key)))
+                .findFirst();
+        return eatingDirection.isPresent();
+    }
+
+    public static BlackTile asBlackTile(Tile tile) {
         return (BlackTile) tile;
     }
 
