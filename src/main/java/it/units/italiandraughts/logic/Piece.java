@@ -69,6 +69,22 @@ public class Piece {
         return false;
     }
 
+    /*
+    TODO WIP
+    public void eatNeighbor(Piece otherPiece) {
+        if (canEatNeighbor(otherPiece)) {
+
+            Map<String, BlackTile> map = this.getBlackTile().getNeighbors();
+            String eatingDirection = map.keySet()
+                    .stream()
+                    .filter(key -> otherPiece.getBlackTile().equals(map.get(key)))
+                    .findFirst()
+                    .get();
+        }
+    }
+
+     */
+
     BlackTile getPositionAfterEating(Piece otherPiece) {
         Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
                 .filter(entry -> entry.getValue().equals(otherPiece.getBlackTile()))
