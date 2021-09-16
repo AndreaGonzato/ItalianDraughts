@@ -79,7 +79,6 @@ public class Piece {
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
 
-            Map<String, BlackTile> mapNeighborsBlackTile = this.getBlackTile().getNeighbors();
             String eatingDirection = blackTile.getNeighborKey(otherPiece.blackTile);
 
             Optional<BlackTile> landingTile = Optional.ofNullable(otherPiece.getBlackTile().getNeighbors().get(eatingDirection));
