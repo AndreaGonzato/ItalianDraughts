@@ -46,6 +46,19 @@ public class BlackTile extends Tile {
         return eatingDirection.isPresent();
     }
 
+    public String getNeighborKey(BlackTile neighborBlackTile){
+        if (isNeighbor(neighborBlackTile)){
+            return neighbors
+                    .keySet()
+                    .stream()
+                    .filter(key -> neighborBlackTile.equals(neighbors.get(key)))
+                    .findFirst()
+                    .orElseThrow(NullPointerException::new);
+        }else {
+            throw new IllegalArgumentException("you didn't pass a neighbor");
+        }
+    }
+
     public static BlackTile asBlackTile(Tile tile) {
         return (BlackTile) tile;
     }
