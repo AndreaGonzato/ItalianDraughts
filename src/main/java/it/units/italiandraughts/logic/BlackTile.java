@@ -37,11 +37,11 @@ public class BlackTile extends Tile {
         }
     }
 
-    public boolean isNeighbor(BlackTile blackTile) {
+    public boolean isNeighbor(BlackTile otherBlackTile) {
         Optional<String> eatingDirection = neighbors
                 .keySet()
                 .stream()
-                .filter(key -> blackTile.equals(neighbors.get(key)))
+                .filter(key -> otherBlackTile.equals(neighbors.get(key)))
                 .findFirst();
         return eatingDirection.isPresent();
     }
