@@ -96,18 +96,7 @@ public class Game {
         List<EatenPiece> eatenPieces = new ArrayList<>();
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
-            if (!piece.getReachableNeighboringBlackTiles().collect(Collectors.toList()).contains(landingTile)) {
-                Optional<BlackTile> optionalOverTile = piece.getReachableNeighboringBlackTiles()
-                        .filter(tile -> !tile.isEmpty() &&
-                                landingTile.equals(piece.getPositionAfterEating(tile.getPiece())))
-                        .findAny();
-                if (optionalOverTile.isPresent()) {
-                    EatenPiece eatenPiece = new EatenPiece(optionalOverTile.get());
-                    eatenPieces.add(eatenPiece);
-                    optionalOverTile.get().removePiece();
-                }
-            }
-            movePiece(piece, landingTile);
+            piece.moveToReachableNeighboringBlackTiles(landingTile, eatenPieces);
         }
 
         if (shouldLog) {

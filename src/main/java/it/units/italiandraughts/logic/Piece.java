@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.PieceColor;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -38,8 +39,31 @@ public class Piece {
     }
 
     // TODO WIP implement this method
-    public void moveToReachableNeighboringBlackTiles(BlackTile targetBlackTile){
+    public void moveToReachableNeighboringBlackTiles(BlackTile targetBlackTile, List<EatenPiece> eatenPieces) {
+        if (blackTile.isNeighbor(targetBlackTile)) {
+            // simple move
+            blackTile.removePiece();
+            targetBlackTile.placePiece(this);
+        } else {
+            // move and eat a piece
 
+            BlackTile overTile = null;
+            for (BlackTile blackTile : blackTile.getNeighbors().values()){
+                for (BlackTile blackTile2 : blackTile.getNeighbors().values()){
+                    if (blackTile2.equals(targetBlackTile)){
+                        overTile = blackTile;
+                        break;
+                    }
+                }
+            }
+
+            if (overTile != null){
+                eatenPieces.add(new EatenPiece(overTile));
+                eatNeighbor(overTile.getPiece());
+            }
+
+
+        }
     }
 
     public PieceColor getPieceColor() {
@@ -75,7 +99,7 @@ public class Piece {
     }
 
 
-    // TODO WIP, for the moment this method is not used. It is used only in Test
+    // TODO WIP, for the moment this method is not used. It is used only in Test.
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
 
@@ -85,9 +109,7 @@ public class Piece {
             BlackTile sourceBlackTile = this.getBlackTile();
             BlackTile throughBlackTile = otherPiece.getBlackTile();
 
-            EatenPiece eatenPiece;
             if (landingTile.isPresent()) {
-                eatenPiece = new EatenPiece(otherPiece.getBlackTile());
                 sourceBlackTile.removePiece();
                 throughBlackTile.removePiece();
                 landingTile.get().placePiece(this);
