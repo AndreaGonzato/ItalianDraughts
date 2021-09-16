@@ -143,11 +143,6 @@ public class Drawer implements PropertyChangeListener {
         matrixToStream(board).filter(tile -> !tile.isEmpty())
                 .forEach(tile -> pieceDrawer.drawPieceOnSquare(squares[tile.getY()][tile.getX()],
                         BlackTile.asBlackTile(tile).getPiece()));
-        /*
-        // TODO here we need to call methods to draw other elements
-        drawGreenCircleOnEmptySquare(squares[4][2]); // TODO test draw a single greenCircle, remove this line
-        pieceDrawer.drawKingOnEmptySquare(squares[4][4]); // TODO test draw a king, remove this line
-         */
     }
 
     private void drawGreenCircleOnEmptySquare(Square square) {
