@@ -69,21 +69,37 @@ public class Piece {
         return false;
     }
 
-    /*
-    TODO WIP
+
+    // TODO WIP
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
 
-            Map<String, BlackTile> map = this.getBlackTile().getNeighbors();
-            String eatingDirection = map.keySet()
+            Map<String, BlackTile> mapNeighborsBlackTile = this.getBlackTile().getNeighbors();
+            String eatingDirection = this.getBlackTile()
+                    .getNeighbors()
+                    .keySet()
                     .stream()
-                    .filter(key -> otherPiece.getBlackTile().equals(map.get(key)))
+                    .filter(key -> otherPiece.getBlackTile().equals(mapNeighborsBlackTile.get(key)))
                     .findFirst()
-                    .get();
+                    .orElseThrow(IllegalArgumentException::new); //TODO find a better Exception
+
+
+            Optional<BlackTile> landingTile = Optional.ofNullable(otherPiece.getBlackTile().getNeighbors().get(eatingDirection));
+            BlackTile sourceBlackTile = this.getBlackTile();
+            BlackTile throughBlackTile = otherPiece.getBlackTile();
+
+            EatenPiece eatenPiece;
+            if (landingTile.isPresent()) {
+                eatenPiece = new EatenPiece(otherPiece.getBlackTile());
+                sourceBlackTile.removePiece();
+                throughBlackTile.removePiece();
+                landingTile.get().placePiece(this);
+            }
+
+
         }
     }
 
-     */
 
     BlackTile getPositionAfterEating(Piece otherPiece) {
         Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()

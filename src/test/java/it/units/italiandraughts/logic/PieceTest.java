@@ -59,10 +59,17 @@ public class PieceTest {
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        BlackTile blackTile3 = BlackTile.asBlackTile(board.getTiles()[2][2]);
+
 
         Piece whitePiece = new Piece(PieceColor.WHITE, blackTile1);
         Piece blackPiece = new Piece(PieceColor.BLACK, blackTile2);
 
-        Assertions.assertTrue(whitePiece.canEatNeighbor(blackPiece));
+        whitePiece.eatNeighbor(blackPiece);
+
+        // TODO need to write code to pass this assertion
+        Assertions.assertNull(blackTile1.getPiece());
+        Assertions.assertNull(blackTile2.getPiece());
+        Assertions.assertEquals(whitePiece, blackTile3.getPiece());
     }
 }
