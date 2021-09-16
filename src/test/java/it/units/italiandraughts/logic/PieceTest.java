@@ -50,4 +50,19 @@ public class PieceTest {
         Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
 
     }
+
+    @Test
+    void eatNeighbor(){
+        Tile[][] tiles = initTiles();
+        Board board = new Board(tiles);
+        addNeighbors(board);
+
+        BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
+
+        Piece whitePiece = new Piece(PieceColor.WHITE, blackTile1);
+        Piece blackPiece = new Piece(PieceColor.BLACK, blackTile2);
+
+        Assertions.assertTrue(whitePiece.canEatNeighbor(blackPiece));
+    }
 }

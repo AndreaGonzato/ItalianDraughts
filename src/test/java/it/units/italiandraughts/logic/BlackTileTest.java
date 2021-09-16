@@ -102,14 +102,47 @@ public class BlackTileTest {
 
     }
 
-    public static void addNeighbors(Board board){
-        for (int i = 0; i < Board.SIZE; i++) {
-            for (int j = 0; j < Board.SIZE; j++) {
-                if ((i+j)%2==0){
-                    BlackTile.asBlackTile(board.getTiles()[i][j]).addNeighbors(board);
-                }
-            }
-        }
+    public static void addNeighbors(Board board) {
+
+        BlackTile.asBlackTile(board.getTiles()[0][0]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[0][2]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[0][4]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[0][6]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[1][1]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[1][3]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[1][5]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[1][7]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[2][0]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[2][2]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[2][4]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[2][6]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[3][1]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[3][3]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[3][5]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[3][7]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[4][0]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[4][2]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[4][4]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[4][6]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[5][1]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[5][3]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[5][5]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[5][7]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[6][0]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[6][2]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[6][4]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[6][6]).addNeighbors(board);
+
+        BlackTile.asBlackTile(board.getTiles()[7][1]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[7][3]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[7][5]).addNeighbors(board);
+        BlackTile.asBlackTile(board.getTiles()[7][7]).addNeighbors(board);
     }
 
 
