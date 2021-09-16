@@ -108,11 +108,11 @@ public class Drawer implements PropertyChangeListener {
             throw new IllegalSquareClickException("Do not click on White Square");
         }
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
-            Optional<GraphPath<BlackTile, Edge>> optionalPath = game.getAbsoluteLongestPaths().stream()
+            Optional<GraphPath<BlackTile, Edge>> absoluteLongestPathThatEndOnClickedSquare = game.getAbsoluteLongestPaths().stream()
                     .filter(path -> path.getEndVertex().equals(square.getTile()))
                     .findAny();
-            if (optionalPath.isPresent()) {
-                List<BlackTile> steps = optionalPath.get().getVertexList();
+            if (absoluteLongestPathThatEndOnClickedSquare.isPresent()) {
+                List<BlackTile> steps = absoluteLongestPathThatEndOnClickedSquare.get().getVertexList();
                 game.makeMove(game.getActiveTile().getPiece(), steps, true);
             }
         }
