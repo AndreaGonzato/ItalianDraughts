@@ -2,7 +2,6 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.ui.Drawer;
-import it.units.italiandraughts.ui.PieceColor;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -165,7 +164,7 @@ public class Game {
     public void undo() {
         undoLastMove();
         finalizeMove();
-        drawer.turnOffHighlightedSquares();
+        drawer.turnOffHighlightedSquaresAndGreenCircles();
     }
 
     public Graph generateGraphForTile(BlackTile source) {

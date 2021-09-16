@@ -74,13 +74,13 @@ public class Drawer implements PropertyChangeListener {
         }
     }
 
-    public void turnOffHighlightedSquares() {
+    public void turnOffHighlightedSquaresAndGreenCircles() {
         matrixToStream(squares).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
         matrixToStream(squares).filter(Square::hasGreenCircle).forEach(Square::removeGreenCircle);
     }
 
     private void highlightSquare(Square square) {
-        turnOffHighlightedSquares();
+        turnOffHighlightedSquaresAndGreenCircles();
         square.setHighlighted(true);
     }
 
