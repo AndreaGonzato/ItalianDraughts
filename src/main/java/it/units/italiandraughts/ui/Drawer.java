@@ -64,7 +64,6 @@ public class Drawer implements PropertyChangeListener {
     }
 
     public void propertyChange(PropertyChangeEvent event) {
-        // TODO remove this if if no other PropertyChangeEvent are used
         if ("activePlayer".equals(event.getPropertyName())) {
             setClickableForPlayer((Player) event.getNewValue());
             unsetClickableForPlayer((Player) event.getOldValue());
