@@ -161,7 +161,7 @@ public class BoardTest {
 
 
 
-    private void placePieceOnTile(BlackTile blackTile, PieceColor pieceColor){
+    public static void placePieceOnTile(BlackTile blackTile, PieceColor pieceColor){
         blackTile.placePiece(new Piece(pieceColor, blackTile));
     }
 

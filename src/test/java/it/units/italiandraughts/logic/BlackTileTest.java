@@ -102,5 +102,15 @@ public class BlackTileTest {
 
     }
 
+    public static void addNeighbors(Board board){
+        for (int i = 0; i < Board.SIZE; i++) {
+            for (int j = 0; j < Board.SIZE; j++) {
+                if ((i+j)%2==0){
+                    BlackTile.asBlackTile(board.getTiles()[i][j]).addNeighbors(board);
+                }
+            }
+        }
+    }
+
 
 }
