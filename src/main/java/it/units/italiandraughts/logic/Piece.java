@@ -30,11 +30,11 @@ public class Piece {
         this.blackTile = blackTile;
         this.pieceType = pieceType;
         movable = false;
-        blackTile.placePiece(this);
         switch (pieceColor) {
             case WHITE -> promotionRow = 0;
             case BLACK -> promotionRow = 7;
         }
+        blackTile.placePiece(this);
     }
 
     public PieceColor getPieceColor() {
