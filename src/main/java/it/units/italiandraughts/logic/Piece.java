@@ -80,14 +80,7 @@ public class Piece {
         if (canEatNeighbor(otherPiece)) {
 
             Map<String, BlackTile> mapNeighborsBlackTile = this.getBlackTile().getNeighbors();
-            String eatingDirection = this.getBlackTile()
-                    .getNeighbors()
-                    .keySet()
-                    .stream()
-                    .filter(key -> otherPiece.getBlackTile().equals(mapNeighborsBlackTile.get(key)))
-                    .findFirst()
-                    .orElseThrow(IllegalArgumentException::new); //TODO find a better Exception
-
+            String eatingDirection = blackTile.getNeighborKey(otherPiece.blackTile);
 
             Optional<BlackTile> landingTile = Optional.ofNullable(otherPiece.getBlackTile().getNeighbors().get(eatingDirection));
             BlackTile sourceBlackTile = this.getBlackTile();
