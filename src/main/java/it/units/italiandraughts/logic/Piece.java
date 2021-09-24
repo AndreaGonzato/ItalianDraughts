@@ -40,18 +40,18 @@ public class Piece {
     }
 
     // TODO WIP implement this method
-    public void moveToReachableNeighboringBlackTile(BlackTile targetBlackTile, List<EatenPiece> eatenPieces) {
-        if (blackTile.isNeighbor(targetBlackTile)) {
+    public void moveToReachableNeighboringBlackTile(BlackTile landingTile, List<EatenPiece> eatenPieces) {
+        if (blackTile.isNeighbor(landingTile)) {
             // simple move
             blackTile.removePiece();
-            targetBlackTile.placePiece(this);
+            landingTile.placePiece(this);
         } else {
             // move and eat a piece
 
             BlackTile overTile = null;
             for (BlackTile blackTile : blackTile.getNeighbors().values()){
                 for (BlackTile blackTile2 : blackTile.getNeighbors().values()){
-                    if (blackTile2.equals(targetBlackTile)){
+                    if (blackTile2.equals(landingTile)){
                         overTile = blackTile;
                         break;
                     }
