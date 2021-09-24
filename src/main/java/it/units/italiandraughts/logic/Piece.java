@@ -47,23 +47,13 @@ public class Piece {
             landingTile.placePiece(this);
         } else {
             // move and eat a piece
+            BlackTile overTile = blackTile.getNeighbors().values().stream()
+                    .filter(neighbor -> neighbor.getNeighbors().values().stream()
+                            .anyMatch(blackTile -> blackTile.equals(landingTile)))
+                    .findAny().orElseThrow();
 
-            BlackTile overTile = null;
-            for (BlackTile blackTile : blackTile.getNeighbors().values()){
-                for (BlackTile blackTile2 : blackTile.getNeighbors().values()){
-                    if (blackTile2.equals(landingTile)){
-                        overTile = blackTile;
-                        break;
-                    }
-                }
-            }
-
-            if (overTile != null){
-                eatenPieces.add(new EatenPiece(overTile));
-                eatNeighbor(overTile.getPiece());
-            }
-
-
+            eatenPieces.add(new EatenPiece(overTile));
+            eatNeighbor(overTile.getPiece());
         }
     }
 
@@ -115,8 +105,6 @@ public class Piece {
                 overBlackTile.removePiece();
                 landingTile.get().placePiece(this);
             }
-
-
         }
     }
 
