@@ -108,11 +108,11 @@ public class Piece {
 
             Optional<BlackTile> landingTile = Optional.ofNullable(otherPiece.getBlackTile().getNeighbors().get(eatingDirection));
             BlackTile sourceBlackTile = this.getBlackTile();
-            BlackTile throughBlackTile = otherPiece.getBlackTile();
+            BlackTile overBlackTile = otherPiece.getBlackTile();
 
             if (landingTile.isPresent()) {
                 sourceBlackTile.removePiece();
-                throughBlackTile.removePiece();
+                overBlackTile.removePiece();
                 landingTile.get().placePiece(this);
             }
 
