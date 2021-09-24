@@ -2,7 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.PieceColor;
 
-import java.util.List;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -39,7 +39,7 @@ public class Piece {
         blackTile.placePiece(this);
     }
 
-    // TODO WIP implement this method
+
     public Optional<EatenPiece> moveToReachableNeighboringBlackTile(BlackTile landingTile) {
         if (blackTile.isNeighbor(landingTile)) {
             // simple move
@@ -92,7 +92,6 @@ public class Piece {
     }
 
 
-    // TODO WIP, for the moment this method is not used. It is used only in Test.
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
 
