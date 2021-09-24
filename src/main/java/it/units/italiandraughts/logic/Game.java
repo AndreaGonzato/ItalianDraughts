@@ -83,7 +83,6 @@ public class Game {
         }).start();
     }
 
-    // TODO maybe shouldLog is useless
     public void createDoAndSaveMove(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size()-1), steps);
         move.doIt();
