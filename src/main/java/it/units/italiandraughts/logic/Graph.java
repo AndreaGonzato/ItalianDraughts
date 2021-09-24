@@ -55,7 +55,7 @@ public class Graph {
             weight *= EATING_KING_MULTIPLIER;
         }
         addEdge(eatingPiece.getBlackTile(), landingTile, weight);
-        game.moveStepByStep(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile));
+        game.createDoAndSaveMove(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile));
         List<BlackTile> eatableNeighbors = landingTile.getPiece().getReachableNeighboringBlackTiles()
                 .filter(blackTileNeighbor -> !blackTileNeighbor.isEmpty() && landingTile.getPiece().canEatNeighbor(blackTileNeighbor.getPiece()))
                 .collect(Collectors.toList());
