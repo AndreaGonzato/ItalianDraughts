@@ -59,6 +59,12 @@ public class Piece {
         }
     }
 
+    public void move(BlackTile destination) {
+        BlackTile source = blackTile;
+        source.removePiece();
+        destination.placePiece(this);
+    }
+
     public PieceColor getPieceColor() {
         return pieceColor;
     }

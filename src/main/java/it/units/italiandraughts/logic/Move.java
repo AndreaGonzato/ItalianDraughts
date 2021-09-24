@@ -40,13 +40,8 @@ public class Move {
         if (pieceBeenPromoted) {
             piece.setPieceType(PieceType.MAN);
         }
-        movePiece(piece, source);
-    }
+        piece.move(source);
 
-    public void movePiece(Piece piece, BlackTile destination) {
-        BlackTile source = piece.getBlackTile();
-        source.removePiece();
-        destination.placePiece(piece);
     }
 
     public Piece getPiece() {
