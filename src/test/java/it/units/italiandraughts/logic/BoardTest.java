@@ -37,7 +37,7 @@ public class BoardTest {
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][7]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
         Move move = new Move(piece, source, destination, List.of(source, destination));
-        move.doIt();
+        move.make();
 
         Assertions.assertEquals(expectedBoard, board);
     }

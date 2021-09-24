@@ -23,7 +23,7 @@ public class Move {
 
     }
 
-    public void doIt(){
+    public void make(){
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
             PieceType pieceTypeBeforeMoving = piece.getPieceType();
@@ -35,7 +35,7 @@ public class Move {
         }
     }
 
-    public void undoIt(){
+    public void undo(){
         eatenPieces.forEach(EatenPiece::restore);
         if (pieceBeenPromoted) {
             piece.setPieceType(PieceType.MAN);

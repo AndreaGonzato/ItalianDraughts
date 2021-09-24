@@ -85,7 +85,7 @@ public class Game {
 
     public void createDoAndSaveMove(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size()-1), steps);
-        move.doIt();
+        move.make();
         moves.add(move);
 
     }
@@ -101,7 +101,7 @@ public class Game {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
         Move move = moves.remove(moves.size() - 1);
-        move.undoIt();
+        move.undo();
     }
 
     private void finalizeMove() {
