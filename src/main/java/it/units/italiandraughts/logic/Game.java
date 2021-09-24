@@ -90,17 +90,16 @@ public class Game {
     }
 
     // TODO maybe shouldLog is useless
-    public void moveStepByStep(Piece piece, List<BlackTile> steps, boolean shouldLog) {
-
+    public void moveStepByStep(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size()-1), steps);
         move.doIt();
         moves.add(move);
 
     }
 
-    public void makeMove(Piece piece, List<BlackTile> steps, boolean shouldLog) {
+    public void makeMove(Piece piece, List<BlackTile> steps) {
         playSound();
-        moveStepByStep(piece, steps, shouldLog);
+        moveStepByStep(piece, steps);
         finalizeMove();
     }
 

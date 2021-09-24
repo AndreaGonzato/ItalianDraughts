@@ -112,7 +112,7 @@ public class Drawer implements PropertyChangeListener {
                     .findAny();
             if (absoluteLongestPathThatEndOnClickedSquare.isPresent()) {
                 List<BlackTile> steps = absoluteLongestPathThatEndOnClickedSquare.get().getVertexList();
-                game.makeMove(game.getActiveTile().getPiece(), steps, true);
+                game.makeMove(game.getActiveTile().getPiece(), steps);
             }
         }
     }
