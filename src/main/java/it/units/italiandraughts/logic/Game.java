@@ -25,7 +25,7 @@ public class Game {
     private BlackTile activeTile;
     private Drawer drawer;
     private final PropertyChangeSupport support;
-    private final List<Move> log;
+    private final List<Move> moves;
     private final MediaPlayer mediaPlayer;
     private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
 
@@ -36,7 +36,7 @@ public class Game {
         this.activePlayer = player1;
         support = new PropertyChangeSupport(this);
         newTurn();
-        log = new ArrayList<>();
+        moves = new ArrayList<>();
         mediaPlayer = initMediaPlayer();
     }
 
@@ -91,16 +91,10 @@ public class Game {
 
     // TODO maybe shouldLog is useless
     public void moveStepByStep(Piece piece, List<BlackTile> steps, boolean shouldLog) {
-        BlackTile source = piece.getBlackTile();
-        List<EatenPiece> eatenPieces = new ArrayList<>();
-        for (int i = 1; i < steps.size(); i++) {
-            final BlackTile landingTile = steps.get(i);
-            piece.moveToReachableNeighboringBlackTile(landingTile, eatenPieces);
-        }
 
-        if (shouldLog) {
-            log.add(new Move(piece, source, steps.get(steps.size() - 1), eatenPieces));
-        }
+        Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size()-1), steps);
+        move.doIt();
+        moves.add(move);
 
     }
 
@@ -111,10 +105,10 @@ public class Game {
     }
 
     public void undoLastMove() {
-        if (log.size() - 1 < 0) {
+        if (moves.size() - 1 < 0) {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
-        Move move = log.remove(log.size() - 1);
+        Move move = moves.remove(moves.size() - 1);
         move.getEatenPieces().forEach(EatenPiece::restore);
         Piece piece = move.getPiece();
         if (piece.getBlackTile().getY() == piece.getPromotionRow()) {
@@ -153,7 +147,7 @@ public class Game {
 
     public void reset() {
         board = new Board();
-        log.clear();
+        moves.clear();
         activePlayer = player1;
         newTurn();
         support.removePropertyChangeListener(drawer);
@@ -219,8 +213,8 @@ public class Game {
         return activePlayer;
     }
 
-    public List<Move> getLog() {
-        return log;
+    public List<Move> getMoves() {
+        return moves;
     }
 
 }
