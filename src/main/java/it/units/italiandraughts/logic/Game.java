@@ -76,12 +76,6 @@ public class Game {
         support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
     }
 
-    public void movePiece(Piece piece, BlackTile destination) {
-        BlackTile source = piece.getBlackTile();
-        source.removePiece();
-        destination.placePiece(piece);
-    }
-
     private void playSound() {
         new Thread(() -> {
             mediaPlayer.play();
@@ -108,12 +102,7 @@ public class Game {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
         Move move = moves.remove(moves.size() - 1);
-        move.getEatenPieces().forEach(EatenPiece::restore);
-        Piece piece = move.getPiece();
-        if (piece.getBlackTile().getY() == piece.getPromotionRow()) {
-            piece.setPieceType(PieceType.MAN);
-        }
-        movePiece(move.getPiece(), move.getSource());
+        move.undoIt();
     }
 
     private void finalizeMove() {

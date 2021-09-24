@@ -1,5 +1,7 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.exception.IllegalButtonClickException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,20 @@ public class Move {
             final BlackTile landingTile = steps.get(i);
             piece.moveToReachableNeighboringBlackTile(landingTile, eatenPieces);
         }
+    }
+
+    public void undoIt(){
+        eatenPieces.forEach(EatenPiece::restore);
+        if (piece.getBlackTile().getY() == piece.getPromotionRow()) {
+            piece.setPieceType(PieceType.MAN);
+        }
+        movePiece(piece, source);
+    }
+
+    public void movePiece(Piece piece, BlackTile destination) {
+        BlackTile source = piece.getBlackTile();
+        source.removePiece();
+        destination.placePiece(piece);
     }
 
     public Piece getPiece() {
