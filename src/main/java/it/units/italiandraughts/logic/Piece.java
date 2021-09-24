@@ -15,7 +15,8 @@ public class Piece {
     private int promotionRow;
 
     public Piece(PieceColor pieceColor, PieceType pieceType) {
-        this(pieceColor, pieceType, null);
+        this.pieceColor = pieceColor;
+        this.pieceType = pieceType;
     }
 
     public Piece(PieceColor pieceColor) {
