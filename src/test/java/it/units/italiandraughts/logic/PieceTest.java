@@ -4,11 +4,8 @@ import it.units.italiandraughts.ui.PieceColor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static it.units.italiandraughts.logic.BlackTileTest.addNeighbors;
 import static it.units.italiandraughts.logic.BoardTest.initTiles;
-import static it.units.italiandraughts.logic.BoardTest.placePieceOnTile;
 
 public class PieceTest {
 

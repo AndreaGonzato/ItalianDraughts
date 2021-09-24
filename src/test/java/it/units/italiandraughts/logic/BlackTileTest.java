@@ -67,8 +67,7 @@ public class BlackTileTest {
     void isEmptyOnEmptyBlackTile() {
         BlackTile blackTile = new BlackTile(0, 0);
 
-        Assertions.assertEquals(true, blackTile.isEmpty());
-
+        Assertions.assertTrue(blackTile.isEmpty());
     }
 
     @Test
@@ -76,7 +75,7 @@ public class BlackTileTest {
         BlackTile blackTile = new BlackTile(0, 0);
         blackTile.placePiece(new Piece(PieceColor.BLACK));
 
-        Assertions.assertEquals(false, blackTile.isEmpty());
+        Assertions.assertFalse(blackTile.isEmpty());
 
     }
 
