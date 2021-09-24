@@ -4,6 +4,7 @@ import it.units.italiandraughts.exception.IllegalButtonClickException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Move {
 
@@ -25,7 +26,8 @@ public class Move {
     public void doIt(){
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
-            piece.moveToReachableNeighboringBlackTile(landingTile, eatenPieces);
+            Optional<EatenPiece> eatenPieceOptional = piece.moveToReachableNeighboringBlackTile(landingTile);
+            eatenPieceOptional.ifPresent(eatenPieces::add);
         }
     }
 

@@ -40,11 +40,12 @@ public class Piece {
     }
 
     // TODO WIP implement this method
-    public void moveToReachableNeighboringBlackTile(BlackTile landingTile, List<EatenPiece> eatenPieces) {
+    public Optional<EatenPiece> moveToReachableNeighboringBlackTile(BlackTile landingTile) {
         if (blackTile.isNeighbor(landingTile)) {
             // simple move
             blackTile.removePiece();
             landingTile.placePiece(this);
+            return Optional.empty();
         } else {
             // move and eat a piece
             BlackTile overTile = blackTile.getNeighbors().values().stream()
@@ -52,8 +53,9 @@ public class Piece {
                             .anyMatch(blackTile -> blackTile.equals(landingTile)))
                     .findAny().orElseThrow();
 
-            eatenPieces.add(new EatenPiece(overTile));
+            Optional<EatenPiece> eatenPieceOptional = Optional.of(new EatenPiece(overTile));
             eatNeighbor(overTile.getPiece());
+            return eatenPieceOptional;
         }
     }
 
