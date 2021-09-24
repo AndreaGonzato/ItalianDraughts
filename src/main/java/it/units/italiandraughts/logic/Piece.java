@@ -40,7 +40,7 @@ public class Piece {
     }
 
     // TODO WIP implement this method
-    public void moveToReachableNeighboringBlackTiles(BlackTile targetBlackTile, List<EatenPiece> eatenPieces) {
+    public void moveToReachableNeighboringBlackTile(BlackTile targetBlackTile, List<EatenPiece> eatenPieces) {
         if (blackTile.isNeighbor(targetBlackTile)) {
             // simple move
             blackTile.removePiece();

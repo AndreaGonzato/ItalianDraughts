@@ -95,7 +95,7 @@ public class Game {
         List<EatenPiece> eatenPieces = new ArrayList<>();
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
-            piece.moveToReachableNeighboringBlackTiles(landingTile, eatenPieces);
+            piece.moveToReachableNeighboringBlackTile(landingTile, eatenPieces);
         }
 
         if (shouldLog) {
