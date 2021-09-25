@@ -11,7 +11,7 @@ public class PieceTest {
 
     @Test
     void getPieceType() {
-        Piece piece = new Piece(PieceColor.WHITE, PieceType.MAN);
+        Piece piece = new WhitePiece(PieceType.MAN);
 
         Assertions.assertEquals(PieceType.MAN, piece.getPieceType());
     }
@@ -25,8 +25,8 @@ public class PieceTest {
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
 
-        Piece whitePiece = new Piece(PieceColor.WHITE, blackTile1);
-        Piece blackPiece = new Piece(PieceColor.BLACK, blackTile2);
+        Piece whitePiece = new WhitePiece(blackTile1);
+        Piece blackPiece = new BlackPiece(blackTile2);
 
         Assertions.assertTrue(whitePiece.canEatNeighbor(blackPiece));
 
@@ -41,8 +41,8 @@ public class PieceTest {
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
 
-        Piece whitePiece = new Piece(PieceColor.WHITE, blackTile1);
-        Piece blackPiece = new Piece(PieceColor.BLACK, blackTile2);
+        Piece whitePiece = new WhitePiece(blackTile1);
+        Piece blackPiece = new BlackPiece(blackTile2);
 
         Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
 
@@ -59,8 +59,8 @@ public class PieceTest {
         BlackTile blackTile3 = BlackTile.asBlackTile(board.getTiles()[2][2]);
 
 
-        Piece whitePiece = new Piece(PieceColor.WHITE, blackTile1);
-        Piece blackPiece = new Piece(PieceColor.BLACK, blackTile2);
+        Piece whitePiece = new WhitePiece(blackTile1);
+        Piece blackPiece = new BlackPiece(blackTile2);
 
         whitePiece.eatNeighbor(blackPiece);
 

@@ -37,10 +37,10 @@ public class Board {
     private void initPieces() {
         matrixToStream(tiles).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
                 .map(BlackTile::asBlackTile)
-                .forEach(tile -> tile.placePiece(new Piece(PieceColor.BLACK, tile)));
+                .forEach(tile -> tile.placePiece(new BlackPiece(tile)));
         matrixToStream(tiles).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
                 .map(BlackTile::asBlackTile)
-                .forEach(tile -> tile.placePiece(new Piece(PieceColor.WHITE, tile)));
+                .forEach(tile -> tile.placePiece(new WhitePiece(tile)));
     }
 
     @Override

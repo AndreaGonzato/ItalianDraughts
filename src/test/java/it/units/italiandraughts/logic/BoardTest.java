@@ -166,7 +166,11 @@ public class BoardTest {
 
 
     public static void placePieceOnTile(BlackTile blackTile, PieceColor pieceColor){
-        blackTile.placePiece(new Piece(pieceColor, blackTile));
+        Piece piece = switch (pieceColor) {
+            case BLACK -> new BlackPiece(blackTile);
+            case WHITE -> new WhitePiece(blackTile);
+        };
+        blackTile.placePiece(piece);
     }
 
 

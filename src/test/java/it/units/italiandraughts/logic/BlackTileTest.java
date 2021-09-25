@@ -14,7 +14,7 @@ public class BlackTileTest {
     void getPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
 
-        Piece expectedPiece = new Piece(PieceColor.WHITE, blackTile);
+        Piece expectedPiece = new WhitePiece(blackTile);
         Piece actualPiece = blackTile.getPiece();
 
         Assertions.assertEquals(expectedPiece, actualPiece);
@@ -73,7 +73,7 @@ public class BlackTileTest {
     @Test
     void isEmptyOnFullBlackTile() {
         BlackTile blackTile = new BlackTile(0, 0);
-        blackTile.placePiece(new Piece(PieceColor.BLACK));
+        blackTile.placePiece(new BlackPiece());
 
         Assertions.assertFalse(blackTile.isEmpty());
 
@@ -93,7 +93,7 @@ public class BlackTileTest {
     @Test
     void removePiece() {
         BlackTile blackTile = new BlackTile(0, 0);
-        Piece expectedPiece = new Piece(PieceColor.BLACK);
+        Piece expectedPiece = new BlackPiece();
 
         blackTile.placePiece(expectedPiece);
 

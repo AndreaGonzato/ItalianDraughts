@@ -2,43 +2,24 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.PieceColor;
 
-
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class Piece {
-    private final PieceColor pieceColor;
+public abstract class Piece {
+
     private PieceType pieceType;
     private boolean movable;
     private BlackTile blackTile;
-    private int promotionRow;
 
-    public Piece(PieceColor pieceColor, PieceType pieceType) {
-        this.pieceColor = pieceColor;
-        this.pieceType = pieceType;
-    }
-
-    public Piece(PieceColor pieceColor) {
-        this(pieceColor, PieceType.MAN);
-    }
-
-    public Piece(PieceColor pieceColor, BlackTile blackTile) {
-        this(pieceColor, PieceType.MAN, blackTile);
-    }
-
-    public Piece(PieceColor pieceColor, PieceType pieceType, BlackTile blackTile) {
-        this.pieceColor = pieceColor;
+    Piece(PieceType pieceType, BlackTile blackTile) {
         this.blackTile = blackTile;
         this.pieceType = pieceType;
-        movable = false;
-        switch (pieceColor) {
-            case WHITE -> promotionRow = 0;
-            case BLACK -> promotionRow = 7;
+        if (blackTile != null) {
+            blackTile.placePiece(this);
         }
-        blackTile.placePiece(this);
     }
-
 
     public Optional<EatenPiece> moveToReachableNeighboringBlackTile(BlackTile landingTile) {
         if (blackTile.isNeighbor(landingTile)) {
@@ -65,9 +46,7 @@ public class Piece {
         destination.placePiece(this);
     }
 
-    public PieceColor getPieceColor() {
-        return pieceColor;
-    }
+    public abstract PieceColor getPieceColor();
 
     public PieceType getPieceType() {
         return pieceType;
@@ -131,9 +110,7 @@ public class Piece {
         return blackTile;
     }
 
-    public int getPromotionRow() {
-        return promotionRow;
-    }
+    public abstract int getPromotionRow();
 
     public void setBlackTile(BlackTile blackTile) {
         this.blackTile = blackTile;
@@ -148,7 +125,7 @@ public class Piece {
         if (this == o) return true;
         if (!(o instanceof Piece piece)) return false;
 
-        return pieceColor == piece.pieceColor && pieceType == piece.pieceType;
+        return pieceType == piece.pieceType;
     }
 
     public boolean isMovable() {
@@ -161,11 +138,12 @@ public class Piece {
 
     @Override
     public String toString() {
-        return pieceColor + ", " + pieceType + ", movable: " + movable;
+        return pieceType + ", movable: " + movable;
     }
 
     @Override
     public int hashCode() {
-        return pieceColor.hashCode();
+        return Objects.hash(pieceType, movable, blackTile);
     }
+
 }
