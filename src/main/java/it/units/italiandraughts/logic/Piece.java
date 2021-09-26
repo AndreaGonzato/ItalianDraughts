@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public abstract class Piece {
 
-    private PieceType pieceType;
+    protected PieceType pieceType;
     private boolean movable;
     private BlackTile blackTile;
 
@@ -123,9 +123,9 @@ public abstract class Piece {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Piece piece)) return false;
+        if (!o.getClass().equals(this.getClass())) return false;
 
-        return pieceType == piece.pieceType;
+        return pieceType == this.getClass().cast(o).pieceType;
     }
 
     public boolean isMovable() {

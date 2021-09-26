@@ -33,4 +33,9 @@ public class WhitePiece extends Piece {
         return PIECE_COLOR;
     }
 
+    @Override
+    public String toString() {
+        return PIECE_COLOR + ", " + super.toString();
+    }
+
 }
