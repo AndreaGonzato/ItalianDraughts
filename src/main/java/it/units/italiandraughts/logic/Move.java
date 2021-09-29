@@ -11,7 +11,7 @@ public class Move {
     private final BlackTile destination;
     private final List<EatenPiece> eatenPieces;
     private final List<BlackTile> steps;
-    private boolean pieceBeenPromoted;
+    private boolean hasPromoted;
 
     public Move(Piece piece, BlackTile source, BlackTile destination, List<BlackTile> steps) {
         this.piece = piece;
@@ -19,8 +19,6 @@ public class Move {
         this.destination = destination;
         this.steps = steps;
         this.eatenPieces = new ArrayList<>();
-        pieceBeenPromoted = false;
-
     }
 
     public void make(){
@@ -30,14 +28,14 @@ public class Move {
             Optional<EatenPiece> eatenPieceOptional = piece.moveToReachableNeighboringBlackTile(landingTile);
             eatenPieceOptional.ifPresent(eatenPieces::add);
             if (pieceTypeBeforeMoving.equals(PieceType.MAN) && piece.getPieceType().equals(PieceType.KING)){
-                pieceBeenPromoted = true;
+                hasPromoted = true;
             }
         }
     }
 
     public void undo(){
         eatenPieces.forEach(EatenPiece::restore);
-        if (pieceBeenPromoted) {
+        if (hasPromoted) {
             piece.setPieceType(PieceType.MAN);
         }
         piece.move(source);
