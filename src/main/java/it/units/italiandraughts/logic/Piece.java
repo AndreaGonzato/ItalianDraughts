@@ -69,6 +69,9 @@ public abstract class Piece {
         if (otherPiece.getPieceColor().equals(this.getPieceColor())) {
             return false;
         }
+        if(otherPiece.getPieceType().equals(PieceType.KING) && this.pieceType.equals(PieceType.MAN)){
+            return false;
+        }
         BlackTile landingTile = getPositionAfterEating(otherPiece);
         if (landingTile != null) {
             return landingTile.isEmpty();
