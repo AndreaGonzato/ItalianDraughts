@@ -46,6 +46,10 @@ public class Move {
         return piece;
     }
 
+    public boolean hasPromoted() {
+        return hasPromoted;
+    }
+
     public BlackTile getSource() {
         return source;
     }
