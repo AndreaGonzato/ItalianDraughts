@@ -84,10 +84,9 @@ public class Game {
     }
 
     public void createDoAndSaveMove(Piece piece, List<BlackTile> steps) {
-        Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size()-1), steps);
+        Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size() - 1), steps);
         move.make();
         moves.add(move);
-
     }
 
     public void makeMove(Piece piece, List<BlackTile> steps) {

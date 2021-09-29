@@ -97,7 +97,6 @@ public abstract class Piece {
         }
     }
 
-
     BlackTile getPositionAfterEating(Piece otherPiece) {
         Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
                 .filter(entry -> entry.getValue().equals(otherPiece.getBlackTile()))
