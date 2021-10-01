@@ -107,7 +107,8 @@ public class Drawer implements PropertyChangeListener {
         }
         if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
             Optional<GraphPath<BlackTile, Edge>> absoluteLongestPathEndingOnClickedSquare = game.getAbsoluteLongestPaths().stream()
-                    .filter(path -> path.getEndVertex().equals(square.getTile()))
+                    .filter(path -> path.getEndVertex().equals(square.getTile())
+                            && path.getStartVertex().equals(game.getActiveTile()))
                     .findAny();
             if (absoluteLongestPathEndingOnClickedSquare.isPresent()) {
                 List<BlackTile> steps = absoluteLongestPathEndingOnClickedSquare.get().getVertexList();
