@@ -97,7 +97,6 @@ public class Drawer implements PropertyChangeListener {
         game.getAbsoluteLongestPaths()
                 .stream()
                 .filter(path -> path.getStartVertex().equals(tile))
-                .collect(Collectors.toList())
                 .forEach(path -> path.getEndVertex().getSquare().placeGreenCircle());
     }
 
