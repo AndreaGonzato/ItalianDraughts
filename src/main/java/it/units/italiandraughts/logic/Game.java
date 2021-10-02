@@ -145,7 +145,7 @@ public class Game {
     public void undo() {
         undoLastMove();
         finalizeMove();
-        drawer.turnOffHighlightedSquaresAndGreenCircles();
+        drawer.clearHighlightingAndCircles();
     }
 
     public Graph generateGraphForTile(BlackTile source) {
