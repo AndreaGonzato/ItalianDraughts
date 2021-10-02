@@ -15,7 +15,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
