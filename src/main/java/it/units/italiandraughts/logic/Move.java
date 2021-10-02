@@ -28,9 +28,7 @@ public class Move {
             Optional<EatenPiece> eatenPieceOptional = piece.moveToReachableNeighboringBlackTile(landingTile);
             boolean isKing = piece.isKing();
             eatenPieceOptional.ifPresent(eatenPieces::add);
-            if (wasMan && isKing) {
-                hasPromoted = true;
-            }
+            hasPromoted = wasMan && isKing;
         }
     }
 
