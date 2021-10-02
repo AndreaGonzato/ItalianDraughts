@@ -48,10 +48,10 @@ public class Graph {
             return;
         }
         double weight = 2;
-        if (eatenPiece.getPieceType().equals(PieceType.KING)) {
+        if (eatenPiece.isKing()) {
             weight += 1f / step;
         }
-        if (eatingPiece.getPieceType().equals(PieceType.KING)) {
+        if (eatingPiece.isKing()) {
             weight *= EATING_KING_MULTIPLIER;
         }
         addEdge(eatingPiece.getBlackTile(), landingTile, weight);

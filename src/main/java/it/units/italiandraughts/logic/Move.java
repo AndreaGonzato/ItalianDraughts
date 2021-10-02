@@ -21,19 +21,20 @@ public class Move {
         this.eatenPieces = new ArrayList<>();
     }
 
-    public void make(){
+    public void make() {
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
-            PieceType pieceTypeBeforeMoving = piece.getPieceType();
+            boolean wasMan = piece.isMan();
             Optional<EatenPiece> eatenPieceOptional = piece.moveToReachableNeighboringBlackTile(landingTile);
+            boolean isKing = piece.isKing();
             eatenPieceOptional.ifPresent(eatenPieces::add);
-            if (pieceTypeBeforeMoving.equals(PieceType.MAN) && piece.getPieceType().equals(PieceType.KING)){
+            if (wasMan && isKing) {
                 hasPromoted = true;
             }
         }
     }
 
-    public void undo(){
+    public void undo() {
         eatenPieces.forEach(EatenPiece::restore);
         if (hasPromoted) {
             piece.setPieceType(PieceType.MAN);

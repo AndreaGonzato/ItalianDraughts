@@ -69,7 +69,7 @@ public abstract class Piece {
         if (otherPiece.getPieceColor().equals(this.getPieceColor())) {
             return false;
         }
-        if(otherPiece.getPieceType().equals(PieceType.KING) && this.pieceType.equals(PieceType.MAN)){
+        if (otherPiece.isKing() && this.isMan()) {
             return false;
         }
         BlackTile landingTile = getPositionAfterEating(otherPiece);
@@ -78,7 +78,6 @@ public abstract class Piece {
         }
         return false;
     }
-
 
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
@@ -120,6 +119,14 @@ public abstract class Piece {
 
     public void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
+    }
+
+    boolean isMan() {
+        return PieceType.MAN.equals(pieceType);
+    }
+
+    boolean isKing() {
+        return PieceType.KING.equals(pieceType);
     }
 
     @Override
