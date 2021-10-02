@@ -77,7 +77,7 @@ public class Drawer implements PropertyChangeListener {
     }
 
     public void clearHighlightingAndCircles() {
-        matrixToStream(squares).filter(Square::isHighlighted).forEach(t -> t.setHighlighted(false));
+        matrixToStream(squares).filter(Square::isHighlighted).forEach(square -> square.setHighlighted(false));
         matrixToStream(squares).filter(Square::hasGreenCircle).forEach(Square::removeGreenCircle);
     }
 
