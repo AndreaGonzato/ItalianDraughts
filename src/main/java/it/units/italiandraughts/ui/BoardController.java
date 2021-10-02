@@ -42,6 +42,14 @@ public class BoardController {
         return ItalianDraughts.getScreenHeight() / 3 * 2;
     }
 
+    Label getPlayerLabel(Player player) {
+        if (player.getName().equals(player1NameLabel.getText())) {
+            return player1NameLabel;
+        } else {
+            return player2NameLabel;
+        }
+    }
+
     public void initializeWindow() {
         gridPane.setMinSize(getBoardHeight(), getBoardHeight());
         gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
@@ -78,6 +86,7 @@ public class BoardController {
         reset.setOnAction(event -> game.reset());
         undo.setOnAction(event -> game.undo());
         undo.setDisable(true);
+        player1NameLabel.setStyle("-fx-font-weight: bold;");
     }
 
     public Button getUndoButton() {

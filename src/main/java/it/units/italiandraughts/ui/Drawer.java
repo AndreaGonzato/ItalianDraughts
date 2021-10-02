@@ -64,11 +64,15 @@ public class Drawer implements PropertyChangeListener {
 
     public void propertyChange(PropertyChangeEvent event) {
         if ("activePlayer".equals(event.getPropertyName())) {
-            setClickableForPlayer((Player) event.getNewValue());
-            unsetClickableForPlayer((Player) event.getOldValue());
+            Player nowPlaying = (Player) event.getNewValue();
+            Player otherPlayer = (Player) event.getOldValue();
+            setClickableForPlayer(nowPlaying);
+            unsetClickableForPlayer(otherPlayer);
             setClickableForEmptySquares();
             BoardController boardController = (BoardController) gridPane.getUserData();
             boardController.getUndoButton().setDisable(game.getMoves().size() <= 0);
+            boardController.getPlayerLabel(nowPlaying).setStyle("-fx-font-weight: bold;");
+            boardController.getPlayerLabel(otherPlayer).setStyle("-fx-font-weight: normal;");
         }
     }
 
