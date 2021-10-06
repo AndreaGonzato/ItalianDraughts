@@ -140,8 +140,8 @@ public class Drawer implements PropertyChangeListener {
     public void updateBoard(Tile[][] board) {
         matrixToStream(squares).forEach(tile -> tile.getChildren().clear());
         matrixToStream(board).filter(tile -> !tile.isEmpty())
-                .forEach(tile -> pieceDrawer.drawPieceOnSquare(squares[tile.getY()][tile.getX()],
-                        BlackTile.asBlackTile(tile).getPiece()));
+                .forEach(tile -> pieceDrawer.drawPieceOnSquare(BlackTile.asBlackTile(tile).getPiece(),
+                        squares[tile.getY()][tile.getX()]));
     }
 
 
