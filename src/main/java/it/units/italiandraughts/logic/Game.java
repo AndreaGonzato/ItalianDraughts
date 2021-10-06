@@ -44,7 +44,7 @@ public class Game {
         setActiveTile(null);
         setStatus(Status.IDLE);
         updateMovablePieces();
-        if (countMovablePieces() == 0) {
+        if (countMovablePiecesActivePlayer() == 0) {
             support.firePropertyChange("winner", null, activePlayer.equals(player1) ?
                     player2 : player1);
         }
@@ -66,7 +66,7 @@ public class Game {
         //absoluteLongestPaths.forEach(System.out::println);
     }
 
-    private int countMovablePieces(){
+    private int countMovablePiecesActivePlayer(){
         return (int) matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
