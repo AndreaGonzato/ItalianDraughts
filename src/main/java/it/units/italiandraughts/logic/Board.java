@@ -56,9 +56,7 @@ public class Board {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Board)) return false;
-
-        Board board = (Board) o;
+        if (!(o instanceof Board board)) return false;
 
         return Arrays.deepEquals(tiles, board.tiles);
     }
