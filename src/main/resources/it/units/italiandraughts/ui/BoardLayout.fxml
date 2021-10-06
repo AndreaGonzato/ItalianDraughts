@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
-<?import it.units.italiandraughts.ui.elements.InGameLabel?>
+<?import it.units.italiandraughts.ui.elements.GameLabel?>
 <?import it.units.italiandraughts.ui.elements.GameButton?>
 <?import it.units.italiandraughts.ui.elements.CoordinateLabel?>
 
@@ -53,12 +53,12 @@
     </VBox>
     <Line stroke="gray" fx:id="line" strokeWidth="2"/>
     <HBox VBox.vgrow="ALWAYS">
-        <InGameLabel fx:id="player1NameLabel" maxWidth="148">
+        <GameLabel fx:id="player1NameLabel" maxWidth="148">
             <padding>
                 <Insets right="15.0"/>
             </padding>
-        </InGameLabel>
-        <InGameLabel text="○" textFill="#423c39"/>
+        </GameLabel>
+        <GameLabel text="○" textFill="#423c39"/>
         <Pane HBox.hgrow="ALWAYS"/>
         <GameButton fx:id="undo" text="Undo">
             <HBox.margin>
@@ -75,12 +75,12 @@
             </HBox.margin>
         </GameButton>
         <Pane HBox.hgrow="ALWAYS"/>
-        <InGameLabel text="●" textFill="#423c39"/>
-        <InGameLabel fx:id="player2NameLabel" maxWidth="148">
+        <GameLabel text="●" textFill="#423c39"/>
+        <GameLabel fx:id="player2NameLabel" maxWidth="148">
             <padding>
                 <Insets left="15.0"/>
             </padding>
-        </InGameLabel>
+        </GameLabel>
     </HBox>
 
 </VBox>

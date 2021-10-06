@@ -5,10 +5,10 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class InGameLabel extends Label {
+public class GameLabel extends Label {
 
-    public InGameLabel() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InGameLabel.fxml"));
+    public GameLabel() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameLabel.fxml"));
         loader.setController(this);
         loader.setRoot(this);
         loader.load();
