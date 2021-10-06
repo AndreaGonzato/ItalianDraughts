@@ -4,6 +4,7 @@ import it.units.italiandraughts.ItalianDraughts;
 import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.Game;
 import it.units.italiandraughts.logic.Player;
+import it.units.italiandraughts.logic.StaticUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,7 @@ public class BoardController implements PropertyChangeListener {
     Button reset;
 
     private static double getBoardHeight() {
-        return ItalianDraughts.getScreenHeight() / 3 * 2;
+        return StaticUtil.getScreenHeight() / 3 * 2;
     }
 
     Label getPlayerLabel(Player player) {
@@ -107,7 +108,7 @@ public class BoardController implements PropertyChangeListener {
         if ("winner".equals(event.getPropertyName())) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EndgameLayout.fxml"));
             try {
-                Scene scene = new Scene(fxmlLoader.load(), ItalianDraughts.getScreenWidth() / 5f, ItalianDraughts.getScreenHeight() / 5f);
+                Scene scene = new Scene(fxmlLoader.load(), StaticUtil.getScreenWidth() / 5f, StaticUtil.getScreenHeight() / 5f);
                 EndgameController controller = fxmlLoader.getController();
                 controller.setWinner((Player) event.getNewValue());
                 controller.initializeWindow();
