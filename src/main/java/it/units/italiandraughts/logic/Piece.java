@@ -81,9 +81,7 @@ public abstract class Piece {
 
     public void eatNeighbor(Piece otherPiece) {
         if (canEatNeighbor(otherPiece)) {
-
             String eatingDirection = blackTile.getNeighborKey(otherPiece.blackTile);
-
             Optional<BlackTile> landingTile = Optional.ofNullable(otherPiece.getBlackTile().getNeighbors().get(eatingDirection));
             BlackTile sourceBlackTile = this.getBlackTile();
             BlackTile overBlackTile = otherPiece.getBlackTile();
@@ -121,11 +119,11 @@ public abstract class Piece {
         this.pieceType = pieceType;
     }
 
-    boolean isMan() {
+    public boolean isMan() {
         return PieceType.MAN.equals(pieceType);
     }
 
-    boolean isKing() {
+    public boolean isKing() {
         return PieceType.KING.equals(pieceType);
     }
 
