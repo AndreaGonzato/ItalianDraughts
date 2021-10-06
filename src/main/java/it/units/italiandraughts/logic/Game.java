@@ -61,9 +61,6 @@ public class Game {
                 .flatMap(graph -> graph.getLongestPaths().stream())
                 .collect(getLongestPaths());
 
-        // TODO test print the cost of the absoluteLongestPaths and then the path, remove this two lines
-        //System.out.println(absoluteLongestPaths.get(0).getWeight());
-        //absoluteLongestPaths.forEach(System.out::println);
     }
 
     private int countMovablePiecesOfActivePlayer(){
