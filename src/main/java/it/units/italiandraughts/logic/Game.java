@@ -43,8 +43,8 @@ public class Game {
     private void newTurn() {
         setActiveTile(null);
         setStatus(Status.IDLE);
-        updateMovablePieces();
-        if (countMovablePiecesActivePlayer() == 0) {
+        updateMovablePiecesOfActivePlayer();
+        if (countMovablePiecesOfActivePlayer() == 0) {
             support.firePropertyChange("winner", null, activePlayer.equals(player1) ?
                     player2 : player1);
         }
@@ -66,7 +66,7 @@ public class Game {
         //absoluteLongestPaths.forEach(System.out::println);
     }
 
-    private int countMovablePiecesActivePlayer(){
+    private int countMovablePiecesOfActivePlayer(){
         return (int) matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
@@ -130,7 +130,7 @@ public class Game {
         return new MediaPlayer(media);
     }
 
-    private void updateMovablePieces() {
+    private void updateMovablePiecesOfActivePlayer() {
         matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
