@@ -25,7 +25,7 @@ public class Board {
         }
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
                 .forEach(blackTile -> blackTile.addNeighbors(this));
-        initPieces();
+        initPiecesDebug();
     }
 
     public Board(Tile[][] tiles){
@@ -39,6 +39,12 @@ public class Board {
         matrixToStream(tiles).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
                 .map(BlackTile::asBlackTile)
                 .forEach(WhitePiece::new);
+    }
+
+    // TODO remove this
+    private void initPiecesDebug() {
+        new BlackPiece(BlackTile.asBlackTile(tiles[0][0]));
+        new WhitePiece(BlackTile.asBlackTile(tiles[3][3]));
     }
 
     @Override
