@@ -25,6 +25,9 @@ public class Board {
         }
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
                 .forEach(blackTile -> blackTile.addNeighbors(this));
+
+        // TODO remove initPiecesDebug and put initPieces
+        //initPieces();
         initPiecesDebug();
     }
 
