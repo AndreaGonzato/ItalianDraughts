@@ -93,14 +93,22 @@ public class BoardController implements PropertyChangeListener {
 
         line.setEndX(gridPane.getMaxWidth());
         gridPane.setStyle("-fx-border-color: #d47d35");
-        reset.setOnAction(event -> game.reset());
+        reset.setOnAction(event -> resetWindow());
         undo.setOnAction(event -> game.undo());
         undo.setDisable(true);
         player1NameLabel.setStyle("-fx-font-weight: bold;");
+        player2NameLabel.setStyle("-fx-font-weight: normal;");
     }
 
     public Button getUndoButton() {
         return undo;
+    }
+
+    private void resetWindow() {
+        gridPane.getColumnConstraints().clear();
+        gridPane.getRowConstraints().clear();
+        gridPane.getChildren().clear();
+        initializeWindow();
     }
 
     @Override
@@ -113,11 +121,8 @@ public class BoardController implements PropertyChangeListener {
                 controller.setWinner((Player) event.getNewValue());
                 controller.initializeWindow();
                 Stage stage = new Stage();
-                controller.newGameButton.setOnAction((ee) -> {
-                    gridPane.getColumnConstraints().clear();
-                    gridPane.getRowConstraints().clear();
-                    gridPane.getChildren().clear();
-                    initializeWindow();
+                controller.newGameButton.setOnAction((clickEvent) -> {
+                    resetWindow();
                     stage.hide();
                 });
                 stage.setScene(scene);

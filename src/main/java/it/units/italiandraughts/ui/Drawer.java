@@ -52,13 +52,6 @@ public class Drawer implements PropertyChangeListener {
         updateBoard(game.getBoard().getTiles());
     }
 
-    public Drawer reset() {
-        gridPane.getColumnConstraints().clear();
-        gridPane.getRowConstraints().clear();
-        gridPane.getChildren().clear();
-        return new Drawer(gridPane, game);
-    }
-
     public void propertyChange(PropertyChangeEvent event) {
         if ("activePlayer".equals(event.getPropertyName())) {
             Player nowPlaying = (Player) event.getNewValue();

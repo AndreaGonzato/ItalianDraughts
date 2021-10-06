@@ -142,16 +142,6 @@ public class Game {
         piece.setMovable(movable);
     }
 
-    public void reset() {
-        board = new Board();
-        moves.clear();
-        activePlayer = player1;
-        newTurn();
-        support.removePropertyChangeListener(drawer);
-        drawer = drawer.reset();
-        addPropertyChangeListener(drawer);
-    }
-
     public void undo() {
         undoLastMove();
         finalizeMove();
