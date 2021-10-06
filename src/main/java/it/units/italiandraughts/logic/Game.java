@@ -96,7 +96,7 @@ public class Game {
         }).start();
     }
 
-    public Move createDoAndSaveMove(Piece piece, List<BlackTile> steps) {
+    public Move moveAndLog(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size() - 1), steps);
         move.make();
         moves.add(move);
@@ -105,7 +105,7 @@ public class Game {
 
     public void makeMove(Piece piece, List<BlackTile> steps) {
         playSound();
-        createDoAndSaveMove(piece, steps);
+        moveAndLog(piece, steps);
         finalizeMove();
     }
 
