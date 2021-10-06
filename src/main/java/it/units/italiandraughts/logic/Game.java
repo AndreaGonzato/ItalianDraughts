@@ -44,13 +44,7 @@ public class Game {
         setActiveTile(null);
         setStatus(Status.IDLE);
         updateMovablePieces();
-        long movablePieces = matrixToStream(board.getTiles())
-                .filter(tile -> !tile.isEmpty())
-                .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
-                        && tile.getPiece().isMovable())
-                .count();
-        if (movablePieces == 0) {
+        if (countMovablePieces() == 0) {
             support.firePropertyChange("winner", null, activePlayer.equals(player1) ?
                     player2 : player1);
         }
@@ -70,6 +64,15 @@ public class Game {
         // TODO test print the cost of the absoluteLongestPaths and then the path, remove this two lines
         //System.out.println(absoluteLongestPaths.get(0).getWeight());
         //absoluteLongestPaths.forEach(System.out::println);
+    }
+
+    private int countMovablePieces(){
+        return (int) matrixToStream(board.getTiles())
+                .filter(tile -> !tile.isEmpty())
+                .map(BlackTile::asBlackTile)
+                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
+                        && tile.getPiece().isMovable())
+                .count();
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
