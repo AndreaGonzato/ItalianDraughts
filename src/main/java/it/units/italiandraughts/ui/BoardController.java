@@ -107,7 +107,7 @@ public class BoardController implements PropertyChangeListener {
         if ("winner".equals(event.getPropertyName())) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EndgameLayout.fxml"));
             try {
-                Scene scene = new Scene(fxmlLoader.load());
+                Scene scene = new Scene(fxmlLoader.load(), ItalianDraughts.getScreenWidth() / 5f, ItalianDraughts.getScreenHeight() / 5f);
                 EndgameController controller = fxmlLoader.getController();
                 controller.setWinner((Player) event.getNewValue());
                 controller.initializeWindow();
