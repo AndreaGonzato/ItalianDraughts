@@ -40,7 +40,7 @@ public class Square extends StackPane {
         this.setStyle("-fx-background-color: " + newColor + ";");
     }
 
-    void placeGreenCircle(){
+    void placeGreenCircle() {
         this.hasGreenCircle = true;
         if (this.getType().equals(SquareType.WHITE_SMOKE)) {
             throw new IllegalPositionDrawingException("Cannot draw on white square");
@@ -50,7 +50,7 @@ public class Square extends StackPane {
         this.getChildren().add(greenCircle);
     }
 
-    void removeGreenCircle(){
+    void removeGreenCircle() {
         this.hasGreenCircle = false;
         this.getChildren().remove(greenCircle);
     }
