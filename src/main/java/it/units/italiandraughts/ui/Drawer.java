@@ -1,13 +1,10 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.exception.IllegalPositionDrawingException;
 import it.units.italiandraughts.exception.IllegalSquareClickException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.input.MouseEvent;
 import org.jgrapht.GraphPath;
 
