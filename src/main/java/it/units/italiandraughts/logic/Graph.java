@@ -6,8 +6,10 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
@@ -72,7 +74,7 @@ public class Graph {
     void explorePossibleMoves() {
         DijkstraShortestPath<BlackTile, Edge> dijkstra = new DijkstraShortestPath<>(graph);
         ShortestPathAlgorithm.SingleSourcePaths<BlackTile, Edge> paths = dijkstra.getPaths(source);
-        longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(StaticUtil.getLongestPaths()));
+        longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector()));
     }
 
 
@@ -93,4 +95,38 @@ public class Graph {
     public double getMaxPathWeight(){
         return longestPaths.get(0).getWeight();
     }
+
+    static Collector<GraphPath<BlackTile, Edge>, List<GraphPath<BlackTile, Edge>>, List<GraphPath<BlackTile, Edge>>> getLongestPathsCollector() {
+        Comparator<GraphPath<BlackTile, Edge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
+        return Collector.of(
+                ArrayList::new,
+                (list, path) -> {
+                    int result;
+                    if (list.isEmpty() || (result = comparator.compare(path, list.get(0))) == 0) {
+                        list.add(path);
+                    } else if (result > 0) {
+                        list.clear();
+                        list.add(path);
+                    }
+                },
+                (list1, list2) -> {
+                    if (list1.isEmpty()) {
+                        return list2;
+                    }
+                    if (list2.isEmpty()) {
+                        return list1;
+                    }
+                    int result = comparator.compare(list1.get(0), list2.get(0));
+                    if (result < 0) {
+                        return list2;
+                    } else if (result > 0) {
+                        return list1;
+                    } else {
+                        list1.addAll(list2);
+                        return list1;
+                    }
+                }
+        );
+    }
+
 }

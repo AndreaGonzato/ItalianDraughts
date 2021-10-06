@@ -59,7 +59,7 @@ public class Game {
 
         absoluteLongestPaths = graphs.stream()
                 .flatMap(graph -> graph.getLongestPaths().stream())
-                .collect(getLongestPaths());
+                .collect(Graph.getLongestPathsCollector());
 
     }
 
