@@ -6,16 +6,24 @@ import it.units.italiandraughts.logic.Game;
 import it.units.italiandraughts.logic.Player;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
-public class BoardController {
+public class BoardController implements PropertyChangeListener {
 
     @FXML
     GridPane gridPane;
@@ -60,6 +68,7 @@ public class BoardController {
         Game game = new Game(board, player1, player2);
         Drawer drawer = new Drawer(gridPane, game);
         game.addPropertyChangeListener(drawer);
+        game.addPropertyChangeListener(this);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
@@ -93,4 +102,31 @@ public class BoardController {
         return undo;
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        if ("winner".equals(event.getPropertyName())) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EndgameLayout.fxml"));
+            try {
+                Scene scene = new Scene(fxmlLoader.load());
+                EndgameController controller = fxmlLoader.getController();
+                controller.setWinner((Player) event.getNewValue());
+                controller.initializeWindow();
+                Stage stage = new Stage();
+                controller.newGameButton.setOnAction((ee) -> {
+                    gridPane.getColumnConstraints().clear();
+                    gridPane.getRowConstraints().clear();
+                    gridPane.getChildren().clear();
+                    initializeWindow();
+                    stage.hide();
+                });
+                stage.setScene(scene);
+                stage.setTitle("Game over");
+                stage.getIcons().add(new Image(Objects.requireNonNull(ItalianDraughts.class.getResourceAsStream("ui/img/icon.png"))));
+                ItalianDraughts.setupStage(stage);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

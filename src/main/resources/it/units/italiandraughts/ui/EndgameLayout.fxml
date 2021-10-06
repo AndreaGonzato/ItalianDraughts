@@ -12,12 +12,12 @@
     </padding>
     <Label fx:id="winnerLabel"/>
     <HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-        <GameButton text="New game" prefWidth="80">
+        <GameButton fx:id="newGameButton" text="New game" prefWidth="80">
             <HBox.margin>
                 <Insets right="10.0"/>
             </HBox.margin>
         </GameButton>
-        <GameButton text="Exit" prefWidth="80">
+        <GameButton onAction="#quitGame" text="Exit" prefWidth="80">
             <HBox.margin>
                 <Insets left="10.0"/>
             </HBox.margin>
