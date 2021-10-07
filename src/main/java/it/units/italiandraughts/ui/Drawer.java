@@ -61,8 +61,6 @@ public class Drawer implements PropertyChangeListener {
             setClickableForEmptySquares();
             BoardController boardController = (BoardController) gridPane.getUserData();
             boardController.getUndoButton().setDisable(game.getMoves().size() <= 0);
-            boardController.getPlayerLabel(nowPlaying).setStyle("-fx-font-weight: bold;");
-            boardController.getPlayerLabel(otherPlayer).setStyle("-fx-font-weight: normal;");
         }
     }
 

@@ -51,11 +51,13 @@ public class BoardController implements PropertyChangeListener {
         return StaticUtil.getScreenHeight() / 3 * 2;
     }
 
-    Label getPlayerLabel(Player player) {
-        if (player.getName().equals(player1NameLabel.getText())) {
-            return player1NameLabel;
+    private void showActivePlayerInBold(Player active) {
+        if (active.getName().equals(player1NameLabel.getText())) {
+            player1NameLabel.setStyle("-fx-font-weight: bold;");
+            player2NameLabel.setStyle("-fx-font-weight: normal;");
         } else {
-            return player2NameLabel;
+            player1NameLabel.setStyle("-fx-font-weight: normal;");
+            player2NameLabel.setStyle("-fx-font-weight: bold;");
         }
     }
 
@@ -96,8 +98,7 @@ public class BoardController implements PropertyChangeListener {
         reset.setOnAction(event -> resetWindow());
         undo.setOnAction(event -> game.undo());
         undo.setDisable(true);
-        player1NameLabel.setStyle("-fx-font-weight: bold;");
-        player2NameLabel.setStyle("-fx-font-weight: normal;");
+        showActivePlayerInBold(player1);
     }
 
     public Button getUndoButton() {
@@ -133,6 +134,8 @@ public class BoardController implements PropertyChangeListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if ("activePlayer".equals(event.getPropertyName())) {
+            showActivePlayerInBold((Player) event.getNewValue());
         }
     }
 }
