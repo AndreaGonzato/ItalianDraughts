@@ -75,8 +75,8 @@ public class BoardController implements PropertyChangeListener {
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
-        rowLabels.forEach(e -> {
-            Label label = (Label) e;
+        rowLabels.forEach(node -> {
+            Label label = (Label) node;
             label.setMaxHeight(getBoardHeight() / Board.SIZE);
             label.setMinHeight(getBoardHeight() / Board.SIZE);
         });
@@ -87,8 +87,8 @@ public class BoardController implements PropertyChangeListener {
 
         // resize the letters under the board
         List<Node> columnLabels = columnLetters.getChildren();
-        columnLabels.forEach(e -> {
-            Label label = (Label) e;
+        columnLabels.forEach(node -> {
+            Label label = (Label) node;
             label.setMaxWidth(getBoardHeight() / Board.SIZE);
             label.setMinWidth(getBoardHeight() / Board.SIZE);
         });
