@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static it.units.italiandraughts.logic.StaticUtil.*;
 
 public class Game {
-    private Board board;
+    private final Board board;
     private final Player player1;
     private final Player player2;
     private Player activePlayer;
