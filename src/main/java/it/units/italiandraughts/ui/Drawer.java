@@ -18,12 +18,10 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 public class Drawer implements PropertyChangeListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
-    private final GridPane gridPane;
     private final Game game;
     private final PieceDrawer pieceDrawer;
 
     public Drawer(GridPane gridPane, Game game) {
-        this.gridPane = gridPane;
         this.game = game;
         pieceDrawer = new PieceDrawer();
         game.setDrawer(this);
