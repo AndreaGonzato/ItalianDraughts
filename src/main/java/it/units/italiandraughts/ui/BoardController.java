@@ -53,8 +53,8 @@ public class BoardController implements PropertyChangeListener {
         return StaticUtil.getScreenHeight() / 3 * 2;
     }
 
-    private void showActivePlayerInBold(Player active) {
-        if (active.getName().equals(player1NameLabel.getText())) {
+    private void showActivePlayerInBold(Player activePlayer) {
+        if (activePlayer.getName().equals(player1NameLabel.getText())) {
             player1NameLabel.setStyle("-fx-font-weight: bold;");
             player2NameLabel.setStyle("-fx-font-weight: normal;");
         } else {

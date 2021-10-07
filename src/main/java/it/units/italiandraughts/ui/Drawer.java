@@ -55,9 +55,9 @@ public class Drawer implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if ("activePlayer".equals(event.getPropertyName())) {
-            Player nowPlaying = (Player) event.getNewValue();
+            Player activePlayer = (Player) event.getNewValue();
             Player otherPlayer = (Player) event.getOldValue();
-            setClickableForPlayer(nowPlaying);
+            setClickableForPlayer(activePlayer);
             unsetClickableForPlayer(otherPlayer);
             setClickableForEmptySquares();
         }
