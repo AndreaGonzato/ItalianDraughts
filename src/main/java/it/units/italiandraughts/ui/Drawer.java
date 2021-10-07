@@ -52,6 +52,7 @@ public class Drawer implements PropertyChangeListener {
         updateBoard(game.getBoard().getTiles());
     }
 
+    @Override
     public void propertyChange(PropertyChangeEvent event) {
         if ("activePlayer".equals(event.getPropertyName())) {
             Player nowPlaying = (Player) event.getNewValue();
