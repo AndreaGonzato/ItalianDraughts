@@ -59,8 +59,6 @@ public class Drawer implements PropertyChangeListener {
             setClickableForPlayer(nowPlaying);
             unsetClickableForPlayer(otherPlayer);
             setClickableForEmptySquares();
-            BoardController boardController = (BoardController) gridPane.getUserData();
-            boardController.getUndoButton().setDisable(game.getMoves().size() <= 0);
         }
     }
 

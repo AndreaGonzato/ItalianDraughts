@@ -47,6 +47,8 @@ public class BoardController implements PropertyChangeListener {
     @FXML
     Button reset;
 
+    private Game game;
+
     private static double getBoardHeight() {
         return StaticUtil.getScreenHeight() / 3 * 2;
     }
@@ -68,7 +70,7 @@ public class BoardController implements PropertyChangeListener {
         Board board = new Board();
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
-        Game game = new Game(board, player1, player2);
+        game = new Game(board, player1, player2);
         Drawer drawer = new Drawer(gridPane, game);
         game.addPropertyChangeListener(drawer);
         game.addPropertyChangeListener(this);
@@ -99,10 +101,6 @@ public class BoardController implements PropertyChangeListener {
         undo.setOnAction(event -> game.undo());
         undo.setDisable(true);
         showActivePlayerInBold(player1);
-    }
-
-    public Button getUndoButton() {
-        return undo;
     }
 
     private void resetWindow() {
@@ -136,6 +134,7 @@ public class BoardController implements PropertyChangeListener {
             }
         } else if ("activePlayer".equals(event.getPropertyName())) {
             showActivePlayerInBold((Player) event.getNewValue());
+            undo.setDisable(game.getMoves().size() <= 0);
         }
     }
 }
