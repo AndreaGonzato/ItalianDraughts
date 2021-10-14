@@ -1,10 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.ItalianDraughts;
-import it.units.italiandraughts.logic.Board;
-import it.units.italiandraughts.logic.Game;
-import it.units.italiandraughts.logic.Player;
-import it.units.italiandraughts.logic.StaticUtil;
+import it.units.italiandraughts.logic.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,13 +15,11 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class BoardController implements PropertyChangeListener {
+public class BoardController implements GameEventListener {
 
     @FXML
     GridPane gridPane;
@@ -72,8 +67,8 @@ public class BoardController implements PropertyChangeListener {
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
         game = new Game(board, player1, player2);
         Drawer drawer = new Drawer(gridPane, game);
-        game.addPropertyChangeListener(drawer);
-        game.addPropertyChangeListener(this);
+        game.addListeners(EventType.GAME_OVER, this);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, this, drawer);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();
@@ -103,6 +98,37 @@ public class BoardController implements PropertyChangeListener {
         showActivePlayerInBold(player1);
     }
 
+    @Override
+    public void onGameEvent(GameEvent event) {
+        switch (event.getEventType()) {
+            case GAME_OVER -> {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EndgameLayout.fxml"));
+                try {
+                    Scene scene = new Scene(fxmlLoader.load(), StaticUtil.getScreenWidth() / 5f, StaticUtil.getScreenHeight() / 5f);
+                    EndgameController controller = fxmlLoader.getController();
+                    controller.setWinner((Player) event.getPayload());
+                    controller.initializeWindow();
+                    Stage stage = new Stage();
+                    controller.newGameButton.setOnAction((clickEvent) -> {
+                        resetWindow();
+                        stage.hide();
+                    });
+                    stage.setScene(scene);
+                    stage.setTitle("Game over");
+                    stage.getIcons().add(new Image(Objects.requireNonNull(ItalianDraughts.class.getResourceAsStream("ui/img/icon.png"))));
+                    ItalianDraughts.setupStage(stage);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case SWITCH_ACTIVE_PLAYER -> {
+                showActivePlayerInBold(((Player[]) event.getPayload())[0]);
+                undo.setDisable(game.getMoves().size() <= 0);
+            }
+        }
+    }
+
     private void resetWindow() {
         gridPane.getColumnConstraints().clear();
         gridPane.getRowConstraints().clear();
@@ -110,31 +136,4 @@ public class BoardController implements PropertyChangeListener {
         initializeWindow();
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        if ("winner".equals(event.getPropertyName())) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EndgameLayout.fxml"));
-            try {
-                Scene scene = new Scene(fxmlLoader.load(), StaticUtil.getScreenWidth() / 5f, StaticUtil.getScreenHeight() / 5f);
-                EndgameController controller = fxmlLoader.getController();
-                controller.setWinner((Player) event.getNewValue());
-                controller.initializeWindow();
-                Stage stage = new Stage();
-                controller.newGameButton.setOnAction((clickEvent) -> {
-                    resetWindow();
-                    stage.hide();
-                });
-                stage.setScene(scene);
-                stage.setTitle("Game over");
-                stage.getIcons().add(new Image(Objects.requireNonNull(ItalianDraughts.class.getResourceAsStream("ui/img/icon.png"))));
-                ItalianDraughts.setupStage(stage);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if ("activePlayer".equals(event.getPropertyName())) {
-            showActivePlayerInBold((Player) event.getNewValue());
-            undo.setDisable(game.getMoves().size() <= 0);
-        }
-    }
 }

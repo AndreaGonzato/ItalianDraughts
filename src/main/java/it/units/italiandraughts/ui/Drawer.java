@@ -8,14 +8,12 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.input.MouseEvent;
 import org.jgrapht.GraphPath;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Optional;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
-public class Drawer implements PropertyChangeListener {
+public class Drawer implements GameEventListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
@@ -51,14 +49,13 @@ public class Drawer implements PropertyChangeListener {
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        if ("activePlayer".equals(event.getPropertyName())) {
-            Player activePlayer = (Player) event.getNewValue();
-            Player otherPlayer = (Player) event.getOldValue();
-            setClickableForPlayer(activePlayer);
-            unsetClickableForPlayer(otherPlayer);
-            setClickableForEmptySquares();
-        }
+    public void onGameEvent(GameEvent event) {
+        SwitchActivePlayerEvent switchActivePlayerEvent = (SwitchActivePlayerEvent) event;
+        Player activePlayer = switchActivePlayerEvent.getPayload()[0];
+        Player otherPlayer = switchActivePlayerEvent.getPayload()[1];
+        setClickableForPlayer(activePlayer);
+        unsetClickableForPlayer(otherPlayer);
+        setClickableForEmptySquares();
     }
 
     public void clearHighlightingAndCircles() {

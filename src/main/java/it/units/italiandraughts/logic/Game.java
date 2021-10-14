@@ -7,8 +7,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import org.jgrapht.GraphPath;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
@@ -16,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.*;
 
-public class Game {
+public class Game implements GameEventSource {
     private final Board board;
     private final Player player1;
     private final Player player2;
@@ -24,20 +22,33 @@ public class Game {
     private Status status;
     private BlackTile activeTile;
     private Drawer drawer;
-    private final PropertyChangeSupport support;
     private final List<Move> moves;
     private final MediaPlayer mediaPlayer;
     private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
+    private final HashMap<EventType, List<GameEventListener>> listenersMap;
 
     public Game(Board board, Player player1, Player player2) {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
         this.activePlayer = player1;
-        support = new PropertyChangeSupport(this);
         newTurn();
         moves = new ArrayList<>();
         mediaPlayer = initMediaPlayer();
+        listenersMap = new HashMap<>();
+    }
+
+    @Override
+    public void addListeners(EventType eventType, GameEventListener... listeners) {
+        if (!listenersMap.containsKey(eventType)) {
+            listenersMap.put(eventType, new LinkedList<>());
+        }
+        listenersMap.get(eventType).addAll(List.of(listeners));
+    }
+
+    @Override
+    public void notifyListeners(GameEvent event) {
+        listenersMap.get(event.getEventType()).forEach(listener -> listener.onGameEvent(event));
     }
 
     private void newTurn() {
@@ -45,8 +56,7 @@ public class Game {
         setStatus(Status.IDLE);
         updateMovablePiecesOfActivePlayer();
         if (countMovablePiecesOfActivePlayer() == 0) {
-            support.firePropertyChange("winner", null, activePlayer.equals(player1) ?
-                    player2 : player1);
+            notifyListeners(new GameOverEvent(this, activePlayer.equals(player1) ? player2 : player1));
         }
         List<Graph> graphs = matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
@@ -72,10 +82,6 @@ public class Game {
                 .count();
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
-    }
-
     private void toggleActivePlayer() {
         final Player oldActivePlayer = activePlayer;
         if (player1.equals(activePlayer)) {
@@ -83,7 +89,7 @@ public class Game {
         } else {
             activePlayer = player1;
         }
-        support.firePropertyChange("activePlayer", oldActivePlayer, activePlayer);
+        notifyListeners(new SwitchActivePlayerEvent(this, activePlayer, oldActivePlayer));
     }
 
     private void playSound() {
