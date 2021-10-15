@@ -66,9 +66,9 @@ public class BoardController implements GameEventListener {
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
         game = new Game(board, player1, player2);
-        Drawer drawer = new Drawer(gridPane, game);
+        BoardDrawer boardDrawer = new BoardDrawer(gridPane, game);
         game.addListeners(EventType.GAME_OVER, this);
-        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, this, drawer);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, this, boardDrawer);
 
         // resize the numbers to the left of board
         List<Node> rowLabels = rowNumbers.getChildren();

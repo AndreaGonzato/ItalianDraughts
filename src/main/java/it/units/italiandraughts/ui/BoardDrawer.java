@@ -13,13 +13,13 @@ import java.util.Optional;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
-public class Drawer implements GameEventListener {
+public class BoardDrawer implements GameEventListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
     private final PieceDrawer pieceDrawer;
 
-    public Drawer(GridPane gridPane, Game game) {
+    public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
         pieceDrawer = new PieceDrawer();
         game.setDrawer(this);

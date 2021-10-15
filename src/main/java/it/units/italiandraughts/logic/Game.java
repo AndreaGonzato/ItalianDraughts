@@ -1,7 +1,7 @@
 package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.exception.IllegalButtonClickException;
-import it.units.italiandraughts.ui.Drawer;
+import it.units.italiandraughts.ui.BoardDrawer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -21,7 +21,7 @@ public class Game implements GameEventSource {
     private Player activePlayer;
     private Status status;
     private BlackTile activeTile;
-    private Drawer drawer;
+    private BoardDrawer boardDrawer;
     private final List<Move> moves;
     private final MediaPlayer mediaPlayer;
     private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
@@ -121,7 +121,7 @@ public class Game implements GameEventSource {
     }
 
     private void finalizeMove() {
-        drawer.updateBoard(board.getTiles());
+        boardDrawer.updateBoard(board.getTiles());
         toggleActivePlayer();
         newTurn();
     }
@@ -151,7 +151,7 @@ public class Game implements GameEventSource {
     public void undo() {
         undoLastMove();
         finalizeMove();
-        drawer.clearHighlightingAndCircles();
+        boardDrawer.clearHighlightingAndCircles();
     }
 
     public Graph generateGraphForTile(BlackTile source) {
@@ -184,8 +184,8 @@ public class Game implements GameEventSource {
         this.status = status;
     }
 
-    public void setDrawer(Drawer drawer) {
-        this.drawer = drawer;
+    public void setDrawer(BoardDrawer boardDrawer) {
+        this.boardDrawer = boardDrawer;
     }
 
     public Board getBoard() {
