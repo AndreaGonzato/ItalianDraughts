@@ -1,4 +1,4 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.event;
 
 public interface GameEventSource {
     void addListeners(EventType eventType, GameEventListener... listener);

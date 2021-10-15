@@ -1,4 +1,4 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.event;
 
 import java.util.EventObject;
 

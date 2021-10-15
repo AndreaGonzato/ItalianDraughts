@@ -1,5 +1,8 @@
 package it.units.italiandraughts.ui;
 
+import it.units.italiandraughts.event.GameEvent;
+import it.units.italiandraughts.event.GameEventListener;
+import it.units.italiandraughts.event.SwitchActivePlayerEvent;
 import it.units.italiandraughts.exception.IllegalSquareClickException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;

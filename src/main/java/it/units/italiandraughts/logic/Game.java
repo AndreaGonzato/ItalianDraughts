@@ -1,5 +1,6 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.event.*;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.ui.BoardDrawer;
 import javafx.scene.media.Media;
