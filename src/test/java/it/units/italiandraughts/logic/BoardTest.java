@@ -31,9 +31,7 @@ public class BoardTest {
         BlackTile.asBlackTile(expectedBoard.getTiles()[5][7]).removePiece();
 
         Board board = new Board();
-        Game game = new Game(board, new Player("Player1", PieceColor.WHITE),
-                new Player("Player2", PieceColor.BLACK));
-        Piece piece = BlackTile.asBlackTile(board.getTiles()[5][7]).getPiece();
+        Piece piece = new WhitePiece(PieceType.MAN, BlackTile.asBlackTile(board.getTiles()[5][7]));
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][7]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
         Move move = new Move(piece, source, destination, List.of(source, destination));
