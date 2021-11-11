@@ -139,14 +139,7 @@ public class Game implements GameEventSource {
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
-                .forEach(this::checkNeighborsAndSetMovable);
-    }
-
-    private void checkNeighborsAndSetMovable(BlackTile blackTile) {
-        Piece piece = blackTile.getPiece();
-        boolean movable = piece.getReachableNeighboringBlackTiles()
-                .anyMatch(tile -> tile.isEmpty() || piece.canEatNeighbor(tile.getPiece()));
-        piece.setMovable(movable);
+                .forEach(tile -> tile.getPiece().updateMovable());
     }
 
     public void undo() {

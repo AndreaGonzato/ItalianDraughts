@@ -139,8 +139,9 @@ public abstract class Piece {
         return movable;
     }
 
-    public void setMovable(boolean movable) {
-        this.movable = movable;
+    public void updateMovable() {
+        this.movable = getReachableNeighboringBlackTiles()
+                .anyMatch(tile -> tile.isEmpty() || canEatNeighbor(tile.getPiece()));
     }
 
     @Override
