@@ -29,6 +29,7 @@ public class Graph {
         this.game = game;
         possibleDestinations = new ArrayList<>();
         addVertices(game.getBoard());
+        initializePaths();
         longestPaths = new ArrayList<>();
     }
 
@@ -36,6 +37,16 @@ public class Graph {
         matrixToStream(board.getTiles()).filter(tile -> tile instanceof BlackTile)
                 .map(BlackTile::asBlackTile)
                 .forEach(graph::addVertex);
+    }
+
+    private void initializePaths() {
+        Piece piece = source.getPiece();
+        piece.getReachableNeighboringBlackTiles()
+                .filter(Tile::isEmpty)
+                .forEach(tile -> addEdge(source, tile, 1));
+        piece.getReachableNeighboringBlackTiles()
+                .filter(tile -> !tile.isEmpty() && piece.canEatNeighbor(tile.getPiece()))
+                .forEach(tile -> recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
     }
 
     void addEdge(BlackTile source, BlackTile target, double weight){

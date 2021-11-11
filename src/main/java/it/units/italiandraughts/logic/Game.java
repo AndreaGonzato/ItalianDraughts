@@ -64,7 +64,7 @@ public class Game implements GameEventSource {
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
                         && tile.getPiece().isMovable())
-                .map(this::generateGraphForTile).collect(Collectors.toList());
+                .map(tile -> new Graph(tile, this)).collect(Collectors.toList());
 
         graphs.forEach(Graph::explorePossibleMoves);
 
@@ -146,20 +146,6 @@ public class Game implements GameEventSource {
         undoLastMove();
         finalizeMove();
         boardDrawer.clearHighlightingAndCircles();
-    }
-
-    public Graph generateGraphForTile(BlackTile source) {
-        Graph graph = new Graph(source, this);
-        Piece piece = source.getPiece();
-        // Add edges for trivial moves (moves on empty squares, which weight 1)
-        piece.getReachableNeighboringBlackTiles()
-                .filter(Tile::isEmpty)
-                .forEach(tile -> graph.addEdge(source, tile, 1));
-        // Add edges for eating pieces
-        piece.getReachableNeighboringBlackTiles()
-                .filter(tile -> !tile.isEmpty() && piece.canEatNeighbor(tile.getPiece()))
-                .forEach(tile -> graph.recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
-        return graph;
     }
 
     public BlackTile getActiveTile() {
