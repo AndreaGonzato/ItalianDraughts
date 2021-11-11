@@ -13,9 +13,9 @@ public class GameTest {
     void firstActivePlayerPieceColor(){
         Game game = new Game(new Board(), new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
 
-        Player actualActivePlayer = game.getActivePlayer();
+        Player activePlayer = game.getActivePlayer();
 
-        Assertions.assertThat(actualActivePlayer.getPieceColor()).isEqualTo(PieceColor.WHITE);
+        Assertions.assertThat(activePlayer.getPieceColor()).isEqualTo(PieceColor.WHITE);
     }
 
 }
