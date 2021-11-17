@@ -37,26 +37,18 @@ public class BlackTile extends Tile {
         }
     }
 
-    public boolean isNeighbor(BlackTile otherBlackTile) {
-        Optional<String> eatingDirection = neighbors
-                .keySet()
-                .stream()
-                .filter(key -> otherBlackTile.equals(neighbors.get(key)))
+    private Optional<String> getAdjacencyDirection(BlackTile other) {
+        return neighbors.keySet().stream()
+                .filter(key -> other.equals(neighbors.get(key)))
                 .findFirst();
-        return eatingDirection.isPresent();
     }
 
-    public String getNeighborKey(BlackTile neighborBlackTile){
-        if (isNeighbor(neighborBlackTile)){
-            return neighbors
-                    .keySet()
-                    .stream()
-                    .filter(key -> neighborBlackTile.equals(neighbors.get(key)))
-                    .findFirst()
-                    .orElseThrow(NullPointerException::new);
-        }else {
-            throw new IllegalArgumentException("you didn't pass a neighbor");
-        }
+    public boolean isNeighbor(BlackTile other) {
+        return getAdjacencyDirection(other).isPresent();
+    }
+
+    public String getNeighborKey(BlackTile other){
+        return getAdjacencyDirection(other).orElseThrow(() -> new IllegalArgumentException("You did not pass a neighbor"));
     }
 
     public static BlackTile asBlackTile(Tile tile) {
