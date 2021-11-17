@@ -3,7 +3,6 @@ package it.units.italiandraughts.ui;
 import it.units.italiandraughts.event.GameEvent;
 import it.units.italiandraughts.event.GameEventListener;
 import it.units.italiandraughts.event.SwitchActivePlayerEvent;
-import it.units.italiandraughts.exception.IllegalSquareClickException;
 import it.units.italiandraughts.logic.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -92,9 +91,6 @@ public class BoardDrawer implements GameEventListener {
 
     private void onClickOnEmptySquare(MouseEvent event) {
         Square square = (Square) event.getSource();
-        if (square.getType().equals(SquareType.WHITE_SMOKE)){
-            throw new IllegalSquareClickException("Do not click on White Square");
-        }
         if (Status.MOVE_IN_PROGRESS.equals(status)) {
             Optional<GraphPath<BlackTile, Edge>> absoluteLongestPathEndingOnClickedSquare = game.getAbsoluteLongestPaths().stream()
                     .filter(path -> path.getEndVertex().equals(square.getTile())
