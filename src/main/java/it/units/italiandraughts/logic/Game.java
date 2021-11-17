@@ -20,7 +20,6 @@ public class Game implements GameEventSource {
     private final Player player1;
     private final Player player2;
     private Player activePlayer;
-    private Status status;
     private BlackTile activeTile;
     private BoardDrawer boardDrawer;
     private final List<Move> moves;
@@ -54,7 +53,6 @@ public class Game implements GameEventSource {
 
     private void newTurn() {
         setActiveTile(null);
-        setStatus(Status.IDLE);
         updateMovablePiecesOfActivePlayer();
         if (countMovablePiecesOfActivePlayer() == 0) {
             notifyListeners(new GameOverEvent(this, activePlayer.equals(player1) ? player2 : player1));
@@ -154,14 +152,6 @@ public class Game implements GameEventSource {
 
     public void setActiveTile(BlackTile tile) {
         this.activeTile = tile;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public void setDrawer(BoardDrawer boardDrawer) {

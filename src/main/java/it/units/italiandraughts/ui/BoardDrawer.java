@@ -20,6 +20,7 @@ public class BoardDrawer implements GameEventListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
+    private Status status;
     private final PieceDrawer pieceDrawer;
 
     public BoardDrawer(GridPane gridPane, Game game) {
@@ -46,6 +47,7 @@ public class BoardDrawer implements GameEventListener {
 
         setClickableForPlayer(game.getPlayer1());
         setClickableForEmptySquares();
+        status = Status.IDLE;
 
         // draw the pieces at the start
         updateBoard(game.getBoard().getTiles());
@@ -74,7 +76,7 @@ public class BoardDrawer implements GameEventListener {
     private void onClickOnFullSquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         setActiveTileAndHighlightSquare(square);
-        game.setStatus(Status.MOVE_IN_PROGRESS);
+        status = Status.MOVE_IN_PROGRESS;
     }
 
     private void setActiveTileAndHighlightSquare(Square square) {
@@ -93,7 +95,7 @@ public class BoardDrawer implements GameEventListener {
         if (square.getType().equals(SquareType.WHITE_SMOKE)){
             throw new IllegalSquareClickException("Do not click on White Square");
         }
-        if (Status.MOVE_IN_PROGRESS.equals(game.getStatus())) {
+        if (Status.MOVE_IN_PROGRESS.equals(status)) {
             Optional<GraphPath<BlackTile, Edge>> absoluteLongestPathEndingOnClickedSquare = game.getAbsoluteLongestPaths().stream()
                     .filter(path -> path.getEndVertex().equals(square.getTile())
                             && path.getStartVertex().equals(game.getActiveTile()))
