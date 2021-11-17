@@ -16,13 +16,7 @@ public class Board {
 
         for (int row = 0; row < Board.SIZE; row++) {
             for (int col = 0; col < Board.SIZE; col++) {
-                Tile tile;
-                if ((col + row) % 2 == 0) {
-                    tile = new BlackTile(col, row);
-                } else {
-                    tile = new Tile(col, row);
-                }
-                tiles[row][col] = tile;
+                tiles[row][col] = Tile.generateTile(col, row);
             }
         }
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)

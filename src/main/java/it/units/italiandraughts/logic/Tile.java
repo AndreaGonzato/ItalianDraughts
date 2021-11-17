@@ -2,7 +2,6 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.ui.Square;
 
-
 import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -19,9 +18,16 @@ public class Tile {
     protected static final BiPredicate<Integer, Integer> areValidCoordinatesBiPredicate =
             (coordinateX, coordinateY) -> isValidCoordinatePredicate.test(coordinateX) &&
                     isValidCoordinatePredicate.test(coordinateY);
-    
 
-    public Tile(int x, int y) {
+    public static Tile generateTile(int x, int y) {
+        if ((x + y) % 2 == 0) {
+            return new BlackTile(x, y);
+        } else {
+            return new Tile(x, y);
+        }
+    }
+
+    protected Tile(int x, int y) {
         this.x = x;
         this.y = y;
     }
