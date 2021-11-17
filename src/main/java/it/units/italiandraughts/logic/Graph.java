@@ -23,7 +23,7 @@ public class Graph {
     private final List<GraphPath<BlackTile, Edge>> longestPaths;
     private final Game game;
 
-    public Graph(BlackTile source, Game game) {
+    Graph(BlackTile source, Game game) {
         graph = new SimpleDirectedWeightedGraph<>(Edge.class);
         this.source = source;
         this.game = game;
