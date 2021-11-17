@@ -52,7 +52,11 @@ public class BlackTile extends Tile {
     }
 
     public static BlackTile asBlackTile(Tile tile) {
-        return (BlackTile) tile;
+        if (tile instanceof BlackTile) {
+            return (BlackTile) tile;
+        } else {
+            throw new IllegalArgumentException("A white tile cannot be cast to BlackTile");
+        }
     }
 
     public boolean isEmpty() {
