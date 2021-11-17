@@ -30,10 +30,11 @@ public class Game implements GameEventSource {
         this.player1 = player1;
         this.player2 = player2;
         this.activePlayer = player1;
-        newTurn();
+        listenersMap = new HashMap<>();
         moves = new ArrayList<>();
         mediaPlayer = initMediaPlayer();
-        listenersMap = new HashMap<>();
+        updateMovablePiecesOfPlayer(activePlayer);
+        updateAbsoluteLongestPath();
     }
 
     @Override
@@ -51,10 +52,16 @@ public class Game implements GameEventSource {
 
     private void newTurn() {
         setActiveTile(null);
-        updateMovablePiecesOfActivePlayer();
-        if (countMovablePiecesOfActivePlayer() == 0) {
-            notifyListeners(new GameOverEvent(this, activePlayer.equals(player1) ? player2 : player1));
+        Player inactivePlayer = activePlayer.equals(player1) ? player2 : player1;
+        updateMovablePiecesOfPlayer(inactivePlayer);
+        if (countMovablePiecesOfPlayer(inactivePlayer) == 0) {
+            notifyListeners(new GameOverEvent(this, activePlayer));
         }
+        toggleActivePlayer();
+        updateAbsoluteLongestPath();
+    }
+
+    private void updateAbsoluteLongestPath() {
         List<Graph> graphs = matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
@@ -67,14 +74,13 @@ public class Game implements GameEventSource {
         absoluteLongestPaths = graphs.stream()
                 .flatMap(graph -> graph.getLongestPaths().stream())
                 .collect(Graph.getLongestPathsCollector());
-
     }
 
-    private int countMovablePiecesOfActivePlayer(){
+    private int countMovablePiecesOfPlayer(Player player){
         return (int) matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
+                .filter(tile -> tile.getPiece().getPieceColor().equals(player.getPieceColor())
                         && tile.getPiece().isMovable())
                 .count();
     }
@@ -106,7 +112,7 @@ public class Game implements GameEventSource {
     public void makeMove(Piece piece, List<BlackTile> steps) {
         playSound();
         moveAndLog(piece, steps);
-        finalizeMove();
+        newTurn();
     }
 
     public void undoLastMove() {
@@ -117,11 +123,6 @@ public class Game implements GameEventSource {
         move.undo();
     }
 
-    private void finalizeMove() {
-        toggleActivePlayer();
-        newTurn();
-    }
-
     private MediaPlayer initMediaPlayer() {
         String path = "sounds" + File.separatorChar + "movePiece.mp3";
         URL resource = Objects.requireNonNull(getClass().getResource(path));
@@ -129,17 +130,17 @@ public class Game implements GameEventSource {
         return new MediaPlayer(media);
     }
 
-    private void updateMovablePiecesOfActivePlayer() {
+    private void updateMovablePiecesOfPlayer(Player player) {
         matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor()))
+                .filter(tile -> tile.getPiece().getPieceColor().equals(player.getPieceColor()))
                 .forEach(tile -> tile.getPiece().updateMovable());
     }
 
     public void undo() {
         undoLastMove();
-        finalizeMove();
+        newTurn();
     }
 
     public BlackTile getActiveTile() {
