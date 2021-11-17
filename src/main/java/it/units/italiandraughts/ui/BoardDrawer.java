@@ -25,7 +25,6 @@ public class BoardDrawer implements GameEventListener {
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
         pieceDrawer = new PieceDrawer();
-        game.setDrawer(this);
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setPercentWidth(12.5);
@@ -54,6 +53,7 @@ public class BoardDrawer implements GameEventListener {
 
     @Override
     public void onGameEvent(GameEvent event) {
+        updateBoard(game.getBoard().getTiles());
         SwitchActivePlayerEvent switchActivePlayerEvent = (SwitchActivePlayerEvent) event;
         Player activePlayer = switchActivePlayerEvent.getPayload()[0];
         Player otherPlayer = switchActivePlayerEvent.getPayload()[1];
