@@ -10,7 +10,6 @@ import org.jgrapht.GraphPath;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.*;
 
@@ -62,16 +61,12 @@ public class Game implements GameEventSource {
     }
 
     private void updateAbsoluteLongestPath() {
-        List<Graph> graphs = matrixToStream(board.getTiles())
+        absoluteLongestPaths = matrixToStream(board.getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
                         && tile.getPiece().isMovable())
-                .map(tile -> new Graph(tile, this)).collect(Collectors.toList());
-
-        graphs.forEach(Graph::explorePossibleMoves);
-
-        absoluteLongestPaths = graphs.stream()
+                .map(tile -> new Graph(tile, this))
                 .flatMap(graph -> graph.getLongestPaths().stream())
                 .collect(Graph.getLongestPathsCollector());
     }

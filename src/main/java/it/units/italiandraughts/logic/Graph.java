@@ -28,9 +28,10 @@ public class Graph {
         this.source = source;
         this.game = game;
         possibleDestinations = new ArrayList<>();
+        longestPaths = new ArrayList<>();
         addVertices(game.getBoard());
         initializePaths();
-        longestPaths = new ArrayList<>();
+        explorePossibleMoves();
     }
 
     private void addVertices(Board board){
