@@ -2,6 +2,8 @@ package it.units.italiandraughts.logic;
 
 
 import java.util.Arrays;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -36,12 +38,11 @@ public class Board {
     }
 
     private void initPieces() {
-        matrixToStream(tiles).filter(tile -> tile.getY() < 3 && (tile.getY() + tile.getX()) % 2 == 0)
-                .map(BlackTile::asBlackTile)
-                .forEach(BlackPiece::new);
-        matrixToStream(tiles).filter(tile -> tile.getY() > 4 && (tile.getY() + tile.getX()) % 2 == 0)
-                .map(BlackTile::asBlackTile)
-                .forEach(WhitePiece::new);
+        Supplier<Stream<BlackTile>> blackTilesSupplier = () -> matrixToStream(tiles)
+                .filter(tile -> tile instanceof BlackTile)
+                .map(BlackTile::asBlackTile);
+        blackTilesSupplier.get().filter(tile -> tile.getY() < 3).forEach(BlackPiece::new);
+        blackTilesSupplier.get().filter(tile -> tile.getY() > 4).forEach(WhitePiece::new);
     }
 
     // TODO remove this
