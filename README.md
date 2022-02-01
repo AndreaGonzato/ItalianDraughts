@@ -1,3 +1,6 @@
+[![Build Status](https://app.travis-ci.com/AndreaGonzato/ItalianDraughts.svg?token=mbqkqifSVkWs9qhq64bY&branch=main)](https://app.travis-ci.com/AndreaGonzato/ItalianDraughts)
+
+
 # ItalianDraughts
 
 This is the Java implementation of the board game Italian Draughts.
