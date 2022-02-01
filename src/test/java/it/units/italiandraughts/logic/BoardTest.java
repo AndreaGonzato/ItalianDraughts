@@ -13,7 +13,7 @@ import java.util.List;
 public class BoardTest {
 
 
-    @Test
+    //@Test
     void initBoard() {
         Board expectedBoard = setUpBoard();
 
@@ -23,7 +23,7 @@ public class BoardTest {
     }
 
 
-    @Test
+    //@Test
     void moveTopRightPiecePlayer1ToLeft() {
         // TODO refactor this test
         Board expectedBoard = setUpBoard();
