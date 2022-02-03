@@ -22,7 +22,6 @@ public class Game implements GameEventSource {
     private Player activePlayer;
     private BlackTile activeTile;
     private final List<Move> moves;
-    private final MediaPlayer mediaPlayer;
     private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
     private final HashMap<EventType, List<GameEventListener>> listenersMap;
 
@@ -33,7 +32,6 @@ public class Game implements GameEventSource {
         this.activePlayer = player1;
         listenersMap = new HashMap<>();
         moves = new ArrayList<>();
-        mediaPlayer = initMediaPlayer();
         updateMovablePiecesOfPlayer(activePlayer);
         updateAbsoluteLongestPath();
     }
@@ -94,6 +92,7 @@ public class Game implements GameEventSource {
 
     private void playSound() {
         new Thread(() -> {
+            MediaPlayer mediaPlayer = initMediaPlayer();
             mediaPlayer.play();
             mediaPlayer.seek(new Duration(0));
         }).start();
