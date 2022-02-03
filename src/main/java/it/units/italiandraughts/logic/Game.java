@@ -119,7 +119,7 @@ public class Game implements GameEventSource {
     }
 
     private MediaPlayer initMediaPlayer() {
-        String path = "sounds" + File.separatorChar + "movePiece.mp3";
+        String path = "sounds" + File.separatorChar + "movePiece.wav";
         URL resource = Objects.requireNonNull(getClass().getResource(path));
         Media media = new Media(resource.toString());
         return new MediaPlayer(media);
