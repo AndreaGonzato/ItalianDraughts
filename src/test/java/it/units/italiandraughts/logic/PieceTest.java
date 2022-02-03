@@ -24,7 +24,8 @@ public class PieceTest {
     @Test
     void canEatNeighborTrue(){
         Tile[][] tiles = initTiles();
-        Board board = new Board(tiles);
+        Board board = Board.getBoard();
+        board.setTiles(tiles);
         addNeighbors(board);
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
@@ -40,7 +41,8 @@ public class PieceTest {
     @Test
     void canEatNeighborFalse(){
         Tile[][] tiles = initTiles();
-        Board board = new Board(tiles);
+        Board board = Board.getBoard();
+        board.setTiles(tiles);
         addNeighbors(board);
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -56,7 +58,8 @@ public class PieceTest {
     @Test
     void eatNeighbor(){
         Tile[][] tiles = initTiles();
-        Board board = new Board(tiles);
+        Board board = Board.getBoard();
+        board.setTiles(tiles);
         addNeighbors(board);
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);

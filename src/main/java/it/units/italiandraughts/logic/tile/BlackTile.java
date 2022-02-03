@@ -26,7 +26,8 @@ public class BlackTile extends Tile {
         return neighbors;
     }
 
-    public void addNeighbors(Board board) {
+    public void addNeighbors() {
+        Board board = Board.getBoard();
         if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y - 1)) {
             neighbors.put("topLeft", BlackTile.asBlackTile(board.getTiles()[y - 1][x - 1]));
         }

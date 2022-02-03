@@ -65,7 +65,8 @@ public class BoardController implements GameEventListener {
         gridPane.setMinSize(getBoardHeight(), getBoardHeight());
         gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
 
-        Board board = new Board();
+        Board board = Board.getBoard(true);
+        board.assignNeighbors();
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
         game = new Game(board, player1, player2);

@@ -13,10 +13,23 @@ import java.util.stream.Stream;
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Board {
-    private final Tile[][] tiles;
-    public static final int SIZE = 8;
 
-    public Board() {
+    private Tile[][] tiles;
+    public static final int SIZE = 8;
+    private static Board instance;
+
+    public static Board getBoard() {
+        return getBoard(false);
+    }
+
+    public static Board getBoard(boolean reset) {
+        if (instance == null || reset) {
+            instance = new Board();
+        }
+        return instance;
+    }
+
+    private Board() {
         tiles = new Tile[SIZE][SIZE];
 
         for (int row = 0; row < Board.SIZE; row++) {
@@ -24,16 +37,15 @@ public class Board {
                 tiles[row][col] = Tile.generateTile(col, row);
             }
         }
-        matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
-                .forEach(blackTile -> blackTile.addNeighbors(this));
 
 
         initPieces();
         //initPiecesDebug(); // TODO remove this line
     }
 
-    public Board(Tile[][] tiles){
-        this.tiles = tiles;
+    public void assignNeighbors(){
+        matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
+                .forEach(BlackTile::addNeighbors);
     }
 
     private void initPieces() {
@@ -60,6 +72,10 @@ public class Board {
 
     public Tile[][] getTiles() {
         return tiles;
+    }
+
+    public void setTiles(Tile[][] tiles) {
+        this.tiles = tiles;
     }
 
     @Override

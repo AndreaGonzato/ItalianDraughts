@@ -23,7 +23,7 @@ public class BoardTest {
     void initBoard() {
         Board expectedBoard = setUpBoard();
 
-        Board actualBoard = new Board();
+        Board actualBoard = Board.getBoard();
 
         Assertions.assertEquals(expectedBoard, actualBoard);
     }
@@ -36,7 +36,8 @@ public class BoardTest {
         placePieceOnTile(BlackTile.asBlackTile(expectedBoard.getTiles()[4][6]), PieceColor.WHITE);
         BlackTile.asBlackTile(expectedBoard.getTiles()[5][7]).removePiece();
 
-        Board board = new Board();
+        Board board = Board.getBoard();
+        board.assignNeighbors();
         Piece piece = new WhitePiece(PieceType.MAN, BlackTile.asBlackTile(board.getTiles()[5][7]));
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][7]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
@@ -77,7 +78,9 @@ public class BoardTest {
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][5]), PieceColor.WHITE);
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][7]), PieceColor.WHITE);
 
-        return new Board(tiles);
+        Board board = Board.getBoard();
+        board.setTiles(tiles);
+        return board;
     }
 
     public static Tile[][] initTiles(){
