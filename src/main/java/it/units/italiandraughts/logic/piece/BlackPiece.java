@@ -8,7 +8,7 @@ public class BlackPiece extends Piece {
     private static final int PROMOTION_ROW = 7;
     private static final PieceColor PIECE_COLOR = PieceColor.BLACK;
 
-    BlackPiece() {
+    public BlackPiece() {
         this(PieceType.MAN, null);
     }
 

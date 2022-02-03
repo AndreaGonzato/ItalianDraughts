@@ -14,7 +14,7 @@ public class WhitePiece extends Piece {
         this(PieceType.MAN, null);
     }
 
-    WhitePiece(PieceType pieceType) {
+    public WhitePiece(PieceType pieceType) {
         this(pieceType, null);
     }
 
@@ -22,7 +22,7 @@ public class WhitePiece extends Piece {
         this(PieceType.MAN, blackTile);
     }
 
-    WhitePiece(PieceType pieceType, BlackTile blackTile) {
+    public WhitePiece(PieceType pieceType, BlackTile blackTile) {
         super(pieceType, blackTile);
     }
 

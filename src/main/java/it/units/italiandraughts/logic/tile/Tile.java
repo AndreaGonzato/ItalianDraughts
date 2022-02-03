@@ -16,7 +16,7 @@ public class Tile {
     private static final Predicate<Integer> isValidCoordinatePredicate =
             coordinate -> (coordinate >= 0 && coordinate < Board.SIZE);
 
-    protected static final BiPredicate<Integer, Integer> areValidCoordinatesBiPredicate =
+    public static final BiPredicate<Integer, Integer> areValidCoordinatesBiPredicate =
             (coordinateX, coordinateY) -> isValidCoordinatePredicate.test(coordinateX) &&
                     isValidCoordinatePredicate.test(coordinateY);
 
@@ -28,7 +28,7 @@ public class Tile {
         }
     }
 
-    protected Tile(int x, int y) {
+    public Tile(int x, int y) {
         this.x = x;
         this.y = y;
     }

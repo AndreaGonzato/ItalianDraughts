@@ -13,7 +13,7 @@ public class BlackTile extends Tile {
     private Piece piece;
     private final Map<String, BlackTile> neighbors = new HashMap<>();
 
-    BlackTile(int x, int y) {
+    public BlackTile(int x, int y) {
         super(x, y);
     }
 
