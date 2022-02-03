@@ -4,13 +4,8 @@ import it.units.italiandraughts.event.*;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.BlackTile;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import org.jgrapht.GraphPath;
 
-import java.io.File;
-import java.net.URL;
 import java.util.*;
 
 import static it.units.italiandraughts.logic.StaticUtil.*;
@@ -90,14 +85,6 @@ public class Game implements GameEventSource {
         notifyListeners(new SwitchActivePlayerEvent(this, activePlayer, oldActivePlayer));
     }
 
-    private void playSound() {
-        new Thread(() -> {
-            MediaPlayer mediaPlayer = initMediaPlayer();
-            mediaPlayer.play();
-            mediaPlayer.seek(new Duration(0));
-        }).start();
-    }
-
     public Move moveAndLog(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, piece.getBlackTile(), steps.get(steps.size() - 1), steps);
         move.make();
@@ -106,7 +93,6 @@ public class Game implements GameEventSource {
     }
 
     public void makeMove(Piece piece, List<BlackTile> steps) {
-        playSound();
         moveAndLog(piece, steps);
         newTurn();
     }
@@ -117,13 +103,6 @@ public class Game implements GameEventSource {
         }
         Move move = moves.remove(moves.size() - 1);
         move.undo();
-    }
-
-    private MediaPlayer initMediaPlayer() {
-        String path = "sounds" + File.separatorChar + "movePiece.mp3";
-        URL resource = Objects.requireNonNull(getClass().getResource(path));
-        Media media = new Media(resource.toString());
-        return new MediaPlayer(media);
     }
 
     private void updateMovablePiecesOfPlayer(Player player) {

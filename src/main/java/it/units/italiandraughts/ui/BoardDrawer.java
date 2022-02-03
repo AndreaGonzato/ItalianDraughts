@@ -10,9 +10,15 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import org.jgrapht.GraphPath;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
@@ -100,9 +106,25 @@ public class BoardDrawer implements GameEventListener {
                     .findAny();
             if (absoluteLongestPathEndingOnClickedSquare.isPresent()) {
                 List<BlackTile> steps = absoluteLongestPathEndingOnClickedSquare.get().getVertexList();
+                playSound();
                 game.makeMove(game.getActiveTile().getPiece(), steps);
             }
         }
+    }
+
+    private MediaPlayer initMediaPlayer() {
+        String path = "sounds" + File.separatorChar + "movePiece.mp3";
+        URL resource = Objects.requireNonNull(getClass().getResource(path));
+        Media media = new Media(resource.toString());
+        return new MediaPlayer(media);
+    }
+
+    private void playSound() {
+        new Thread(() -> {
+            MediaPlayer mediaPlayer = initMediaPlayer();
+            mediaPlayer.play();
+            mediaPlayer.seek(new Duration(0));
+        }).start();
     }
 
     private void setClickableForPlayer(Player player) {
