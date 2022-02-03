@@ -1,7 +1,7 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.exception.IllegalPositionDrawingException;
-import it.units.italiandraughts.logic.Tile;
+import it.units.italiandraughts.logic.tile.Tile;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

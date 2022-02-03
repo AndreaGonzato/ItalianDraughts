@@ -4,6 +4,8 @@ import it.units.italiandraughts.event.GameEvent;
 import it.units.italiandraughts.event.GameEventListener;
 import it.units.italiandraughts.event.SwitchActivePlayerEvent;
 import it.units.italiandraughts.logic.*;
+import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.logic.tile.Tile;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;

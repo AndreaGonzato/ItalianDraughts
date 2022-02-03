@@ -1,5 +1,8 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.logic.piece.Piece;
+import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.logic.tile.Tile;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;

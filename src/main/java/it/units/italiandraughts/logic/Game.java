@@ -2,6 +2,8 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.event.*;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
+import it.units.italiandraughts.logic.piece.Piece;
+import it.units.italiandraughts.logic.tile.BlackTile;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;

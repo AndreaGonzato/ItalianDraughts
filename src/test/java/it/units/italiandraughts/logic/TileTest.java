@@ -3,7 +3,7 @@ package it.units.italiandraughts.logic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static it.units.italiandraughts.logic.Tile.areValidCoordinatesBiPredicate;
+import static it.units.italiandraughts.logic.tile.Tile.areValidCoordinatesBiPredicate;
 
 public class TileTest {
     @Test

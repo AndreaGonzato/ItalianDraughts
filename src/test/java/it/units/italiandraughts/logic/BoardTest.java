@@ -1,5 +1,11 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.logic.piece.BlackPiece;
+import it.units.italiandraughts.logic.piece.Piece;
+import it.units.italiandraughts.logic.piece.PieceType;
+import it.units.italiandraughts.logic.piece.WhitePiece;
+import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.logic.tile.Tile;
 import it.units.italiandraughts.ui.PieceColor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,6 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.logic.piece;
+
+import it.units.italiandraughts.logic.tile.BlackTile;
 
 public class EatenPiece {
 
@@ -15,7 +17,7 @@ public class EatenPiece {
         this.position = blackTile;
     }
 
-    void restore() {
+    public void restore() {
         position.placePiece(piece);
     }
 

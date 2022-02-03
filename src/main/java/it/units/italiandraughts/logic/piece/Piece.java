@@ -1,5 +1,6 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.logic.piece;
 
+import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.Map;
@@ -94,7 +95,7 @@ public abstract class Piece {
         }
     }
 
-    BlackTile getPositionAfterEating(Piece otherPiece) {
+    public BlackTile getPositionAfterEating(Piece otherPiece) {
         Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
                 .filter(entry -> entry.getValue().equals(otherPiece.getBlackTile()))
                 .map(Map.Entry::getKey).findAny();

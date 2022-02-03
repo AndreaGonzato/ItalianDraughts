@@ -1,5 +1,10 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.logic.piece.EatenPiece;
+import it.units.italiandraughts.logic.piece.Piece;
+import it.units.italiandraughts.logic.piece.PieceType;
+import it.units.italiandraughts.logic.tile.BlackTile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

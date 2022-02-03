@@ -1,4 +1,4 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.logic.piece;
 
 public enum PieceType {
     MAN, KING;

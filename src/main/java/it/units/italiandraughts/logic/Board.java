@@ -1,6 +1,11 @@
 package it.units.italiandraughts.logic;
 
 
+import it.units.italiandraughts.logic.piece.BlackPiece;
+import it.units.italiandraughts.logic.piece.WhitePiece;
+import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.logic.tile.Tile;
+
 import java.util.Arrays;
 import java.util.function.Supplier;
 import java.util.stream.Stream;

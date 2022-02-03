@@ -1,5 +1,6 @@
-package it.units.italiandraughts.logic;
+package it.units.italiandraughts.logic.tile;
 
+import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.ui.Square;
 
 import java.util.Objects;

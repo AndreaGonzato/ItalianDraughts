@@ -1,7 +1,7 @@
 package it.units.italiandraughts.ui;
 
 
-import it.units.italiandraughts.logic.Piece;
+import it.units.italiandraughts.logic.piece.Piece;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
