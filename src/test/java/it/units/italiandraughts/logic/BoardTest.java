@@ -11,9 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 
-import java.util.List;
-
-
 @ExtendWith(ApplicationExtension.class)
 public class BoardTest {
 

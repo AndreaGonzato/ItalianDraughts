@@ -131,6 +131,7 @@ public abstract class Piece {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if (o == null) return false;
         if (!o.getClass().equals(this.getClass())) return false;
 
         return pieceType == this.getClass().cast(o).pieceType;

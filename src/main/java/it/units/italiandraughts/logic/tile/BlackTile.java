@@ -84,19 +84,15 @@ public class BlackTile extends Tile {
         return piece;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof BlackTile blackTile)) return false;
-//        if (!super.equals(o)) return false;
-//
-//        return Objects.equals(piece, blackTile.piece);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = super.hashCode();
-//        result = 31 * result + (piece != null ? piece.hashCode() : 0);
-//        return result;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BlackTile)) return false;
+        if (!super.equals(o)) return false;
+
+        BlackTile blackTile = (BlackTile) o;
+
+        return piece != null ? piece.equals(blackTile.piece) : blackTile.piece == null;
+    }
+
 }
