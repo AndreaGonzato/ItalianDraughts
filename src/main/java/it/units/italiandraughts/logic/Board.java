@@ -19,12 +19,8 @@ public class Board {
     private static Board instance;
 
     public static Board getBoard() {
-        return getBoard(false);
-    }
-
-    public static Board getBoard(boolean reset) {
-        if (instance == null || reset) {
-            initializeBoard();
+        if (instance == null) {
+            reset();
         }
         return instance;
     }
@@ -42,7 +38,7 @@ public class Board {
         //initPiecesDebug(); // TODO remove this line
     }
 
-    private static void initializeBoard(){
+    public static void reset(){
         instance = new Board();
         instance.assignNeighborsOfBlackTiles();
     }

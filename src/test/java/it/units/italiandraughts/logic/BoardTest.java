@@ -29,24 +29,6 @@ public class BoardTest {
     }
 
 
-    @Test
-    void moveTopRightPiecePlayer1ToLeft() {
-        // TODO refactor this test
-        Board expectedBoard = setUpBoard();
-        placePieceOnTile(BlackTile.asBlackTile(expectedBoard.getTiles()[4][6]), PieceColor.WHITE);
-        BlackTile.asBlackTile(expectedBoard.getTiles()[5][7]).removePiece();
-
-        Board board = Board.getBoard();
-        Piece piece = new WhitePiece(PieceType.MAN, BlackTile.asBlackTile(board.getTiles()[5][7]));
-        BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][7]);
-        BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);
-        Move move = new Move(piece, source, destination, List.of(source, destination));
-        move.make();
-
-        Assertions.assertEquals(expectedBoard, board);
-    }
-
-
 
     private Board setUpBoard() {
         Tile[][] tiles = initTiles();
