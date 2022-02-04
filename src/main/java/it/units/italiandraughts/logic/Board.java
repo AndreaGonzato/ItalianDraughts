@@ -24,7 +24,7 @@ public class Board {
 
     public static Board getBoard(boolean reset) {
         if (instance == null || reset) {
-            instance = new Board();
+            initializeBoard();
         }
         return instance;
     }
@@ -38,12 +38,16 @@ public class Board {
             }
         }
 
-
         initPieces();
         //initPiecesDebug(); // TODO remove this line
     }
 
-    public void assignNeighborsOfBlackTiles(){
+    private static void initializeBoard(){
+        instance = new Board();
+        instance.assignNeighborsOfBlackTiles();
+    }
+
+    private void assignNeighborsOfBlackTiles(){
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
                 .forEach(BlackTile::addNeighbors);
     }
