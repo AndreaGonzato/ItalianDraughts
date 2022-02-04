@@ -37,7 +37,7 @@ public class BoardTest {
         BlackTile.asBlackTile(expectedBoard.getTiles()[5][7]).removePiece();
 
         Board board = Board.getBoard();
-        board.assignNeighbors();
+        board.assignNeighborsOfBlackTiles();
         Piece piece = new WhitePiece(PieceType.MAN, BlackTile.asBlackTile(board.getTiles()[5][7]));
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][7]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][6]);

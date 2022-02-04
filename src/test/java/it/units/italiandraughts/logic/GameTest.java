@@ -11,7 +11,7 @@ public class GameTest {
 
     @Test
     void firstActivePlayerPieceColor(){
-        Game game = new Game(Board.getBoard(), new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
 
         Player activePlayer = game.getActivePlayer();
 

@@ -30,7 +30,7 @@ public class Game implements GameEventSource {
         this.activePlayer = player1;
         listenersMap = new HashMap<>();
         moves = new ArrayList<>();
-        updateMovablePiecesOfPlayer(activePlayer);
+        activePlayer.updateMovablePieces();
         updateAbsoluteLongestPath();
     }
 
@@ -50,8 +50,8 @@ public class Game implements GameEventSource {
     private void newTurn() {
         setActiveTile(null);
         Player inactivePlayer = activePlayer.equals(player1) ? player2 : player1;
-        updateMovablePiecesOfPlayer(inactivePlayer);
-        if (countMovablePiecesOfPlayer(inactivePlayer) == 0) {
+        inactivePlayer.updateMovablePieces();
+        if (inactivePlayer.countMovablePieces() == 0) {
             notifyListeners(new GameOverEvent(this, activePlayer));
         }
         toggleActivePlayer();
@@ -67,15 +67,6 @@ public class Game implements GameEventSource {
                 .map(tile -> new Graph(tile, this))
                 .flatMap(graph -> graph.getLongestPaths().stream())
                 .collect(Graph.getLongestPathsCollector());
-    }
-
-    private int countMovablePiecesOfPlayer(Player player){
-        return (int) matrixToStream(Board.getBoard().getTiles())
-                .filter(tile -> !tile.isEmpty())
-                .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(player.getPieceColor())
-                        && tile.getPiece().isMovable())
-                .count();
     }
 
     private void toggleActivePlayer() {
@@ -122,14 +113,6 @@ public class Game implements GameEventSource {
         URL resource = Objects.requireNonNull(getClass().getResource(path));
         Media media = new Media(resource.toString());
         return new MediaPlayer(media);
-    }
-
-    private void updateMovablePiecesOfPlayer(Player player) {
-        matrixToStream(Board.getBoard().getTiles())
-                .filter(tile -> !tile.isEmpty())
-                .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(player.getPieceColor()))
-                .forEach(tile -> tile.getPiece().updateMovable());
     }
 
     public void undo() {

@@ -1,8 +1,11 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.Objects;
+
+import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Player {
 
@@ -12,6 +15,23 @@ public class Player {
     public Player(String name, PieceColor pieceColor){
         this.pieceColor = pieceColor;
         this.name = name;
+    }
+
+    void updateMovablePieces() {
+        matrixToStream(Board.getBoard().getTiles())
+                .filter(tile -> !tile.isEmpty())
+                .map(BlackTile::asBlackTile)
+                .filter(tile -> tile.getPiece().getPieceColor().equals(pieceColor))
+                .forEach(tile -> tile.getPiece().updateMovable());
+    }
+
+    int countMovablePieces(){
+        return (int) matrixToStream(Board.getBoard().getTiles())
+                .filter(tile -> !tile.isEmpty())
+                .map(BlackTile::asBlackTile)
+                .filter(tile -> tile.getPiece().getPieceColor().equals(pieceColor)
+                        && tile.getPiece().isMovable())
+                .count();
     }
 
     public String getName() {

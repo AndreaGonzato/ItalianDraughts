@@ -43,7 +43,7 @@ public class Board {
         //initPiecesDebug(); // TODO remove this line
     }
 
-    public void assignNeighbors(){
+    public void assignNeighborsOfBlackTiles(){
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
                 .forEach(BlackTile::addNeighbors);
     }
