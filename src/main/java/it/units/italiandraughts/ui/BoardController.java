@@ -69,7 +69,7 @@ public class BoardController implements GameEventListener {
         board.assignNeighbors();
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
-        game = new Game(board, player1, player2);
+        game = new Game(player1, player2);
         BoardDrawer boardDrawer = new BoardDrawer(gridPane, game);
         game.addListeners(EventType.GAME_OVER, this);
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, this, boardDrawer);

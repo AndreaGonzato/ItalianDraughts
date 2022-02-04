@@ -16,7 +16,6 @@ import java.util.*;
 import static it.units.italiandraughts.logic.StaticUtil.*;
 
 public class Game implements GameEventSource {
-    private final Board board;
     private final Player player1;
     private final Player player2;
     private Player activePlayer;
@@ -25,8 +24,7 @@ public class Game implements GameEventSource {
     private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
     private final HashMap<EventType, List<GameEventListener>> listenersMap;
 
-    public Game(Board board, Player player1, Player player2) {
-        this.board = board;
+    public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
         this.activePlayer = player1;
@@ -61,7 +59,7 @@ public class Game implements GameEventSource {
     }
 
     private void updateAbsoluteLongestPath() {
-        absoluteLongestPaths = matrixToStream(board.getTiles())
+        absoluteLongestPaths = matrixToStream(Board.getBoard().getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
@@ -72,7 +70,7 @@ public class Game implements GameEventSource {
     }
 
     private int countMovablePiecesOfPlayer(Player player){
-        return (int) matrixToStream(board.getTiles())
+        return (int) matrixToStream(Board.getBoard().getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(player.getPieceColor())
@@ -127,7 +125,7 @@ public class Game implements GameEventSource {
     }
 
     private void updateMovablePiecesOfPlayer(Player player) {
-        matrixToStream(board.getTiles())
+        matrixToStream(Board.getBoard().getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
                 .filter(tile -> tile.getPiece().getPieceColor().equals(player.getPieceColor()))
@@ -146,11 +144,6 @@ public class Game implements GameEventSource {
     public void setActiveTile(BlackTile tile) {
         this.activeTile = tile;
     }
-
-    public Board getBoard() {
-        return board;
-    }
-
 
     public Player getPlayer1() {
         return player1;

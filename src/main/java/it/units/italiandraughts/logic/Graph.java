@@ -32,7 +32,7 @@ public class Graph {
         this.game = game;
         possibleDestinations = new ArrayList<>();
         longestPaths = new ArrayList<>();
-        addVertices(game.getBoard());
+        addVertices(Board.getBoard());
         initializePaths();
         explorePossibleMoves();
     }

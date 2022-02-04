@@ -37,7 +37,7 @@ public class BoardDrawer implements GameEventListener {
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
-        matrixToStream(game.getBoard().getTiles()).forEach(tile -> {
+        matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
             Square square = new Square(tile,
                     ((tile.getX() + tile.getY()) % 2 == 0) ?
                             SquareType.BRONZE : SquareType.WHITE_SMOKE, gridPane.getMaxHeight() / Board.SIZE);
@@ -50,12 +50,12 @@ public class BoardDrawer implements GameEventListener {
         status = Status.IDLE;
 
         // draw the pieces at the start
-        updateBoard(game.getBoard().getTiles());
+        updateBoard(Board.getBoard().getTiles());
     }
 
     @Override
     public void onGameEvent(GameEvent event) {
-        updateBoard(game.getBoard().getTiles());
+        updateBoard(Board.getBoard().getTiles());
         SwitchActivePlayerEvent switchActivePlayerEvent = (SwitchActivePlayerEvent) event;
         Player activePlayer = switchActivePlayerEvent.getPayload()[0];
         Player otherPlayer = switchActivePlayerEvent.getPayload()[1];
