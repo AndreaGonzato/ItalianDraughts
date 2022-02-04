@@ -6,6 +6,7 @@ import it.units.italiandraughts.logic.piece.PieceType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class BlackTile extends Tile {
@@ -15,11 +16,6 @@ public class BlackTile extends Tile {
 
     public BlackTile(int x, int y) {
         super(x, y);
-    }
-
-    BlackTile(int x, int y, Piece piece) {
-        super(x, y);
-        this.piece = piece;
     }
 
     public Map<String, BlackTile> getNeighbors() {
@@ -87,4 +83,20 @@ public class BlackTile extends Tile {
     public Piece getPiece() {
         return piece;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof BlackTile blackTile)) return false;
+//        if (!super.equals(o)) return false;
+//
+//        return Objects.equals(piece, blackTile.piece);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = super.hashCode();
+//        result = 31 * result + (piece != null ? piece.hashCode() : 0);
+//        return result;
+//    }
 }

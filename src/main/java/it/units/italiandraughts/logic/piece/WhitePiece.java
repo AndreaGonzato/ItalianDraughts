@@ -1,7 +1,5 @@
 package it.units.italiandraughts.logic.piece;
 
-import it.units.italiandraughts.logic.piece.Piece;
-import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
 
@@ -9,14 +7,6 @@ public class WhitePiece extends Piece {
 
     private static final int PROMOTION_ROW = 0;
     private static final PieceColor PIECE_COLOR = PieceColor.WHITE;
-
-    WhitePiece() {
-        this(PieceType.MAN, null);
-    }
-
-    public WhitePiece(PieceType pieceType) {
-        this(pieceType, null);
-    }
 
     public WhitePiece(BlackTile blackTile) {
         this(PieceType.MAN, blackTile);

@@ -14,12 +14,6 @@ import static it.units.italiandraughts.logic.BoardTest.initTiles;
 
 public class PieceTest {
 
-    @Test
-    void getPieceType() {
-        Piece piece = new WhitePiece(PieceType.MAN);
-
-        Assertions.assertEquals(PieceType.MAN, piece.getPieceType());
-    }
 
     @Test
     void canEatNeighborTrue(){

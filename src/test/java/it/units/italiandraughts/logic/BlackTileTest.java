@@ -2,7 +2,6 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
-import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
 import org.junit.jupiter.api.Assertions;
@@ -15,20 +14,8 @@ import java.util.Map;
 public class BlackTileTest {
 
     @Test
-    void getPiece() {
+    void checkNeighborsX0Y0() {
         BlackTile blackTile = new BlackTile(0, 0);
-
-        Piece expectedPiece = new WhitePiece(blackTile);
-        Piece actualPiece = blackTile.getPiece();
-
-        Assertions.assertEquals(expectedPiece, actualPiece);
-
-    }
-
-    @Test
-    void getNeighborsX0Y0() {
-        BlackTile blackTile = new BlackTile(0, 0);
-        Board board = Board.getBoard();
 
         blackTile.addNeighbors();
         Map<String, BlackTile> expectedMap = new HashMap<>();
@@ -39,9 +26,8 @@ public class BlackTileTest {
     }
 
     @Test
-    void getNeighborsX1Y1() {
+    void checkNeighborsX1Y1() {
         BlackTile blackTile = new BlackTile(1, 1);
-        Board board = Board.getBoard();
 
         blackTile.addNeighbors();
         Map<String, BlackTile> expectedMap = new HashMap<>();
@@ -55,9 +41,8 @@ public class BlackTileTest {
     }
 
     @Test
-    void getNeighborsX7Y7() {
+    void checkNeighborsX7Y7() {
         BlackTile blackTile = new BlackTile(7, 7);
-        Board board = Board.getBoard();
 
         blackTile.addNeighbors();
         Map<String, BlackTile> expectedMap = new HashMap<>();
@@ -68,23 +53,25 @@ public class BlackTileTest {
     }
 
     @Test
-    void isEmptyOnEmptyBlackTile() {
+    void isEmptyAfterRemovingPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
+        new BlackPiece(blackTile);
+        blackTile.removePiece();
 
         Assertions.assertTrue(blackTile.isEmpty());
     }
 
     @Test
-    void isEmptyOnFullBlackTile() {
+    void isFullAfterPlacingPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
-        blackTile.placePiece(new BlackPiece());
+        new BlackPiece(blackTile);
 
         Assertions.assertFalse(blackTile.isEmpty());
 
     }
 
     @Test
-    void asBlackTile() {
+    void checkBlackTileCasting() {
         Tile tile = new BlackTile(0, 0);
         BlackTile actualBlackTile = BlackTile.asBlackTile(tile);
 
@@ -95,15 +82,15 @@ public class BlackTileTest {
     }
 
     @Test
-    void removePiece() {
+    void checkRemovedPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
-        Piece expectedPiece = new BlackPiece();
-
-        blackTile.placePiece(expectedPiece);
+        Piece expectedPiece = new BlackPiece(blackTile);
 
         Assertions.assertEquals(expectedPiece, blackTile.removePiece());
 
     }
+
+
 
     public static void addNeighbors(Board board) {
 
