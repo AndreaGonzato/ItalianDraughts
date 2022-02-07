@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class PieceTest {
 
-    static {
-        Board.reset();
-    }
 
     @Test
     void canEatNeighborTrue(){

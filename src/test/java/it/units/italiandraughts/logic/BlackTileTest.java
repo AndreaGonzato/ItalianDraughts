@@ -10,9 +10,6 @@ import org.junit.jupiter.api.Test;
 
 public class BlackTileTest {
 
-    static {
-        Board.reset();
-    }
 
     @Test
     void checkNeighborsX0Y0() {
