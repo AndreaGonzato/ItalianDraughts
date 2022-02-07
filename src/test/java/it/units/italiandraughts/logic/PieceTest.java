@@ -4,20 +4,15 @@ import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
-import it.units.italiandraughts.logic.tile.Tile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static it.units.italiandraughts.logic.BoardTest.initTiles;
-
 public class PieceTest {
-
 
     @Test
     void canEatNeighborTrue(){
-        Tile[][] tiles = initTiles();
         Board board = Board.getBoard();
-        board.setTiles(tiles);
+        board.removePieces();
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -31,9 +26,8 @@ public class PieceTest {
 
     @Test
     void canEatNeighborFalse(){
-        Tile[][] tiles = initTiles();
         Board board = Board.getBoard();
-        board.setTiles(tiles);
+        board.removePieces();
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -47,9 +41,8 @@ public class PieceTest {
 
     @Test
     void eatNeighbor(){
-        Tile[][] tiles = initTiles();
         Board board = Board.getBoard();
-        board.setTiles(tiles);
+        board.removePieces();
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -62,8 +55,10 @@ public class PieceTest {
         whitePiece.eatNeighbor(blackPiece);
 
         // TODO need to write code to pass this assertion
-        Assertions.assertNull(blackTile1.getPiece());
-        Assertions.assertNull(blackTile2.getPiece());
-        Assertions.assertEquals(whitePiece, blackTile3.getPiece());
+        Assertions.assertTrue(
+                blackTile1.getPiece() == null
+                        && blackTile2.getPiece() == null
+                        && whitePiece.equals(blackTile3.getPiece())
+        );
     }
 }
