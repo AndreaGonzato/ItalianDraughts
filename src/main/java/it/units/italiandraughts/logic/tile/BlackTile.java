@@ -6,7 +6,6 @@ import it.units.italiandraughts.logic.piece.PieceType;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class BlackTile extends Tile {

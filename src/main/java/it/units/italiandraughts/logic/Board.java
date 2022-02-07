@@ -38,6 +38,13 @@ public class Board {
         //initPiecesDebug(); // TODO remove this line
     }
 
+    public void removePieces(){
+        matrixToStream(tiles)
+                .filter(tile -> tile instanceof BlackTile)
+                .map(BlackTile::asBlackTile)
+                .forEach(BlackTile::removePiece);
+    }
+
     public static void reset(){
         instance = new Board();
         instance.assignNeighborsOfBlackTiles();
