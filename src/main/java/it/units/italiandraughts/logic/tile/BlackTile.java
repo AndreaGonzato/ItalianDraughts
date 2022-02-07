@@ -74,6 +74,9 @@ public class BlackTile extends Tile {
 
     public Piece removePiece() {
         Piece piece = this.piece;
+        if (piece == null) {
+            return null;
+        }
         piece.setBlackTile(null);
         this.piece = null;
         return piece;
