@@ -10,9 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class BlackTileTest {
 
+    static {
+        Board.reset();
+    }
+
     @Test
     void checkNeighborsX0Y0() {
-        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[0][0]);
+        BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[0][0]);
 
         BlackTile expectedBlackTile = new BlackTile(1, 1);
         new BlackPiece(expectedBlackTile);
@@ -23,7 +27,7 @@ public class BlackTileTest {
 
     @Test
     void checkNeighborsX1Y1() {
-        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[1][1]);
+        BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[1][1]);
 
         BlackTile expectedBlackTile1 = new BlackTile(0, 0);
         new BlackPiece(expectedBlackTile1);
@@ -43,7 +47,7 @@ public class BlackTileTest {
 
     @Test
     void checkNeighborsX7Y7() {
-        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[7][7]);
+        BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[7][7]);
 
         BlackTile expectedBlackTile = new BlackTile(6, 6);
         new WhitePiece(expectedBlackTile);

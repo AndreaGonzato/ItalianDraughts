@@ -45,9 +45,10 @@ public class Board {
                 .forEach(BlackTile::removePiece);
     }
 
-    public static void reset(){
+    public static Board reset(){
         instance = new Board();
         instance.assignNeighborsOfBlackTiles();
+        return instance;
     }
 
     private void assignNeighborsOfBlackTiles(){

@@ -9,9 +9,13 @@ import org.junit.jupiter.api.Test;
 
 public class PieceTest {
 
+    static {
+        Board.reset();
+    }
+
     @Test
     void canEatNeighborTrue(){
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.removePieces();
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
@@ -26,7 +30,7 @@ public class PieceTest {
 
     @Test
     void canEatNeighborFalse(){
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.removePieces();
 
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[1][1]);
