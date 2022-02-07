@@ -81,7 +81,9 @@ public class BlackTileTest {
 
     @Test
     void checkRemovedPiece() {
-        BlackTile blackTile = new BlackTile(0, 0);
+        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[0][0]);
+        blackTile.removePiece();
+
         Piece expectedPiece = new BlackPiece(blackTile);
 
         Assertions.assertEquals(expectedPiece, blackTile.removePiece());
