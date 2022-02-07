@@ -11,22 +11,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 
+import java.util.Objects;
+
 @ExtendWith(ApplicationExtension.class)
 public class BoardTest {
 
 
     @Test
-    void initBoard() {
-        Board expectedBoard = setUpBoard();
+    void checkTiles() {
+        Board board = Board.reset();
 
-        Board actualBoard = Board.getBoard();
-
-        Assertions.assertEquals(expectedBoard, actualBoard);
+        Assertions.assertTrue(Objects.deepEquals(board.getTiles(), setUpTiles()));
     }
 
 
 
-    private Board setUpBoard() {
+    private Tile[][] setUpTiles() {
         Tile[][] tiles = initTiles();
 
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][0]), PieceColor.BLACK);
@@ -55,9 +55,7 @@ public class BoardTest {
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][5]), PieceColor.WHITE);
         placePieceOnTile(BlackTile.asBlackTile(tiles[7][7]), PieceColor.WHITE);
 
-        Board board = Board.getBoard();
-        board.setTiles(tiles);
-        return board;
+        return tiles;
     }
 
     public static Tile[][] initTiles(){
