@@ -54,7 +54,6 @@ public class PieceTest {
 
         whitePiece.eatNeighbor(blackPiece);
 
-        // TODO need to write code to pass this assertion
         Assertions.assertTrue(
                 blackTile1.getPiece() == null
                         && blackTile2.getPiece() == null
