@@ -21,12 +21,12 @@ public class BoardTest {
     void checkTiles() {
         Board board = Board.reset();
 
-        Assertions.assertTrue(Objects.deepEquals(board.getTiles(), setUpTiles()));
+        Assertions.assertTrue(Objects.deepEquals(board.getTiles(), setUpPieces()));
     }
 
 
 
-    private Tile[][] setUpTiles() {
+    private Tile[][] setUpPieces() {
         Tile[][] tiles = initTiles();
 
         placePieceOnTile(BlackTile.asBlackTile(tiles[0][0]), PieceColor.BLACK);
