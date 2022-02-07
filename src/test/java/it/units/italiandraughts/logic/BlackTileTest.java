@@ -1,6 +1,5 @@
 package it.units.italiandraughts.logic;
 
-import com.sun.prism.shader.Texture_ImagePattern_AlphaTest_Loader;
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.WhitePiece;
@@ -9,29 +8,22 @@ import it.units.italiandraughts.logic.tile.Tile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class BlackTileTest {
 
     @Test
     void checkNeighborsX0Y0() {
-        BlackTile blackTile = new BlackTile(0, 0);
-        blackTile.addNeighbors();
+        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[0][0]);
 
         BlackTile expectedBlackTile = new BlackTile(1, 1);
         new BlackPiece(expectedBlackTile);
 
         BlackTile actualBlackTile = blackTile.getNeighbors().get("bottomRight");
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
-
     }
 
     @Test
     void checkNeighborsX1Y1() {
-        BlackTile blackTile = new BlackTile(1, 1);
-        blackTile.addNeighbors();
+        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[1][1]);
 
         BlackTile expectedBlackTile1 = new BlackTile(0, 0);
         new BlackPiece(expectedBlackTile1);
@@ -47,20 +39,17 @@ public class BlackTileTest {
                     && expectedBlackTile3.equals(blackTile.getNeighbors().get("bottomLeft"))
                     && expectedBlackTile4.equals(blackTile.getNeighbors().get("bottomRight"))
         );
-
     }
 
     @Test
     void checkNeighborsX7Y7() {
-        BlackTile blackTile = new BlackTile(7, 7);
-        blackTile.addNeighbors();
+        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[7][7]);
 
         BlackTile expectedBlackTile = new BlackTile(6, 6);
         new WhitePiece(expectedBlackTile);
 
         BlackTile actualBlackTile = blackTile.getNeighbors().get("topLeft");
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
-
     }
 
     @Test
@@ -78,7 +67,6 @@ public class BlackTileTest {
         new BlackPiece(blackTile);
 
         Assertions.assertFalse(blackTile.isEmpty());
-
     }
 
     @Test
@@ -89,7 +77,6 @@ public class BlackTileTest {
         BlackTile expectedBlackTile = new BlackTile(0, 0);
 
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
-
     }
 
     @Test
@@ -98,7 +85,6 @@ public class BlackTileTest {
         Piece expectedPiece = new BlackPiece(blackTile);
 
         Assertions.assertEquals(expectedPiece, blackTile.removePiece());
-
     }
 
 
