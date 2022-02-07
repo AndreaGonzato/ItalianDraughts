@@ -5,3 +5,6 @@ before_install:
   - sudo apt-get -y install libgtk-3-0 libgtk-3-bin libgtk-3-common libgtk2.0-0 libgtk2.0-bin libgtk2.0-common libgtkmm-3.0-1v5 at-spi2-core
 services:
   - xvfb
+branches:
+  only:
+    - main
