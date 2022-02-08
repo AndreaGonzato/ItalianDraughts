@@ -88,7 +88,7 @@ public class Game implements GameEventSource {
     }
 
     public Move moveAndLog(Piece piece, List<BlackTile> steps) {
-        Move move = new Move(piece, steps.get(steps.size() - 1), steps);
+        Move move = new Move(piece, steps);
         move.make();
         moves.add(move);
         return move;
