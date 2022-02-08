@@ -8,12 +8,11 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PieceTest {
 
     @Test
-    void moveToReachableNearEmptyBlackTile(){
+    void moveToNeighboringEmptyBlackTile(){
         Board board = Board.reset();
         board.removePieces();
 
