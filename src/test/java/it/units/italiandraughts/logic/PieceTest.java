@@ -34,12 +34,13 @@ public class PieceTest {
         BlackTile.asBlackTile(board.getTiles()[0][0]).placePiece(pieceToMove);
 
         Piece pieceToEat = new WhitePiece();
-        BlackTile.asBlackTile(board.getTiles()[1][1]).placePiece(pieceToEat);
-        EatenPiece eatenPiece = new EatenPiece(pieceToEat, BlackTile.asBlackTile(board.getTiles()[1][1]));
+        BlackTile pieceToEatBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        pieceToEatBlackTile.placePiece(pieceToEat);
+        EatenPiece expectedEatenPiece = new EatenPiece(pieceToEat, pieceToEatBlackTile);
 
         Optional<EatenPiece> actualEatenPiece = pieceToMove.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[2][2]));
 
-        Assertions.assertEquals(actualEatenPiece.get(), eatenPiece);
+        actualEatenPiece.ifPresent(piece -> Assertions.assertEquals(piece, expectedEatenPiece));
     }
 
     @Test
