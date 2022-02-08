@@ -14,19 +14,8 @@ public class PieceTest {
         Board board = Board.reset();
         board.removePieces();
 
-        Piece actualPiece = new BlackPiece(BlackTile.asBlackTile(board.getTiles()[0][0]));
-        actualPiece.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[1][1]));
-
-        Assertions.assertEquals(actualPiece.getBlackTile(), BlackTile.asBlackTile(board.getTiles()[1][1]));
-    }
-
-    @Test
-    void moveToReachableBlackTileEatingPiece(){
-        // TODO WIP
-        Board board = Board.reset();
-        board.removePieces();
-
-        Piece actualPiece = new BlackPiece(BlackTile.asBlackTile(board.getTiles()[0][0]));
+        Piece actualPiece = new BlackPiece();
+        BlackTile.asBlackTile(board.getTiles()[0][0]).placePiece(actualPiece);
 
         actualPiece.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[1][1]));
 
