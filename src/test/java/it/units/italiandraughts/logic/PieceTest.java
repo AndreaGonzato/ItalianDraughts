@@ -9,6 +9,29 @@ import org.junit.jupiter.api.Test;
 
 public class PieceTest {
 
+    @Test
+    void moveToReachableNearEmptyBlackTile(){
+        Board board = Board.reset();
+        board.removePieces();
+
+        Piece actualPiece = new BlackPiece(BlackTile.asBlackTile(board.getTiles()[0][0]));
+        actualPiece.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[1][1]));
+
+        Assertions.assertEquals(actualPiece.getBlackTile(), BlackTile.asBlackTile(board.getTiles()[1][1]));
+    }
+
+    @Test
+    void moveToReachableBlackTileEatingPiece(){
+        // TODO WIP
+        Board board = Board.reset();
+        board.removePieces();
+
+        Piece actualPiece = new BlackPiece(BlackTile.asBlackTile(board.getTiles()[0][0]));
+
+        actualPiece.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[1][1]));
+
+        Assertions.assertEquals(actualPiece.getBlackTile(), BlackTile.asBlackTile(board.getTiles()[1][1]));
+    }
 
     @Test
     void canEatNeighborTrue(){

@@ -18,7 +18,7 @@ public abstract class Piece {
         this.pieceType = pieceType;
     }
 
-    public Optional<EatenPiece> moveToReachableNeighboringBlackTile(BlackTile landingTile) {
+    public Optional<EatenPiece> moveToReachableBlackTile(BlackTile landingTile) {
         if (blackTile.isNeighbor(landingTile)) {
             // simple move
             blackTile.removePiece();
