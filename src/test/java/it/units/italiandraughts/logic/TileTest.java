@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static it.units.italiandraughts.logic.tile.Tile.areValidCoordinatesBiPredicate;
+import static it.units.italiandraughts.logic.tile.Tile.generateTile;
 
 public class TileTest {
 
@@ -35,6 +36,14 @@ public class TileTest {
         Tile actual = Tile.generateTile(x, y);
 
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void checkToString() {
+        String actual = "Tile{x=0, y=0}";
+        Tile tile = generateTile(0, 0);
+
+        Assertions.assertEquals(tile.toString(), actual);
     }
 
 }
