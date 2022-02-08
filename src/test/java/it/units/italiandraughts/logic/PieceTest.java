@@ -1,14 +1,14 @@
 package it.units.italiandraughts.logic;
 
-import it.units.italiandraughts.logic.piece.BlackPiece;
-import it.units.italiandraughts.logic.piece.EatenPiece;
-import it.units.italiandraughts.logic.piece.Piece;
-import it.units.italiandraughts.logic.piece.WhitePiece;
+import it.units.italiandraughts.logic.piece.*;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PieceTest {
 
@@ -55,6 +55,61 @@ public class PieceTest {
 
         Assertions.assertEquals(actualPiece.getBlackTile(), BlackTile.asBlackTile(board.getTiles()[3][3]));
     }
+
+    @Test
+    void getReachableNeighboringBlackTilesForWhiteMan(){
+        Board board = Board.reset();
+        board.removePieces();
+
+        Piece piece = new WhitePiece();
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        whitePieceBlackTile.placePiece(piece);
+
+        BlackTile topLeftBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile topRightBlackTile = BlackTile.asBlackTile(board.getTiles()[2][4]);
+
+        Set<BlackTile> expectedSetBlackTiles = Set.of(topLeftBlackTile, topRightBlackTile);
+
+        Assertions.assertEquals(piece.getReachableNeighboringBlackTiles().collect(Collectors.toSet()), expectedSetBlackTiles);
+    }
+
+    @Test
+    void getReachableNeighboringBlackTilesForBlackMan(){
+        Board board = Board.reset();
+        board.removePieces();
+
+        Piece piece = new BlackPiece();
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        whitePieceBlackTile.placePiece(piece);
+
+        BlackTile bottomLeftBlackTile = BlackTile.asBlackTile(board.getTiles()[4][2]);
+        BlackTile bottomRightBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
+
+        Set<BlackTile> expectedSetBlackTiles = Set.of(bottomLeftBlackTile, bottomRightBlackTile);
+
+        Assertions.assertEquals(piece.getReachableNeighboringBlackTiles().collect(Collectors.toSet()), expectedSetBlackTiles);
+    }
+
+    @Test
+    void getReachableNeighboringBlackTilesForKing(){
+        Board board = Board.reset();
+        board.removePieces();
+
+        Piece piece = new WhitePiece(PieceType.KING);
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        whitePieceBlackTile.placePiece(piece);
+
+        BlackTile topLeftBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile topRightBlackTile = BlackTile.asBlackTile(board.getTiles()[2][4]);
+        BlackTile bottomLeftBlackTile = BlackTile.asBlackTile(board.getTiles()[4][2]);
+        BlackTile bottomRightBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
+
+        Set<BlackTile> expectedSetBlackTiles = Set.of(topLeftBlackTile, topRightBlackTile, bottomLeftBlackTile, bottomRightBlackTile);
+
+        Assertions.assertEquals(piece.getReachableNeighboringBlackTiles().collect(Collectors.toSet()), expectedSetBlackTiles);
+    }
+
+
 
     @Test
     void canEatNeighborTrue(){
