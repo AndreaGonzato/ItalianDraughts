@@ -7,6 +7,7 @@ import it.units.italiandraughts.logic.tile.BlackTile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Move {
@@ -64,5 +65,18 @@ public class Move {
 
     public List<EatenPiece> getEatenPieces() {
         return eatenPieces;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Move move = (Move) o;
+        return hasPromoted == move.hasPromoted && piece.equals(move.piece) && source.equals(move.source) && destination.equals(move.destination) && eatenPieces.equals(move.eatenPieces) && steps.equals(move.steps);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(piece, source, destination, eatenPieces, steps, hasPromoted);
     }
 }
