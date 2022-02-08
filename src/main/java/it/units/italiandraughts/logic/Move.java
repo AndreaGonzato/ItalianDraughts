@@ -18,9 +18,9 @@ public class Move {
     private final List<BlackTile> steps;
     private boolean hasPromoted;
 
-    public Move(Piece piece, BlackTile source, BlackTile destination, List<BlackTile> steps) {
+    public Move(Piece piece, BlackTile destination, List<BlackTile> steps) {
         this.piece = piece;
-        this.source = source;
+        this.source = piece.getBlackTile();
         this.destination = destination;
         this.steps = steps;
         this.eatenPieces = new ArrayList<>();
