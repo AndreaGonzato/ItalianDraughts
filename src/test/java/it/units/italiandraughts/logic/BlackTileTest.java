@@ -54,6 +54,33 @@ public class BlackTileTest {
     }
 
     @Test
+    void checkAdjacency() {
+        BlackTile main = new BlackTile(0, 0);
+        BlackTile neighbor = new BlackTile(1, 1);
+        main.getNeighbors().put("bottomRight", neighbor);
+
+        Assertions.assertTrue(main.isNeighbor(neighbor));
+    }
+
+    @Test
+    void checkNeighborKey() {
+        BlackTile main = new BlackTile(0, 0);
+        BlackTile neighbor = new BlackTile(1, 1);
+        main.getNeighbors().put("bottomRight", neighbor);
+
+        Assertions.assertEquals(main.getNeighborKey(neighbor), "bottomRight");
+    }
+
+    @Test
+    void checkBlackTileCasting() {
+        Tile tile = new BlackTile(0, 0);
+        BlackTile actualBlackTile = BlackTile.asBlackTile(tile);
+        BlackTile expectedBlackTile = new BlackTile(0, 0);
+
+        Assertions.assertEquals(expectedBlackTile, actualBlackTile);
+    }
+
+    @Test
     void isEmptyAfterRemovingPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
         new BlackPiece(blackTile);
@@ -71,20 +98,9 @@ public class BlackTileTest {
     }
 
     @Test
-    void checkBlackTileCasting() {
-        Tile tile = new BlackTile(0, 0);
-        BlackTile actualBlackTile = BlackTile.asBlackTile(tile);
-
-        BlackTile expectedBlackTile = new BlackTile(0, 0);
-
-        Assertions.assertEquals(expectedBlackTile, actualBlackTile);
-    }
-
-    @Test
     void checkRemovedPiece() {
         BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[0][0]);
         blackTile.removePiece();
-
         Piece expectedPiece = new BlackPiece(blackTile);
 
         Assertions.assertEquals(expectedPiece, blackTile.removePiece());
