@@ -10,6 +10,16 @@ import static it.units.italiandraughts.logic.tile.Tile.areValidCoordinatesBiPred
 public class TileTest {
 
     @Test
+    void areValidCoordinatesBiPredicateX0Y0() {
+        Assertions.assertTrue(areValidCoordinatesBiPredicate.test(0, 0));
+    }
+
+    @Test
+    void areValidCoordinatesBiPredicateX9Y0() {
+        Assertions.assertFalse(areValidCoordinatesBiPredicate.test(9, 0));
+    }
+
+    @Test
     void checkBlackTileGeneration() {
         int x = 0, y = 0;
         BlackTile expected = new BlackTile(x, y);
@@ -27,15 +37,4 @@ public class TileTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    void areValidCoordinatesBiPredicateX0Y0() {
-
-        Assertions.assertTrue(areValidCoordinatesBiPredicate.test(0, 0));
-    }
-
-    @Test
-    void areValidCoordinatesBiPredicateX9Y0() {
-
-        Assertions.assertFalse(areValidCoordinatesBiPredicate.test(9, 0));
-    }
 }
