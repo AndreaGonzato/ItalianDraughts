@@ -42,23 +42,23 @@ public class PieceTest {
 
     @Test
     void eatNeighbor(){
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.removePieces();
 
-        BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[4][4]);
-        BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[3][3]);
-        BlackTile blackTile3 = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile fromBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        BlackTile toBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
 
 
-        Piece whitePiece = new WhitePiece(blackTile1);
-        Piece blackPiece = new BlackPiece(blackTile2);
+        Piece whitePiece = new WhitePiece(fromBlackTile);
+        Piece blackPiece = new BlackPiece(overBlackTile);
 
         whitePiece.eatNeighbor(blackPiece);
 
         Assertions.assertTrue(
-                blackTile1.getPiece() == null
-                        && blackTile2.getPiece() == null
-                        && whitePiece.equals(blackTile3.getPiece())
+                fromBlackTile.getPiece() == null
+                        && overBlackTile.getPiece() == null
+                        && whitePiece.equals(toBlackTile.getPiece())
         );
     }
 }
