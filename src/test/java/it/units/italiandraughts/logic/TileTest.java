@@ -10,7 +10,7 @@ import static it.units.italiandraughts.logic.tile.Tile.areValidCoordinatesBiPred
 public class TileTest {
 
     @Test
-    void generateBlackTile() {
+    void checkBlackTileGeneration() {
         int x = 0, y = 0;
         BlackTile expected = new BlackTile(x, y);
         Tile actual = Tile.generateTile(x, y);
@@ -19,7 +19,7 @@ public class TileTest {
     }
 
     @Test
-    void generateTile() {
+    void checkTileGeneration() {
         int x = 1, y = 0;
         Tile expected = new Tile(x, y);
         Tile actual = Tile.generateTile(x, y);
