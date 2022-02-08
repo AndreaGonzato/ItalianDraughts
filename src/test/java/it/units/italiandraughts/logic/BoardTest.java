@@ -138,14 +138,12 @@ public class BoardTest {
     }
 
     private static void initTile(Tile[][] tiles, int x, int y, boolean blackTile){
-        if (blackTile){
+        if (blackTile) {
             tiles[y][x] = new BlackTile(x, y);
-        }else {
+        } else {
             tiles[y][x] = new Tile(x, y);
         }
     }
-
-
 
     public static void placePieceOnTile(BlackTile blackTile, PieceColor pieceColor){
         Piece piece = switch (pieceColor) {
