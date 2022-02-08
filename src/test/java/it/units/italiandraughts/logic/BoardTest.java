@@ -15,6 +15,7 @@ import java.util.Objects;
 
 @ExtendWith(ApplicationExtension.class)
 public class BoardTest {
+    // TEST associated class : completed
 
     @Test
     void checkTiles() {
