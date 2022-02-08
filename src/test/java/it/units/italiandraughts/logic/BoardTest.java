@@ -16,7 +16,6 @@ import java.util.Objects;
 @ExtendWith(ApplicationExtension.class)
 public class BoardTest {
 
-
     @Test
     void checkTiles() {
         Board board = Board.reset();
@@ -24,7 +23,15 @@ public class BoardTest {
         Assertions.assertTrue(Objects.deepEquals(board.getTiles(), setUpPieces()));
     }
 
+    @Test
+    void checkPieceRemoval() {
+        Board board = Board.reset();
+        board.removePieces();
+        Tile[][] actualTiles = board.getTiles();
+        Tile[][] expectedTiles = initTiles();
 
+        Assertions.assertTrue(Objects.deepEquals(expectedTiles, actualTiles));
+    }
 
     private Tile[][] setUpPieces() {
         Tile[][] tiles = initTiles();
