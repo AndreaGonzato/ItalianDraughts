@@ -14,7 +14,7 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Board {
 
-    private Tile[][] tiles;
+    private final Tile[][] tiles;
     public static final int SIZE = 8;
     private static Board instance;
 
@@ -80,10 +80,6 @@ public class Board {
 
     public Tile[][] getTiles() {
         return tiles;
-    }
-
-    public void setTiles(Tile[][] tiles) {
-        this.tiles = tiles;
     }
 
     @Override
