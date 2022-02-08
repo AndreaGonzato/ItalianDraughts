@@ -1,6 +1,5 @@
 package it.units.italiandraughts.logic.piece;
 
-import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
 
 public class WhitePiece extends Piece {
@@ -8,12 +7,12 @@ public class WhitePiece extends Piece {
     private static final int PROMOTION_ROW = 0;
     private static final PieceColor PIECE_COLOR = PieceColor.WHITE;
 
-    public WhitePiece(BlackTile blackTile) {
-        this(PieceType.MAN, blackTile);
+    public WhitePiece() {
+        this(PieceType.MAN);
     }
 
-    public WhitePiece(PieceType pieceType, BlackTile blackTile) {
-        super(pieceType, blackTile);
+    public WhitePiece(PieceType pieceType) {
+        super(pieceType);
     }
 
     @Override

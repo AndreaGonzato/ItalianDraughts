@@ -60,14 +60,14 @@ public class Board {
         Supplier<Stream<BlackTile>> blackTilesSupplier = () -> matrixToStream(tiles)
                 .filter(tile -> tile instanceof BlackTile)
                 .map(BlackTile::asBlackTile);
-        blackTilesSupplier.get().filter(tile -> tile.getY() < 3).forEach(BlackPiece::new);
-        blackTilesSupplier.get().filter(tile -> tile.getY() > 4).forEach(WhitePiece::new);
+        blackTilesSupplier.get().filter(tile -> tile.getY() < 3).forEach(tile -> tile.placePiece(new BlackPiece()));
+        blackTilesSupplier.get().filter(tile -> tile.getY() > 4).forEach(tile -> tile.placePiece(new WhitePiece()));
     }
 
     // TODO remove this
     private void initPiecesDebug() {
-        new BlackPiece(BlackTile.asBlackTile(tiles[0][0]));
-        new WhitePiece(BlackTile.asBlackTile(tiles[3][3]));
+        BlackTile.asBlackTile(tiles[0][0]).placePiece(new BlackPiece());
+        BlackTile.asBlackTile(tiles[3][3]).placePiece(new WhitePiece());
     }
 
     @Override

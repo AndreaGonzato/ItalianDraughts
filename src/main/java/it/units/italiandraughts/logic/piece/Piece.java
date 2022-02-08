@@ -14,12 +14,8 @@ public abstract class Piece {
     private boolean movable;
     private BlackTile blackTile;
 
-    Piece(PieceType pieceType, BlackTile blackTile) {
-        this.blackTile = blackTile;
+    Piece(PieceType pieceType) {
         this.pieceType = pieceType;
-        if (blackTile != null) {
-            blackTile.placePiece(this);
-        }
     }
 
     public Optional<EatenPiece> moveToReachableNeighboringBlackTile(BlackTile landingTile) {

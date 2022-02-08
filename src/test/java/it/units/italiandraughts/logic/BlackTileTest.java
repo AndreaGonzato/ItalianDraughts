@@ -16,7 +16,7 @@ public class BlackTileTest {
         BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[0][0]);
 
         BlackTile expectedBlackTile = new BlackTile(1, 1);
-        new BlackPiece(expectedBlackTile);
+        expectedBlackTile.placePiece(new BlackPiece());
 
         BlackTile actualBlackTile = blackTile.getNeighbors().get("bottomRight");
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
@@ -27,13 +27,13 @@ public class BlackTileTest {
         BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[1][1]);
 
         BlackTile expectedBlackTile1 = new BlackTile(0, 0);
-        new BlackPiece(expectedBlackTile1);
+        expectedBlackTile1.placePiece(new BlackPiece());
         BlackTile expectedBlackTile2 = new BlackTile(2, 0);
-        new BlackPiece(expectedBlackTile2);
+        expectedBlackTile2.placePiece(new BlackPiece());
         BlackTile expectedBlackTile3 = new BlackTile(0, 2);
-        new BlackPiece(expectedBlackTile3);
+        expectedBlackTile3.placePiece(new BlackPiece());
         BlackTile expectedBlackTile4 = new BlackTile(2, 2);
-        new BlackPiece(expectedBlackTile4);
+        expectedBlackTile4.placePiece(new BlackPiece());
 
         Assertions.assertTrue(expectedBlackTile1.equals(blackTile.getNeighbors().get("topLeft"))
                     && expectedBlackTile2.equals(blackTile.getNeighbors().get("topRight"))
@@ -47,7 +47,7 @@ public class BlackTileTest {
         BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[7][7]);
 
         BlackTile expectedBlackTile = new BlackTile(6, 6);
-        new WhitePiece(expectedBlackTile);
+        expectedBlackTile.placePiece(new WhitePiece());
 
         BlackTile actualBlackTile = blackTile.getNeighbors().get("topLeft");
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
@@ -83,7 +83,7 @@ public class BlackTileTest {
     @Test
     void isEmptyAfterRemovingPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
-        new BlackPiece(blackTile);
+        blackTile.placePiece(new BlackPiece());
         blackTile.removePiece();
 
         Assertions.assertTrue(blackTile.isEmpty());
@@ -92,7 +92,7 @@ public class BlackTileTest {
     @Test
     void isFullAfterPlacingPiece() {
         BlackTile blackTile = new BlackTile(0, 0);
-        new BlackPiece(blackTile);
+        blackTile.placePiece(new BlackPiece());
 
         Assertions.assertFalse(blackTile.isEmpty());
     }
@@ -100,10 +100,10 @@ public class BlackTileTest {
     @Test
     void checkRemovedPiece() {
         BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[0][0]);
-        blackTile.removePiece();
-        Piece expectedPiece = new BlackPiece(blackTile);
+        Piece actualPiece = blackTile.removePiece();
+        Piece expectedPiece = new BlackPiece();
 
-        Assertions.assertEquals(expectedPiece, blackTile.removePiece());
+        Assertions.assertEquals(expectedPiece, actualPiece);
     }
 
 }
