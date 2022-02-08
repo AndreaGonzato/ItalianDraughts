@@ -6,6 +6,7 @@ import it.units.italiandraughts.logic.piece.PieceType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class BlackTile extends Tile {
@@ -89,12 +90,10 @@ public class BlackTile extends Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BlackTile)) return false;
+        if (!(o instanceof BlackTile blackTile)) return false;
         if (!super.equals(o)) return false;
 
-        BlackTile blackTile = (BlackTile) o;
-
-        return piece != null ? piece.equals(blackTile.piece) : blackTile.piece == null;
+        return Objects.equals(piece, blackTile.piece);
     }
 
 }
