@@ -1,9 +1,12 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -17,21 +20,21 @@ public class Player {
         this.name = name;
     }
 
-    void updateMovablePieces() {
-        matrixToStream(Board.getBoard().getTiles())
+    private List<Piece> getPieces() {
+        return matrixToStream(Board.getBoard().getTiles())
                 .filter(tile -> !tile.isEmpty())
                 .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(pieceColor))
-                .forEach(tile -> tile.getPiece().updateMovable());
+                .map(BlackTile::getPiece)
+                .filter(piece -> piece.getPieceColor().equals(pieceColor))
+                .collect(Collectors.toList());
+    }
+
+    void updateMovablePieces() {
+        getPieces().forEach(Piece::updateMovable);
     }
 
     int countMovablePieces(){
-        return (int) matrixToStream(Board.getBoard().getTiles())
-                .filter(tile -> !tile.isEmpty())
-                .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(pieceColor)
-                        && tile.getPiece().isMovable())
-                .count();
+        return (int) getPieces().stream().filter(Piece::isMovable).count();
     }
 
     public String getName() {
