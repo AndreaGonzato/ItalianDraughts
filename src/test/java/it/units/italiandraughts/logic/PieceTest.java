@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class PieceTest {
 
     @Test
-    void moveToNeighboringEmptyBlackTile(){
+    void moveToNeighboringEmptyBlackTile() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -25,7 +25,7 @@ public class PieceTest {
     }
 
     @Test
-    void moveToReachableBlackTileByEatingPiece(){
+    void moveToReachableBlackTileByEatingPiece() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -43,7 +43,7 @@ public class PieceTest {
     }
 
     @Test
-    void move(){
+    void move() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -56,7 +56,7 @@ public class PieceTest {
     }
 
     @Test
-    void getReachableNeighboringBlackTilesForWhiteMan(){
+    void getReachableNeighboringBlackTilesForWhiteMan() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -73,7 +73,7 @@ public class PieceTest {
     }
 
     @Test
-    void getReachableNeighboringBlackTilesForBlackMan(){
+    void getReachableNeighboringBlackTilesForBlackMan() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -90,7 +90,7 @@ public class PieceTest {
     }
 
     @Test
-    void getReachableNeighboringBlackTilesForKing(){
+    void getReachableNeighboringBlackTilesForKing() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -109,9 +109,8 @@ public class PieceTest {
     }
 
 
-
     @Test
-    void canEatNeighborTrue(){
+    void canEatNeighborTrue() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -128,7 +127,7 @@ public class PieceTest {
     }
 
     @Test
-    void canEatNotReachablePiece(){
+    void canEatNotReachablePiece() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -145,7 +144,7 @@ public class PieceTest {
     }
 
     @Test
-    void canEatSameColorPiece(){
+    void canEatSameColorPiece() {
         Board board = Board.reset();
         board.removePieces();
 
@@ -162,26 +161,60 @@ public class PieceTest {
     }
 
     @Test
-    void eatNeighbor(){
+    void canManEatKing() {
         Board board = Board.reset();
         board.removePieces();
 
-        BlackTile fromBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
-        BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
-        BlackTile toBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+
+        Piece whitePiece = new WhitePiece();
+        Piece blackPiece = new BlackPiece(PieceType.KING);
+        whitePieceBlackTile.placePiece(whitePiece);
+        blackPieceBlackTile.placePiece(blackPiece);
+
+        Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
+
+    }
+
+    @Test
+    void canEatNeighborWithFullLandingTile() {
+        Board board = Board.reset();
+        board.removePieces();
+
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile blackPieceDefenderBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
 
 
         Piece whitePiece = new WhitePiece();
         Piece blackPiece = new BlackPiece();
-        fromBlackTile.placePiece(whitePiece);
-        overBlackTile.placePiece(blackPiece);
+        Piece blackPieceDefender = new BlackPiece();
+        whitePieceBlackTile.placePiece(whitePiece);
+        blackPieceBlackTile.placePiece(blackPiece);
+        blackPieceDefenderBlackTile.placePiece(blackPieceDefender);
 
-        whitePiece.eatNeighbor(blackPiece);
+        Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
 
-        Assertions.assertTrue(
-                fromBlackTile.getPiece() == null
-                        && overBlackTile.getPiece() == null
-                        && whitePiece.equals(toBlackTile.getPiece())
-        );
     }
+
+    @Test
+    void canEatNeighborWhenLandingTileDoesNotExist() {
+        // when landing tile is outside the board
+        Board board = Board.reset();
+        board.removePieces();
+
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][0]);
+
+
+        Piece whitePiece = new WhitePiece();
+        Piece blackPiece = new BlackPiece();
+        whitePieceBlackTile.placePiece(whitePiece);
+        blackPieceBlackTile.placePiece(blackPiece);
+
+        Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
+
+    }
+
 }
