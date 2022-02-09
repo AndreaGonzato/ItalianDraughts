@@ -18,14 +18,16 @@ public class BoardTest {
     // TEST associated class : completed
 
     @Test
-    void checkTiles() {
+    void checkTilesInitialization() {
         Board board = Board.reset();
 
-        Assertions.assertTrue(Objects.deepEquals(board.getTiles(), setUpPieces()));
+        Tile[][] expectedTiles = setUpPieces();
+
+        Assertions.assertTrue(Objects.deepEquals(board.getTiles(), expectedTiles));
     }
 
     @Test
-    void checkPieceRemoval() {
+    void checkRemovePieces() {
         Board board = Board.reset();
         board.removePieces();
         Tile[][] actualTiles = board.getTiles();
