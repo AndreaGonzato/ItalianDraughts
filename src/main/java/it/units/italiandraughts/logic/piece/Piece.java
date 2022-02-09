@@ -60,7 +60,6 @@ public abstract class Piece {
     }
 
     public boolean canEatNeighbor(Piece otherPiece) {
-
         if (otherPiece == null) {
             return false;
         }
@@ -70,11 +69,13 @@ public abstract class Piece {
         if (otherPiece.isKing() && this.isMan()) {
             return false;
         }
-        BlackTile landingTile = getPositionAfterEating(otherPiece);
-        if (landingTile != null) {
-            return landingTile.isEmpty();
+        BlackTile landingTile;
+        try {
+            landingTile = getPositionAfterEating(otherPiece);
+        } catch (IllegalArgumentException e) {
+            return false;
         }
-        return false;
+        return landingTile.isEmpty();
     }
 
     public void eatNeighbor(Piece otherPiece) {
