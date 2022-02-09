@@ -7,14 +7,9 @@ public class EatenPiece {
     private final Piece piece;
     private final BlackTile position;
 
-    public EatenPiece(Piece piece, BlackTile position) {
+    public EatenPiece(Piece piece) {
         this.piece = piece;
-        this.position = position;
-    }
-
-    EatenPiece(BlackTile blackTile) {
-        this.piece = blackTile.getPiece();
-        this.position = blackTile;
+        this.position = piece.getBlackTile();
     }
 
     public void restore() {

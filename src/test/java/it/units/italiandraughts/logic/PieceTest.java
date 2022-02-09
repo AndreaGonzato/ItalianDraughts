@@ -35,7 +35,7 @@ public class PieceTest {
         Piece pieceToEat = new WhitePiece();
         BlackTile pieceToEatBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
         pieceToEatBlackTile.placePiece(pieceToEat);
-        EatenPiece expectedEatenPiece = new EatenPiece(pieceToEat, pieceToEatBlackTile);
+        EatenPiece expectedEatenPiece = new EatenPiece(pieceToEat);
 
         Optional<EatenPiece> actualEatenPiece = pieceToMove.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[2][2]));
 

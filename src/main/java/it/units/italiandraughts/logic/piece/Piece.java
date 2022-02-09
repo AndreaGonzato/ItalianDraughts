@@ -30,8 +30,9 @@ public abstract class Piece {
                             .anyMatch(blackTile -> blackTile.equals(landingTile)))
                     .findAny().orElseThrow();
 
-            Optional<EatenPiece> eatenPieceOptional = Optional.of(new EatenPiece(overTile));
-            eatNeighbor(overTile.getPiece());
+            Piece toEat = overTile.getPiece();
+            Optional<EatenPiece> eatenPieceOptional = Optional.of(new EatenPiece(toEat));
+            eatNeighbor(toEat);
             return eatenPieceOptional;
         }
     }
