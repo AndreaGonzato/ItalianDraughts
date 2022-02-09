@@ -125,9 +125,9 @@ public class BoardDrawer implements GameEventListener {
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
     }
 
-    public void updateBoard(Tile[][] board) {
-        matrixToStream(squares).forEach(tile -> tile.getChildren().clear());
-        matrixToStream(board).filter(tile -> !tile.isEmpty())
+    public void updateBoard(Tile[][] tiles) {
+        matrixToStream(squares).forEach(square -> square.getChildren().clear());
+        matrixToStream(tiles).filter(tile -> !tile.isEmpty())
                 .forEach(tile -> pieceDrawer.drawPieceOnSquare(BlackTile.asBlackTile(tile).getPiece(),
                         squares[tile.getY()][tile.getX()]));
     }
