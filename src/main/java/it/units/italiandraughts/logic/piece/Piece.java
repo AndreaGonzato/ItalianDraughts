@@ -77,7 +77,7 @@ public abstract class Piece {
                 && getPositionAfterEatingNeighbor(neighboringPiece).isEmpty();
     }
 
-    public void eatNeighbor(Piece neighboringPiece) {
+    private void eatNeighbor(Piece neighboringPiece) {
         if (canEatNeighbor(neighboringPiece)) {
             BlackTile landingTile = getPositionAfterEatingNeighbor(neighboringPiece);
             BlackTile overBlackTile = neighboringPiece.getBlackTile();
