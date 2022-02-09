@@ -87,6 +87,10 @@ public class BlackTile extends Tile {
         return piece;
     }
 
+    public boolean hasNeighbor(String direction) {
+        return neighbors.get(direction) != null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

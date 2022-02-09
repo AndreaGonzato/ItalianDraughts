@@ -67,13 +67,14 @@ public abstract class Piece {
         if (neighboringPiece.isKing() && this.isMan()) {
             return false;
         }
-        BlackTile landingTile;
+        String eatingDirection;
         try {
-            landingTile = getPositionAfterEatingNeighbor(neighboringPiece);
+            eatingDirection = getEatingDirection(neighboringPiece);
         } catch (IllegalArgumentException e) {
             return false;
         }
-        return landingTile.isEmpty();
+        return neighboringPiece.getBlackTile().hasNeighbor(eatingDirection)
+                && getPositionAfterEatingNeighbor(neighboringPiece).isEmpty();
     }
 
     public void eatNeighbor(Piece neighboringPiece) {
@@ -86,12 +87,17 @@ public abstract class Piece {
     }
 
     public BlackTile getPositionAfterEatingNeighbor(Piece neighboringPiece) {
-        Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
-                .filter(entry -> entry.getValue().equals(neighboringPiece.getBlackTile()))
-                .map(Map.Entry::getKey).findAny();
+        BlackTile overTile = neighboringPiece.getBlackTile();
+        String eatingDirection = getEatingDirection(neighboringPiece);
+        return overTile.getNeighbors().get(eatingDirection);
+    }
 
-        String eatingDirection = optionalDirection.orElseThrow(() -> new IllegalArgumentException("The piece need to be a neighbor"));
-        return neighboringPiece.getBlackTile().getNeighbors().get(eatingDirection);
+    private String getEatingDirection(Piece neighboringPiece) {
+        BlackTile overTile = neighboringPiece.getBlackTile();
+        Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
+                .filter(entry -> entry.getValue().equals(overTile))
+                .map(Map.Entry::getKey).findAny();
+        return optionalDirection.orElseThrow(() -> new IllegalArgumentException("The piece need to be a neighbor"));
     }
 
     public BlackTile getBlackTile() {
