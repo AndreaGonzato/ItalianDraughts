@@ -7,7 +7,9 @@ import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
@@ -80,6 +82,21 @@ public class Board {
 
     public Tile[][] getTiles() {
         return tiles;
+    }
+
+    public List<BlackTile> getEmptyBlackTiles() {
+        return matrixToStream(tiles)
+                .filter(Tile::isEmpty)
+                .filter(tile -> tile instanceof BlackTile)
+                .map(BlackTile::asBlackTile)
+                .collect(Collectors.toList());
+    }
+
+    public List<BlackTile> getFullBlackTiles() {
+        return matrixToStream(tiles)
+                .filter(tile -> !tile.isEmpty())
+                .map(BlackTile::asBlackTile)
+                .collect(Collectors.toList());
     }
 
     @Override

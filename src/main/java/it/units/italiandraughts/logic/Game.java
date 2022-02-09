@@ -59,11 +59,8 @@ public class Game implements GameEventSource {
     }
 
     private void updateAbsoluteLongestPath() {
-        absoluteLongestPaths = matrixToStream(Board.getBoard().getTiles())
-                .filter(tile -> !tile.isEmpty())
-                .map(BlackTile::asBlackTile)
-                .filter(tile -> tile.getPiece().getPieceColor().equals(activePlayer.getPieceColor())
-                        && tile.getPiece().isMovable())
+        absoluteLongestPaths = activePlayer.getPieces()
+                .stream().map(Piece::getBlackTile)
                 .map(tile -> new Graph(tile, this))
                 .flatMap(graph -> graph.getLongestPaths().stream())
                 .collect(Graph.getLongestPathsCollector());

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
-
 public class Player {
 
     private final String name;
@@ -20,10 +18,8 @@ public class Player {
         this.name = name;
     }
 
-    private List<Piece> getPieces() {
-        return matrixToStream(Board.getBoard().getTiles())
-                .filter(tile -> !tile.isEmpty())
-                .map(BlackTile::asBlackTile)
+    List<Piece> getPieces() {
+        return Board.getBoard().getFullBlackTiles().stream()
                 .map(BlackTile::getPiece)
                 .filter(piece -> piece.getPieceColor().equals(pieceColor))
                 .collect(Collectors.toList());
