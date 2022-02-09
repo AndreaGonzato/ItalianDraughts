@@ -38,8 +38,7 @@ public abstract class Piece {
     }
 
     public void move(BlackTile destination) {
-        BlackTile source = blackTile;
-        source.removePiece();
+        this.blackTile.removePiece();
         destination.placePiece(this);
     }
 
