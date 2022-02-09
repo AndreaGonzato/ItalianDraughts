@@ -60,6 +60,7 @@ public abstract class Piece {
     }
 
     public boolean canEatNeighbor(Piece otherPiece) {
+
         if (otherPiece == null) {
             return false;
         }
@@ -95,11 +96,9 @@ public abstract class Piece {
         Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
                 .filter(entry -> entry.getValue().equals(otherPiece.getBlackTile()))
                 .map(Map.Entry::getKey).findAny();
-        if (optionalDirection.isPresent()) {
-            String eatingDirection = optionalDirection.get();
-            return otherPiece.getBlackTile().getNeighbors().get(eatingDirection);
-        }
-        return null;
+
+        String eatingDirection = optionalDirection.orElseThrow(() -> new IllegalArgumentException("The piece need to be a neighbor"));
+        return otherPiece.getBlackTile().getNeighbors().get(eatingDirection);
     }
 
     public BlackTile getBlackTile() {

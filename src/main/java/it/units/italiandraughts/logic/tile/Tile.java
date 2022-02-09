@@ -37,6 +37,12 @@ public class Tile {
         this.square = square;
     }
 
+    public int calculateDistance(Tile otherTile){
+        int deltaX = this.x - otherTile.x;
+        int deltaY = this.y - otherTile.y;
+        return Math.max(deltaX, deltaY);
+    }
+
     public Square getSquare() {
         return square;
     }

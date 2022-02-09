@@ -140,7 +140,14 @@ public class PieceTest {
         whitePieceBlackTile.placePiece(whitePiece);
         blackPieceBlackTile.placePiece(blackPiece);
 
-        Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
+        boolean isCaught = false;
+        try {
+            whitePiece.canEatNeighbor(blackPiece);
+        }catch (IllegalArgumentException e){
+            isCaught = true;
+        }
+
+        Assertions.assertTrue(isCaught);
 
     }
 
