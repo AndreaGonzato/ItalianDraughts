@@ -128,7 +128,7 @@ public class PieceTest {
     }
 
     @Test
-    void canEatNeighborFalse(){
+    void canEatNotReachablePiece(){
         Board board = Board.reset();
         board.removePieces();
 
@@ -141,6 +141,23 @@ public class PieceTest {
         blackPieceBlackTile.placePiece(blackPiece);
 
         Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
+
+    }
+
+    @Test
+    void canEatSameColorPiece(){
+        Board board = Board.reset();
+        board.removePieces();
+
+        BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+
+        Piece whitePiece1 = new WhitePiece();
+        Piece whitePiece2 = new WhitePiece();
+        whitePieceBlackTile.placePiece(whitePiece1);
+        blackPieceBlackTile.placePiece(whitePiece2);
+
+        Assertions.assertFalse(whitePiece1.canEatNeighbor(whitePiece2));
 
     }
 
