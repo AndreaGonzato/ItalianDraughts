@@ -21,8 +21,7 @@ public abstract class Piece {
     public Optional<EatenPiece> moveToReachableBlackTile(BlackTile landingTile) {
         if (blackTile.isNeighbor(landingTile)) {
             // simple move
-            blackTile.removePiece();
-            landingTile.placePiece(this);
+            moveTo(landingTile);
             return Optional.empty();
         } else {
             // move and eat a piece
@@ -37,7 +36,7 @@ public abstract class Piece {
         }
     }
 
-    public void move(BlackTile destination) {
+    public void moveTo(BlackTile destination) {
         this.blackTile.removePiece();
         destination.placePiece(this);
     }
@@ -80,11 +79,9 @@ public abstract class Piece {
     public void eatNeighbor(Piece neighboringPiece) {
         if (canEatNeighbor(neighboringPiece)) {
             BlackTile landingTile = getPositionAfterEatingNeighbor(neighboringPiece);
-            BlackTile sourceBlackTile = this.getBlackTile();
             BlackTile overBlackTile = neighboringPiece.getBlackTile();
-            sourceBlackTile.removePiece();
             overBlackTile.removePiece();
-            landingTile.placePiece(this);
+            moveTo(landingTile);
         }
     }
 

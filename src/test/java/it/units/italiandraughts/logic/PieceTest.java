@@ -50,7 +50,7 @@ public class PieceTest {
         Piece actualPiece = new BlackPiece();
         BlackTile.asBlackTile(board.getTiles()[0][0]).placePiece(actualPiece);
 
-        actualPiece.move(BlackTile.asBlackTile(board.getTiles()[3][3]));
+        actualPiece.moveTo(BlackTile.asBlackTile(board.getTiles()[3][3]));
 
         Assertions.assertEquals(actualPiece.getBlackTile(), BlackTile.asBlackTile(board.getTiles()[3][3]));
     }

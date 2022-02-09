@@ -43,7 +43,7 @@ public class Move {
         if (hasPromoted) {
             piece.setPieceType(PieceType.MAN);
         }
-        piece.move(source);
+        piece.moveTo(source);
 
     }
 
