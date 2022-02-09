@@ -60,7 +60,7 @@ public class Graph {
     }
 
     void recursivelyAddEatingEdges(Piece eatingPiece, Piece eatenPiece, int step) {
-        BlackTile landingTile = eatingPiece.getPositionAfterEating(eatenPiece);
+        BlackTile landingTile = eatingPiece.getPositionAfterEatingNeighbor(eatenPiece);
         if (landingTile == null) {
             return;
         }

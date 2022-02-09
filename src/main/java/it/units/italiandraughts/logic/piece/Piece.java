@@ -59,31 +59,31 @@ public abstract class Piece {
         }
     }
 
-    public boolean canEatNeighbor(Piece otherPiece) {
-        if (otherPiece == null) {
+    public boolean canEatNeighbor(Piece neighboringPiece) {
+        if (neighboringPiece == null) {
             return false;
         }
-        if (otherPiece.getPieceColor().equals(this.getPieceColor())) {
+        if (neighboringPiece.getPieceColor().equals(this.getPieceColor())) {
             return false;
         }
-        if (otherPiece.isKing() && this.isMan()) {
+        if (neighboringPiece.isKing() && this.isMan()) {
             return false;
         }
         BlackTile landingTile;
         try {
-            landingTile = getPositionAfterEating(otherPiece);
+            landingTile = getPositionAfterEatingNeighbor(neighboringPiece);
         } catch (IllegalArgumentException e) {
             return false;
         }
         return landingTile.isEmpty();
     }
 
-    public void eatNeighbor(Piece otherPiece) {
-        if (canEatNeighbor(otherPiece)) {
-            String eatingDirection = blackTile.getNeighborKey(otherPiece.blackTile);
-            Optional<BlackTile> landingTile = Optional.ofNullable(otherPiece.getBlackTile().getNeighbors().get(eatingDirection));
+    public void eatNeighbor(Piece neighboringPiece) {
+        if (canEatNeighbor(neighboringPiece)) {
+            String eatingDirection = blackTile.getNeighborKey(neighboringPiece.blackTile);
+            Optional<BlackTile> landingTile = Optional.ofNullable(neighboringPiece.getBlackTile().getNeighbors().get(eatingDirection));
             BlackTile sourceBlackTile = this.getBlackTile();
-            BlackTile overBlackTile = otherPiece.getBlackTile();
+            BlackTile overBlackTile = neighboringPiece.getBlackTile();
 
             if (landingTile.isPresent()) {
                 sourceBlackTile.removePiece();
@@ -93,13 +93,13 @@ public abstract class Piece {
         }
     }
 
-    public BlackTile getPositionAfterEating(Piece otherPiece) {
+    public BlackTile getPositionAfterEatingNeighbor(Piece neighboringPiece) {
         Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
-                .filter(entry -> entry.getValue().equals(otherPiece.getBlackTile()))
+                .filter(entry -> entry.getValue().equals(neighboringPiece.getBlackTile()))
                 .map(Map.Entry::getKey).findAny();
 
         String eatingDirection = optionalDirection.orElseThrow(() -> new IllegalArgumentException("The piece need to be a neighbor"));
-        return otherPiece.getBlackTile().getNeighbors().get(eatingDirection);
+        return neighboringPiece.getBlackTile().getNeighbors().get(eatingDirection);
     }
 
     public BlackTile getBlackTile() {
