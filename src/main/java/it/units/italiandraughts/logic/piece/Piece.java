@@ -80,16 +80,12 @@ public abstract class Piece {
 
     public void eatNeighbor(Piece neighboringPiece) {
         if (canEatNeighbor(neighboringPiece)) {
-            String eatingDirection = blackTile.getNeighborKey(neighboringPiece.blackTile);
-            Optional<BlackTile> landingTile = Optional.ofNullable(neighboringPiece.getBlackTile().getNeighbors().get(eatingDirection));
+            BlackTile landingTile = getPositionAfterEatingNeighbor(neighboringPiece);
             BlackTile sourceBlackTile = this.getBlackTile();
             BlackTile overBlackTile = neighboringPiece.getBlackTile();
-
-            if (landingTile.isPresent()) {
-                sourceBlackTile.removePiece();
-                overBlackTile.removePiece();
-                landingTile.get().placePiece(this);
-            }
+            sourceBlackTile.removePiece();
+            overBlackTile.removePiece();
+            landingTile.placePiece(this);
         }
     }
 
