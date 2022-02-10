@@ -32,13 +32,13 @@ public class Graph {
         this.game = game;
         possibleDestinations = new ArrayList<>();
         longestPaths = new ArrayList<>();
-        addVertices(Board.getBoard());
+        addVertices();
         initializePaths();
         explorePossibleMoves();
     }
 
-    private void addVertices(Board board){
-        matrixToStream(board.getTiles()).filter(tile -> tile instanceof BlackTile)
+    private void addVertices(){
+        matrixToStream(Board.getBoard().getTiles()).filter(tile -> tile instanceof BlackTile)
                 .map(BlackTile::asBlackTile)
                 .forEach(graph::addVertex);
     }
