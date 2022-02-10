@@ -4,10 +4,7 @@ import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class BlackTile extends Tile {
 
@@ -22,7 +19,7 @@ public class BlackTile extends Tile {
         return neighbors;
     }
 
-    public void addNeighbors() {
+    public void populateNeighborsFromBoard() {
         Board board = Board.getBoard();
         if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y - 1)) {
             neighbors.put("topLeft", BlackTile.asBlackTile(board.getTiles()[y - 1][x - 1]));
