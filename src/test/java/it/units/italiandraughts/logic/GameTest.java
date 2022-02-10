@@ -23,18 +23,15 @@ public class GameTest {
     }
 
     @Test
-    void moveAndLog() {
+    void makeAndSaveMoveWithSimpleMove() {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        Piece piece = new BlackPiece();
-        BlackTile source = new BlackTile(2, 2);
-        source.placePiece(piece);
-        BlackTile destination = new BlackTile(3, 3);
-        Move expectedMove = new Move(piece, List.of(destination));
-        expectedMove.make();
         Board board = Board.reset();
-        BlackTile actualSource = BlackTile.asBlackTile(board.getTiles()[2][2]);
-        BlackTile actualDestination = BlackTile.asBlackTile(board.getTiles()[3][3]);
-        Move actualMove = game.makeAndSaveMove(actualSource.getPiece(), List.of(actualDestination));
+        BlackTile source = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        Move expectedMove = new Move(source.getPiece(), List.of(source, destination));
+        expectedMove.make();
+        expectedMove.undo();
+        Move actualMove = game.makeAndSaveMove(source.getPiece(), List.of(source, destination));
 
         Assertions.assertEquals(expectedMove, actualMove);
     }
