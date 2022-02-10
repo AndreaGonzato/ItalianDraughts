@@ -15,6 +15,23 @@ public class BlackTile extends Tile {
         super(x, y);
     }
 
+
+    public String getDirection(BlackTile otherNeighborTile){
+        // TODO complete the code here
+
+        if (calculateDistance(otherNeighborTile) >= 2){
+            throw new IllegalArgumentException("otherNeighborTile is not a neighbor");
+        }
+        String result = "";
+        if (this.y - otherNeighborTile.y > 0){
+            result += "";
+        }{
+            result += "top";
+        }
+
+        return null;
+    }
+
     public Map<String, BlackTile> getNeighbors() {
         return neighbors;
     }

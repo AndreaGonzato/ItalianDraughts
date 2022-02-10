@@ -43,6 +43,7 @@ public class Tile {
         return Math.max(deltaX, deltaY);
     }
 
+
     public Square getSquare() {
         return square;
     }

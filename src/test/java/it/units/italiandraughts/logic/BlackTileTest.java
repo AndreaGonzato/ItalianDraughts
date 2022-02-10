@@ -107,4 +107,16 @@ public class BlackTileTest {
         Assertions.assertEquals(expectedPiece, actualPiece);
     }
 
+    @Test
+    void getDirection(){
+        BlackTile blackTile1 = new BlackTile(0, 0);
+        BlackTile blackTile2 = new BlackTile(1, 1);
+
+        String actualString = blackTile1.getDirection(blackTile2);
+        String expectedString = "bottomRight";
+
+        Assertions.assertEquals(actualString, expectedString);
+
+    }
+
 }

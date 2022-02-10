@@ -20,6 +20,8 @@ public class Move {
     private boolean hasPromoted;
 
     public Move(Piece piece, List<BlackTile> steps) {
+        // TODO control that a white man piece can not move down
+
         this.piece = piece;
         this.source = piece.getBlackTile();
         this.destination = steps.get(steps.size() - 1);
