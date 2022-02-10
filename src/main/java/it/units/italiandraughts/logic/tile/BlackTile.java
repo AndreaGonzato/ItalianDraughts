@@ -16,19 +16,6 @@ public class BlackTile extends Tile {
     }
 
 
-    public String getDirection(BlackTile otherTile){
-
-        if (this.equals(otherTile)){
-            throw new IllegalArgumentException("otherTile must be a different tile");
-        }
-
-        if (this.y - otherTile.y > 0){
-            return  "top";
-        }else {
-            return "bottom";
-        }
-
-    }
 
     public Map<String, BlackTile> getNeighbors() {
         return neighbors;

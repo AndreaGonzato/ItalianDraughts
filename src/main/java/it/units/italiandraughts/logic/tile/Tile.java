@@ -43,6 +43,20 @@ public class Tile {
         return Math.max(deltaX, deltaY);
     }
 
+    public String getDirection(Tile otherTile){
+
+        if (this.equals(otherTile)){
+            throw new IllegalArgumentException("otherTile must be a different tile");
+        }
+
+        if (this.y - otherTile.y > 0){
+            return  "top";
+        }else {
+            return "bottom";
+        }
+
+    }
+
 
     public Square getSquare() {
         return square;
