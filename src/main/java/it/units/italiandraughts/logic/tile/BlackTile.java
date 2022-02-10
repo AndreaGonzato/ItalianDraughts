@@ -22,14 +22,21 @@ public class BlackTile extends Tile {
         if (calculateDistance(otherNeighborTile) >= 2){
             throw new IllegalArgumentException("otherNeighborTile is not a neighbor");
         }
+
         String result = "";
         if (this.y - otherNeighborTile.y > 0){
-            result += "";
-        }{
             result += "top";
+        }else {
+            result += "bottom";
         }
 
-        return null;
+        if(this.x - otherNeighborTile.x > 0){
+            result += "Left";
+        }else {
+            result += "Right";
+        }
+
+        return result;
     }
 
     public Map<String, BlackTile> getNeighbors() {
