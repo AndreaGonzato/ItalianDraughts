@@ -41,10 +41,7 @@ public class Board {
     }
 
     public void removePieces(){
-        matrixToStream(tiles)
-                .filter(tile -> tile instanceof BlackTile)
-                .map(BlackTile::asBlackTile)
-                .forEach(BlackTile::removePiece);
+        getFullBlackTiles().forEach(BlackTile::removePiece);
     }
 
     public static Board reset(){
@@ -59,9 +56,7 @@ public class Board {
     }
 
     private void initPieces() {
-        Supplier<Stream<BlackTile>> blackTilesSupplier = () -> matrixToStream(tiles)
-                .filter(tile -> tile instanceof BlackTile)
-                .map(BlackTile::asBlackTile);
+        Supplier<Stream<BlackTile>> blackTilesSupplier = () -> getEmptyBlackTiles().stream();
         blackTilesSupplier.get().filter(tile -> tile.getY() < 3).forEach(tile -> tile.placePiece(new BlackPiece()));
         blackTilesSupplier.get().filter(tile -> tile.getY() > 4).forEach(tile -> tile.placePiece(new WhitePiece()));
     }
