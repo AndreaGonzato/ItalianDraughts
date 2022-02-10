@@ -4,6 +4,7 @@ import it.units.italiandraughts.logic.piece.EatenPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,22 @@ public class Move {
     private boolean hasPromoted;
 
     public Move(Piece piece, List<BlackTile> steps) {
-        // TODO control that a white man piece can not move down
+        // TODO improve code here
+        if (piece.isMan()){
+            if (piece.getPieceColor().equals(PieceColor.WHITE)){
+                for ( int i = 1 ; i<steps.size() ; i++){
+                    if (steps.get(i-1).getDirection(steps.get(i)).equals("bottom")){
+                        throw new IllegalArgumentException("A white man piece can only move to the top");
+                    }
+                }
+            }else {
+                for ( int i = 1 ; i<steps.size() ; i++){
+                    if (steps.get(i-1).getDirection(steps.get(i)).equals("top")){
+                        throw new IllegalArgumentException("A black man piece can only move to the bottom");
+                    }
+                }
+            }
+        }
 
         this.piece = piece;
         this.source = piece.getBlackTile();
