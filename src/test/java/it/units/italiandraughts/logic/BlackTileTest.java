@@ -108,7 +108,42 @@ public class BlackTileTest {
     }
 
     @Test
-    void getDirection(){
+    void getDirectionTopLeft(){
+        BlackTile blackTile1 = new BlackTile(3, 3);
+        BlackTile blackTile2 = new BlackTile(2, 2);
+
+        String actualString = blackTile1.getDirection(blackTile2);
+        String expectedString = "topLeft";
+
+        Assertions.assertEquals(actualString, expectedString);
+    }
+
+
+    @Test
+    void getDirectionTopRight(){
+        BlackTile blackTile1 = new BlackTile(4, 4);
+        BlackTile blackTile2 = new BlackTile(5, 3);
+
+        String actualString = blackTile1.getDirection(blackTile2);
+        String expectedString = "topRight";
+
+        Assertions.assertEquals(actualString, expectedString);
+    }
+
+    @Test
+    void getDirectionBottomLeft(){
+        BlackTile blackTile1 = new BlackTile(6, 6);
+        BlackTile blackTile2 = new BlackTile(5, 7);
+
+        String actualString = blackTile1.getDirection(blackTile2);
+        String expectedString = "bottomLeft";
+
+        Assertions.assertEquals(actualString, expectedString);
+    }
+
+
+    @Test
+    void getDirectionBottomRight(){
         BlackTile blackTile1 = new BlackTile(0, 0);
         BlackTile blackTile2 = new BlackTile(1, 1);
 
@@ -116,7 +151,6 @@ public class BlackTileTest {
         String expectedString = "bottomRight";
 
         Assertions.assertEquals(actualString, expectedString);
-
     }
 
 }
