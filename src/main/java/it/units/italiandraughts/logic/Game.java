@@ -29,7 +29,7 @@ public class Game implements GameEventSource {
         listenersMap = new HashMap<>();
         moves = new ArrayList<>();
         activePlayer.updateMovablePieces();
-        updateAbsoluteLongestPath();
+        updateAbsoluteLongestPaths();
     }
 
     @Override
@@ -53,10 +53,10 @@ public class Game implements GameEventSource {
             notifyListeners(new GameOverEvent(this, activePlayer));
         }
         toggleActivePlayer();
-        updateAbsoluteLongestPath();
+        updateAbsoluteLongestPaths();
     }
 
-    private void updateAbsoluteLongestPath() {
+    private void updateAbsoluteLongestPaths() {
         absoluteLongestPaths = activePlayer.getPieces()
                 .stream().map(Piece::getBlackTile)
                 .map(tile -> new Graph(tile, this))
@@ -82,7 +82,17 @@ public class Game implements GameEventSource {
         }).start();
     }
 
-    Move movePieceAlongSteps(Piece piece, List<BlackTile> steps) {
+    private GraphPath<BlackTile, Edge> getLongestPathFromActiveTileToDestination(BlackTile destination) {
+        return absoluteLongestPaths.stream()
+                .filter(path -> path.getEndVertex().equals(destination)
+                        && path.getStartVertex().equals(activeTile))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "The destination must be the final BlackTile of one of the absolute longest paths."
+                ));
+    }
+
+    Move makeAndSaveMove(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, steps);
         move.make();
         moves.add(move);
@@ -91,13 +101,9 @@ public class Game implements GameEventSource {
 
     public void moveActivePieceTo(BlackTile destination) {
         Piece piece = activeTile.getPiece();
-        GraphPath<BlackTile, Edge> longestPath = absoluteLongestPaths.stream()
-                .filter(path -> path.getEndVertex().equals(destination)
-                        && path.getStartVertex().equals(activeTile))
-                .findAny()
-                .orElseThrow();
+        GraphPath<BlackTile, Edge> longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
         playSound();
-        movePieceAlongSteps(piece, longestPath.getVertexList());
+        makeAndSaveMove(piece, longestPathToDestination.getVertexList());
         newTurn();
     }
 

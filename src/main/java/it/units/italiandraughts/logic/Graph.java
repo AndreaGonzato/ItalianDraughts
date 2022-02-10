@@ -72,7 +72,7 @@ public class Graph {
             weight *= EATING_KING_MULTIPLIER;
         }
         addEdge(eatingPiece.getBlackTile(), landingTile, weight);
-        Move move = game.movePieceAlongSteps(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile));
+        Move move = game.makeAndSaveMove(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile));
         if (move.hasPromoted()) {
             game.undoLastMove();
             return;
