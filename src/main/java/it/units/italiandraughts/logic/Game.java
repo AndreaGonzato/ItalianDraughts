@@ -13,8 +13,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.*;
 
-import static it.units.italiandraughts.logic.StaticUtil.*;
-
 public class Game implements GameEventSource {
     private final Player player1;
     private final Player player2;
@@ -84,16 +82,22 @@ public class Game implements GameEventSource {
         }).start();
     }
 
-    public Move moveAndLog(Piece piece, List<BlackTile> steps) {
+    Move movePieceAlongSteps(Piece piece, List<BlackTile> steps) {
         Move move = new Move(piece, steps);
         move.make();
         moves.add(move);
         return move;
     }
 
-    public void makeMove(Piece piece, List<BlackTile> steps) {
+    public void moveActivePieceTo(BlackTile destination) {
+        Piece piece = activeTile.getPiece();
+        GraphPath<BlackTile, Edge> longestPath = absoluteLongestPaths.stream()
+                .filter(path -> path.getEndVertex().equals(destination)
+                        && path.getStartVertex().equals(activeTile))
+                .findAny()
+                .orElseThrow();
         playSound();
-        moveAndLog(piece, steps);
+        movePieceAlongSteps(piece, longestPath.getVertexList());
         newTurn();
     }
 

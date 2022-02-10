@@ -34,7 +34,7 @@ public class GameTest {
         Board board = Board.reset();
         BlackTile actualSource = BlackTile.asBlackTile(board.getTiles()[2][2]);
         BlackTile actualDestination = BlackTile.asBlackTile(board.getTiles()[3][3]);
-        Move actualMove = game.moveAndLog(actualSource.getPiece(), List.of(actualDestination));
+        Move actualMove = game.movePieceAlongSteps(actualSource.getPiece(), List.of(actualDestination));
 
         Assertions.assertEquals(expectedMove, actualMove);
     }
