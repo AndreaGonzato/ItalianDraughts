@@ -4,12 +4,14 @@ import it.units.italiandraughts.logic.piece.EatenPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.logic.tile.Tile;
 import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public class Move {
 
@@ -21,28 +23,34 @@ public class Move {
     private boolean hasPromoted;
 
     public Move(Piece piece, List<BlackTile> steps) {
-        // TODO improve code here
-        if (piece.isMan()){
-            if (piece.getPieceColor().equals(PieceColor.WHITE)){
-                for ( int i = 1 ; i<steps.size() ; i++){
-                    if (steps.get(i-1).getDirection(steps.get(i)).equals("bottom")){
-                        throw new IllegalArgumentException("A white man piece can only move to the top");
-                    }
-                }
-            }else {
-                for ( int i = 1 ; i<steps.size() ; i++){
-                    if (steps.get(i-1).getDirection(steps.get(i)).equals("top")){
-                        throw new IllegalArgumentException("A black man piece can only move to the bottom");
-                    }
-                }
-            }
-        }
+        checkPreconditions(piece, steps);
 
         this.piece = piece;
         this.source = piece.getBlackTile();
         this.destination = steps.get(steps.size() - 1);
         this.steps = steps;
         this.eatenPieces = new ArrayList<>();
+    }
+
+    private void checkPreconditions(Piece piece, List<BlackTile> steps) {
+        // TODO think how to improve code
+        if (piece.isMan()) {
+            BiFunction<BlackTile, BlackTile, String> movingDirection = Tile::getDirection;
+
+            if (piece.getPieceColor().equals(PieceColor.WHITE)) {
+                for (int i = 1; i < steps.size(); i++) {
+                    if (movingDirection.apply(steps.get(i - 1), steps.get(i)).equals("bottom")) {
+                        throw new IllegalArgumentException("A white man piece can only move to the top");
+                    }
+                }
+            } else {
+                for (int i = 1; i < steps.size(); i++) {
+                    if (movingDirection.apply(steps.get(i - 1), steps.get(i)).equals("top")) {
+                        throw new IllegalArgumentException("A black man piece can only move to the bottom");
+                    }
+                }
+            }
+        }
     }
 
     public void make() {
