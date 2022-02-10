@@ -108,47 +108,47 @@ public class BlackTileTest {
     }
 
     @Test
-    void getDirectionTopLeft(){
+    void getDirectionTop1(){
         BlackTile blackTile1 = new BlackTile(3, 3);
         BlackTile blackTile2 = new BlackTile(2, 2);
 
         String actualString = blackTile1.getDirection(blackTile2);
-        String expectedString = "topLeft";
+        String expectedString = "top";
 
         Assertions.assertEquals(actualString, expectedString);
     }
 
 
     @Test
-    void getDirectionTopRight(){
+    void getDirectionTop2(){
         BlackTile blackTile1 = new BlackTile(4, 4);
         BlackTile blackTile2 = new BlackTile(5, 3);
 
         String actualString = blackTile1.getDirection(blackTile2);
-        String expectedString = "topRight";
+        String expectedString = "top";
 
         Assertions.assertEquals(actualString, expectedString);
     }
 
     @Test
-    void getDirectionBottomLeft(){
+    void getDirectionBottom1(){
         BlackTile blackTile1 = new BlackTile(6, 6);
         BlackTile blackTile2 = new BlackTile(5, 7);
 
         String actualString = blackTile1.getDirection(blackTile2);
-        String expectedString = "bottomLeft";
+        String expectedString = "bottom";
 
         Assertions.assertEquals(actualString, expectedString);
     }
 
 
     @Test
-    void getDirectionBottomRight(){
+    void getDirectionBottom2(){
         BlackTile blackTile1 = new BlackTile(0, 0);
         BlackTile blackTile2 = new BlackTile(1, 1);
 
         String actualString = blackTile1.getDirection(blackTile2);
-        String expectedString = "bottomRight";
+        String expectedString = "bottom";
 
         Assertions.assertEquals(actualString, expectedString);
     }
