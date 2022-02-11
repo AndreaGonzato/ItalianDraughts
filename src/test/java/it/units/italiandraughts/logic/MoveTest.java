@@ -1,5 +1,6 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
@@ -15,11 +16,11 @@ public class MoveTest {
         Board board = Board.reset();
         board.removePieces();
 
-        Piece piece = new WhitePiece();
-        BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[0][0]);//new BlackTile(0, 0);
+        Piece piece = new BlackPiece();
+        BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);//new BlackTile(0, 0);
         startingBlackTile.placePiece(piece);
 
-        BlackTile firstStepBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);;
+        BlackTile firstStepBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);;
 
         Move move = new Move(piece, List.of(startingBlackTile, firstStepBlackTile));
         move.make();

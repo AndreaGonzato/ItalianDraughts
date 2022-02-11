@@ -25,15 +25,15 @@ public abstract class Piece {
             return Optional.empty();
         } else {
             // move and eat a piece
-            BlackTile overTile = blackTile.getNeighbors().values().stream()
-                    .filter(neighbor -> neighbor.getNeighbors().values().stream()
-                            .anyMatch(blackTile -> blackTile.equals(landingTile)))
-                    .findAny().orElseThrow();
+            BlackTile overTile = blackTile.getBlackTileInMiddle(landingTile);
 
             Piece toEat = overTile.getPiece();
-            Optional<EatenPiece> eatenPieceOptional = Optional.of(new EatenPiece(toEat));
+            if (toEat == null){
+                // TODO Tom what do you think about this if?
+                throw new NullPointerException("No piece found on the BlackTile overTile");
+            }
             eatNeighbor(toEat);
-            return eatenPieceOptional;
+            return Optional.of(new EatenPiece(toEat));
         }
     }
 

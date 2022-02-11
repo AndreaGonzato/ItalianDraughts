@@ -16,7 +16,6 @@ public class BlackTile extends Tile {
     }
 
 
-
     public Map<String, BlackTile> getNeighbors() {
         return neighbors;
     }
@@ -37,6 +36,18 @@ public class BlackTile extends Tile {
         }
     }
 
+    public BlackTile getBlackTileInMiddle(BlackTile otherBlackTile) {
+        // TODO add test to this method
+        if (calculateDistance(otherBlackTile) != 2) {
+            throw new IllegalArgumentException("otherBlackTile must be at a distance of 2");
+        }
+
+        return getNeighbors().values().stream()
+                .filter(neighbor -> neighbor.getNeighbors().values().stream()
+                        .anyMatch(blackTile -> blackTile.equals(otherBlackTile)))
+                .findAny().orElseThrow();
+    }
+
     private Optional<String> getAdjacencyDirection(BlackTile other) {
         return neighbors.keySet().stream()
                 .filter(key -> other.equals(neighbors.get(key)))
@@ -47,7 +58,7 @@ public class BlackTile extends Tile {
         return getAdjacencyDirection(other).isPresent();
     }
 
-    public String getNeighborKey(BlackTile other){
+    public String getNeighborKey(BlackTile other) {
         return getAdjacencyDirection(other).orElseThrow(() -> new IllegalArgumentException("You did not pass a neighbor"));
     }
 
@@ -82,6 +93,7 @@ public class BlackTile extends Tile {
         return piece;
     }
 
+    // TODO do we need to use Optional? Do we need to create an Exception that extend NullPointerException with a name like NoPieceOnBlackTileException?
     public Piece getPiece() {
         return piece;
     }
