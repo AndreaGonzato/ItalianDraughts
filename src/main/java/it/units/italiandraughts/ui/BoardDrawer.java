@@ -33,8 +33,8 @@ public class BoardDrawer implements GameEventListener {
 
         matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
             Square square = new Square(tile,
-                    ((tile.getX() + tile.getY()) % 2 == 0) ?
-                            SquareType.BRONZE : SquareType.WHITE_SMOKE, gridPane.getMaxHeight() / Board.SIZE);
+                    ((tile.getX() + tile.getY()) % 2 == 0) ? SquareType.BRONZE : SquareType.WHITE_SMOKE,
+                    gridPane.getMaxHeight() / Board.SIZE);
             squares[tile.getY()][tile.getX()] = square;
             gridPane.add(square, tile.getX(), tile.getY());
         });
