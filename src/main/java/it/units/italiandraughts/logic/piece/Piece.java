@@ -27,14 +27,13 @@ public abstract class Piece {
             // move and eat a piece
             BlackTile overTile = blackTile.getBlackTileInMiddle(landingTile);
 
-            Piece toEat = overTile.getPiece();
-            if (toEat == null) {
+            Piece piceToEat = overTile.getPiece();
+            if (piceToEat == null) {
                 // TODO Tom what do you think about this if?
                 throw new NullPointerException("No piece found on the BlackTile overTile");
             }
-            Optional<EatenPiece> optionalEatenPiece = Optional.of(new EatenPiece(toEat));
-            eatNeighbor(toEat);
-            return optionalEatenPiece;
+            eatNeighbor(piceToEat);
+            return Optional.of(new EatenPiece(piceToEat, overTile));
         }
     }
 

@@ -7,6 +7,12 @@ public class EatenPiece {
     private final Piece piece;
     private final BlackTile position;
 
+    public EatenPiece(Piece piece, BlackTile position) {
+        this.piece = piece;
+        this.position = position;
+        piece.setBlackTile(position);
+    }
+
     public EatenPiece(Piece piece) {
         this.piece = piece;
         this.position = piece.getBlackTile();
