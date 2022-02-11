@@ -10,10 +10,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.input.MouseEvent;
-import org.jgrapht.GraphPath;
-
-import java.util.List;
-import java.util.Optional;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -99,16 +95,12 @@ public class BoardDrawer implements GameEventListener {
     }
 
     private void setClickableForPlayer(Player player) {
-        matrixToStream(squares).filter(square -> !(square.getTile().isEmpty()) &&
-                        BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
-                                .equals(player.getPieceColor()))
+        player.getPieces().stream().map(piece -> piece.getBlackTile().getSquare())
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
     private void unsetClickableForPlayer(Player player) {
-        matrixToStream(squares).filter(square -> !(square.getTile().isEmpty()) &&
-                        BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor()
-                                .equals(player.getPieceColor()))
+        player.getPieces().stream().map(piece -> piece.getBlackTile().getSquare())
                 .forEach(square -> square.setOnMouseClicked(null));
     }
 
