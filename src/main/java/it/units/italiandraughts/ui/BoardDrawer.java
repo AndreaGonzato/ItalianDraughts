@@ -18,11 +18,9 @@ public class BoardDrawer implements GameEventListener {
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
     private Status status;
-    private final PieceDrawer pieceDrawer;
 
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
-        pieceDrawer = new PieceDrawer();
 
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setPercentWidth(12.5);
@@ -113,8 +111,7 @@ public class BoardDrawer implements GameEventListener {
     public void updateBoard(Tile[][] tiles) {
         matrixToStream(squares).forEach(square -> square.getChildren().clear());
         matrixToStream(tiles).filter(tile -> !tile.isEmpty())
-                .forEach(tile -> pieceDrawer.drawPieceOnSquare(BlackTile.asBlackTile(tile).getPiece(),
-                        squares[tile.getY()][tile.getX()]));
+                .forEach(tile -> tile.getSquare().drawPiece(BlackTile.asBlackTile(tile).getPiece()));
     }
 
 

@@ -1,10 +1,14 @@
 package it.units.italiandraughts.ui;
 
 import it.units.italiandraughts.exception.IllegalPositionDrawingException;
+import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.Tile;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
+
+import java.util.List;
 
 public class Square extends StackPane {
 
@@ -15,7 +19,6 @@ public class Square extends StackPane {
     private boolean highlighted;
     private boolean hasGreenCircle;
     private Circle greenCircle;
-
 
     public Square(Tile tile, SquareType squareType, double squareSize) {
         this.squareSize = squareSize;
@@ -55,6 +58,31 @@ public class Square extends StackPane {
         this.getChildren().remove(greenCircle);
     }
 
+    void drawPiece(Piece piece) {
+        List<Ellipse> ellipses;
+        double translateFactor = piece.isMan() ? 0.07 : 0.06;
+        double squareSize = this.squareSize;
+        Ellipse baseEllipse = EllipseDrawer.createEllipse(squareSize);
+        baseEllipse.setFill(Color.BLACK);
+        baseEllipse.setTranslateY(squareSize * translateFactor);
+
+        if (piece.isMan()) {
+            Ellipse upperEllipse = EllipseDrawer.createEllipse(squareSize);
+            upperEllipse.setFill(Color.valueOf(piece.getPieceColor().getHexColor()));
+            ellipses = List.of(baseEllipse, upperEllipse);
+        } else {
+            Ellipse upperEllipse = EllipseDrawer.createEllipse(squareSize);
+            upperEllipse.setTranslateY(squareSize * -1 * translateFactor);
+            Ellipse middleEllipse = EllipseDrawer.createEllipse(squareSize);
+            middleEllipse.setFill(Color.valueOf("#c6c6c6"));
+            Ellipse upperEllipse2 = EllipseDrawer.createEllipse(squareSize);
+            upperEllipse2.setTranslateY(squareSize * -0.1);
+            upperEllipse2.setFill(Color.valueOf(piece.getPieceColor().getHexColor()));
+            ellipses = List.of(baseEllipse, middleEllipse, upperEllipse, upperEllipse2);
+        }
+        this.getChildren().addAll(ellipses);
+    }
+
     public boolean hasGreenCircle() {
         return hasGreenCircle;
     }
@@ -63,7 +91,4 @@ public class Square extends StackPane {
         return type;
     }
 
-    public double getSquareSize() {
-        return squareSize;
-    }
 }
