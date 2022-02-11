@@ -15,12 +15,9 @@ public class BlackTile extends Tile {
         super(x, y);
     }
 
-
     public Map<String, BlackTile> getNeighbors() {
         return neighbors;
     }
-
-
 
     public void populateNeighborsFromBoard() {
         Board board = Board.getBoard();
