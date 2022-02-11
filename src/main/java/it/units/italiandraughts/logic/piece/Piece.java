@@ -27,11 +27,12 @@ public abstract class Piece {
             // move and eat a piece
             BlackTile overTile = blackTile.getBlackTileInMiddle(landingTile);
 
-            Piece pieceToEat = overTile.getPiece();
-            if (pieceToEat == null) {
+            if (overTile.isEmpty()) {
                 throw new IllegalArgumentException("No piece found on the BlackTile overTile. " +
                         "You have passed an unreachable landingTile.");
             }
+
+            Piece pieceToEat = overTile.getPiece();
             eatNeighbor(pieceToEat);
             return Optional.of(new EatenPiece(pieceToEat, overTile));
         }
