@@ -20,6 +20,8 @@ public class BlackTile extends Tile {
         return neighbors;
     }
 
+
+
     public void populateNeighborsFromBoard() {
         Board board = Board.getBoard();
         if (Tile.areValidCoordinatesBiPredicate.test(x - 1, y - 1)) {
