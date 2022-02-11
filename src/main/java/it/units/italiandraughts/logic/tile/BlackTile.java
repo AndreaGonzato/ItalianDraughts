@@ -93,13 +93,12 @@ public class BlackTile extends Tile {
         return piece;
     }
 
-    // TODO do we need to use Optional? Do we need to create an Exception that extend NullPointerException with a name like NoPieceOnBlackTileException?
-    public Piece getPiece() {
-        return piece;
-    }
-
     public boolean hasNeighbor(String direction) {
         return neighbors.get(direction) != null;
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 
     @Override
