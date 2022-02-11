@@ -37,14 +37,9 @@ public class PieceTest {
         pieceToEatBlackTile.placePiece(pieceToEat);
         EatenPiece expectedEatenPiece = new EatenPiece(pieceToEat);
 
-        Optional<EatenPiece> actualEatenPiece = pieceToMove.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[2][2]));
+        Optional<EatenPiece> actualEatenPieceOptional = pieceToMove.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[2][2]));
 
-        // TODO control here
-        Assertions.assertEquals(expectedEatenPiece, actualEatenPiece.get());
-
-        //actualEatenPiece.ifPresent(piece -> Assertions.assertEquals(piece, pieceToEat));
-
-        //actualEatenPiece.ifPresent(piece -> Assertions.assertEquals(piece.getPiece(), expectedEatenPiece.getPiece()));
+        actualEatenPieceOptional.ifPresent(actualEatenPiece -> Assertions.assertEquals(expectedEatenPiece, actualEatenPiece));
     }
 
     @Test
@@ -221,5 +216,7 @@ public class PieceTest {
         Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
 
     }
+
+    // TODO add test getPositionAfterEatingNeighbor
 
 }
