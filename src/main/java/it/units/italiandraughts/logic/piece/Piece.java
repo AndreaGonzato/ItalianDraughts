@@ -100,10 +100,7 @@ public abstract class Piece {
 
     private String getEatingDirection(Piece neighboringPiece) {
         BlackTile overTile = neighboringPiece.getBlackTile();
-        Optional<String> optionalDirection = this.getBlackTile().getNeighbors().entrySet().stream()
-                .filter(entry -> entry.getValue().equals(overTile))
-                .map(Map.Entry::getKey).findAny();
-        return optionalDirection.orElseThrow(() -> new IllegalArgumentException("The piece need to be a neighbor"));
+        return this.getBlackTile().getNeighborKey(overTile);
     }
 
     public BlackTile getBlackTile() {
