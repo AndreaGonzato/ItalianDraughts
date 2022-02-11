@@ -90,7 +90,7 @@ public abstract class Piece {
 
     public BlackTile getPositionAfterEatingNeighbor(Piece neighboringPiece) {
         if (neighboringPiece.getBlackTile().calculateDistance(blackTile) > 1){
-            throw new IllegalArgumentException("neighboringPiece must be on a neighbor BlackTile");
+            throw new IllegalArgumentException("Argument neighboringPiece must be on a neighboring BlackTile");
         }
 
         BlackTile overTile = neighboringPiece.getBlackTile();
