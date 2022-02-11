@@ -107,4 +107,14 @@ public class BlackTileTest {
         Assertions.assertEquals(expectedPiece, actualPiece);
     }
 
+    @Test
+    void getBlackTileInBetween() {
+        Board board = Board.reset();
+        BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[0][0]);
+        BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile expectedMiddleBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        BlackTile actualMiddleBlackTile = blackTile1.getBlackTileInBetween(blackTile2);
+        Assertions.assertEquals(expectedMiddleBlackTile, actualMiddleBlackTile);
+    }
+
 }

@@ -35,8 +35,7 @@ public class BlackTile extends Tile {
         }
     }
 
-    public BlackTile getBlackTileInMiddle(BlackTile otherBlackTile) {
-        // TODO add test to this method
+    public BlackTile getBlackTileInBetween(BlackTile otherBlackTile) {
         if (calculateDistance(otherBlackTile) != 2) {
             throw new IllegalArgumentException("otherBlackTile must be at a distance of 2");
         }

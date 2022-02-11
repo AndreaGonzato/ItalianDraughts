@@ -25,7 +25,7 @@ public abstract class Piece {
             return Optional.empty();
         } else {
             // move and eat a piece
-            BlackTile overTile = blackTile.getBlackTileInMiddle(landingTile);
+            BlackTile overTile = blackTile.getBlackTileInBetween(landingTile);
 
             if (overTile.isEmpty()) {
                 throw new IllegalArgumentException("No piece found on the BlackTile overTile. " +
