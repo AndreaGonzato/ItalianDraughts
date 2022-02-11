@@ -46,9 +46,13 @@ public class BlackTile extends Tile {
                 .findAny().orElseThrow();
     }
 
-    private Optional<String> getAdjacencyDirection(BlackTile other) {
+    private Optional<String> getAdjacencyDirection(BlackTile neighboringBlackTile) {
+        if (calculateDistance(neighboringBlackTile) > 1){
+            throw new IllegalArgumentException("neighboringBlackTile must be a neighbor");
+        }
+
         return neighbors.keySet().stream()
-                .filter(key -> other.equals(neighbors.get(key)))
+                .filter(key -> neighboringBlackTile.equals(neighbors.get(key)))
                 .findFirst();
     }
 
@@ -56,8 +60,8 @@ public class BlackTile extends Tile {
         return getAdjacencyDirection(other).isPresent();
     }
 
-    public String getNeighborKey(BlackTile other) {
-        return getAdjacencyDirection(other).orElseThrow(() -> new IllegalArgumentException("You did not pass a neighbor"));
+    public String getNeighborKey(BlackTile neighboringBlackTile) {
+        return getAdjacencyDirection(neighboringBlackTile).orElseThrow(() -> new IllegalArgumentException("You did not pass a neighbor"));
     }
 
     public static BlackTile asBlackTile(Tile tile) {
