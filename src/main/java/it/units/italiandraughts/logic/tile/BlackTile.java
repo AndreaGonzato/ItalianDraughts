@@ -47,10 +47,6 @@ public class BlackTile extends Tile {
     }
 
     private Optional<String> getAdjacencyDirection(BlackTile neighboringBlackTile) {
-        if (calculateDistance(neighboringBlackTile) > 1){
-            throw new IllegalArgumentException("neighboringBlackTile must be a neighbor");
-        }
-
         return neighbors.keySet().stream()
                 .filter(key -> neighboringBlackTile.equals(neighbors.get(key)))
                 .findFirst();
