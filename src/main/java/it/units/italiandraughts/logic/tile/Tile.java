@@ -40,7 +40,7 @@ public class Tile {
     public int calculateDistance(Tile otherTile){
         int deltaX = this.x - otherTile.x;
         int deltaY = this.y - otherTile.y;
-        return Math.max(deltaX, deltaY);
+        return Math.abs(Math.max(deltaX, deltaY));
     }
 
     public String getDirection(Tile otherTile){

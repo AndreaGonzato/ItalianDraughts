@@ -39,7 +39,11 @@ public class PieceTest {
 
         Optional<EatenPiece> actualEatenPiece = pieceToMove.moveToReachableBlackTile(BlackTile.asBlackTile(board.getTiles()[2][2]));
 
-        actualEatenPiece.ifPresent(piece -> Assertions.assertEquals(piece, expectedEatenPiece));
+        Assertions.assertEquals(expectedEatenPiece, actualEatenPiece.get());
+
+        //actualEatenPiece.ifPresent(piece -> Assertions.assertEquals(piece, pieceToEat));
+
+        //actualEatenPiece.ifPresent(piece -> Assertions.assertEquals(piece.getPiece(), expectedEatenPiece.getPiece()));
     }
 
     @Test
