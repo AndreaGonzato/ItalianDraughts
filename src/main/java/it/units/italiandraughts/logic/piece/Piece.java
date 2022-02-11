@@ -29,8 +29,8 @@ public abstract class Piece {
 
             Piece pieceToEat = overTile.getPiece();
             if (pieceToEat == null) {
-                // TODO Tom what do you think about this if?
-                throw new NullPointerException("No piece found on the BlackTile overTile");
+                throw new IllegalArgumentException("No piece found on the BlackTile overTile. " +
+                        "You have passed an unreachable landingTile.");
             }
             eatNeighbor(pieceToEat);
             return Optional.of(new EatenPiece(pieceToEat, overTile));
