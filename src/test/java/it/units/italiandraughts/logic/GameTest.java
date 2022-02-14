@@ -1,7 +1,7 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.event.EventType;
 import it.units.italiandraughts.logic.piece.BlackPiece;
-import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
@@ -78,6 +78,27 @@ public class GameTest {
         game.makeAndSaveMove(source.getPiece(), List.of(source, intermediate, destination));
         Move actualMove = game.getMoves().get(0);
         Assertions.assertEquals(expectedMove, actualMove);
+    }
+
+    @Test
+    void moveActivePieceTo() {
+        Board board = Board.reset();
+        board.removePieces();
+        BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        BlackTile simpleMoveDestination = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][6]);
+        BlackTile eatingDestination = BlackTile.asBlackTile(board.getTiles()[3][7]);
+        source.placePiece(new WhitePiece());
+        over.placePiece(new BlackPiece());
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        game.addListeners(EventType.GAME_OVER);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        game.setActiveTile(source);
+        game.moveActivePieceTo(eatingDestination);
+        Assertions.assertTrue(
+                source.isEmpty() && simpleMoveDestination.isEmpty() && !eatingDestination.isEmpty()
+                && over.isEmpty()
+        );
     }
 
 }
