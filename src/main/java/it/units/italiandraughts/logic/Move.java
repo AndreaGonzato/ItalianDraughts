@@ -65,7 +65,7 @@ public class Move {
 
     }
 
-    public void make() {
+    void make() {
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
             boolean wasMan = piece.isMan();
@@ -76,13 +76,12 @@ public class Move {
         }
     }
 
-    public void undo() {
+    void undo() {
         eatenPieces.forEach(EatenPiece::restore);
         if (hasPromoted) {
             piece.setPieceType(PieceType.MAN);
         }
         piece.moveTo(source);
-
     }
 
     public Piece getPiece() {

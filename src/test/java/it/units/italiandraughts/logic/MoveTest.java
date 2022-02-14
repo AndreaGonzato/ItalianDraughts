@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
+import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import org.junit.jupiter.api.Assertions;
@@ -151,7 +152,7 @@ public class MoveTest {
     }
 
     @Test
-    void undoSimpleMove() {
+    void undoCheckToMoveThePieceFromDestinationToSource() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -166,5 +167,79 @@ public class MoveTest {
                 && arrivedBlackTile.isEmpty()
                 && startingBlackTile.getPiece().equals(piece));
     }
+
+    @Test
+    void undoCheckToRestoreEatenPiece() {
+        Board board = Board.reset();
+
+        Piece pieceMoved = new BlackPiece();
+        BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        startingBlackTile.placePiece(pieceMoved);
+
+        Piece eatenPiece = new WhitePiece();
+        BlackTile eatenPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        eatenPieceBlackTile.placePiece(eatenPiece);
+
+        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+
+        Move move = new Move(pieceMoved, List.of(startingBlackTile, arrivedBlackTile));
+        move.undo();
+
+        move.undo();
+
+        Assertions.assertTrue(!eatenPieceBlackTile.isEmpty()
+                && eatenPieceBlackTile.getPiece().equals(eatenPiece));
+    }
+
+
+    @Test
+    void undoCheckToRestoreEatenPieces() {
+        Board board = Board.reset();
+
+        Piece pieceMoved = new BlackPiece();
+        BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        startingBlackTile.placePiece(pieceMoved);
+
+        Piece eatenPiece1 = new WhitePiece();
+        BlackTile eatenPiece1BlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        eatenPiece1BlackTile.placePiece(eatenPiece1);
+
+        BlackTile acrossBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+
+        Piece eatenPiece2 = new WhitePiece();
+        BlackTile eatenPiece2BlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        eatenPiece2BlackTile.placePiece(eatenPiece2);
+
+        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
+
+        Move move = new Move(pieceMoved, List.of(startingBlackTile, acrossBlackTile, arrivedBlackTile));
+        move.undo();
+
+        move.undo();
+
+        Assertions.assertTrue(!eatenPiece1BlackTile.isEmpty()
+                && eatenPiece1BlackTile.getPiece().equals(eatenPiece1)
+                && !eatenPiece2BlackTile.isEmpty()
+                && eatenPiece2BlackTile.getPiece().equals(eatenPiece2));
+    }
+
+    @Test
+    void undoCheckToRemovePromotion() {
+        Board board = Board.reset();
+
+        Piece piece = new WhitePiece();
+        BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[0][2]);
+        startingBlackTile.placePiece(piece);
+
+        Move move = new Move(piece, List.of(startingBlackTile, arrivedBlackTile));
+        move.make();
+
+        move.undo();
+
+        Assertions.assertTrue(move.hasPromoted() && piece.getPieceType().equals(PieceType.MAN));
+    }
+
+
 
 }
