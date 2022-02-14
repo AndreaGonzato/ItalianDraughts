@@ -14,7 +14,6 @@ public class MoveTest {
     @Test
     void makeMoveToNeighbor() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -33,7 +32,6 @@ public class MoveTest {
     @Test
     void makeMoveAndEatPiece() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece movingPiece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -58,7 +56,6 @@ public class MoveTest {
     @Test
     void makeMoveWith2Jumps() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece movingPiece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -90,7 +87,6 @@ public class MoveTest {
     @Test
     void tryMakeIllegalMoveWhiteManMoveDown() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new WhitePiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
@@ -113,7 +109,6 @@ public class MoveTest {
     @Test
     void tryMakeIllegalMoveBlackManMoveUp() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
@@ -136,7 +131,6 @@ public class MoveTest {
     @Test
     void tryMakeIllegalMoveBigStepWithDistanceJumpBiggerThan2() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -159,7 +153,6 @@ public class MoveTest {
     @Test
     void undoSimpleMove() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);

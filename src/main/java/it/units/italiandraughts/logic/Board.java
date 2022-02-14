@@ -35,9 +35,6 @@ public class Board {
                 tiles[row][col] = Tile.generateTile(col, row);
             }
         }
-
-        initPieces();
-        //initPiecesDebug(); // TODO remove this line
     }
 
     public void removePieces(){
@@ -55,14 +52,14 @@ public class Board {
                 .forEach(BlackTile::populateNeighborsFromBoard);
     }
 
-    private void initPieces() {
+    public void initPieces() {
         Supplier<Stream<BlackTile>> blackTilesSupplier = () -> getEmptyBlackTiles().stream();
         blackTilesSupplier.get().filter(tile -> tile.getY() < 3).forEach(tile -> tile.placePiece(new BlackPiece()));
         blackTilesSupplier.get().filter(tile -> tile.getY() > 4).forEach(tile -> tile.placePiece(new WhitePiece()));
     }
 
     // TODO remove this
-    private void initPiecesDebug() {
+    public void initPiecesDebug() {
         BlackTile.asBlackTile(tiles[0][0]).placePiece(new BlackPiece());
         BlackTile.asBlackTile(tiles[3][3]).placePiece(new WhitePiece());
     }

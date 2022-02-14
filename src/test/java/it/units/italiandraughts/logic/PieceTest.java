@@ -14,7 +14,6 @@ public class PieceTest {
     @Test
     void moveToNeighboringEmptyBlackTile() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece actualPiece = new BlackPiece();
         BlackTile.asBlackTile(board.getTiles()[0][0]).placePiece(actualPiece);
@@ -27,7 +26,6 @@ public class PieceTest {
     @Test
     void moveToReachableBlackTileByEatingPiece() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece pieceToMove = new BlackPiece();
         BlackTile.asBlackTile(board.getTiles()[0][0]).placePiece(pieceToMove);
@@ -45,7 +43,6 @@ public class PieceTest {
     @Test
     void move() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece actualPiece = new BlackPiece();
         BlackTile.asBlackTile(board.getTiles()[0][0]).placePiece(actualPiece);
@@ -58,7 +55,6 @@ public class PieceTest {
     @Test
     void getReachableNeighboringBlackTilesForWhiteMan() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new WhitePiece();
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -75,7 +71,6 @@ public class PieceTest {
     @Test
     void getReachableNeighboringBlackTilesForBlackMan() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new BlackPiece();
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -92,7 +87,6 @@ public class PieceTest {
     @Test
     void getReachableNeighboringBlackTilesForKing() {
         Board board = Board.reset();
-        board.removePieces();
 
         Piece piece = new WhitePiece(PieceType.KING);
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -112,7 +106,6 @@ public class PieceTest {
     @Test
     void canEatNeighborTrue() {
         Board board = Board.reset();
-        board.removePieces();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -129,7 +122,6 @@ public class PieceTest {
     @Test
     void canEatNotReachablePiece() {
         Board board = Board.reset();
-        board.removePieces();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -146,7 +138,6 @@ public class PieceTest {
     @Test
     void canEatSameColorPiece() {
         Board board = Board.reset();
-        board.removePieces();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
@@ -163,7 +154,6 @@ public class PieceTest {
     @Test
     void canManEatKing() {
         Board board = Board.reset();
-        board.removePieces();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
@@ -180,7 +170,6 @@ public class PieceTest {
     @Test
     void canEatNeighborWithFullLandingTile() {
         Board board = Board.reset();
-        board.removePieces();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
@@ -202,7 +191,6 @@ public class PieceTest {
     void canEatNeighborWhenLandingTileDoesNotExist() {
         // when landing tile is outside the board
         Board board = Board.reset();
-        board.removePieces();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile blackPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][0]);
@@ -220,7 +208,6 @@ public class PieceTest {
     @Test
     void getPositionAfterEatingNeighbor() {
         Board board = Board.reset();
-        board.removePieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[0][0]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile expectedDestination = BlackTile.asBlackTile(board.getTiles()[2][2]);

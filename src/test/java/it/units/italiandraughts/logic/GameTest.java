@@ -26,6 +26,8 @@ public class GameTest {
     void makeAndSaveMoveWithSimpleMove() {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         Board board = Board.reset();
+        board.initPieces();
+
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[2][2]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
         Move expectedMove = new Move(source.getPiece(), List.of(source, destination));

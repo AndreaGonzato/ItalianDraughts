@@ -20,6 +20,7 @@ public class BoardTest {
     @Test
     void checkTilesInitialization() {
         Board board = Board.reset();
+        board.initPieces();
 
         Tile[][] expectedTiles = setUpPieces();
 
@@ -29,7 +30,7 @@ public class BoardTest {
     @Test
     void checkRemovePieces() {
         Board board = Board.reset();
-        board.removePieces();
+
         Tile[][] actualTiles = board.getTiles();
         Tile[][] expectedTiles = initTiles();
 

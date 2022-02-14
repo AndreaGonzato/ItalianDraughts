@@ -67,6 +67,8 @@ public class BoardController implements GameEventListener {
 
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
+        Board board = Board.reset();
+        board.initPieces();
         game = new Game(player1, player2);
         BoardDrawer boardDrawer = new BoardDrawer(gridPane, game);
         game.addListeners(EventType.GAME_OVER, this);
@@ -135,7 +137,8 @@ public class BoardController implements GameEventListener {
         gridPane.getColumnConstraints().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getChildren().clear();
-        Board.reset();
+        Board board = Board.reset();
+        board.initPieces();
         initializeWindow();
     }
 

@@ -2,7 +2,6 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
-import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
 import org.junit.jupiter.api.Assertions;
@@ -14,10 +13,11 @@ public class BlackTileTest {
 
     @Test
     void checkNeighborsX0Y0() {
-        BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[0][0]);
+        Board board = Board.reset();
+
+        BlackTile blackTile = BlackTile.asBlackTile(board.getTiles()[0][0]);
 
         BlackTile expectedBlackTile = new BlackTile(1, 1);
-        expectedBlackTile.placePiece(new BlackPiece());
 
         BlackTile actualBlackTile = blackTile.getNeighbors().get("bottomRight");
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
@@ -28,13 +28,9 @@ public class BlackTileTest {
         BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[1][1]);
 
         BlackTile expectedBlackTile1 = new BlackTile(0, 0);
-        expectedBlackTile1.placePiece(new BlackPiece());
         BlackTile expectedBlackTile2 = new BlackTile(2, 0);
-        expectedBlackTile2.placePiece(new BlackPiece());
         BlackTile expectedBlackTile3 = new BlackTile(0, 2);
-        expectedBlackTile3.placePiece(new BlackPiece());
         BlackTile expectedBlackTile4 = new BlackTile(2, 2);
-        expectedBlackTile4.placePiece(new BlackPiece());
 
         Assertions.assertTrue(expectedBlackTile1.equals(blackTile.getNeighbors().get("topLeft"))
                     && expectedBlackTile2.equals(blackTile.getNeighbors().get("topRight"))
@@ -48,7 +44,6 @@ public class BlackTileTest {
         BlackTile blackTile = BlackTile.asBlackTile(Board.reset().getTiles()[7][7]);
 
         BlackTile expectedBlackTile = new BlackTile(6, 6);
-        expectedBlackTile.placePiece(new WhitePiece());
 
         BlackTile actualBlackTile = blackTile.getNeighbors().get("topLeft");
         Assertions.assertEquals(expectedBlackTile, actualBlackTile);
@@ -100,7 +95,10 @@ public class BlackTileTest {
 
     @Test
     void checkRemovedPiece() {
-        BlackTile blackTile = BlackTile.asBlackTile(Board.getBoard().getTiles()[0][0]);
+        Board board = Board.reset();
+        board.initPieces();
+
+        BlackTile blackTile = BlackTile.asBlackTile(board.getTiles()[0][0]);
         Piece actualPiece = blackTile.removePiece();
         Piece expectedPiece = new BlackPiece();
 
