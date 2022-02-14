@@ -45,7 +45,6 @@ public class GameTest {
     void makeAndSaveMoveEatingOnePiece() {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         Board board = Board.reset();
-        board.removePieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[2][2]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -63,7 +62,6 @@ public class GameTest {
     void makeAndSaveMoveEatingTwoPieces() {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         Board board = Board.reset();
-        board.removePieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[0][0]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][0]);
         BlackTile intermediate = BlackTile.asBlackTile(board.getTiles()[2][2]);
@@ -83,7 +81,6 @@ public class GameTest {
     @Test
     void moveActivePieceTo() {
         Board board = Board.reset();
-        board.removePieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile simpleMoveDestination = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][6]);
