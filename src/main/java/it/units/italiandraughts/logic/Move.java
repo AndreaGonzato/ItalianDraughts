@@ -32,7 +32,6 @@ public class Move {
     }
 
     private void checkPreconditions(Piece piece, List<BlackTile> steps) {
-        // TODO think how to improve code
         if (piece.isMan()) {
             BiFunction<Tile, Tile, String> movingDirection = Tile::getDirection;
 
