@@ -156,15 +156,14 @@ public class MoveTest {
 
         Piece piece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
-        startingBlackTile.placePiece(piece);
+        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        arrivedBlackTile.placePiece(piece);
 
-        BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
-
-        Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
+        Move move = new Move(piece, List.of(startingBlackTile, arrivedBlackTile));
         move.undo();
 
         Assertions.assertTrue(!startingBlackTile.isEmpty()
-                && targetBlackTile.isEmpty()
+                && arrivedBlackTile.isEmpty()
                 && startingBlackTile.getPiece().equals(piece));
     }
 

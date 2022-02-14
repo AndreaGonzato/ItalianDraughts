@@ -25,7 +25,7 @@ public class Move {
         checkPreconditions(piece, steps);
 
         this.piece = piece;
-        this.source = piece.getBlackTile();
+        this.source = steps.get(0);
         this.destination = steps.get(steps.size() - 1);
         this.steps = steps;
         this.eatenPieces = new ArrayList<>();
