@@ -107,7 +107,7 @@ public class Game implements GameEventSource {
         newTurn();
     }
 
-    public void undoLastMove() {
+    void undoLastMove() {
         if (moves.size() - 1 < 0) {
             throw new IllegalButtonClickException("An illegal click was performed on the undo button");
         }
@@ -127,10 +127,6 @@ public class Game implements GameEventSource {
         newTurn();
     }
 
-    public BlackTile getActiveTile() {
-        return activeTile;
-    }
-
     public void setActiveTile(BlackTile tile) {
         this.activeTile = tile;
     }
@@ -142,7 +138,6 @@ public class Game implements GameEventSource {
     public List<GraphPath<BlackTile, Edge>> getAbsoluteLongestPaths() {
         return absoluteLongestPaths;
     }
-
 
     public Player getActivePlayer() {
         return activePlayer;
