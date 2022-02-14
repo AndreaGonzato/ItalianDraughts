@@ -1,6 +1,7 @@
 package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.event.EventType;
+import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.piece.WhitePiece;
@@ -90,11 +91,77 @@ public class GameTest {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         game.addListeners(EventType.GAME_OVER);
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        Player formerActivePlayer = game.getActivePlayer();
         game.setActiveTile(source);
         game.moveActivePieceTo(eatingDestination);
         Assertions.assertTrue(
                 source.isEmpty() && simpleMoveDestination.isEmpty() && !eatingDestination.isEmpty()
-                && over.isEmpty()
+                && over.isEmpty() && !game.getActivePlayer().equals(formerActivePlayer)
+        );
+    }
+
+    @Test
+    void undoLastMoveFail() {
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        boolean caught = false;
+        try {
+            game.undoLastMove();
+        } catch (IllegalButtonClickException e) {
+            caught = true;
+        }
+        Assertions.assertTrue(caught);
+    }
+
+    @Test
+    void undoLastSimpleMove() {
+        Board board = Board.getBoard();
+        board.initPieces();
+        BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        game.addListeners(EventType.GAME_OVER);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        game.setActiveTile(source);
+        game.moveActivePieceTo(destination);
+        game.undoLastMove();
+        Assertions.assertTrue(!source.isEmpty() && destination.isEmpty());
+    }
+
+    @Test
+    void undoLastEatingMove() {
+        Board board = Board.getBoard();
+        board.initPieces();
+        BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        over.placePiece(new BlackPiece());
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        game.addListeners(EventType.GAME_OVER);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        game.setActiveTile(source);
+        game.moveActivePieceTo(destination);
+        game.undoLastMove();
+        Assertions.assertTrue(!source.isEmpty() && destination.isEmpty() && !over.isEmpty());
+    }
+
+    @Test
+    void undo() {
+        Board board = Board.getBoard();
+        board.initPieces();
+        BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        over.placePiece(new BlackPiece());
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        game.addListeners(EventType.GAME_OVER);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        game.setActiveTile(source);
+        game.moveActivePieceTo(destination);
+        Player formerActivePlayer = game.getActivePlayer();
+        game.undo();
+        Assertions.assertTrue(
+                !source.isEmpty() && destination.isEmpty() && !over.isEmpty()
+                && !formerActivePlayer.equals(game.getActivePlayer())
         );
     }
 
