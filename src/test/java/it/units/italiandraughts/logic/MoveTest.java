@@ -21,7 +21,6 @@ public class MoveTest {
         startingBlackTile.placePiece(piece);
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
-        ;
 
         Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
         move.make();
@@ -156,4 +155,24 @@ public class MoveTest {
 
         Assertions.assertTrue(startingBlackTile.calculateDistance(targetBlackTile) > 2 && isIllegal);
     }
+
+    @Test
+    void undoSimpleMove() {
+        Board board = Board.reset();
+        board.removePieces();
+
+        Piece piece = new BlackPiece();
+        BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
+        startingBlackTile.placePiece(piece);
+
+        BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+
+        Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
+        move.undo();
+
+        Assertions.assertTrue(!startingBlackTile.isEmpty()
+                && targetBlackTile.isEmpty()
+                && startingBlackTile.getPiece().equals(piece));
+    }
+
 }
