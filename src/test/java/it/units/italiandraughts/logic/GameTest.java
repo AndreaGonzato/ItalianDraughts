@@ -18,11 +18,14 @@ import java.util.List;
 public class GameTest {
 
     @Test
-    void firstActivePlayerPieceColor(){
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+    void firstActivePlayer(){
+        Player whitePlayer = new Player("Player1", PieceColor.WHITE);
+        Player blackPlayer = new Player("Player1", PieceColor.BLACK);
+
+        Game game = new Game(blackPlayer, whitePlayer);
         Player activePlayer = game.getActivePlayer();
 
-        Assertions.assertEquals(activePlayer.getPieceColor(), PieceColor.WHITE);
+        Assertions.assertEquals(whitePlayer, activePlayer);
     }
 
     @Test

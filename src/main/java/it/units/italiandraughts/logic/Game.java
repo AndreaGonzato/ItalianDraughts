@@ -4,6 +4,7 @@ import it.units.italiandraughts.event.*;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.BlackTile;
+import it.units.italiandraughts.ui.PieceColor;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -12,6 +13,7 @@ import org.jgrapht.GraphPath;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Game implements GameEventSource {
     private final Player player1;
@@ -23,9 +25,22 @@ public class Game implements GameEventSource {
     private final HashMap<EventType, List<GameEventListener>> listenersMap;
 
     public Game(Player player1, Player player2) {
+
+        if (player1.getPieceColor().equals(player2.getPieceColor())){
+            System.err.println("Two player can not have the same PieceColor in a Game. The player1 will be the white and player2 will be black");
+            player1 = new Player(player1.getName(), PieceColor.WHITE);
+            player2 = new Player(player2.getName(), PieceColor.BLACK);
+        }
+
         this.player1 = player1;
         this.player2 = player2;
-        this.activePlayer = player1;
+
+        if (player1.getPieceColor().equals(PieceColor.WHITE)){
+            this.activePlayer = player1;
+        }else{
+            this.activePlayer = player2;
+        }
+
         listenersMap = new HashMap<>();
         moves = new ArrayList<>();
         activePlayer.updateMovablePieces();
