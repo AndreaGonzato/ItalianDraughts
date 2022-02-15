@@ -15,7 +15,7 @@ public class PlayerTest {
 
     @Test
     void getPiecesOfPlayer1() {
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.initPieces();
         Player player = new Player("", PieceColor.WHITE);
         Piece[] actualPieces = new Piece[12];
@@ -37,7 +37,7 @@ public class PlayerTest {
 
     @Test
     void getPiecesOfPlayer2() {
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.initPieces();
         Player player = new Player("", PieceColor.BLACK);
         Piece[] actualPieces = new Piece[12];

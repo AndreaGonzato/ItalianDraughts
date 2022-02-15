@@ -114,7 +114,7 @@ public class GameTest {
 
     @Test
     void undoLastSimpleMove() {
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.initPieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][4]);
@@ -146,7 +146,7 @@ public class GameTest {
 
     @Test
     void undo() {
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.initPieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
