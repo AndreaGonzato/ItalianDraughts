@@ -92,17 +92,6 @@ public class Graph {
         longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector()));
     }
 
-
-    public void printVertices(){
-        Set<BlackTile> tiles = graph.vertexSet();
-        tiles.forEach(System.out::println);
-    }
-
-    public void printEdges(){
-        Set<Edge> edges = graph.edgeSet();
-        edges.forEach(System.out::println);
-    }
-
     public List<GraphPath<BlackTile, Edge>> getLongestPaths() {
         return longestPaths;
     }
