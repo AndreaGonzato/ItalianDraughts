@@ -3,6 +3,7 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.event.EventType;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.logic.piece.BlackPiece;
+import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
@@ -40,19 +41,40 @@ public class GameTest {
 
     @Test
     void makeAndSaveMoveWithSimpleMove() {
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         Board board = Board.reset();
         board.initPieces();
 
-        BlackTile source = BlackTile.asBlackTile(board.getTiles()[2][2]);
-        BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
-        Move expectedMove = new Move(source.getPiece(), List.of(source, destination));
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+
+        BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        Piece piece = sourceBlackTile.getPiece();
+        Move expectedMove = new Move(piece, List.of(sourceBlackTile, destinationBlackTile));
         expectedMove.make();
         expectedMove.undo();
-        game.makeAndSaveMove(source.getPiece(), List.of(source, destination));
-        Move actualMove = game.getMoves().get(0);
+        Move actualMove = game.makeAndSaveMove(piece, List.of(sourceBlackTile, destinationBlackTile));
 
         Assertions.assertEquals(expectedMove, actualMove);
+    }
+
+    @Test
+    void checkThatMakeAndSaveMoveAddTheMoveInList() {
+        Board board = Board.reset();
+        board.initPieces();
+
+        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+
+        BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        Piece piece = sourceBlackTile.getPiece();
+        Move expectedMove = new Move(piece, List.of(sourceBlackTile, destinationBlackTile));
+        expectedMove.make();
+        expectedMove.undo();
+        int movesSizeBefore = game.getMoves().size();
+        game.makeAndSaveMove(piece, List.of(sourceBlackTile, destinationBlackTile));
+        int movesSizeAfter = game.getMoves().size();
+
+        Assertions.assertEquals(1, movesSizeAfter-movesSizeBefore);
     }
 
     @Test
