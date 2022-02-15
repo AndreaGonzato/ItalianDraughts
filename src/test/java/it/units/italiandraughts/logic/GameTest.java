@@ -29,6 +29,16 @@ public class GameTest {
     }
 
     @Test
+    void thatThePieceColorOfPlayersInGameIsAlwaysDifferent(){
+        Player whitePlayer1 = new Player("Player1", PieceColor.WHITE);
+        Player whitePlayer2 = new Player("Player2", PieceColor.WHITE);
+
+        Game game = new Game(whitePlayer1, whitePlayer2);
+
+        Assertions.assertNotEquals(game.getPlayer1().getPieceColor(), game.getPlayer2().getPieceColor());
+    }
+
+    @Test
     void makeAndSaveMoveWithSimpleMove() {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         Board board = Board.reset();

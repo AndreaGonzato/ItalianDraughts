@@ -27,7 +27,7 @@ public class Game implements GameEventSource {
     public Game(Player player1, Player player2) {
 
         if (player1.getPieceColor().equals(player2.getPieceColor())){
-            System.err.println("Two player can not have the same PieceColor in a Game. The player1 will be the white and player2 will be black");
+            System.out.println("Two player can not have the same PieceColor in a Game. The player1 will be the white and player2 will be black");
             player1 = new Player(player1.getName(), PieceColor.WHITE);
             player2 = new Player(player2.getName(), PieceColor.BLACK);
         }
@@ -148,6 +148,10 @@ public class Game implements GameEventSource {
 
     public Player getPlayer1() {
         return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
     }
 
     public List<GraphPath<BlackTile, Edge>> getAbsoluteLongestPaths() {
