@@ -137,8 +137,6 @@ public class BoardController implements GameEventListener {
         gridPane.getColumnConstraints().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getChildren().clear();
-        Board board = Board.reset();
-        board.initPieces();
         initializeWindow();
     }
 
