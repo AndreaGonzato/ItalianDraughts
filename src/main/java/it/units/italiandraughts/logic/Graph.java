@@ -11,7 +11,6 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -53,13 +52,34 @@ public class Graph {
                 .forEach(tile -> recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
     }
 
-    void addEdge(BlackTile source, BlackTile target, double weight){
+    private void addEdge(BlackTile source, BlackTile target, double weight){
+        if (source.isEmpty()) {
+            System.err.println("addEdge() called with unexpectedly empty source, ignoring the call.");
+            return;
+        }
+        if (source.calculateDistance(target) > 2) {
+            System.err.println("addEdge() called with unexpectedly distant source and target, ignoring the call.");
+            return;
+        }
+        if (source.calculateDistance(target) == 2) {
+            BlackTile over;
+            try {
+                over = source.getBlackTileInBetween(target);
+            } catch (IllegalArgumentException e) {
+                System.err.println("addEdge() called with non-diagonally aligned target BlackTile, ignoring the call.");
+                return;
+            }
+            if (!source.getPiece().canEatNeighbor(over.getPiece())) {
+                System.err.println("addEdge() called with parameters that imply an impossible eating move, ignoring the call.");
+                return;
+            }
+        }
         Edge e1 = graph.addEdge(source, target);
         graph.setEdgeWeight(e1, weight);
         possibleDestinations.add(target);
     }
 
-    void recursivelyAddEatingEdges(Piece eatingPiece, Piece eatenPiece, int step) {
+    private void recursivelyAddEatingEdges(Piece eatingPiece, Piece eatenPiece, int step) {
         BlackTile landingTile = eatingPiece.getPositionAfterEatingNeighbor(eatenPiece);
         if (landingTile == null) {
             return;
@@ -94,10 +114,6 @@ public class Graph {
 
     public List<GraphPath<BlackTile, Edge>> getLongestPaths() {
         return longestPaths;
-    }
-
-    public double getMaxPathWeight(){
-        return longestPaths.get(0).getWeight();
     }
 
     static Collector<GraphPath<BlackTile, Edge>, List<GraphPath<BlackTile, Edge>>, List<GraphPath<BlackTile, Edge>>> getLongestPathsCollector() {
