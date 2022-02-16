@@ -1,6 +1,6 @@
 package it.units.italiandraughts.exception;
 
-public class IllegalPositionDrawingException extends RuntimeException{
+public class IllegalPositionDrawingException extends ItalianDraughtsException{
 
     public IllegalPositionDrawingException() {
         super("Can not draw in this position");
