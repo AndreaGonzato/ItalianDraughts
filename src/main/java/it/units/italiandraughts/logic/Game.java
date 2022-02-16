@@ -13,7 +13,6 @@ import org.jgrapht.GraphPath;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class Game implements GameEventSource {
     private final Player player1;
