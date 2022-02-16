@@ -73,7 +73,6 @@ public class MoveTest {
 
         BlackTile acrossBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
-        ;
 
         Move move = new Move(movingPiece, List.of(startingBlackTile, acrossBlackTile, targetBlackTile));
         move.make();
@@ -94,7 +93,6 @@ public class MoveTest {
         startingBlackTile.placePiece(piece);
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
-        ;
 
         boolean isIllegal = false;
         try {
@@ -116,7 +114,6 @@ public class MoveTest {
         startingBlackTile.placePiece(piece);
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
-        ;
 
         boolean isIllegal = false;
         try {
@@ -138,7 +135,6 @@ public class MoveTest {
         startingBlackTile.placePiece(piece);
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
-        ;
 
         boolean isIllegal = false;
         try {

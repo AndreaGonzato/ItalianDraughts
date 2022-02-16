@@ -211,11 +211,11 @@ public class PieceTest {
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[0][0]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[1][1]);
         BlackTile expectedDestination = BlackTile.asBlackTile(board.getTiles()[2][2]);
-        Piece eater = new BlackPiece();
-        Piece eatee = new WhitePiece();
-        source.placePiece(eater);
-        over.placePiece(eatee);
-        BlackTile actualDestination = eater.getPositionAfterEatingNeighbor(eatee);
+        Piece eaterPiece = new BlackPiece();
+        Piece eatenPiece = new WhitePiece();
+        source.placePiece(eaterPiece);
+        over.placePiece(eatenPiece);
+        BlackTile actualDestination = eaterPiece.getPositionAfterEatingNeighbor(eatenPiece);
         Assertions.assertEquals(actualDestination, expectedDestination);
     }
 
