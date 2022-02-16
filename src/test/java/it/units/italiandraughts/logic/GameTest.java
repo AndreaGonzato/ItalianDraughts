@@ -180,7 +180,6 @@ public class GameTest {
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
-
         game.undoLastMove();
         Assertions.assertTrue(!source.isEmpty() && destination.isEmpty() && !over.isEmpty());
     }

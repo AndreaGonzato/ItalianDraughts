@@ -84,24 +84,8 @@ public class Move {
         piece.moveTo(source);
     }
 
-    public Piece getPiece() {
-        return piece;
-    }
-
     public boolean hasPromoted() {
         return hasPromoted;
-    }
-
-    public BlackTile getSource() {
-        return source;
-    }
-
-    public BlackTile getDestination() {
-        return destination;
-    }
-
-    public List<EatenPiece> getEatenPieces() {
-        return eatenPieces;
     }
 
     @Override
