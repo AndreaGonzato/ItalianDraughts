@@ -44,13 +44,13 @@ public class BoardDrawer implements GameEventListener {
         status = Status.IDLE;
 
         // draw the pieces at the start
-        updateBoard(Board.getBoard().getTiles());
+        updateBoard();
     }
 
     @Override
     public void onGameEvent(GameEvent event) {
         if (event instanceof SwitchActivePlayerEvent switchActivePlayerEvent) {
-            updateBoard(Board.getBoard().getTiles());
+            updateBoard();
             Player activePlayer = switchActivePlayerEvent.getPayload()[0];
             Player otherPlayer = switchActivePlayerEvent.getPayload()[1];
             setClickableForPlayer(activePlayer);
@@ -109,9 +109,9 @@ public class BoardDrawer implements GameEventListener {
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
     }
 
-    private void updateBoard(Tile[][] tiles) {
+    private void updateBoard() {
         matrixToStream(squares).forEach(square -> square.getChildren().clear());
-        matrixToStream(tiles).filter(tile -> !tile.isEmpty())
+        matrixToStream(Board.getBoard().getTiles()).filter(tile -> !tile.isEmpty())
                 .forEach(tile -> tile.getSquare().drawPiece(BlackTile.asBlackTile(tile).getPiece()));
     }
 
