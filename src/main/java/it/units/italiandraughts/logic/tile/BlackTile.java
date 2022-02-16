@@ -43,7 +43,8 @@ public class BlackTile extends Tile {
         return getNeighbors().values().stream()
                 .filter(neighbor -> neighbor.getNeighbors().values().stream()
                         .anyMatch(blackTile -> blackTile.equals(otherBlackTile)))
-                .findAny().orElseThrow();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("otherBlackTile is not diagonally aligned" +
+                        "with the source BlackTile."));
     }
 
     private Optional<String> getAdjacencyDirection(BlackTile neighboringBlackTile) {
