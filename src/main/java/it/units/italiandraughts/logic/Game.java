@@ -3,6 +3,7 @@ package it.units.italiandraughts.logic;
 import it.units.italiandraughts.event.*;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.IllegalMoveException;
+import it.units.italiandraughts.exception.InvalidPlayersException;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
@@ -27,9 +28,7 @@ public class Game implements GameEventSource {
     public Game(Player player1, Player player2) {
 
         if (player1.getPieceColor().equals(player2.getPieceColor())){
-            System.out.println("Two player can not have the same PieceColor in a Game. The player1 will be the white and player2 will be black");
-            player1 = new Player(player1.getName(), PieceColor.WHITE);
-            player2 = new Player(player2.getName(), PieceColor.BLACK);
+            throw new InvalidPlayersException("Two player can not have the same PieceColor in a Game.");
         }
 
         this.player1 = player1;

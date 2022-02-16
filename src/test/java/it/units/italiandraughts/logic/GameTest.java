@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.event.EventType;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
+import it.units.italiandraughts.exception.InvalidPlayersException;
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
@@ -30,13 +31,18 @@ public class GameTest {
     }
 
     @Test
-    void thatThePieceColorOfPlayersInGameIsAlwaysDifferent(){
+    void thatTwoPayerCanNotHaveTheSamePieceColor(){
         Player whitePlayer1 = new Player("Player1", PieceColor.WHITE);
         Player whitePlayer2 = new Player("Player2", PieceColor.WHITE);
 
-        Game game = new Game(whitePlayer1, whitePlayer2);
+        boolean thereIsAnException = false;
+        try {
+            new Game(whitePlayer1, whitePlayer2);
+        }catch (InvalidPlayersException e){
+            thereIsAnException = true;
+        }
 
-        Assertions.assertNotEquals(game.getPlayer1().getPieceColor(), game.getPlayer2().getPieceColor());
+        Assertions.assertTrue(thereIsAnException);
     }
 
     @Test
