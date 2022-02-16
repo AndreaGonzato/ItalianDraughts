@@ -18,7 +18,7 @@ public class Player {
         this.name = name;
     }
 
-    public List<Piece> getPieces() {
+    List<Piece> getPieces() {
         return Board.getBoard().getFullBlackTiles().stream()
                 .map(BlackTile::getPiece)
                 .filter(piece -> piece.getPieceColor().equals(pieceColor))

@@ -169,7 +169,7 @@ public class GameTest {
 
     @Test
     void undoLastEatingMoveRestorePiecePositions() {
-        Board board = Board.getBoard();
+        Board board = Board.reset();
         board.initPieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
