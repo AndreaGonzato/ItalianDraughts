@@ -104,8 +104,8 @@ public class BoardDrawer implements GameEventListener {
     }
 
     private void setClickableForEmptySquares() {
-        matrixToStream(squares).filter(square -> square.getTile().isEmpty())
-                .filter(square -> square.getType().equals(SquareType.BRONZE))
+        matrixToStream(squares).filter(square -> square.getType().equals(SquareType.BRONZE))
+                .filter(square -> square.getTile().isEmpty())
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnEmptySquare));
     }
 
