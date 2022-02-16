@@ -2,6 +2,7 @@ package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.event.*;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
+import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
@@ -101,7 +102,7 @@ public class Game implements GameEventSource {
                 .filter(path -> path.getEndVertex().equals(destination)
                         && path.getStartVertex().equals(activeTile))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(
+                .orElseThrow(() -> new IllegalMoveException(
                         "The destination must be the final BlackTile of one of the absolute longest paths."
                 ));
     }
@@ -118,7 +119,7 @@ public class Game implements GameEventSource {
         GraphPath<BlackTile, Edge> longestPathToDestination;
         try {
             longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalMoveException e){
             return;
         }
         playSound();
