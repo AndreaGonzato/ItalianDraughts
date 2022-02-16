@@ -115,7 +115,12 @@ public class Game implements GameEventSource {
 
     public void moveActivePieceTo(BlackTile destination) {
         Piece piece = activeTile.getPiece();
-        GraphPath<BlackTile, Edge> longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
+        GraphPath<BlackTile, Edge> longestPathToDestination;
+        try {
+            longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
+        } catch (IllegalArgumentException e){
+            return;
+        }
         playSound();
         makeAndSaveMove(piece, longestPathToDestination.getVertexList());
         newTurn();
