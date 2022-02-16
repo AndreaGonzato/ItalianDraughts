@@ -25,15 +25,14 @@ public class Square extends StackPane {
         this.tile = tile;
         this.type = squareType;
         this.setStyle("-fx-background-color: " + squareType.getHex() + ";");
-        tile.setSquare(this);
         hasGreenCircle = false;
     }
 
-    public Tile getTile() {
+    Tile getTile() {
         return tile;
     }
 
-    public boolean isHighlighted() {
+    boolean isHighlighted() {
         return highlighted;
     }
 
