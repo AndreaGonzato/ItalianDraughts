@@ -59,7 +59,7 @@ public class BoardDrawer implements GameEventListener {
         }
     }
 
-    public void clearHighlightingAndCircles() {
+    private void clearHighlightingAndCircles() {
         matrixToStream(squares).filter(Square::isHighlighted).forEach(square -> square.setHighlighted(false));
         matrixToStream(squares).filter(Square::hasGreenCircle).forEach(Square::removeGreenCircle);
     }
