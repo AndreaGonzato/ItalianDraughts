@@ -200,7 +200,7 @@ public class GameTest {
         game.moveActivePieceTo(destination);
         Player formerActivePlayer = game.getActivePlayer();
         game.undo();
-        Assertions.assertTrue(!formerActivePlayer.equals(game.getActivePlayer()));
+        Assertions.assertNotEquals(formerActivePlayer, game.getActivePlayer());
     }
 
 }
