@@ -6,6 +6,7 @@ import it.units.italiandraughts.logic.tile.Tile;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 public class Graph {
 
     private static final float EATING_KING_MULTIPLIER = 1.2f;
-    private final SimpleDirectedWeightedGraph<BlackTile, Edge> graph;
+    private final SimpleDirectedWeightedGraph<BlackTile, DefaultWeightedEdge> graph;
     private final BlackTile source;
     private final List<BlackTile> possibleDestinations;
-    private final List<GraphPath<BlackTile, Edge>> longestPaths;
+    private final List<GraphPath<BlackTile, DefaultWeightedEdge>> longestPaths;
     private final Game game;
 
     Graph(BlackTile source, Game game) {
-        graph = new SimpleDirectedWeightedGraph<>(Edge.class);
+        graph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
         this.source = source;
         this.game = game;
         possibleDestinations = new ArrayList<>();
@@ -74,7 +75,7 @@ public class Graph {
                 return;
             }
         }
-        Edge e1 = graph.addEdge(source, target);
+        DefaultWeightedEdge e1 = graph.addEdge(source, target);
         graph.setEdgeWeight(e1, weight);
         possibleDestinations.add(target);
     }
@@ -107,17 +108,18 @@ public class Graph {
     }
 
     void explorePossibleMoves() {
-        DijkstraShortestPath<BlackTile, Edge> dijkstra = new DijkstraShortestPath<>(graph);
-        ShortestPathAlgorithm.SingleSourcePaths<BlackTile, Edge> paths = dijkstra.getPaths(source);
+        DijkstraShortestPath<BlackTile, DefaultWeightedEdge> dijkstra = new DijkstraShortestPath<>(graph);
+        ShortestPathAlgorithm.SingleSourcePaths<BlackTile, DefaultWeightedEdge> paths = dijkstra.getPaths(source);
         longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector()));
     }
 
-    List<GraphPath<BlackTile, Edge>> getLongestPaths() {
+
+    List<GraphPath<BlackTile, DefaultWeightedEdge>> getLongestPaths() {
         return longestPaths;
     }
 
-    static Collector<GraphPath<BlackTile, Edge>, List<GraphPath<BlackTile, Edge>>, List<GraphPath<BlackTile, Edge>>> getLongestPathsCollector() {
-        Comparator<GraphPath<BlackTile, Edge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
+    static Collector<GraphPath<BlackTile, DefaultWeightedEdge>, List<GraphPath<BlackTile, DefaultWeightedEdge>>, List<GraphPath<BlackTile, DefaultWeightedEdge>>> getLongestPathsCollector() {
+        Comparator<GraphPath<BlackTile, DefaultWeightedEdge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
         return Collector.of(
                 ArrayList::new,
                 (list, path) -> {

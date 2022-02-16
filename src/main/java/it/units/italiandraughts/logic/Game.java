@@ -11,6 +11,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import org.jgrapht.GraphPath;
+import org.jgrapht.graph.DefaultWeightedEdge;
 
 import java.io.File;
 import java.net.URL;
@@ -22,7 +23,7 @@ public class Game implements GameEventSource {
     private Player activePlayer;
     private BlackTile activeTile;
     private final List<Move> moves;
-    private List<GraphPath<BlackTile, Edge>> absoluteLongestPaths;
+    private List<GraphPath<BlackTile, DefaultWeightedEdge>> absoluteLongestPaths;
     private final HashMap<EventType, List<GameEventListener>> listenersMap;
 
     public Game(Player player1, Player player2) {
@@ -96,7 +97,7 @@ public class Game implements GameEventSource {
         }).start();
     }
 
-    private GraphPath<BlackTile, Edge> getLongestPathFromActiveTileToDestination(BlackTile destination) {
+    private GraphPath<BlackTile, DefaultWeightedEdge> getLongestPathFromActiveTileToDestination(BlackTile destination) {
         return absoluteLongestPaths.stream()
                 .filter(path -> path.getEndVertex().equals(destination)
                         && path.getStartVertex().equals(activeTile))
@@ -115,7 +116,7 @@ public class Game implements GameEventSource {
 
     public void moveActivePieceTo(BlackTile destination) {
         Piece piece = activeTile.getPiece();
-        GraphPath<BlackTile, Edge> longestPathToDestination;
+        GraphPath<BlackTile, DefaultWeightedEdge> longestPathToDestination;
         try {
             longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
         } catch (IllegalMoveException e){
@@ -158,7 +159,7 @@ public class Game implements GameEventSource {
         return player2;
     }
 
-    public List<GraphPath<BlackTile, Edge>> getAbsoluteLongestPaths() {
+    public List<GraphPath<BlackTile, DefaultWeightedEdge>> getAbsoluteLongestPaths() {
         return absoluteLongestPaths;
     }
 
