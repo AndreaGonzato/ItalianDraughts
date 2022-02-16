@@ -112,7 +112,7 @@ public class Graph {
         longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector()));
     }
 
-    public List<GraphPath<BlackTile, Edge>> getLongestPaths() {
+    List<GraphPath<BlackTile, Edge>> getLongestPaths() {
         return longestPaths;
     }
 
