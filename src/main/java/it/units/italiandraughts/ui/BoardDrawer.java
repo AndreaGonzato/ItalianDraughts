@@ -83,7 +83,11 @@ public class BoardDrawer implements GameEventListener {
         game.getAbsoluteLongestPaths()
                 .stream()
                 .filter(path -> path.getStartVertex().equals(tile))
-                .forEach(path -> path.getEndVertex().getSquare().placeGreenCircle());
+                .forEach(path -> {
+                    int x = path.getEndVertex().getX();
+                    int y = path.getEndVertex().getY();
+                    squares[y][x].placeGreenCircle();
+                });
     }
 
     private void onClickOnEmptySquare(MouseEvent event) {
@@ -94,12 +98,14 @@ public class BoardDrawer implements GameEventListener {
     }
 
     private void setClickableForPlayer(Player player) {
-        player.getPieces().stream().map(piece -> piece.getBlackTile().getSquare())
+        matrixToStream(squares).filter(square -> !square.getTile().isEmpty())
+                .filter(square -> BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor().equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(this::onClickOnFullSquare));
     }
 
     private void unsetClickableForPlayer(Player player) {
-        player.getPieces().stream().map(piece -> piece.getBlackTile().getSquare())
+        matrixToStream(squares).filter(square -> !square.getTile().isEmpty())
+                .filter(square -> BlackTile.asBlackTile(square.getTile()).getPiece().getPieceColor().equals(player.getPieceColor()))
                 .forEach(square -> square.setOnMouseClicked(null));
     }
 
@@ -111,8 +117,8 @@ public class BoardDrawer implements GameEventListener {
 
     private void updateBoard() {
         matrixToStream(squares).forEach(square -> square.getChildren().clear());
-        matrixToStream(Board.getBoard().getTiles()).filter(tile -> !tile.isEmpty())
-                .forEach(tile -> tile.getSquare().drawPiece(BlackTile.asBlackTile(tile).getPiece()));
+        matrixToStream(squares).filter(square -> !square.getTile().isEmpty())
+                        .forEach(square -> square.drawPiece(BlackTile.asBlackTile(square.getTile()).getPiece()));
     }
 
 

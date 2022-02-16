@@ -1,7 +1,6 @@
 package it.units.italiandraughts.logic.tile;
 
 import it.units.italiandraughts.logic.Board;
-import it.units.italiandraughts.ui.Square;
 
 import java.util.Objects;
 import java.util.function.BiPredicate;
@@ -11,7 +10,6 @@ public class Tile {
 
     protected final int x;
     protected final int y;
-    private Square square;
 
     private static final Predicate<Integer> isValidCoordinatePredicate =
             coordinate -> (coordinate >= 0 && coordinate < Board.SIZE);
@@ -31,10 +29,6 @@ public class Tile {
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public void setSquare(Square square) {
-        this.square = square;
     }
 
     public int calculateDistance(Tile otherTile){
@@ -57,11 +51,6 @@ public class Tile {
 
     }
 
-
-    public Square getSquare() {
-        return square;
-    }
-
     public int getX() {
         return x;
     }
@@ -77,19 +66,14 @@ public class Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile tile)) return false;
-
-        if (x != tile.x) return false;
-        if (y != tile.y) return false;
-        return Objects.equals(square, tile.square);
+        if (o == null || getClass() != o.getClass()) return false;
+        Tile tile = (Tile) o;
+        return x == tile.x && y == tile.y;
     }
 
     @Override
     public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
-        result = 31 * result + (square != null ? square.hashCode() : 0);
-        return result;
+        return Objects.hash(x, y);
     }
 
     @Override
