@@ -19,7 +19,7 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Graph {
 
-    private static final float EATING_KING_MULTIPLIER = 1.2f;
+    static final float EATING_KING_MULTIPLIER = 1.2f;
     private final SimpleDirectedWeightedGraph<BlackTile, DefaultWeightedEdge> graph;
     private final BlackTile source;
     private final List<BlackTile> possibleDestinations;
@@ -107,7 +107,7 @@ public class Graph {
         game.undoLastMove();
     }
 
-    void explorePossibleMoves() {
+    private void explorePossibleMoves() {
         DijkstraShortestPath<BlackTile, DefaultWeightedEdge> dijkstra = new DijkstraShortestPath<>(graph);
         ShortestPathAlgorithm.SingleSourcePaths<BlackTile, DefaultWeightedEdge> paths = dijkstra.getPaths(source);
         longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector()));
