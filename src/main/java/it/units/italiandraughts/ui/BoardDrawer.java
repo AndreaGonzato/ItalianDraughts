@@ -26,7 +26,7 @@ public class BoardDrawer implements GameEventListener {
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
     private Status status;
-    private MediaPlayer mediaPlayer;
+    private final MediaPlayer mediaPlayer;
 
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
