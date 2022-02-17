@@ -19,7 +19,7 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class DijkstraGraph {
 
-    static final float EATING_KING_MULTIPLIER = 1.2f;
+    private static final float EATING_KING_MULTIPLIER = 1.2f;
     private final SimpleDirectedWeightedGraph<BlackTile, DefaultWeightedEdge> graph;
     private final BlackTile source;
     private final List<BlackTile> possibleDestinations;
