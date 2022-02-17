@@ -13,6 +13,8 @@ import org.testfx.framework.junit5.ApplicationExtension;
 @ExtendWith(ApplicationExtension.class)
 public class DijkstraGraphTest {
 
+    private final float epsilon = (float) 10e-6;
+
     private Board prepareBoard() {
         Board board = Board.reset();
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[6][2]);
@@ -39,7 +41,7 @@ public class DijkstraGraphTest {
         int weight = 1;
         Assertions.assertTrue(
                 graph.getLongestPaths().size() == moves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < 10e-6 &&
+                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < epsilon &&
                         graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[5][1])
         );
     }
@@ -53,7 +55,7 @@ public class DijkstraGraphTest {
         int weight = 2;
         Assertions.assertTrue(
                 graph.getLongestPaths().size() == moves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < 10e-6 &&
+                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < epsilon &&
                         graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[7][1])
         );
     }
@@ -67,7 +69,7 @@ public class DijkstraGraphTest {
         double weight = 4 * DijkstraGraph.EATING_KING_MULTIPLIER;
         Assertions.assertTrue(
                 graph.getLongestPaths().size() == moves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < 10e-6 &&
+                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < epsilon &&
                         graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[1][1])
         );
     }
