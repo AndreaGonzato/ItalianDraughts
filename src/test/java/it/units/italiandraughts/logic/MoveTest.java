@@ -13,7 +13,7 @@ import java.util.List;
 public class MoveTest {
 
     @Test
-    void makeMoveToNeighbor() {
+    void makeSimpleMove() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -71,10 +71,10 @@ public class MoveTest {
         eatingPiece2BlackTile.placePiece(eatingPiece2);
 
 
-        BlackTile acrossBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        BlackTile intermediateBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
 
-        Move move = new Move(movingPiece, List.of(startingBlackTile, acrossBlackTile, targetBlackTile));
+        Move move = new Move(movingPiece, List.of(startingBlackTile, intermediateBlackTile, targetBlackTile));
         move.make();
 
         Assertions.assertTrue(startingBlackTile.isEmpty()
@@ -85,7 +85,7 @@ public class MoveTest {
     }
 
     @Test
-    void tryMakeIllegalMoveWhiteManMoveDown() {
+    void tryMovingAWhiteManDownwards() {
         Board board = Board.reset();
 
         Piece piece = new WhitePiece();
@@ -106,7 +106,7 @@ public class MoveTest {
     }
 
     @Test
-    void tryMakeIllegalMoveBlackManMoveUp() {
+    void tryMovingABlackManUpwards() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -127,7 +127,7 @@ public class MoveTest {
     }
 
     @Test
-    void tryMakeIllegalMoveBigStepWithDistanceJumpBiggerThan2() {
+    void tryMakingAnExcessivelyLongStep() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -148,24 +148,24 @@ public class MoveTest {
     }
 
     @Test
-    void undoCheckToMoveThePieceFromDestinationToSource() {
+    void undoAndCheckTileOccupation() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
-        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
-        arrivedBlackTile.placePiece(piece);
+        BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        targetBlackTile.placePiece(piece);
 
-        Move move = new Move(piece, List.of(startingBlackTile, arrivedBlackTile));
+        Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
         move.undo();
 
         Assertions.assertTrue(!startingBlackTile.isEmpty()
-                && arrivedBlackTile.isEmpty()
+                && targetBlackTile.isEmpty()
                 && startingBlackTile.getPiece().equals(piece));
     }
 
     @Test
-    void undoCheckToRestoreEatenPiece() {
+    void undoAndCheckEatenPieceRestoration() {
         Board board = Board.reset();
 
         Piece pieceMoved = new BlackPiece();
@@ -176,11 +176,9 @@ public class MoveTest {
         BlackTile eatenPieceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
         eatenPieceBlackTile.placePiece(eatenPiece);
 
-        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
+        BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
 
-        Move move = new Move(pieceMoved, List.of(startingBlackTile, arrivedBlackTile));
-        move.undo();
-
+        Move move = new Move(pieceMoved, List.of(startingBlackTile, targetBlackTile));
         move.undo();
 
         Assertions.assertTrue(!eatenPieceBlackTile.isEmpty()
@@ -189,7 +187,7 @@ public class MoveTest {
 
 
     @Test
-    void undoCheckToRestoreEatenPieces() {
+    void undoAndCheckEatenPiecesRestoration() {
         Board board = Board.reset();
 
         Piece pieceMoved = new BlackPiece();
@@ -211,8 +209,6 @@ public class MoveTest {
         Move move = new Move(pieceMoved, List.of(startingBlackTile, acrossBlackTile, arrivedBlackTile));
         move.undo();
 
-        move.undo();
-
         Assertions.assertTrue(!eatenPiece1BlackTile.isEmpty()
                 && eatenPiece1BlackTile.getPiece().equals(eatenPiece1)
                 && !eatenPiece2BlackTile.isEmpty()
@@ -220,22 +216,19 @@ public class MoveTest {
     }
 
     @Test
-    void undoCheckToRemovePromotion() {
+    void undoAndCheckDemotion() {
         Board board = Board.reset();
 
         Piece piece = new WhitePiece();
         BlackTile startingBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
-        BlackTile arrivedBlackTile = BlackTile.asBlackTile(board.getTiles()[0][2]);
+        BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[0][2]);
         startingBlackTile.placePiece(piece);
 
-        Move move = new Move(piece, List.of(startingBlackTile, arrivedBlackTile));
+        Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
         move.make();
-
         move.undo();
 
         Assertions.assertTrue(move.hasPromoted() && piece.getPieceType().equals(PieceType.MAN));
     }
-
-
 
 }
