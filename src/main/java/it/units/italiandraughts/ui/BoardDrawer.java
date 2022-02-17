@@ -26,6 +26,7 @@ public class BoardDrawer implements GameEventListener {
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
     private Status status;
+    private MediaPlayer mediaPlayer;
 
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
@@ -46,6 +47,8 @@ public class BoardDrawer implements GameEventListener {
             squares[tile.getY()][tile.getX()] = square;
             gridPane.add(square, tile.getX(), tile.getY());
         });
+
+        mediaPlayer = initMediaPlayer();
 
         setClickableForPlayer(game.getPlayer1());
         setClickableForEmptySquares();
@@ -107,7 +110,6 @@ public class BoardDrawer implements GameEventListener {
 
     private void playSound() {
         new Thread(() -> {
-            MediaPlayer mediaPlayer = initMediaPlayer();
             mediaPlayer.play();
             mediaPlayer.seek(new Duration(0));
         }).start();
