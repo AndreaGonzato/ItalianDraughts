@@ -13,7 +13,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 @ExtendWith(ApplicationExtension.class)
 public class DijkstraGraphTest {
 
-    private final float epsilon = (float) 10e-6;
+    private static final double EPSILON = 10e-6;
 
     private Board prepareBoard() {
         Board board = Board.reset();
@@ -40,9 +40,9 @@ public class DijkstraGraphTest {
         int possibleMoves = 1;
         int longestPathsWeight = 1;
         Assertions.assertTrue(
-                graph.getLongestPaths().size() == possibleMoves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - longestPathsWeight) < epsilon &&
-                        graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[5][1])
+                graph.calculateLongestPaths().size() == possibleMoves &&
+                        Math.abs(graph.calculateLongestPaths().get(0).getWeight() - longestPathsWeight) < EPSILON &&
+                        graph.calculateLongestPaths().get(0).getEndVertex().equals(board.getTiles()[5][1])
         );
     }
 
@@ -54,9 +54,9 @@ public class DijkstraGraphTest {
         int possibleMoves = 1;
         int longestPathsWeight = 2;
         Assertions.assertTrue(
-                graph.getLongestPaths().size() == possibleMoves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - longestPathsWeight) < epsilon &&
-                        graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[7][1])
+                graph.calculateLongestPaths().size() == possibleMoves &&
+                        Math.abs(graph.calculateLongestPaths().get(0).getWeight() - longestPathsWeight) < EPSILON &&
+                        graph.calculateLongestPaths().get(0).getEndVertex().equals(board.getTiles()[7][1])
         );
     }
 
@@ -68,9 +68,9 @@ public class DijkstraGraphTest {
         int possibleMoves = 1;
         double longestPathsWeight = 4 * 1.2f;
         Assertions.assertTrue(
-                graph.getLongestPaths().size() == possibleMoves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - longestPathsWeight) < epsilon &&
-                        graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[1][1])
+                graph.calculateLongestPaths().size() == possibleMoves &&
+                        Math.abs(graph.calculateLongestPaths().get(0).getWeight() - longestPathsWeight) < EPSILON &&
+                        graph.calculateLongestPaths().get(0).getEndVertex().equals(board.getTiles()[1][1])
         );
     }
 
@@ -80,7 +80,7 @@ public class DijkstraGraphTest {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[4][4]), game);
         int possibleMoves = 0;
-        Assertions.assertEquals(graph.getLongestPaths().size(), possibleMoves);
+        Assertions.assertEquals(graph.calculateLongestPaths().size(), possibleMoves);
     }
 
 }

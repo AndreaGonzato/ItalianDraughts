@@ -11,6 +11,7 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game implements GameEventSource {
     private final Player player1;
@@ -70,7 +71,7 @@ public class Game implements GameEventSource {
         absoluteLongestPaths = activePlayer.getPieces()
                 .stream().map(Piece::getBlackTile)
                 .map(tile -> new DijkstraGraph(tile, this))
-                .flatMap(graph -> graph.getLongestPaths().stream())
+                .flatMap(graph -> graph.calculateLongestPaths().stream())
                 .collect(DijkstraGraph.getLongestPathsCollector());
     }
 

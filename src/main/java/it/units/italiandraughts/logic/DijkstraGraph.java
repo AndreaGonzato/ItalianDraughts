@@ -23,7 +23,6 @@ public class DijkstraGraph {
     private final SimpleDirectedWeightedGraph<BlackTile, DefaultWeightedEdge> graph;
     private final BlackTile source;
     private final List<BlackTile> possibleDestinations;
-    private final List<GraphPath<BlackTile, DefaultWeightedEdge>> longestPaths;
     private final Game game;
 
     DijkstraGraph(BlackTile source, Game game) {
@@ -31,10 +30,8 @@ public class DijkstraGraph {
         this.source = source;
         this.game = game;
         possibleDestinations = new ArrayList<>();
-        longestPaths = new ArrayList<>();
         addVertices();
         initializePaths();
-        explorePossibleMoves();
     }
 
     private void addVertices(){
@@ -107,15 +104,10 @@ public class DijkstraGraph {
         game.undoLastMove();
     }
 
-    private void explorePossibleMoves() {
+    public List<GraphPath<BlackTile, DefaultWeightedEdge>> calculateLongestPaths() {
         DijkstraShortestPath<BlackTile, DefaultWeightedEdge> dijkstra = new DijkstraShortestPath<>(graph);
         ShortestPathAlgorithm.SingleSourcePaths<BlackTile, DefaultWeightedEdge> paths = dijkstra.getPaths(source);
-        longestPaths.addAll(possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector()));
-    }
-
-
-    List<GraphPath<BlackTile, DefaultWeightedEdge>> getLongestPaths() {
-        return longestPaths;
+        return possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector());
     }
 
     static Collector<GraphPath<BlackTile, DefaultWeightedEdge>, List<GraphPath<BlackTile, DefaultWeightedEdge>>, List<GraphPath<BlackTile, DefaultWeightedEdge>>> getLongestPathsCollector() {
