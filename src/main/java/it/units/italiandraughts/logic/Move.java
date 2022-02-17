@@ -39,7 +39,7 @@ public class Move {
             String invalidDirection = piece.getPieceColor().equals(PieceColor.WHITE) ? "bottom" : "top";
             for (int i = 1; i < steps.size(); i++) {
                 if (movingDirection.apply(steps.get(i - 1), steps.get(i)).equals(invalidDirection)) {
-                    throw new IllegalArgumentException("A %s man can only move to the %s"
+                    throw new IllegalArgumentException("A %s man can only move to the %s."
                             .formatted(piece.getPieceColor().toString(), validDirection));
                 }
             }
@@ -48,7 +48,7 @@ public class Move {
         BiFunction<Tile, Tile, Integer> movingStepDistance = Tile::calculateDistance;
         for (int i = 1; i < steps.size(); i++) {
             if (movingStepDistance.apply(steps.get(i - 1), steps.get(i)) > 2) {
-                throw new IllegalArgumentException("Each step need to be at a max distance of 2 from the previous");
+                throw new IllegalArgumentException("Two steps cannot be distant more than 2.");
             }
         }
 
