@@ -66,7 +66,7 @@ public class DijkstraGraphTest {
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][5]), game);
         int possibleMoves = 1;
-        double longestPathsWeight = 4 * 1.2f;
+        double longestPathsWeight = 4 * 1.2;
         Assertions.assertTrue(
                 graph.calculateLongestPaths().size() == possibleMoves &&
                         Math.abs(graph.calculateLongestPaths().get(0).getWeight() - longestPathsWeight) < EPSILON &&
