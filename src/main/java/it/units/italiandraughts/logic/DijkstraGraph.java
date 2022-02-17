@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
-public class Graph {
+public class DijkstraGraph {
 
     static final float EATING_KING_MULTIPLIER = 1.2f;
     private final SimpleDirectedWeightedGraph<BlackTile, DefaultWeightedEdge> graph;
@@ -26,7 +26,7 @@ public class Graph {
     private final List<GraphPath<BlackTile, DefaultWeightedEdge>> longestPaths;
     private final Game game;
 
-    Graph(BlackTile source, Game game) {
+    DijkstraGraph(BlackTile source, Game game) {
         graph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
         this.source = source;
         this.game = game;

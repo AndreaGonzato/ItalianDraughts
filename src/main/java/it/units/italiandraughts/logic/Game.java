@@ -69,9 +69,9 @@ public class Game implements GameEventSource {
     private void updateAbsoluteLongestPaths() {
         absoluteLongestPaths = activePlayer.getPieces()
                 .stream().map(Piece::getBlackTile)
-                .map(tile -> new Graph(tile, this))
+                .map(tile -> new DijkstraGraph(tile, this))
                 .flatMap(graph -> graph.getLongestPaths().stream())
-                .collect(Graph.getLongestPathsCollector());
+                .collect(DijkstraGraph.getLongestPathsCollector());
     }
 
     private void toggleActivePlayer() {
