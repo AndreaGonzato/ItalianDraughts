@@ -37,11 +37,11 @@ public class DijkstraGraphTest {
         Board board = prepareBoard();
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[6][2]), game);
-        int moves = 1;
-        int weight = 1;
+        int possibleMoves = 1;
+        int longestPathsWeight = 1;
         Assertions.assertTrue(
-                graph.getLongestPaths().size() == moves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < epsilon &&
+                graph.getLongestPaths().size() == possibleMoves &&
+                        Math.abs(graph.getLongestPaths().get(0).getWeight() - longestPathsWeight) < epsilon &&
                         graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[5][1])
         );
     }
@@ -51,11 +51,11 @@ public class DijkstraGraphTest {
         Board board = prepareBoard();
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][3]), game);
-        int moves = 1;
-        int weight = 2;
+        int possibleMoves = 1;
+        int longestPathsWeight = 2;
         Assertions.assertTrue(
-                graph.getLongestPaths().size() == moves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < epsilon &&
+                graph.getLongestPaths().size() == possibleMoves &&
+                        Math.abs(graph.getLongestPaths().get(0).getWeight() - longestPathsWeight) < epsilon &&
                         graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[7][1])
         );
     }
@@ -65,11 +65,11 @@ public class DijkstraGraphTest {
         Board board = prepareBoard();
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][5]), game);
-        int moves = 1;
-        double weight = 4 * DijkstraGraph.EATING_KING_MULTIPLIER;
+        int possibleMoves = 1;
+        double longestPathsWeight = 4 * 1.2f;
         Assertions.assertTrue(
-                graph.getLongestPaths().size() == moves &&
-                        Math.abs(graph.getLongestPaths().get(0).getWeight() - weight) < epsilon &&
+                graph.getLongestPaths().size() == possibleMoves &&
+                        Math.abs(graph.getLongestPaths().get(0).getWeight() - longestPathsWeight) < epsilon &&
                         graph.getLongestPaths().get(0).getEndVertex().equals(board.getTiles()[1][1])
         );
     }
@@ -79,8 +79,8 @@ public class DijkstraGraphTest {
         Board board = prepareBoard();
         Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[4][4]), game);
-        int moves = 0;
-        Assertions.assertEquals(graph.getLongestPaths().size(), moves);
+        int possibleMoves = 0;
+        Assertions.assertEquals(graph.getLongestPaths().size(), possibleMoves);
     }
 
 }
