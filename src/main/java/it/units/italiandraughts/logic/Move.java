@@ -66,14 +66,14 @@ public class Move {
     }
 
     void make() {
+        boolean wasMan = piece.isMan();
         for (int i = 1; i < steps.size(); i++) {
             final BlackTile landingTile = steps.get(i);
-            boolean wasMan = piece.isMan();
             Optional<EatenPiece> eatenPieceOptional = piece.moveToReachableBlackTile(landingTile);
-            boolean isKing = piece.isKing();
             eatenPieceOptional.ifPresent(eatenPieces::add);
-            hasPromoted = wasMan && isKing;
         }
+        boolean isKing = piece.isKing();
+        hasPromoted = wasMan && isKing;
     }
 
     void undo() {
