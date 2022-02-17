@@ -20,6 +20,7 @@ public class Game implements GameEventSource {
     private final List<Move> moves;
     private List<GraphPath<BlackTile, DefaultWeightedEdge>> absoluteLongestPaths;
     private final HashMap<EventType, List<GameEventListener>> listenersMap;
+    private Player winnerPlayer;
 
     public Game(Player player1, Player player2) {
 
@@ -60,6 +61,8 @@ public class Game implements GameEventSource {
         inactivePlayer.updateMovablePieces();
         if (inactivePlayer.countMovablePieces() == 0) {
             notifyListeners(new GameOverEvent(this, activePlayer));
+            winnerPlayer = activePlayer;
+            return;
         }
         toggleActivePlayer();
         updateAbsoluteLongestPaths();
@@ -139,6 +142,10 @@ public class Game implements GameEventSource {
 
     public Player getActivePlayer() {
         return activePlayer;
+    }
+
+    public Player getWinnerPlayer() {
+        return winnerPlayer;
     }
 
     public List<Move> getMoves() {

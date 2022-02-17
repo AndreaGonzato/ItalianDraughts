@@ -224,6 +224,29 @@ public class GameTest {
         Assertions.assertTrue(listener.receivedGameOver);
     }
 
+    @Test
+    public void checkWinnerPlayer() {
+        Board board = Board.reset();
+
+        Player whitePlayer = new Player("Player1", PieceColor.WHITE);
+        Player blackPlayer = new Player("Player2", PieceColor.BLACK);
+
+        BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        sourceBlackTile.placePiece(new WhitePiece());
+        BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[4][6]);
+        overBlackTile.placePiece(new BlackPiece());
+        BlackTile destinationBackTile = BlackTile.asBlackTile(board.getTiles()[3][7]);
+        Game game = new Game(whitePlayer, blackPlayer);
+        Listener listener = new Listener();
+        game.addListeners(EventType.GAME_OVER, listener);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, listener);
+        game.setActiveTile(sourceBlackTile);
+
+        game.moveActivePieceTo(destinationBackTile);
+
+        Assertions.assertTrue(game.getWinnerPlayer().equals(whitePlayer));
+    }
+
     private Game initGame() {
         return new Game(new Player("Player1", PieceColor.WHITE), new Player("Player1", PieceColor.BLACK));
     }
