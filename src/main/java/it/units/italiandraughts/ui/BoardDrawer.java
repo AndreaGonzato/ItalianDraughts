@@ -3,6 +3,7 @@ package it.units.italiandraughts.ui;
 import it.units.italiandraughts.event.GameEvent;
 import it.units.italiandraughts.event.GameEventListener;
 import it.units.italiandraughts.event.SwitchActivePlayerEvent;
+import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.logic.*;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
@@ -10,6 +11,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
+import java.io.File;
+import java.net.URL;
+import java.util.Objects;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -90,10 +98,30 @@ public class BoardDrawer implements GameEventListener {
                 });
     }
 
+    private MediaPlayer initMediaPlayer() {
+        String path = "sounds" + File.separatorChar + "movePiece.mp3";
+        URL resource = Objects.requireNonNull(getClass().getResource(path));
+        Media media = new Media(resource.toString());
+        return new MediaPlayer(media);
+    }
+
+    private void playSound() {
+        new Thread(() -> {
+            MediaPlayer mediaPlayer = initMediaPlayer();
+            mediaPlayer.play();
+            mediaPlayer.seek(new Duration(0));
+        }).start();
+    }
+
     private void onClickOnEmptySquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         if (Status.MOVE_IN_PROGRESS.equals(status)) {
-            game.moveActivePieceTo(BlackTile.asBlackTile(square.getTile()));
+            try {
+                game.moveActivePieceTo(BlackTile.asBlackTile(square.getTile()));
+            } catch (IllegalMoveException e){
+                return;
+            }
+            playSound();
         }
     }
 

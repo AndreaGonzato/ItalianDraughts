@@ -7,14 +7,9 @@ import it.units.italiandraughts.exception.InvalidPlayersException;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
-import java.io.File;
-import java.net.URL;
 import java.util.*;
 
 public class Game implements GameEventSource {
@@ -89,14 +84,6 @@ public class Game implements GameEventSource {
         notifyListeners(new SwitchActivePlayerEvent(this, activePlayer, oldActivePlayer));
     }
 
-    private void playSound() {
-        new Thread(() -> {
-            MediaPlayer mediaPlayer = initMediaPlayer();
-            mediaPlayer.play();
-            mediaPlayer.seek(new Duration(0));
-        }).start();
-    }
-
     private GraphPath<BlackTile, DefaultWeightedEdge> getLongestPathFromActiveTileToDestination(BlackTile destination) {
         return absoluteLongestPaths.stream()
                 .filter(path -> path.getEndVertex().equals(destination)
@@ -117,12 +104,7 @@ public class Game implements GameEventSource {
     public void moveActivePieceTo(BlackTile destination) {
         Piece piece = activeTile.getPiece();
         GraphPath<BlackTile, DefaultWeightedEdge> longestPathToDestination;
-        try {
-            longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
-        } catch (IllegalMoveException e){
-            return;
-        }
-        playSound();
+        longestPathToDestination = getLongestPathFromActiveTileToDestination(destination);
         makeAndSaveMove(piece, longestPathToDestination.getVertexList());
         newTurn();
     }
@@ -133,13 +115,6 @@ public class Game implements GameEventSource {
         }
         Move move = moves.remove(moves.size() - 1);
         move.undo();
-    }
-
-    private MediaPlayer initMediaPlayer() {
-        String path = "sounds" + File.separatorChar + "movePiece.mp3";
-        URL resource = Objects.requireNonNull(getClass().getResource(path));
-        Media media = new Media(resource.toString());
-        return new MediaPlayer(media);
     }
 
     public void undo() {
