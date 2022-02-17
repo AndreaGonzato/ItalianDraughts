@@ -68,7 +68,7 @@ public class BoardController implements GameEventListener {
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
         Board board = Board.reset();
-        board.initPieces();
+        board.initPiecesDebug(); // TODO change to initPiece
         game = new Game(player1, player2);
         BoardDrawer boardDrawer = new BoardDrawer(gridPane, game);
         game.addListeners(EventType.GAME_OVER, this);
@@ -110,7 +110,7 @@ public class BoardController implements GameEventListener {
                 try {
                     Scene scene = new Scene(fxmlLoader.load(), StaticUtil.getScreenWidth() / 5f, StaticUtil.getScreenHeight() / 5f);
                     EndgameController controller = fxmlLoader.getController();
-                    controller.setWinner((Player) event.getPayload());
+                    controller.setWinner(game.getWinnerPlayer());
                     controller.initializeWindow();
                     Stage stage = new Stage();
                     controller.newGameButton.setOnAction((clickEvent) -> {

@@ -60,8 +60,8 @@ public class Game implements GameEventSource {
         Player inactivePlayer = activePlayer.equals(player1) ? player2 : player1;
         inactivePlayer.updateMovablePieces();
         if (inactivePlayer.countMovablePieces() == 0) {
-            notifyListeners(new GameOverEvent(this, activePlayer));
             winnerPlayer = activePlayer;
+            notifyListeners(new GameOverEvent(this, activePlayer));
             return;
         }
         toggleActivePlayer();
