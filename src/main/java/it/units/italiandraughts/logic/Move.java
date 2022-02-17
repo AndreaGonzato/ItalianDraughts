@@ -5,6 +5,7 @@ import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
+import it.units.italiandraughts.ui.PieceColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,26 +35,14 @@ public class Move {
     private void checkPreconditions(Piece piece, List<BlackTile> steps) {
         if (piece.isMan()) {
             BiFunction<Tile, Tile, String> movingDirection = Tile::getDirection;
-
-            switch (piece.getPieceColor()) {
-                case WHITE -> {
-                    for (int i = 1; i < steps.size(); i++) {
-                        if (movingDirection.apply(steps.get(i - 1), steps.get(i)).equals("bottom")) {
-                            throw new IllegalArgumentException("A white man piece can only move to the top");
-                        }
-                    }
+            String validDirection = piece.getPieceColor().equals(PieceColor.WHITE) ? "top" : "bottom";
+            String invalidDirection = piece.getPieceColor().equals(PieceColor.WHITE) ? "bottom" : "top";
+            for (int i = 1; i < steps.size(); i++) {
+                if (movingDirection.apply(steps.get(i - 1), steps.get(i)).equals(invalidDirection)) {
+                    throw new IllegalArgumentException("A %s man can only move to the %s"
+                            .formatted(piece.getPieceColor().toString(), validDirection));
                 }
-
-                case BLACK -> {
-                    for (int i = 1; i < steps.size(); i++) {
-                        if (movingDirection.apply(steps.get(i - 1), steps.get(i)).equals("top")) {
-                            throw new IllegalArgumentException("A black man piece can only move to the bottom");
-                        }
-                    }
-                }
-
             }
-
         }
 
         BiFunction<Tile, Tile, Integer> movingStepDistance = Tile::calculateDistance;
