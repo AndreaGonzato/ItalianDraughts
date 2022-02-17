@@ -244,7 +244,7 @@ public class GameTest {
 
         game.moveActivePieceTo(destinationBackTile);
 
-        Assertions.assertTrue(game.getWinnerPlayer().equals(whitePlayer));
+        Assertions.assertEquals(game.getWinnerPlayer(), whitePlayer);
     }
 
     private Game initGame() {
