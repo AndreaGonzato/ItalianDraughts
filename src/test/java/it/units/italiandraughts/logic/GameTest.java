@@ -1,6 +1,8 @@
 package it.units.italiandraughts.logic;
 
 import it.units.italiandraughts.event.EventType;
+import it.units.italiandraughts.event.GameEvent;
+import it.units.italiandraughts.event.GameEventListener;
 import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.exception.InvalidPlayersException;
 import it.units.italiandraughts.logic.piece.BlackPiece;
@@ -49,8 +51,7 @@ public class GameTest {
     void makeAndSaveMoveWithSimpleMove() {
         Board board = Board.reset();
         board.initPieces();
-
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        Game game = initGame();
 
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
         BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -67,8 +68,7 @@ public class GameTest {
     void checkThatMakeAndSaveMoveAddTheMoveInList() {
         Board board = Board.reset();
         board.initPieces();
-
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        Game game = initGame();
 
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[2][2]);
         BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -86,7 +86,8 @@ public class GameTest {
     @Test
     void makeAndSaveMoveEatingOnePiece() {
         Board board = Board.reset();
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        Game game = initGame();
+
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[2][2]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[3][3]);
@@ -102,8 +103,8 @@ public class GameTest {
 
     @Test
     void makeAndSaveMoveEatingTwoPieces() {
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
         Board board = Board.reset();
+        Game game = initGame();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[0][0]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][0]);
         BlackTile intermediate = BlackTile.asBlackTile(board.getTiles()[2][2]);
@@ -128,9 +129,9 @@ public class GameTest {
         BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[3][7]);
         sourceBlackTile.placePiece(new WhitePiece());
         overBlackTile.placePiece(new BlackPiece());
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        game.addListeners(EventType.GAME_OVER);
+        Game game = initGame();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        game.addListeners(EventType.GAME_OVER);
         Player activePlayer = game.getActivePlayer();
         game.setActiveTile(sourceBlackTile);
         game.moveActivePieceTo(destinationBlackTile);
@@ -142,7 +143,7 @@ public class GameTest {
 
     @Test
     void undoLastMoveFail() {
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
+        Game game = initGame();
         boolean thereIsAnException = false;
         try {
             game.undoLastMove();
@@ -158,8 +159,7 @@ public class GameTest {
         board.initPieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][4]);
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        game.addListeners(EventType.GAME_OVER);
+        Game game = initGame();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
@@ -175,8 +175,7 @@ public class GameTest {
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
         over.placePiece(new BlackPiece());
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        game.addListeners(EventType.GAME_OVER);
+        Game game = initGame();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
@@ -192,8 +191,7 @@ public class GameTest {
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
         over.placePiece(new BlackPiece());
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        game.addListeners(EventType.GAME_OVER);
+        Game game = initGame();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
@@ -201,5 +199,51 @@ public class GameTest {
         game.undo();
         Assertions.assertNotEquals(formerActivePlayer, game.getActivePlayer());
     }
+
+
+    @Test
+    public void checkToNotifyGameOver() {
+        Board board = Board.reset();
+
+        Player whitePlayer = new Player("Player1", PieceColor.WHITE);
+        Player blackPlayer = new Player("Player2", PieceColor.BLACK);
+
+        BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        sourceBlackTile.placePiece(new WhitePiece());
+        BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[4][6]);
+        overBlackTile.placePiece(new BlackPiece());
+        BlackTile destinationBackTile = BlackTile.asBlackTile(board.getTiles()[3][7]);
+        Game game = new Game(whitePlayer, blackPlayer);
+        Listener listener = new Listener();
+        game.addListeners(EventType.GAME_OVER, listener);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, listener);
+        game.setActiveTile(sourceBlackTile);
+
+        game.moveActivePieceTo(destinationBackTile);
+
+        Assertions.assertTrue(listener.receivedGameOver);
+    }
+
+    private Game initGame() {
+        return new Game(new Player("Player1", PieceColor.WHITE), new Player("Player1", PieceColor.BLACK));
+    }
+
+    class Listener implements GameEventListener{
+        private boolean receivedGameOver = false;
+
+        @Override
+        public void onGameEvent(GameEvent event) {
+            switch (event.getEventType()) {
+                case GAME_OVER -> {
+                    receivedGameOver = true;
+                }
+            }
+        }
+
+        public boolean isReceivedGameOver() {
+            return receivedGameOver;
+        }
+    }
+
 
 }
