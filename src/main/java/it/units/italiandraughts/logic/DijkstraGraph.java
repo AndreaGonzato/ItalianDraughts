@@ -23,12 +23,10 @@ public class DijkstraGraph {
     private final SimpleDirectedWeightedGraph<BlackTile, DefaultWeightedEdge> graph;
     private final BlackTile source;
     private final List<BlackTile> possibleDestinations;
-    private final Game game;
 
-    DijkstraGraph(BlackTile source, Game game) {
+    DijkstraGraph(BlackTile source) {
         graph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
         this.source = source;
-        this.game = game;
         possibleDestinations = new ArrayList<>();
         addVertices();
         initializePaths();
@@ -90,9 +88,10 @@ public class DijkstraGraph {
             weight *= EATING_KING_MULTIPLIER;
         }
         addEdge(eatingPiece.getBlackTile(), landingTile, weight);
-        Move move = game.makeAndSaveMove(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile));
+        Move move = new Move(eatingPiece, List.of(eatingPiece.getBlackTile(), landingTile));
+        move.make();
         if (move.hasPromoted()) {
-            game.undoLastMove();
+            move.undo();
             return;
         }
         List<BlackTile> eatableNeighbors = landingTile.getPiece().getReachableNeighboringBlackTiles()
@@ -101,7 +100,7 @@ public class DijkstraGraph {
         for (BlackTile blackTileNeighbor : eatableNeighbors) {
             recursivelyAddEatingEdges(landingTile.getPiece(), blackTileNeighbor.getPiece(), ++step);
         }
-        game.undoLastMove();
+        move.undo();
     }
 
     public List<GraphPath<BlackTile, DefaultWeightedEdge>> calculateLongestPaths() {

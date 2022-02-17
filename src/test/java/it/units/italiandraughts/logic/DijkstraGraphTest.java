@@ -4,7 +4,6 @@ import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
-import it.units.italiandraughts.ui.PieceColor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,8 +34,7 @@ public class DijkstraGraphTest {
     @Test
     void explorePossibleMovesFromBlackTile1() {
         Board board = prepareBoard();
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[6][2]), game);
+        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[6][2]));
         int possibleMoves = 1;
         int longestPathsWeight = 1;
         Assertions.assertTrue(
@@ -49,8 +47,7 @@ public class DijkstraGraphTest {
     @Test
     void explorePossibleMovesFromBlackTile2() {
         Board board = prepareBoard();
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][3]), game);
+        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][3]));
         int possibleMoves = 1;
         int longestPathsWeight = 2;
         Assertions.assertTrue(
@@ -63,8 +60,7 @@ public class DijkstraGraphTest {
     @Test
     void explorePossibleMovesFromBlackTile3() {
         Board board = prepareBoard();
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][5]), game);
+        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][5]));
         int possibleMoves = 1;
         double longestPathsWeight = 4 * 1.2;
         Assertions.assertTrue(
@@ -77,8 +73,7 @@ public class DijkstraGraphTest {
     @Test
     void explorePossibleMovesFromBlackTile4() {
         Board board = prepareBoard();
-        Game game = new Game(new Player("", PieceColor.WHITE), new Player("", PieceColor.BLACK));
-        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[4][4]), game);
+        DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[4][4]));
         int possibleMoves = 0;
         Assertions.assertEquals(graph.calculateLongestPaths().size(), possibleMoves);
     }
