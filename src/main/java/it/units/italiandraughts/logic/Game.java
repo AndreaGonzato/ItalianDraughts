@@ -56,7 +56,6 @@ public class Game implements GameEventSource {
     }
 
     private void newTurn() {
-        setActiveTile(null);
         Player inactivePlayer = activePlayer.equals(player1) ? player2 : player1;
         inactivePlayer.updateMovablePieces();
         if (inactivePlayer.countMovablePieces() == 0) {
