@@ -61,7 +61,7 @@ public class Game implements GameEventSource {
         inactivePlayer.updateMovablePieces();
         if (inactivePlayer.countMovablePieces() == 0) {
             winnerPlayer = activePlayer;
-            notifyListeners(new GameOverEvent(this, activePlayer));
+            notifyListeners(new GameOverEvent(this));
             return;
         }
         toggleActivePlayer();
@@ -83,7 +83,7 @@ public class Game implements GameEventSource {
         } else {
             activePlayer = player1;
         }
-        notifyListeners(new SwitchActivePlayerEvent(this, activePlayer, oldActivePlayer));
+        notifyListeners(new SwitchActivePlayerEvent(this));
     }
 
     private GraphPath<BlackTile, DefaultWeightedEdge> getLongestPathFromActiveTileToDestination(BlackTile destination) {
@@ -142,6 +142,10 @@ public class Game implements GameEventSource {
 
     public Player getActivePlayer() {
         return activePlayer;
+    }
+
+    public Player getInactivePlayer() {
+        return activePlayer.equals(player1) ? player2 : player1;
     }
 
     public Player getWinnerPlayer() {

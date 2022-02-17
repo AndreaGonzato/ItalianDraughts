@@ -68,7 +68,7 @@ public class BoardController implements GameEventListener {
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
         Board board = Board.reset();
-        board.initPiecesDebug(); // TODO change to initPiece
+        board.initPieces();
         game = new Game(player1, player2);
         BoardDrawer boardDrawer = new BoardDrawer(gridPane, game);
         game.addListeners(EventType.GAME_OVER, this);
@@ -127,7 +127,7 @@ public class BoardController implements GameEventListener {
                 }
             }
             case SWITCH_ACTIVE_PLAYER -> {
-                showActivePlayerInBold(((Player[]) event.getPayload())[0]);
+                showActivePlayerInBold(game.getActivePlayer());
                 undo.setDisable(game.getMoves().size() <= 0);
             }
         }

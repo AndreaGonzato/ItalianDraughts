@@ -132,12 +132,11 @@ public class GameTest {
         Game game = initGame();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.addListeners(EventType.GAME_OVER);
-        Player activePlayer = game.getActivePlayer();
         game.setActiveTile(sourceBlackTile);
         game.moveActivePieceTo(destinationBlackTile);
         Assertions.assertTrue(
                 sourceBlackTile.isEmpty() && !destinationBlackTile.isEmpty()
-                        && overBlackTile.isEmpty() && !game.getActivePlayer().equals(activePlayer)
+                        && overBlackTile.isEmpty()
         );
     }
 
@@ -246,6 +245,8 @@ public class GameTest {
 
         Assertions.assertEquals(game.getWinnerPlayer(), whitePlayer);
     }
+
+    // TODO do a test that control that after a move the active player is another
 
     private Game initGame() {
         return new Game(new Player("Player1", PieceColor.WHITE), new Player("Player1", PieceColor.BLACK));

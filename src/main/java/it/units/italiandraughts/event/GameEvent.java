@@ -11,8 +11,6 @@ public abstract class GameEvent extends EventObject {
         this.eventType = eventType;
     }
 
-    public abstract Object getPayload();
-
     public EventType getEventType() {
         return this.eventType;
     }

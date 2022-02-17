@@ -1,21 +1,10 @@
 package it.units.italiandraughts.event;
 
-
-import it.units.italiandraughts.logic.Player;
-
 public class SwitchActivePlayerEvent extends GameEvent {
 
-    private final Player newActivePlayer;
-    private final Player oldActivePlayer;
 
-    public SwitchActivePlayerEvent(Object source, Player newActivePlayer, Player oldActivePlayer) {
+    public SwitchActivePlayerEvent(Object source) {
         super(source, EventType.SWITCH_ACTIVE_PLAYER);
-        this.newActivePlayer = newActivePlayer;
-        this.oldActivePlayer = oldActivePlayer;
     }
 
-    @Override
-    public Player[] getPayload() {
-        return new Player[] {newActivePlayer, oldActivePlayer};
-    }
 }

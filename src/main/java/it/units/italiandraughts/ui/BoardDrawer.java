@@ -60,12 +60,12 @@ public class BoardDrawer implements GameEventListener {
 
     @Override
     public void onGameEvent(GameEvent event) {
-        if (event instanceof SwitchActivePlayerEvent switchActivePlayerEvent) {
+        if (event instanceof SwitchActivePlayerEvent) {
             updateBoard();
-            Player activePlayer = switchActivePlayerEvent.getPayload()[0];
-            Player otherPlayer = switchActivePlayerEvent.getPayload()[1];
+            Player activePlayer = game.getActivePlayer();
+            Player inactivePlayer = game.getInactivePlayer();
             setClickableForPlayer(activePlayer);
-            unsetClickableForPlayer(otherPlayer);
+            unsetClickableForPlayer(inactivePlayer);
             setClickableForEmptySquares();
         }
     }
