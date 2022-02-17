@@ -1,6 +1,6 @@
 package it.units.italiandraughts.ui;
 
-import it.units.italiandraughts.exception.IllegalPositionDrawingException;
+import it.units.italiandraughts.exception.IllegalDrawingPositionException;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.tile.Tile;
 import javafx.scene.layout.StackPane;
@@ -45,7 +45,7 @@ public class Square extends StackPane {
     void placeGreenCircle() {
         this.hasGreenCircle = true;
         if (this.getType().equals(SquareType.WHITE_SMOKE)) {
-            throw new IllegalPositionDrawingException("Cannot draw on white square");
+            throw new IllegalDrawingPositionException("Cannot draw on white square");
         }
         greenCircle = new Circle(squareSize * 0.15);
         greenCircle.setFill(Color.rgb(131, 235, 159, 0.6));

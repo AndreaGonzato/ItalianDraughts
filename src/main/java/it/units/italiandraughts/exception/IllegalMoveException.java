@@ -1,8 +1,9 @@
 package it.units.italiandraughts.exception;
 
-public class IllegalMoveException extends ItalianDraughtsException{
+public class IllegalMoveException extends ItalianDraughtsException {
+
     public IllegalMoveException() {
-        super("The required move is illegal");
+        super("The requested move is illegal.");
     }
 
     public IllegalMoveException(String message) {

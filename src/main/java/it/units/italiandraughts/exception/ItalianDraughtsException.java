@@ -1,6 +1,7 @@
 package it.units.italiandraughts.exception;
 
-public class ItalianDraughtsException extends RuntimeException{
+public class ItalianDraughtsException extends RuntimeException {
+
     ItalianDraughtsException(){
         super();
     }
@@ -8,4 +9,5 @@ public class ItalianDraughtsException extends RuntimeException{
     ItalianDraughtsException(String message){
         super(message);
     }
+
 }

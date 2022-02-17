@@ -24,7 +24,7 @@ public class Game implements GameEventSource {
     public Game(Player player1, Player player2) {
 
         if (player1.getPieceColor().equals(player2.getPieceColor())){
-            throw new InvalidPlayersException("Two player can not have the same PieceColor in a Game.");
+            throw new InvalidPlayersException();
         }
 
         this.player1 = player1;
@@ -110,7 +110,7 @@ public class Game implements GameEventSource {
 
     void undoLastMove() {
         if (moves.size() - 1 < 0) {
-            throw new IllegalButtonClickException("An illegal click was performed on the undo button");
+            throw new IllegalButtonClickException("An illegal click was performed on the undo button.");
         }
         Move move = moves.remove(moves.size() - 1);
         move.undo();
