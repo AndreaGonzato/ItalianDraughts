@@ -57,14 +57,14 @@
         </GameLabel>
         <GameLabel text="○" textFill="#423c39"/>
         <Pane HBox.hgrow="ALWAYS"/>
-        <GameButton fx:id="undo" text="Undo">
+        <GameButton fx:id="undoButton" text="Undo">
             <HBox.margin>
                 <Insets>
                     <right>10</right>
                 </Insets>
             </HBox.margin>
         </GameButton>
-        <GameButton fx:id="reset" text="Reset">
+        <GameButton fx:id="resetButton" text="Reset">
             <HBox.margin>
                 <Insets>
                     <left>10</left>

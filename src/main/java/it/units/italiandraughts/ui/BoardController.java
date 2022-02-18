@@ -40,10 +40,10 @@ public class BoardController implements GameEventListener {
     Line line;
 
     @FXML
-    Button undo;
+    Button undoButton;
 
     @FXML
-    Button reset;
+    Button resetButton;
 
     private Game game;
 
@@ -85,32 +85,38 @@ public class BoardController implements GameEventListener {
         game.addListeners(EventType.GAME_OVER, this);
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, this, boardDrawer);
 
-        // resize the numbers to the left of board
-        List<Node> rowLabels = rowNumbers.getChildren();
-        rowLabels.forEach(node -> {
-            Label label = (Label) node;
-            label.setMaxHeight(getGridPaneHeight() / Board.SIZE);
-            label.setMinHeight(getGridPaneHeight() / Board.SIZE);
-        });
+        resizeNumberLabels();
 
         Platform.runLater(() -> columnLetters.setPadding(
                 new Insets(0, 0, 0, rowNumbers.getWidth())
         ));
 
-        // resize the letters under the board
+        resizeLetterLabels();
+
+        line.setEndX(gridPane.getMaxWidth());
+        gridPane.setStyle("-fx-border-color: #d47d35");
+        resetButton.setOnAction(event -> resetWindow());
+        undoButton.setOnAction(event -> game.undo());
+        undoButton.setDisable(true);
+        showActivePlayerInBold(player1);
+    }
+
+    private void resizeLetterLabels() {
         List<Node> columnLabels = columnLetters.getChildren();
         columnLabels.forEach(node -> {
             Label label = (Label) node;
             label.setMaxWidth(getGridPaneHeight() / Board.SIZE);
             label.setMinWidth(getGridPaneHeight() / Board.SIZE);
         });
+    }
 
-        line.setEndX(gridPane.getMaxWidth());
-        gridPane.setStyle("-fx-border-color: #d47d35");
-        reset.setOnAction(event -> resetWindow());
-        undo.setOnAction(event -> game.undo());
-        undo.setDisable(true);
-        showActivePlayerInBold(player1);
+    private void resizeNumberLabels() {
+        List<Node> rowLabels = rowNumbers.getChildren();
+        rowLabels.forEach(node -> {
+            Label label = (Label) node;
+            label.setMaxHeight(getGridPaneHeight() / Board.SIZE);
+            label.setMinHeight(getGridPaneHeight() / Board.SIZE);
+        });
     }
 
     @Override
@@ -139,7 +145,7 @@ public class BoardController implements GameEventListener {
             }
             case SWITCH_ACTIVE_PLAYER -> {
                 showActivePlayerInBold(game.getActivePlayer());
-                undo.setDisable(game.getMoves().size() <= 0);
+                undoButton.setDisable(game.getMoves().size() <= 0);
             }
         }
     }

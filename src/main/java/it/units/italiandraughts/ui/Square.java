@@ -63,7 +63,7 @@ public class Square extends StackPane {
     void drawPiece(Piece piece) {
         List<Ellipse> ellipses;
         double translateFactor = piece.isMan() ? 0.07 : 0.06;
-        double squareSize = this.size;
+        double squareSize = size;
         Ellipse baseEllipse = EllipseDrawer.createEllipse(squareSize);
         baseEllipse.setFill(Color.BLACK);
         baseEllipse.setTranslateY(squareSize * translateFactor);
