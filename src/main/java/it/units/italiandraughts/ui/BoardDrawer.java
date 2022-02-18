@@ -120,7 +120,7 @@ public class BoardDrawer implements GameEventListener {
         if (Status.MOVE_IN_PROGRESS.equals(status)) {
             try {
                 game.moveActivePieceTo(BlackTile.asBlackTile(square.getTile()));
-            } catch (IllegalMoveException e){
+            } catch (IllegalMoveException e) {
                 return;
             }
             playSound();
