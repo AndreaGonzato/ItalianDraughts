@@ -23,17 +23,16 @@ public class Game implements GameEventSource {
     private Player winnerPlayer;
 
     public Game(Player player1, Player player2) {
-
-        if (player1.getPieceColor().equals(player2.getPieceColor())){
+        if (player1.getPieceColor().equals(player2.getPieceColor())) {
             throw new InvalidPlayersException();
         }
 
         this.player1 = player1;
         this.player2 = player2;
 
-        if (player1.getPieceColor().equals(PieceColor.WHITE)){
+        if (player1.getPieceColor().equals(PieceColor.WHITE)) {
             this.activePlayer = player1;
-        }else{
+        } else {
             this.activePlayer = player2;
         }
 
@@ -77,7 +76,6 @@ public class Game implements GameEventSource {
     }
 
     private void toggleActivePlayer() {
-        final Player oldActivePlayer = activePlayer;
         if (player1.equals(activePlayer)) {
             activePlayer = player2;
         } else {
