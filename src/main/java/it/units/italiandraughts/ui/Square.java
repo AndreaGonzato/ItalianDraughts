@@ -42,6 +42,10 @@ public class Square extends StackPane {
         this.setStyle("-fx-background-color: " + newColor + ";");
     }
 
+    boolean isEmpty() {
+        return this.getTile().isEmpty();
+    }
+
     void placeGreenCircle() {
         this.hasGreenCircle = true;
         if (this.getType().equals(SquareType.WHITE_SMOKE)) {
