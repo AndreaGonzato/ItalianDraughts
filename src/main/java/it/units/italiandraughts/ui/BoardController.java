@@ -47,7 +47,7 @@ public class BoardController implements GameEventListener {
 
     private Game game;
 
-    private static double getBoardHeight() {
+    private static double getGridPaneHeight() {
         return StaticUtil.getScreenHeight() / 3 * 2;
     }
 
@@ -61,15 +61,27 @@ public class BoardController implements GameEventListener {
         }
     }
 
+    private void addGridPaneConstraints() {
+        ColumnConstraints columnConstraints = new ColumnConstraints();
+        columnConstraints.setPercentWidth(12.5);
+        RowConstraints rowConstraints = new RowConstraints();
+        rowConstraints.setPercentHeight(12.5);
+        for (int i = 0; i < Board.SIZE; i++) {
+            gridPane.getColumnConstraints().add(columnConstraints);
+            gridPane.getRowConstraints().add(rowConstraints);
+        }
+    }
+
     public void initializeWindow() {
-        gridPane.setMinSize(getBoardHeight(), getBoardHeight());
-        gridPane.setMaxSize(getBoardHeight(), getBoardHeight());
+        gridPane.setMinSize(getGridPaneHeight(), getGridPaneHeight());
+        gridPane.setMaxSize(getGridPaneHeight(), getGridPaneHeight());
 
         Player player1 = new Player(player1NameLabel.getText(), PieceColor.WHITE);
         Player player2 = new Player(player2NameLabel.getText(), PieceColor.BLACK);
         Board board = Board.reset();
         board.initPieces();
         game = new Game(player1, player2);
+        addGridPaneConstraints();
         BoardDrawer boardDrawer = new BoardDrawer(gridPane, game);
         game.addListeners(EventType.GAME_OVER, this);
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, this, boardDrawer);
@@ -78,8 +90,8 @@ public class BoardController implements GameEventListener {
         List<Node> rowLabels = rowNumbers.getChildren();
         rowLabels.forEach(node -> {
             Label label = (Label) node;
-            label.setMaxHeight(getBoardHeight() / Board.SIZE);
-            label.setMinHeight(getBoardHeight() / Board.SIZE);
+            label.setMaxHeight(getGridPaneHeight() / Board.SIZE);
+            label.setMinHeight(getGridPaneHeight() / Board.SIZE);
         });
 
         Platform.runLater(() -> columnLetters.setPadding(
@@ -90,8 +102,8 @@ public class BoardController implements GameEventListener {
         List<Node> columnLabels = columnLetters.getChildren();
         columnLabels.forEach(node -> {
             Label label = (Label) node;
-            label.setMaxWidth(getBoardHeight() / Board.SIZE);
-            label.setMinWidth(getBoardHeight() / Board.SIZE);
+            label.setMaxWidth(getGridPaneHeight() / Board.SIZE);
+            label.setMinWidth(getGridPaneHeight() / Board.SIZE);
         });
 
         line.setEndX(gridPane.getMaxWidth());

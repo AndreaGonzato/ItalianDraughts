@@ -7,17 +7,8 @@ import it.units.italiandraughts.exception.IllegalMoveException;
 import it.units.italiandraughts.logic.*;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-
-import java.io.File;
-import java.net.URL;
-import java.util.Objects;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -26,19 +17,9 @@ public class BoardDrawer implements GameEventListener {
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
     private Status status;
-    private final MediaPlayer mediaPlayer;
 
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
-
-        ColumnConstraints columnConstraints = new ColumnConstraints();
-        columnConstraints.setPercentWidth(12.5);
-        RowConstraints rowConstraints = new RowConstraints();
-        rowConstraints.setPercentHeight(12.5);
-        for (int i = 0; i < Board.SIZE; i++) {
-            gridPane.getColumnConstraints().add(columnConstraints);
-            gridPane.getRowConstraints().add(rowConstraints);
-        }
 
         matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
             Square square = new Square(tile,
@@ -47,8 +28,6 @@ public class BoardDrawer implements GameEventListener {
             squares[tile.getY()][tile.getX()] = square;
             gridPane.add(square, tile.getX(), tile.getY());
         });
-
-        mediaPlayer = initMediaPlayer();
 
         setClickableForPlayer(game.getActivePlayer());
         setClickableForEmptySquares();
@@ -101,20 +80,6 @@ public class BoardDrawer implements GameEventListener {
                 });
     }
 
-    private MediaPlayer initMediaPlayer() {
-        String path = "sounds" + File.separatorChar + "movePiece.mp3";
-        URL resource = Objects.requireNonNull(getClass().getResource(path));
-        Media media = new Media(resource.toString());
-        return new MediaPlayer(media);
-    }
-
-    private void playSound() {
-        new Thread(() -> {
-            mediaPlayer.play();
-            mediaPlayer.seek(new Duration(0));
-        }).start();
-    }
-
     private void onClickOnEmptySquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         if (Status.MOVE_IN_PROGRESS.equals(status)) {
@@ -123,7 +88,7 @@ public class BoardDrawer implements GameEventListener {
             } catch (IllegalMoveException e) {
                 return;
             }
-            playSound();
+            SoundPlayer.getSoundPlayer().playSound();
         }
     }
 
