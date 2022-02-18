@@ -11,16 +11,8 @@ import java.util.Objects;
 public class SoundPlayer {
 
     private final MediaPlayer mediaPlayer;
-    private static SoundPlayer soundPlayer;
 
-    static SoundPlayer getSoundPlayer() {
-        if (soundPlayer == null) {
-            soundPlayer = new SoundPlayer();
-        }
-        return soundPlayer;
-    }
-
-    private SoundPlayer() {
+    SoundPlayer() {
         mediaPlayer = initMediaPlayer();
     }
 

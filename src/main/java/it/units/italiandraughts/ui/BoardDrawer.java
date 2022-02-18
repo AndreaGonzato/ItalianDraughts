@@ -17,9 +17,11 @@ public class BoardDrawer implements GameEventListener {
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
     private Status status;
+    private final SoundPlayer soundPlayer;
 
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
+        this.soundPlayer = new SoundPlayer();
 
         matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
             Square square = new Square(tile,
@@ -88,7 +90,7 @@ public class BoardDrawer implements GameEventListener {
             } catch (IllegalMoveException e) {
                 return;
             }
-            SoundPlayer.getSoundPlayer().playSound();
+            soundPlayer.playSound();
         }
     }
 
