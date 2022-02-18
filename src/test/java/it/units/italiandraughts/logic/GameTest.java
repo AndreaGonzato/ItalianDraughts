@@ -270,21 +270,17 @@ public class GameTest {
         return new Game(new Player("Player1", PieceColor.WHITE), new Player("Player1", PieceColor.BLACK));
     }
 
-    class Listener implements GameEventListener{
+    static class Listener implements GameEventListener {
+
         private boolean receivedGameOver = false;
 
         @Override
         public void onGameEvent(GameEvent event) {
-            switch (event.getEventType()) {
-                case GAME_OVER -> {
-                    receivedGameOver = true;
-                }
+            if (event.getEventType() == EventType.GAME_OVER) {
+                receivedGameOver = true;
             }
         }
 
-        public boolean isReceivedGameOver() {
-            return receivedGameOver;
-        }
     }
 
 
