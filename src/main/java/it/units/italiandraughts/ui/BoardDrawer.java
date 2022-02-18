@@ -64,6 +64,7 @@ public class BoardDrawer implements GameEventListener {
     private void onClickOnFullSquare(MouseEvent event) {
         Square square = (Square) event.getSource();
         setActiveTileAndHighlightSquare(square);
+        drawGreenCirclesOnPossibleDestinations(square);
         status = Status.MOVE_IN_PROGRESS;
     }
 
@@ -72,9 +73,12 @@ public class BoardDrawer implements GameEventListener {
         game.setActiveTile(BlackTile.asBlackTile(tile));
         highlightSquare(square);
 
+    }
+
+    private void drawGreenCirclesOnPossibleDestinations(Square startingSquare) {
         game.getAbsoluteLongestPaths()
                 .stream()
-                .filter(path -> path.getStartVertex().equals(tile))
+                .filter(path -> path.getStartVertex().equals(startingSquare.getTile()))
                 .forEach(path -> {
                     int x = path.getEndVertex().getX();
                     int y = path.getEndVertex().getY();
