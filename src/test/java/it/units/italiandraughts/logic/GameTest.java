@@ -11,6 +11,8 @@ import it.units.italiandraughts.logic.piece.PieceType;
 import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
+import org.jgrapht.GraphPath;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +22,8 @@ import java.util.List;
 
 @ExtendWith(ApplicationExtension.class)
 public class GameTest {
+
+    private static final double EPSILON = 10e-6;
 
     @Test
     void firstActivePlayer() {
@@ -254,6 +258,71 @@ public class GameTest {
         game.moveActivePieceTo(destinationBackTile);
 
         Assertions.assertEquals(game.getWinnerPlayer(), whitePlayer);
+    }
+
+    @Test
+    void updateAbsoluteLongestPathsOnNewGame() {
+        Game game = initGame();
+        game.updateAbsoluteLongestPaths();
+        int paths = 7;
+        int weight = 1;
+        BlackTile blackTile1 = BlackTile.asBlackTile(Board.getBoard().getTiles()[4][0]);
+        int pathsEndingOnBlackTile1 = 1;
+        BlackTile blackTile2 = BlackTile.asBlackTile(Board.getBoard().getTiles()[4][2]);
+        int pathsEndingOnBlackTile2 = 2;
+        BlackTile blackTile3 = BlackTile.asBlackTile(Board.getBoard().getTiles()[4][4]);
+        int pathsEndingOnBlackTile3 = 2;
+        BlackTile blackTile4 = BlackTile.asBlackTile(Board.getBoard().getTiles()[4][6]);
+        int pathsEndingOnBlackTile4 = 2;
+        List<GraphPath<BlackTile, DefaultWeightedEdge>> absoluteLongestPaths = game.getAbsoluteLongestPaths();
+        Assertions.assertTrue(
+                absoluteLongestPaths.size() == paths &&
+                        absoluteLongestPaths.get(0).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(1).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(2).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(3).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(4).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(5).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(6).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.stream().filter(path -> path.getEndVertex().equals(blackTile1)).count() == pathsEndingOnBlackTile1 &&
+                        absoluteLongestPaths.stream().filter(path -> path.getEndVertex().equals(blackTile2)).count() == pathsEndingOnBlackTile2 &&
+                        absoluteLongestPaths.stream().filter(path -> path.getEndVertex().equals(blackTile3)).count() == pathsEndingOnBlackTile3 &&
+                        absoluteLongestPaths.stream().filter(path -> path.getEndVertex().equals(blackTile4)).count() == pathsEndingOnBlackTile4
+        );
+    }
+
+    @Test
+    void updateAbsoluteLongestPathsInArtificialScenario() {
+        Game game = initGame();
+        Board board = Board.reset();
+        BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[5][5]);
+        blackTile1.placePiece(new WhitePiece(PieceType.KING));
+        BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[4][4]);
+        blackTile2.placePiece(new BlackPiece());
+        BlackTile blackTile3 = BlackTile.asBlackTile(board.getTiles()[2][2]);
+        blackTile3.placePiece(new BlackPiece());
+        BlackTile blackTile4 = BlackTile.asBlackTile(board.getTiles()[6][4]);
+        blackTile4.placePiece(new BlackPiece());
+        BlackTile blackTile5 = BlackTile.asBlackTile(board.getTiles()[6][2]);
+        blackTile5.placePiece(new BlackPiece());
+
+        BlackTile blackTile6 = BlackTile.asBlackTile(board.getTiles()[5][1]);
+        BlackTile blackTile7 = BlackTile.asBlackTile(board.getTiles()[1][1]);
+
+        game.updateAbsoluteLongestPaths();
+        List<GraphPath<BlackTile, DefaultWeightedEdge>> absoluteLongestPaths = game.getAbsoluteLongestPaths();
+        int paths = 2;
+        double weight = 4 * 1.2;
+        int pathsEndingOnBlackTile6 = 1;
+        int pathsEndingOnBlackTile7 = 1;
+
+        Assertions.assertTrue(
+                absoluteLongestPaths.size() == paths &&
+                        absoluteLongestPaths.get(0).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.get(1).getWeight() - weight < EPSILON &&
+                        absoluteLongestPaths.stream().filter(path -> path.getEndVertex().equals(blackTile6)).count() == pathsEndingOnBlackTile6 &&
+                        absoluteLongestPaths.stream().filter(path -> path.getEndVertex().equals(blackTile7)).count() == pathsEndingOnBlackTile7
+        );
     }
 
     private Game initGame() {
