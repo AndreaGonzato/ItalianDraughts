@@ -23,13 +23,7 @@ public class BoardDrawer implements GameEventListener {
         this.game = game;
         this.soundPlayer = new SoundPlayer();
 
-        matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
-            Square.setSize(gridPane.getMaxHeight() / Board.SIZE);
-            Square square = new Square(tile,
-                    ((tile.getX() + tile.getY()) % 2 == 0) ? SquareType.BRONZE : SquareType.WHITE_SMOKE);
-            squares[tile.getY()][tile.getX()] = square;
-            gridPane.add(square, tile.getX(), tile.getY());
-        });
+        initSquares(gridPane);
 
         setClickableForPlayer(game.getActivePlayer());
         setClickableForEmptySquares();
@@ -37,6 +31,16 @@ public class BoardDrawer implements GameEventListener {
 
         // draw the pieces at the start
         updateBoard();
+    }
+
+    private void initSquares(GridPane gridPane) {
+        matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
+            Square.setSize(gridPane.getMaxHeight() / Board.SIZE);
+            Square square = new Square(tile,
+                    ((tile.getX() + tile.getY()) % 2 == 0) ? SquareType.BRONZE : SquareType.WHITE_SMOKE);
+            squares[tile.getY()][tile.getX()] = square;
+            gridPane.add(square, tile.getX(), tile.getY());
+        });
     }
 
     @Override
