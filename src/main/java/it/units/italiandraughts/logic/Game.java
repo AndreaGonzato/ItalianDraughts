@@ -39,6 +39,10 @@ public class Game implements GameEventSource {
         listenersMap = new HashMap<>();
         moves = new ArrayList<>();
         activePlayer.updateMovablePieces();
+
+        Board board = Board.reset();
+        board.initPieces();
+
         updateAbsoluteLongestPaths();
     }
 
@@ -67,7 +71,8 @@ public class Game implements GameEventSource {
         updateAbsoluteLongestPaths();
     }
 
-    private void updateAbsoluteLongestPaths() {
+    // TODO write some test: now is public
+    void updateAbsoluteLongestPaths() {
         absoluteLongestPaths = activePlayer.getPieces()
                 .stream().map(Piece::getBlackTile)
                 .map(DijkstraGraph::new)

@@ -123,13 +123,14 @@ public class GameTest {
 
     @Test
     void moveActivePieceTo() {
-        Board board = Board.reset();
+        Game game = initGame();
+        Board board = Board.getBoard();
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[4][6]);
         BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[3][7]);
         sourceBlackTile.placePiece(new WhitePiece());
         overBlackTile.placePiece(new BlackPiece());
-        Game game = initGame();
+        game.updateAbsoluteLongestPaths();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.addListeners(EventType.GAME_OVER);
         game.setActiveTile(sourceBlackTile);
@@ -172,11 +173,10 @@ public class GameTest {
 
     @Test
     void undoLastSimpleMove() {
-        Board board = Board.reset();
-        board.initPieces();
+        Game game = initGame();
+        Board board = Board.getBoard();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[4][4]);
-        Game game = initGame();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
@@ -186,13 +186,13 @@ public class GameTest {
 
     @Test
     void undoLastEatingMoveRestorePiecePositions() {
-        Board board = Board.reset();
-        board.initPieces();
+        Game game = initGame();
+        Board board = Board.getBoard();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
         over.placePiece(new BlackPiece());
-        Game game = initGame();
+        game.updateAbsoluteLongestPaths();
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
@@ -202,13 +202,15 @@ public class GameTest {
 
     @Test
     void undoCheckToToggleActivePlayer() {
-        Board board = Board.reset();
+        Game game = initGame();
+        Board board = Board.getBoard();
         board.initPieces();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[4][4]);
         BlackTile destination = BlackTile.asBlackTile(board.getTiles()[3][3]);
         over.placePiece(new BlackPiece());
-        Game game = initGame();
+        game.updateAbsoluteLongestPaths();
+
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
         game.setActiveTile(source);
         game.moveActivePieceTo(destination);
@@ -220,18 +222,19 @@ public class GameTest {
 
     @Test
     public void checkToNotifyGameOver() {
-        Board board = Board.reset();
-
         Player whitePlayer = new Player("Player1", PieceColor.WHITE);
         Player blackPlayer = new Player("Player2", PieceColor.BLACK);
+        Game game = new Game(whitePlayer, blackPlayer);
 
+        Board board = Board.reset();
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
         sourceBlackTile.placePiece(new WhitePiece());
         BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[4][6]);
         overBlackTile.placePiece(new BlackPiece());
         BlackTile destinationBackTile = BlackTile.asBlackTile(board.getTiles()[3][7]);
-        Game game = new Game(whitePlayer, blackPlayer);
+
         Listener listener = new Listener();
+        game.updateAbsoluteLongestPaths();
         game.addListeners(EventType.GAME_OVER, listener);
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, listener);
         game.setActiveTile(sourceBlackTile);
@@ -243,18 +246,19 @@ public class GameTest {
 
     @Test
     public void checkWinnerPlayer() {
-        Board board = Board.reset();
 
         Player whitePlayer = new Player("Player1", PieceColor.WHITE);
         Player blackPlayer = new Player("Player2", PieceColor.BLACK);
+        Game game = new Game(whitePlayer, blackPlayer);
+        Board board = Board.reset();
 
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
         sourceBlackTile.placePiece(new WhitePiece());
         BlackTile overBlackTile = BlackTile.asBlackTile(board.getTiles()[4][6]);
         overBlackTile.placePiece(new BlackPiece());
         BlackTile destinationBackTile = BlackTile.asBlackTile(board.getTiles()[3][7]);
-        Game game = new Game(whitePlayer, blackPlayer);
         Listener listener = new Listener();
+        game.updateAbsoluteLongestPaths();
         game.addListeners(EventType.GAME_OVER, listener);
         game.addListeners(EventType.SWITCH_ACTIVE_PLAYER, listener);
         game.setActiveTile(sourceBlackTile);
