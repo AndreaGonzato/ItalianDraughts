@@ -141,6 +141,24 @@ public class GameTest {
     }
 
     @Test
+    void checkThatMoveActivePieceToToggleActivePlayer() {
+        Board board = Board.reset();
+        board.initPieces();
+        BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][1]);
+        BlackTile destinationBlackTile = BlackTile.asBlackTile(board.getTiles()[4][0]);
+        Player player1 = new Player("player1", PieceColor.WHITE);
+        Player player2 = new Player("player2", PieceColor.BLACK);
+        Game game = new Game(player1, player2);
+        game.addListeners(EventType.SWITCH_ACTIVE_PLAYER);
+        game.addListeners(EventType.GAME_OVER);
+        game.setActiveTile(sourceBlackTile);
+        Player activePlayerBeforeMove = game.getActivePlayer();
+        game.moveActivePieceTo(destinationBlackTile);
+        Player activePlayerAfterMove = game.getActivePlayer();
+        Assertions.assertNotEquals(activePlayerBeforeMove, activePlayerAfterMove);
+    }
+
+    @Test
     void undoLastMoveFail() {
         Game game = initGame();
         boolean thereIsAnException = false;
