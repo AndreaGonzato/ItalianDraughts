@@ -15,17 +15,20 @@ public class Square extends StackPane {
     private final Tile tile;
     private final SquareType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
-    private final double squareSize;
+    private static double size;
     private boolean highlighted;
     private boolean hasGreenCircle;
     private Circle greenCircle;
 
-    public Square(Tile tile, SquareType squareType, double squareSize) {
-        this.squareSize = squareSize;
+    public Square(Tile tile, SquareType squareType) {
         this.tile = tile;
         this.type = squareType;
         this.setStyle("-fx-background-color: " + squareType.getHex() + ";");
         hasGreenCircle = false;
+    }
+
+    public static void setSize(double size) {
+        Square.size = size;
     }
 
     Tile getTile() {
@@ -47,7 +50,7 @@ public class Square extends StackPane {
         if (this.getType().equals(SquareType.WHITE_SMOKE)) {
             throw new IllegalDrawingPositionException("Cannot draw on white square");
         }
-        greenCircle = new Circle(squareSize * 0.15);
+        greenCircle = new Circle(size * 0.15);
         greenCircle.setFill(Color.rgb(131, 235, 159, 0.6));
         this.getChildren().add(greenCircle);
     }
@@ -60,7 +63,7 @@ public class Square extends StackPane {
     void drawPiece(Piece piece) {
         List<Ellipse> ellipses;
         double translateFactor = piece.isMan() ? 0.07 : 0.06;
-        double squareSize = this.squareSize;
+        double squareSize = this.size;
         Ellipse baseEllipse = EllipseDrawer.createEllipse(squareSize);
         baseEllipse.setFill(Color.BLACK);
         baseEllipse.setTranslateY(squareSize * translateFactor);

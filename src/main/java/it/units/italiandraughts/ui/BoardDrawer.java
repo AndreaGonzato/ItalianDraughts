@@ -24,9 +24,9 @@ public class BoardDrawer implements GameEventListener {
         this.soundPlayer = new SoundPlayer();
 
         matrixToStream(Board.getBoard().getTiles()).forEach(tile -> {
+            Square.setSize(gridPane.getMaxHeight() / Board.SIZE);
             Square square = new Square(tile,
-                    ((tile.getX() + tile.getY()) % 2 == 0) ? SquareType.BRONZE : SquareType.WHITE_SMOKE,
-                    gridPane.getMaxHeight() / Board.SIZE);
+                    ((tile.getX() + tile.getY()) % 2 == 0) ? SquareType.BRONZE : SquareType.WHITE_SMOKE);
             squares[tile.getY()][tile.getX()] = square;
             gridPane.add(square, tile.getX(), tile.getY());
         });
