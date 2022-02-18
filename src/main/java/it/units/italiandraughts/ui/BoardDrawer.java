@@ -50,7 +50,7 @@ public class BoardDrawer implements GameEventListener {
 
         mediaPlayer = initMediaPlayer();
 
-        setClickableForPlayer(game.getPlayer1());
+        setClickableForPlayer(game.getActivePlayer());
         setClickableForEmptySquares();
         status = Status.IDLE;
 
