@@ -1,4 +1,6 @@
 [![Build Status](https://app.travis-ci.com/AndreaGonzato/ItalianDraughts.svg?token=mbqkqifSVkWs9qhq64bY&branch=main)](https://app.travis-ci.com/AndreaGonzato/ItalianDraughts)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![JUnit](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white)
 
 
 # ItalianDraughts
