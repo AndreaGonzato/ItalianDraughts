@@ -1,5 +1,6 @@
 package it.units.italiandraughts.logic;
 
+import it.units.italiandraughts.exception.IllegalButtonClickException;
 import it.units.italiandraughts.logic.piece.BlackPiece;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
@@ -94,15 +95,11 @@ public class MoveTest {
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[3][3]);
 
-        boolean isIllegal = false;
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
             move.make();
-        } catch (IllegalArgumentException e) {
-            isIllegal = true;
-        }
+        });
 
-        Assertions.assertTrue(isIllegal);
     }
 
     @Test
@@ -115,15 +112,11 @@ public class MoveTest {
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
 
-        boolean isIllegal = false;
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
             move.make();
-        } catch (IllegalArgumentException e) {
-            isIllegal = true;
-        }
+        });
 
-        Assertions.assertTrue(isIllegal);
     }
 
     @Test
@@ -136,15 +129,12 @@ public class MoveTest {
 
         BlackTile targetBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
 
-        boolean isIllegal = false;
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
             move.make();
-        } catch (IllegalArgumentException e) {
-            isIllegal = true;
-        }
+        });
 
-        Assertions.assertTrue(startingBlackTile.calculateDistance(targetBlackTile) > 2 && isIllegal);
+
     }
 
     @Test

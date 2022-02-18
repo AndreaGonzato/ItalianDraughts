@@ -37,14 +37,8 @@ public class GameTest {
         Player whitePlayer1 = new Player("Player1", PieceColor.WHITE);
         Player whitePlayer2 = new Player("Player2", PieceColor.WHITE);
 
-        boolean thereIsAnException = false;
-        try {
-            new Game(whitePlayer1, whitePlayer2);
-        } catch (InvalidPlayersException e) {
-            thereIsAnException = true;
-        }
+        Assertions.assertThrows(InvalidPlayersException.class, () -> new Game(whitePlayer1, whitePlayer2));
 
-        Assertions.assertTrue(thereIsAnException);
     }
 
     @Test
@@ -162,13 +156,7 @@ public class GameTest {
     @Test
     void undoLastMoveFail() {
         Game game = initGame();
-        boolean thereIsAnException = false;
-        try {
-            game.undoLastMove();
-        } catch (IllegalButtonClickException e) {
-            thereIsAnException = true;
-        }
-        Assertions.assertTrue(thereIsAnException);
+        Assertions.assertThrows(IllegalButtonClickException.class, game::undoLastMove);
     }
 
     @Test
@@ -267,8 +255,6 @@ public class GameTest {
 
         Assertions.assertEquals(game.getWinnerPlayer(), whitePlayer);
     }
-
-    // TODO do a test that control that after a move the active player is another
 
     private Game initGame() {
         return new Game(new Player("Player1", PieceColor.WHITE), new Player("Player1", PieceColor.BLACK));
