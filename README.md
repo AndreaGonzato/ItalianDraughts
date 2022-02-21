@@ -10,8 +10,13 @@
 
 This is the Java implementation of the board game Italian Draughts.
 
+## How to play
 
-# Rules
+Open a terminal in the project folder and run:
+
+    ./gradlew run
+
+## Rules
 The complete rules of the game are described here:
 - https://www.ludoteka.com/clasika/italian_draughts.html
 - https://en.m.wikipedia.org/wiki/Italian_draughts
