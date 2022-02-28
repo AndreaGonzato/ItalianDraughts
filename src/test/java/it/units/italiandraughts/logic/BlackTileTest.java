@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BlackTileTest {
-    // TEST associated class : completed
-
 
     @Test
     void checkNeighborsX0Y0() {

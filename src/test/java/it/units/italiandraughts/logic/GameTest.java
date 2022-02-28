@@ -14,13 +14,10 @@ import it.units.italiandraughts.ui.PieceColor;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.Assertions;
-import org.testfx.framework.junit5.ApplicationExtension;
 
 import java.util.List;
 
-@ExtendWith(ApplicationExtension.class)
 public class GameTest {
 
     private static final double EPSILON = 10e-6;

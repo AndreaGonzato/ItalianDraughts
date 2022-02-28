@@ -6,13 +6,10 @@ import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.ui.PieceColor;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.Assertions;
-import org.testfx.framework.junit5.ApplicationExtension;
 
 import java.util.Objects;
 
-@ExtendWith(ApplicationExtension.class)
 public class PlayerTest {
 
     @Test

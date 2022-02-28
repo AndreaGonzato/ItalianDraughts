@@ -9,7 +9,6 @@ import static it.units.italiandraughts.logic.tile.Tile.areValidCoordinatesBiPred
 import static it.units.italiandraughts.logic.tile.Tile.generateTile;
 
 public class TileTest {
-    // TEST associated class : completed
 
     @Test
     void areValidCoordinatesBiPredicateX0Y0() {

@@ -6,10 +6,7 @@ import it.units.italiandraughts.logic.piece.WhitePiece;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
 
-@ExtendWith(ApplicationExtension.class)
 public class DijkstraGraphTest {
 
     private static final double EPSILON = 10e-6;
