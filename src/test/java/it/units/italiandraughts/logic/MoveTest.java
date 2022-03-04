@@ -13,7 +13,7 @@ import java.util.List;
 public class MoveTest {
 
     @Test
-    void makeSimpleMove() {
+    void checkMakeWithSimpleMove() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -31,7 +31,7 @@ public class MoveTest {
     }
 
     @Test
-    void makeMoveAndEatPiece() {
+    void checkMakeWithSingleEating() {
         Board board = Board.reset();
 
         Piece movingPiece = new BlackPiece();
@@ -55,7 +55,7 @@ public class MoveTest {
 
 
     @Test
-    void makeMoveWith2Jumps() {
+    void checkMakeWithDoubleEating() {
         Board board = Board.reset();
 
         Piece movingPiece = new BlackPiece();
@@ -132,12 +132,10 @@ public class MoveTest {
             Move move = new Move(piece, List.of(startingBlackTile, targetBlackTile));
             move.make();
         });
-
-
     }
 
     @Test
-    void undoAndCheckTileOccupation() {
+    void checkTileOccupationAfterUndoing() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -154,7 +152,7 @@ public class MoveTest {
     }
 
     @Test
-    void undoAndCheckEatenPieceRestoration() {
+    void checkEatenPieceRestorationAfterUndoing() {
         Board board = Board.reset();
 
         Piece pieceMoved = new BlackPiece();
@@ -176,7 +174,7 @@ public class MoveTest {
 
 
     @Test
-    void undoAndCheckEatenPiecesRestoration() {
+    void checkEatenPiecesRestorationAfterUndoing() {
         Board board = Board.reset();
 
         Piece pieceMoved = new BlackPiece();
@@ -205,7 +203,7 @@ public class MoveTest {
     }
 
     @Test
-    void undoAndCheckDemotion() {
+    void checkDemotionAfterUndoing() {
         Board board = Board.reset();
 
         Piece piece = new WhitePiece();

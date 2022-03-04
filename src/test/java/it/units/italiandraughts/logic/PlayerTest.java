@@ -13,7 +13,7 @@ import java.util.Objects;
 public class PlayerTest {
 
     @Test
-    void getPiecesOfPlayer1() {
+    void checkPiecesOfPlayer1() {
         Board board = Board.reset();
         board.initPieces();
         Player player = new Player("", PieceColor.WHITE);
@@ -35,7 +35,7 @@ public class PlayerTest {
     }
 
     @Test
-    void getPiecesOfPlayer2() {
+    void checkPiecesOfPlayer2() {
         Board board = Board.reset();
         board.initPieces();
         Player player = new Player("", PieceColor.BLACK);
@@ -57,7 +57,7 @@ public class PlayerTest {
     }
 
     @Test
-    void updateMovablePiecesOnNewGame() {
+    void checkMovablePiecesOnNewGame() {
         Board board = Board.reset();
         board.initPieces();
         Player player = new Player("", PieceColor.WHITE);
@@ -84,7 +84,7 @@ public class PlayerTest {
     }
 
     @Test
-    void updateMovablePiecesInArtificialScenario() {
+    void checkMovablePiecesInTestingScenario() {
         Board board = Board.reset();
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[0][0]);
         Piece piece1 = new BlackPiece();
@@ -110,7 +110,7 @@ public class PlayerTest {
     }
 
     @Test
-    void countMovablePiecesOnNewGame() {
+    void checkNumberOfMovablePiecesOnNewGame() {
         Board board = Board.reset();
         board.initPieces();
         Player player = new Player("", PieceColor.WHITE);
@@ -121,7 +121,7 @@ public class PlayerTest {
     }
 
     @Test
-    void countMovablePiecesInArtificialScenario() {
+    void checkNumberOfMovablePiecesInTestingScenario() {
         Board board = Board.reset();
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[0][0]);
         Piece piece1 = new BlackPiece();

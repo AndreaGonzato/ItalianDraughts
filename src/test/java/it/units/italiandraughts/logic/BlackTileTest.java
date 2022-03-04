@@ -104,7 +104,7 @@ public class BlackTileTest {
     }
 
     @Test
-    void getBlackTileInBetween() {
+    void checkBlackTileInBetween() {
         Board board = Board.reset();
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[0][0]);
         BlackTile blackTile2 = BlackTile.asBlackTile(board.getTiles()[2][2]);

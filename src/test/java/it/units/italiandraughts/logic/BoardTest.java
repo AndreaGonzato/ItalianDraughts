@@ -68,7 +68,6 @@ public class BoardTest {
     public static Tile[][] initTiles(){
         Tile[][] tiles = new Tile[Board.SIZE][Board.SIZE];
 
-        // create all the tiles
         initTile(tiles, 0, 0, true);
         initTile(tiles, 1, 0, false);
         initTile(tiles, 2, 0, true);
@@ -159,6 +158,5 @@ public class BoardTest {
         };
         blackTile.placePiece(piece);
     }
-
 
 }

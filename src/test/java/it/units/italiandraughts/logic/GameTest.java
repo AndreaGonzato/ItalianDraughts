@@ -23,7 +23,7 @@ public class GameTest {
     private static final double EPSILON = 10e-6;
 
     @Test
-    void firstActivePlayer() {
+    void checkFirstActivePlayer() {
         Player whitePlayer = new Player("Player1", PieceColor.WHITE);
         Player blackPlayer = new Player("Player1", PieceColor.BLACK);
 
@@ -34,7 +34,7 @@ public class GameTest {
     }
 
     @Test
-    void thatTwoPayerCanNotHaveTheSamePieceColor() {
+    void checkThatTwoPayerCanNotHaveTheSamePieceColor() {
         Player whitePlayer1 = new Player("Player1", PieceColor.WHITE);
         Player whitePlayer2 = new Player("Player2", PieceColor.WHITE);
 
@@ -43,7 +43,7 @@ public class GameTest {
     }
 
     @Test
-    void makeAndSaveMoveWithSimpleMove() {
+    void checkSimpleMoveMakingAndSaving() {
         Board board = Board.reset();
         board.initPieces();
         Game game = initGame();
@@ -60,7 +60,7 @@ public class GameTest {
     }
 
     @Test
-    void checkThatMakeAndSaveMoveAddTheMoveInList() {
+    void checkThatMakeAndSaveMoveAddsMoveToList() {
         Board board = Board.reset();
         board.initPieces();
         Game game = initGame();
@@ -79,7 +79,7 @@ public class GameTest {
     }
 
     @Test
-    void makeAndSaveMoveEatingOnePiece() {
+    void checkSingleEatingMakingAndSaving() {
         Board board = Board.reset();
         Game game = initGame();
 
@@ -97,7 +97,7 @@ public class GameTest {
     }
 
     @Test
-    void makeAndSaveMoveEatingTwoPieces() {
+    void checkDoubleEatingMakingAndSaving() {
         Board board = Board.reset();
         Game game = initGame();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[0][0]);
@@ -117,7 +117,7 @@ public class GameTest {
     }
 
     @Test
-    void moveActivePieceTo() {
+    void checkMovingActivePieceFromX5Y5ToX7Y3() {
         Game game = initGame();
         Board board = Board.getBoard();
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][5]);
@@ -137,7 +137,7 @@ public class GameTest {
     }
 
     @Test
-    void checkThatMoveActivePieceToToggleActivePlayer() {
+    void checkThatMoveActivePieceTogglesActivePlayer() {
         Board board = Board.reset();
         board.initPieces();
         BlackTile sourceBlackTile = BlackTile.asBlackTile(board.getTiles()[5][1]);
@@ -155,13 +155,13 @@ public class GameTest {
     }
 
     @Test
-    void undoLastMoveFail() {
+    void checkUndoLastMoveFailureOnNewGame() {
         Game game = initGame();
         Assertions.assertThrows(IllegalButtonClickException.class, game::undoLastMove);
     }
 
     @Test
-    void undoLastSimpleMove() {
+    void checkUndoLastMoveWithSimpleMove() {
         Game game = initGame();
         Board board = Board.getBoard();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
@@ -174,7 +174,7 @@ public class GameTest {
     }
 
     @Test
-    void undoLastEatingMoveRestorePiecePositions() {
+    void checkUndoLastMoveWithEatingMove() {
         Game game = initGame();
         Board board = Board.getBoard();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[5][5]);
@@ -190,7 +190,7 @@ public class GameTest {
     }
 
     @Test
-    void undoCheckToToggleActivePlayer() {
+    void checkThatUndoTogglesActivePlayer() {
         Game game = initGame();
         Board board = Board.getBoard();
         board.initPieces();
@@ -210,7 +210,7 @@ public class GameTest {
 
 
     @Test
-    public void checkToNotifyGameOver() {
+    public void checkGameOverEventReceptionInEndGameScenario() {
         Player whitePlayer = new Player("Player1", PieceColor.WHITE);
         Player blackPlayer = new Player("Player2", PieceColor.BLACK);
         Game game = new Game(whitePlayer, blackPlayer);
@@ -234,7 +234,7 @@ public class GameTest {
     }
 
     @Test
-    public void checkWinnerPlayer() {
+    public void checkWinningPlayer() {
 
         Player whitePlayer = new Player("Player1", PieceColor.WHITE);
         Player blackPlayer = new Player("Player2", PieceColor.BLACK);
@@ -258,7 +258,7 @@ public class GameTest {
     }
 
     @Test
-    void updateAbsoluteLongestPathsOnNewGame() {
+    void checkAbsoluteLongestPathsUpdateOnNewGame() {
         Game game = initGame();
         game.updateAbsoluteLongestPaths();
         int paths = 7;
@@ -289,7 +289,7 @@ public class GameTest {
     }
 
     @Test
-    void updateAbsoluteLongestPathsInArtificialScenario() {
+    void checkAbsoluteLongestPathsUpdateInTestingScenario() {
         Game game = initGame();
         Board board = Board.reset();
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[5][5]);

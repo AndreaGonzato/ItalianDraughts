@@ -11,7 +11,7 @@ public class DijkstraGraphTest {
 
     private static final double EPSILON = 10e-6;
 
-    private Board prepareBoard() {
+    private Board prepareTestingScenario() {
         Board board = Board.reset();
         BlackTile blackTile1 = BlackTile.asBlackTile(board.getTiles()[6][2]);
         blackTile1.placePiece(new WhitePiece());
@@ -29,8 +29,8 @@ public class DijkstraGraphTest {
     }
 
     @Test
-    void explorePossibleMovesFromBlackTile1() {
-        Board board = prepareBoard();
+    void checkPossibleMovesFromX2Y6InTestingScenario() {
+        Board board = prepareTestingScenario();
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[6][2]));
         int possibleMoves = 1;
         int longestPathsWeight = 1;
@@ -42,8 +42,8 @@ public class DijkstraGraphTest {
     }
 
     @Test
-    void explorePossibleMovesFromBlackTile2() {
-        Board board = prepareBoard();
+    void checkPossibleMovesFromX3Y5InTestingScenario() {
+        Board board = prepareTestingScenario();
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][3]));
         int possibleMoves = 1;
         int longestPathsWeight = 2;
@@ -55,8 +55,8 @@ public class DijkstraGraphTest {
     }
 
     @Test
-    void explorePossibleMovesFromBlackTile3() {
-        Board board = prepareBoard();
+    void checkPossibleMovesFromX5Y5InTestingScenario() {
+        Board board = prepareTestingScenario();
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[5][5]));
         int possibleMoves = 1;
         double longestPathsWeight = 4 * 1.2;
@@ -68,8 +68,8 @@ public class DijkstraGraphTest {
     }
 
     @Test
-    void explorePossibleMovesFromBlackTile4() {
-        Board board = prepareBoard();
+    void checkPossibleMovesFromX4Y4InTestingScenario() {
+        Board board = prepareTestingScenario();
         DijkstraGraph graph = new DijkstraGraph(BlackTile.asBlackTile(board.getTiles()[4][4]));
         int possibleMoves = 0;
         Assertions.assertEquals(graph.calculateLongestPaths().size(), possibleMoves);

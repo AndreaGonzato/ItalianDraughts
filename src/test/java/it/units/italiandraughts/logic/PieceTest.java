@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class PieceTest {
 
     @Test
-    void moveToNeighboringEmptyBlackTile() {
+    void checkMovingToEmptyNeighboringBlackTile() {
         Board board = Board.reset();
 
         Piece actualPiece = new BlackPiece();
@@ -24,7 +24,7 @@ public class PieceTest {
     }
 
     @Test
-    void moveToReachableBlackTileByEatingPiece() {
+    void checkMovingByEating() {
         Board board = Board.reset();
 
         Piece pieceToMove = new BlackPiece();
@@ -41,7 +41,7 @@ public class PieceTest {
     }
 
     @Test
-    void move() {
+    void checkLocationAfterMoving() {
         Board board = Board.reset();
 
         Piece actualPiece = new BlackPiece();
@@ -53,7 +53,7 @@ public class PieceTest {
     }
 
     @Test
-    void getReachableNeighboringBlackTilesForWhiteMan() {
+    void checkReachableNeighboringBlackTilesForWhiteManInX3Y3() {
         Board board = Board.reset();
 
         Piece piece = new WhitePiece();
@@ -69,7 +69,7 @@ public class PieceTest {
     }
 
     @Test
-    void getReachableNeighboringBlackTilesForBlackMan() {
+    void checkReachableNeighboringBlackTilesForBlackManInX3Y3() {
         Board board = Board.reset();
 
         Piece piece = new BlackPiece();
@@ -85,7 +85,7 @@ public class PieceTest {
     }
 
     @Test
-    void getReachableNeighboringBlackTilesForKing() {
+    void checkReachableNeighboringBlackTilesForKingInX3Y3() {
         Board board = Board.reset();
 
         Piece piece = new WhitePiece(PieceType.KING);
@@ -104,7 +104,7 @@ public class PieceTest {
 
 
     @Test
-    void canEatNeighborTrue() {
+    void checkThatAWhitePieceCanEatANeighboringBlackPiece() {
         Board board = Board.reset();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[4][4]);
@@ -116,11 +116,10 @@ public class PieceTest {
         blackPieceBlackTile.placePiece(blackPiece);
 
         Assertions.assertTrue(whitePiece.canEatNeighbor(blackPiece));
-
     }
 
     @Test
-    void canEatNotReachablePiece() {
+    void checkThatAWhitePieceCannotEatADistantBlackPiece() {
         Board board = Board.reset();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -136,7 +135,7 @@ public class PieceTest {
     }
 
     @Test
-    void canEatSameColorPiece() {
+    void checkThatAPieceCannotEatAPieceOfTheSameColor() {
         Board board = Board.reset();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -152,7 +151,7 @@ public class PieceTest {
     }
 
     @Test
-    void canManEatKing() {
+    void checkThatManCannotEatAKing() {
         Board board = Board.reset();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -168,7 +167,7 @@ public class PieceTest {
     }
 
     @Test
-    void canEatNeighborWithFullLandingTile() {
+    void checkThatAWhitePieceCannotEatANeighboringBlackPieceIfTheLandingTileIsFull() {
         Board board = Board.reset();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -188,8 +187,7 @@ public class PieceTest {
     }
 
     @Test
-    void canEatNeighborWhenLandingTileDoesNotExist() {
-        // when landing tile is outside the board
+    void checkThatAPieceCannotEatANeighborAndLandOutsideTheBoard() {
         Board board = Board.reset();
 
         BlackTile whitePieceBlackTile = BlackTile.asBlackTile(board.getTiles()[1][1]);
@@ -202,11 +200,10 @@ public class PieceTest {
         blackPieceBlackTile.placePiece(blackPiece);
 
         Assertions.assertFalse(whitePiece.canEatNeighbor(blackPiece));
-
     }
 
     @Test
-    void getPositionAfterEatingNeighbor() {
+    void checkPositionAfterEatingNeighbor() {
         Board board = Board.reset();
         BlackTile source = BlackTile.asBlackTile(board.getTiles()[0][0]);
         BlackTile over = BlackTile.asBlackTile(board.getTiles()[1][1]);
