@@ -4,15 +4,26 @@ import it.units.italiandraughts.logic.Board;
 import it.units.italiandraughts.logic.piece.Piece;
 import it.units.italiandraughts.logic.piece.PieceType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 public class BlackTile extends Tile {
 
-    private Piece piece;
     private final Map<String, BlackTile> neighbors = new HashMap<>();
+    private Piece piece;
 
     public BlackTile(int x, int y) {
         super(x, y);
+    }
+
+    public static BlackTile asBlackTile(Tile tile) {
+        if (tile instanceof BlackTile) {
+            return (BlackTile) tile;
+        } else {
+            throw new IllegalArgumentException("A white tile cannot be cast to BlackTile");
+        }
     }
 
     public Map<String, BlackTile> getNeighbors() {
@@ -59,14 +70,6 @@ public class BlackTile extends Tile {
 
     public String getNeighborKey(BlackTile neighboringBlackTile) {
         return getAdjacencyDirection(neighboringBlackTile).orElseThrow(() -> new IllegalArgumentException("You did not pass a neighbor"));
-    }
-
-    public static BlackTile asBlackTile(Tile tile) {
-        if (tile instanceof BlackTile) {
-            return (BlackTile) tile;
-        } else {
-            throw new IllegalArgumentException("A white tile cannot be cast to BlackTile");
-        }
     }
 
     public boolean isEmpty() {

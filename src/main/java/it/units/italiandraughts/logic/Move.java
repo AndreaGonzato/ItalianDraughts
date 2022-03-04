@@ -89,4 +89,5 @@ public class Move {
     public int hashCode() {
         return Objects.hash(piece, source, destination, eatenPieces, steps, hasPromoted);
     }
+
 }

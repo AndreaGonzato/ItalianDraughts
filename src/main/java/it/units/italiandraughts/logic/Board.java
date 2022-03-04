@@ -16,16 +16,9 @@ import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
 public class Board {
 
-    private final Tile[][] tiles;
     public static final int SIZE = 8;
     private static Board instance;
-
-    public static Board getBoard() {
-        if (instance == null) {
-            reset();
-        }
-        return instance;
-    }
+    private final Tile[][] tiles;
 
     private Board() {
         tiles = new Tile[SIZE][SIZE];
@@ -37,17 +30,20 @@ public class Board {
         }
     }
 
-    public void removePieces(){
-        getFullBlackTiles().forEach(BlackTile::removePiece);
+    public static Board getBoard() {
+        if (instance == null) {
+            reset();
+        }
+        return instance;
     }
 
-    public static Board reset(){
+    public static Board reset() {
         instance = new Board();
         instance.assignNeighborsOfBlackTiles();
         return instance;
     }
 
-    private void assignNeighborsOfBlackTiles(){
+    private void assignNeighborsOfBlackTiles() {
         matrixToStream(tiles).filter(tile -> tile instanceof BlackTile).map(BlackTile::asBlackTile)
                 .forEach(BlackTile::populateNeighborsFromBoard);
     }
@@ -56,12 +52,6 @@ public class Board {
         Supplier<Stream<BlackTile>> blackTilesSupplier = () -> getEmptyBlackTiles().stream();
         blackTilesSupplier.get().filter(tile -> tile.getY() < 3).forEach(tile -> tile.placePiece(new BlackPiece()));
         blackTilesSupplier.get().filter(tile -> tile.getY() > 4).forEach(tile -> tile.placePiece(new WhitePiece()));
-    }
-
-    // TODO remove this
-    public void initPiecesDebug() {
-        BlackTile.asBlackTile(tiles[0][0]).placePiece(new BlackPiece());
-        BlackTile.asBlackTile(tiles[3][3]).placePiece(new WhitePiece());
     }
 
     @Override
@@ -103,4 +93,5 @@ public class Board {
     public int hashCode() {
         return Arrays.deepHashCode(tiles);
     }
+
 }

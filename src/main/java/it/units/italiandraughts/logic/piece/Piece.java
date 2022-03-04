@@ -49,6 +49,10 @@ public abstract class Piece {
         return pieceType;
     }
 
+    public void setPieceType(PieceType pieceType) {
+        this.pieceType = pieceType;
+    }
+
     public Stream<BlackTile> getReachableNeighboringBlackTiles() {
         if (pieceType.equals(PieceType.KING)) {
             return getBlackTile().getNeighbors().values().stream();
@@ -89,7 +93,7 @@ public abstract class Piece {
     }
 
     public BlackTile getPositionAfterEatingNeighbor(Piece neighboringPiece) {
-        if (neighboringPiece.getBlackTile().calculateDistance(blackTile) > 1){
+        if (neighboringPiece.getBlackTile().calculateDistance(blackTile) > 1) {
             throw new IllegalArgumentException("Argument neighboringPiece must be on a neighboring BlackTile");
         }
 
@@ -107,15 +111,11 @@ public abstract class Piece {
         return blackTile;
     }
 
-    public abstract int getPromotionRow();
-
     public void setBlackTile(BlackTile blackTile) {
         this.blackTile = blackTile;
     }
 
-    public void setPieceType(PieceType pieceType) {
-        this.pieceType = pieceType;
-    }
+    public abstract int getPromotionRow();
 
     public boolean isMan() {
         return PieceType.MAN.equals(pieceType);

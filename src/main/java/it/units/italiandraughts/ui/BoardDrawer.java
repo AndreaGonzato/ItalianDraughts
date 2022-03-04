@@ -4,11 +4,14 @@ import it.units.italiandraughts.event.GameEvent;
 import it.units.italiandraughts.event.GameEventListener;
 import it.units.italiandraughts.event.SwitchActivePlayerEvent;
 import it.units.italiandraughts.exception.IllegalMoveException;
-import it.units.italiandraughts.logic.*;
+import it.units.italiandraughts.logic.Board;
+import it.units.italiandraughts.logic.Game;
+import it.units.italiandraughts.logic.Player;
+import it.units.italiandraughts.logic.Status;
 import it.units.italiandraughts.logic.tile.BlackTile;
 import it.units.italiandraughts.logic.tile.Tile;
-import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 
 import static it.units.italiandraughts.logic.StaticUtil.matrixToStream;
 
@@ -16,8 +19,8 @@ public class BoardDrawer implements GameEventListener {
 
     private final Square[][] squares = new Square[Board.SIZE][Board.SIZE];
     private final Game game;
-    private Status status;
     private final SoundPlayer soundPlayer;
+    private Status status;
 
     public BoardDrawer(GridPane gridPane, Game game) {
         this.game = game;
@@ -29,7 +32,6 @@ public class BoardDrawer implements GameEventListener {
         setClickableForEmptySquares();
         status = Status.IDLE;
 
-        // draw the pieces at the start
         updateBoard();
     }
 
@@ -123,7 +125,7 @@ public class BoardDrawer implements GameEventListener {
     private void updateBoard() {
         matrixToStream(squares).forEach(square -> square.getChildren().clear());
         matrixToStream(squares).filter(square -> !square.getTile().isEmpty())
-                        .forEach(square -> square.drawPiece(BlackTile.asBlackTile(square.getTile()).getPiece()));
+                .forEach(square -> square.drawPiece(BlackTile.asBlackTile(square.getTile()).getPiece()));
     }
 
 

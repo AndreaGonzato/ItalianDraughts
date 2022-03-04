@@ -2,6 +2,8 @@ package it.units.italiandraughts.logic.piece;
 
 import it.units.italiandraughts.logic.tile.BlackTile;
 
+import java.util.Objects;
+
 public class EatenPiece {
 
     private final Piece piece;
@@ -26,19 +28,13 @@ public class EatenPiece {
         return piece;
     }
 
-    public BlackTile getPosition() {
-        return position;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof EatenPiece)) return false;
+        if (!(o instanceof EatenPiece that)) return false;
 
-        EatenPiece that = (EatenPiece) o;
-
-        if (piece != null ? !piece.equals(that.piece) : that.piece != null) return false;
-        return position != null ? position.equals(that.position) : that.position == null;
+        if (!Objects.equals(piece, that.piece)) return false;
+        return Objects.equals(position, that.position);
     }
 
     @Override
@@ -47,4 +43,5 @@ public class EatenPiece {
         result = 31 * result + (position != null ? position.hashCode() : 0);
         return result;
     }
+
 }

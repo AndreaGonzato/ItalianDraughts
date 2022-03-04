@@ -32,7 +32,40 @@ public class DijkstraGraph {
         initializePaths();
     }
 
-    private void addVertices(){
+    static Collector<GraphPath<BlackTile, DefaultWeightedEdge>, List<GraphPath<BlackTile, DefaultWeightedEdge>>, List<GraphPath<BlackTile, DefaultWeightedEdge>>> getLongestPathsCollector() {
+        Comparator<GraphPath<BlackTile, DefaultWeightedEdge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
+        return Collector.of(
+                ArrayList::new,
+                (list, path) -> {
+                    int result;
+                    if (list.isEmpty() || (result = comparator.compare(path, list.get(0))) == 0) {
+                        list.add(path);
+                    } else if (result > 0) {
+                        list.clear();
+                        list.add(path);
+                    }
+                },
+                (list1, list2) -> {
+                    if (list1.isEmpty()) {
+                        return list2;
+                    }
+                    if (list2.isEmpty()) {
+                        return list1;
+                    }
+                    int result = comparator.compare(list1.get(0), list2.get(0));
+                    if (result < 0) {
+                        return list2;
+                    } else if (result > 0) {
+                        return list1;
+                    } else {
+                        list1.addAll(list2);
+                        return list1;
+                    }
+                }
+        );
+    }
+
+    private void addVertices() {
         matrixToStream(Board.getBoard().getTiles()).filter(tile -> tile instanceof BlackTile)
                 .map(BlackTile::asBlackTile)
                 .forEach(graph::addVertex);
@@ -48,7 +81,7 @@ public class DijkstraGraph {
                 .forEach(tile -> recursivelyAddEatingEdges(piece, tile.getPiece(), 1));
     }
 
-    private void addEdge(BlackTile source, BlackTile target, double weight){
+    private void addEdge(BlackTile source, BlackTile target, double weight) {
         if (source.isEmpty()) {
             System.err.println("addEdge() called with unexpectedly empty source, ignoring the call.");
             return;
@@ -107,39 +140,6 @@ public class DijkstraGraph {
         DijkstraShortestPath<BlackTile, DefaultWeightedEdge> dijkstra = new DijkstraShortestPath<>(graph);
         ShortestPathAlgorithm.SingleSourcePaths<BlackTile, DefaultWeightedEdge> paths = dijkstra.getPaths(source);
         return possibleDestinations.stream().map(paths::getPath).collect(getLongestPathsCollector());
-    }
-
-    static Collector<GraphPath<BlackTile, DefaultWeightedEdge>, List<GraphPath<BlackTile, DefaultWeightedEdge>>, List<GraphPath<BlackTile, DefaultWeightedEdge>>> getLongestPathsCollector() {
-        Comparator<GraphPath<BlackTile, DefaultWeightedEdge>> comparator = Comparator.comparingDouble(GraphPath::getWeight);
-        return Collector.of(
-                ArrayList::new,
-                (list, path) -> {
-                    int result;
-                    if (list.isEmpty() || (result = comparator.compare(path, list.get(0))) == 0) {
-                        list.add(path);
-                    } else if (result > 0) {
-                        list.clear();
-                        list.add(path);
-                    }
-                },
-                (list1, list2) -> {
-                    if (list1.isEmpty()) {
-                        return list2;
-                    }
-                    if (list2.isEmpty()) {
-                        return list1;
-                    }
-                    int result = comparator.compare(list1.get(0), list2.get(0));
-                    if (result < 0) {
-                        return list2;
-                    } else if (result > 0) {
-                        return list1;
-                    } else {
-                        list1.addAll(list2);
-                        return list1;
-                    }
-                }
-        );
     }
 
 }

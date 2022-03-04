@@ -13,7 +13,7 @@ public class Player {
     private final String name;
     private final PieceColor pieceColor;
 
-    public Player(String name, PieceColor pieceColor){
+    public Player(String name, PieceColor pieceColor) {
         this.pieceColor = pieceColor;
         this.name = name;
     }
@@ -29,7 +29,7 @@ public class Player {
         getPieces().forEach(Piece::updateMovable);
     }
 
-    int countMovablePieces(){
+    int countMovablePieces() {
         return (int) getPieces().stream().filter(Piece::isMovable).count();
     }
 
@@ -63,4 +63,5 @@ public class Player {
         result = 31 * result + pieceColor.hashCode();
         return result;
     }
+
 }

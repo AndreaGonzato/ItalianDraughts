@@ -12,10 +12,10 @@ import java.util.List;
 
 public class Square extends StackPane {
 
-    private final Tile tile;
-    private final SquareType type;
     private static final String HIGHLIGHT_COLOR = "#56db39";
     private static double size;
+    private final Tile tile;
+    private final SquareType type;
     private boolean highlighted;
     private boolean hasGreenCircle;
     private Circle greenCircle;

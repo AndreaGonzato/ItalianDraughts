@@ -1,6 +1,7 @@
 package it.units.italiandraughts.ui;
 
 public enum PieceColor {
+
     WHITE("#eeebd9"), BLACK("#423c39");
 
     private final String hexColor;
@@ -18,4 +19,5 @@ public enum PieceColor {
             return "WHITE";
         } else return "BLACK";
     }
+
 }

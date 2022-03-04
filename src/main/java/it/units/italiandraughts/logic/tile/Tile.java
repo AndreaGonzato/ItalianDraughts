@@ -8,15 +8,18 @@ import java.util.function.Predicate;
 
 public class Tile {
 
-    protected final int x;
-    protected final int y;
-
     private static final Predicate<Integer> isValidCoordinatePredicate =
             coordinate -> (coordinate >= 0 && coordinate < Board.SIZE);
-
     public static final BiPredicate<Integer, Integer> areValidCoordinatesBiPredicate =
             (coordinateX, coordinateY) -> isValidCoordinatePredicate.test(coordinateX) &&
                     isValidCoordinatePredicate.test(coordinateY);
+    protected final int x;
+    protected final int y;
+
+    public Tile(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public static Tile generateTile(int x, int y) {
         if ((x + y) % 2 == 0) {
@@ -26,26 +29,21 @@ public class Tile {
         }
     }
 
-    public Tile(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int calculateDistance(Tile otherTile){
+    public int calculateDistance(Tile otherTile) {
         int deltaX = this.x - otherTile.x;
         int deltaY = this.y - otherTile.y;
         return Math.abs(Math.max(deltaX, deltaY));
     }
 
-    public String getDirection(Tile otherTile){
+    public String getDirection(Tile otherTile) {
 
-        if (this.equals(otherTile)){
+        if (this.equals(otherTile)) {
             throw new IllegalArgumentException("otherTile must be a different tile");
         }
 
-        if (this.y - otherTile.y > 0){
-            return  "top";
-        }else {
+        if (this.y - otherTile.y > 0) {
+            return "top";
+        } else {
             return "bottom";
         }
 
@@ -83,4 +81,5 @@ public class Tile {
                 ", y=" + y +
                 '}';
     }
+
 }

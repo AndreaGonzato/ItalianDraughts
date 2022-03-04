@@ -11,4 +11,5 @@ public class EllipseDrawer {
         ellipse.setStrokeWidth(squareSize * 0.03);
         return ellipse;
     }
+
 }

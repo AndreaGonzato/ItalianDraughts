@@ -13,17 +13,6 @@ import java.util.Objects;
 
 public class ItalianDraughts extends Application {
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/MenuLayout.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), StaticUtil.getScreenWidth() / 4f, StaticUtil.getScreenHeight() / 4f);
-        stage.setTitle("ItalianDraughts");
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("ui/img/icon.png"))));
-        stage.setScene(scene);
-        setupStage(stage);
-        stage.show();
-    }
-
     public static void setupStage(Stage stage) {
         stage.sizeToScene();
         stage.setMinHeight(stage.getHeight());
@@ -35,5 +24,16 @@ public class ItalianDraughts extends Application {
     public static void main(String[] args) {
         launch();
     }
-    
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/MenuLayout.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), StaticUtil.getScreenWidth() / 4f, StaticUtil.getScreenHeight() / 4f);
+        stage.setTitle("ItalianDraughts");
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("ui/img/icon.png"))));
+        stage.setScene(scene);
+        setupStage(stage);
+        stage.show();
+    }
+
 }

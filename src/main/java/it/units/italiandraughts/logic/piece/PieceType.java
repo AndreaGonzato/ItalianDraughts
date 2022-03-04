@@ -1,6 +1,7 @@
 package it.units.italiandraughts.logic.piece;
 
 public enum PieceType {
+
     MAN, KING;
 
     @Override
@@ -9,4 +10,5 @@ public enum PieceType {
             return "MAN";
         } else return "KING";
     }
+
 }

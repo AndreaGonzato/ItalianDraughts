@@ -10,16 +10,19 @@ import it.units.italiandraughts.ui.PieceColor;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Game implements GameEventSource {
     private final Player player1;
     private final Player player2;
+    private final List<Move> moves;
+    private final HashMap<EventType, List<GameEventListener>> listenersMap;
     private Player activePlayer;
     private BlackTile activeTile;
-    private final List<Move> moves;
     private List<GraphPath<BlackTile, DefaultWeightedEdge>> absoluteLongestPaths;
-    private final HashMap<EventType, List<GameEventListener>> listenersMap;
     private Player winnerPlayer;
 
     public Game(Player player1, Player player2) {
@@ -71,7 +74,6 @@ public class Game implements GameEventSource {
         updateAbsoluteLongestPaths();
     }
 
-    // TODO write some test: now is public
     void updateAbsoluteLongestPaths() {
         absoluteLongestPaths = activePlayer.getPieces()
                 .stream().map(Piece::getBlackTile)
@@ -129,14 +131,6 @@ public class Game implements GameEventSource {
 
     public void setActiveTile(BlackTile tile) {
         this.activeTile = tile;
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
     }
 
     public List<GraphPath<BlackTile, DefaultWeightedEdge>> getAbsoluteLongestPaths() {

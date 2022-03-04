@@ -1,6 +1,7 @@
 package it.units.italiandraughts.ui;
 
 public enum SquareType {
+
     BRONZE("#d47d35"), WHITE_SMOKE("#fafafa");
 
     private final String hex;
@@ -12,4 +13,5 @@ public enum SquareType {
     public String getHex() {
         return hex;
     }
+
 }
